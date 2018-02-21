@@ -1,0 +1,133 @@
+﻿<!--<div fxFlex='100' fxLayout='column' *ngIf='(data$ | async).data.length <= 0 && (status$ | async) != "pristine" && (status$ | async) != "dirty" && (status$ | async) != "pending"'>
+  <mat-card fxFlex='100' fxLayoutAlign='center center'>
+    <mat-card-content>
+      در بازه انتخاب شده موردی یافت نشد.
+    </mat-card-content>
+  </mat-card>
+</div>
+<div *ngFor='let item of (data$ | async).data'>
+  <div class='list-item' fxFlexLayout='row' fxLayoutAlign='center center'>
+    <p fxFlex='60'>{{item.Name}}</p>
+    <p fxFlex>{{item.Price}}</p>
+    <p fxFlex>{{item.OffPrice}}</p>
+    <p fxFlex>{{item.ExpireHours}}</p>
+    <p fxFlex>{{item.TimeCredit}}</p>
+    <p fxFlex>{{item.DownloadSpeed}}</p>
+    <p fxFlex>{{item.UploadSpeed}}</p>
+  </div>
+</div>-->
+
+<mat-card>
+  <mat-card-content fxLayout="column">
+    <div fxLayoutAlign='space-between center' fxLayout="row" fxFlex="100">
+      <!-- <mat-list fxFlex="0 1 70%" fxLayoutAlign='start center'>
+        <mat-list-item>
+          <label class="label-control">تعداد نمایش</label>
+          <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="20">20</option>
+            <option [ngValue]="40">40</option>
+          </select>
+        </mat-list-item>
+      </mat-list> -->
+      <div fxFlex="0 1 30%" fxLayoutAlign='start center'>
+        <button mat-fab routerLink="../add">
+          <mat-icon  aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="ShowOrder">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> اولویت </mat-header-cell>
+        <mat-cell *matCellDef="let item">{{item.ShowOrder}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> نام بسته </mat-header-cell>
+        <mat-cell *matCellDef="let item">{{item.Name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> قیمت </mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <span *ngIf="!(item.Price || item.Price===0)">-</span>
+          <span *ngIf="item.Price || item.Price===0">{{item.Price | currencyUnit}} </span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="OffPrice">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> قیمت بعد تخفیف </mat-header-cell>
+        <mat-cell *matCellDef="let item"> <span *ngIf="!(item.OffPrice || item.OffPrice===0)">{{item.Price | currencyUnit}}</span>{{item.OffPrice | currencyUnit}}
+          </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="TimeCredit">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> زمان اعتبار </mat-header-cell>
+        <mat-cell *matCellDef="let item"> <span *ngIf="!(item.TimeCredit || item.TimeCredit==0)">نامحدود</span>{{item.TimeCredit | timeUnit}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ExpireHours">
+        <mat-header-cell *matHeaderCellDef> زمان باقیمانده </mat-header-cell>
+        <mat-cell *matCellDef="let item"> <span *ngIf="!item.ExpireHours">0</span>{{item.ExpireHours | timeUnit}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="DownloadSpeed">
+        <mat-header-cell *matHeaderCellDef> سرعت دانلود </mat-header-cell>
+        <mat-cell *matCellDef="let item"> <span *ngIf="!item.DownloadSpeed">0</span>{{item.DownloadSpeed | dataUnit}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="UploadSpeed" >
+        <mat-header-cell *matHeaderCellDef> سرعت آپلود </mat-header-cell>
+        <mat-cell *matCellDef="let item"> <span *ngIf="!item.UploadSpeed">0</span>{{item.UploadSpeed | dataUnit}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
+  </mat-card-content>
+
+  <!-- 
+          
+              <ng-container matColumnDef="OffPrice">
+                <mat-header-cell *matHeaderCellDef> قیمت با تخفیف </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.OffPrice}} </mat-cell>
+              </ng-container>
+          
+              <ng-container matColumnDef="ExpireHours">
+                <mat-header-cell *matHeaderCellDef> ساعت مصرف شده </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.ExpireHours}} </mat-cell>
+              </ng-container> -->
+</mat-card>
+
+
+<!-- <thead fxFlex="100">
+    <tr>
+        <th fxFlex="20" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="Name">نام بسته</mfDefaultSorter>
+        </th>
+        <th fxFlex="15" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="Price">قیمت</mfDefaultSorter>
+        </th>
+        <th fxFlex="16" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="OffPrice">قیمت بعد تخفیف</mfDefaultSorter>
+        </th>
+        <th fxFlex="15" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="TimeCredit">زمان اعتبار</mfDefaultSorter>
+        </th>
+        <th fxFlex="10" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="ExpireHours">تاریخ انقضا</mfDefaultSorter>
+        </th>
+        <th fxFlex="12" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="DownloadSpeed">حجم دانلود</mfDefaultSorter>
+        </th>
+        <th fxFlex="12" fxLayoutAlign='start center'>
+            <mfDefaultSorter by="UploadSpeed">حجم آپلود</mfDefaultSorter>
+        </th>
+    </tr>
+</thead>
+<tbody fxFlex="100">
+    <tr *ngFor="let item of mf.data">
+        <td fxFlex="20">{{item.Name}}</td>
+        <td fxFlex="15"><span *ngIf="(item.Price == '' || item.Price == null )">-</span><span *ngIf="(item.Price >= 0 )">{{item.Price | currencyUnit}}</span></td>
+        <td fxFlex="16"><span *ngIf="(item.OffPrice == '' || item.OffPrice == null)">-</span>{{item.OffPrice | currencyUnit}}</td>
+        <td fxFlex="15"><span *ngIf="(item.TimeCredit == '' || item.TimeCredit == null )">-</span>{{item.TimeCredit | timeUnit}}</td>
+        <td fxFlex="10"><span *ngIf="(item.PExpireHoursrice == '' || item.ExpireHours == null )">-</span>{{item.ExpireHours | timeUnit}}</td>
+        <td fxFlex="12"><span *ngIf="(item.DownloadSpeed == '' || item.DownloadSpeed == null )">-</span>{{item.DownloadSpeed | dataUnit}}</td>
+        <td fxFlex="12"><span *ngIf="(item.UploadSpeed == '' || item.UploadSpeed == null )">-</span>{{item.UploadSpeed | dataUnit}}</td>
+    </tr>
+</tbody> -->

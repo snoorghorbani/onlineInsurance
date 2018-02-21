@@ -1,0 +1,58 @@
+﻿// import { responseStatusTypes } from '@soushians/shared';
+// import { MonthlyReportReportModel } from 'app/models/reports';
+
+// import { MonthlyReportReportActionTypes, MonthlyReportReportAction } from '../actions';
+
+// export interface State {
+//         status: responseStatusTypes;
+//         data: MonthlyReportReportModel.Response;
+// }
+
+// export const initialState: State = {
+//         status: 'pristine',
+//         data: null
+// };
+
+
+// export function Reducer(state = initialState, action: MonthlyReportReportAction): State {
+//         switch (action.type) {
+//                 case MonthlyReportReportActionTypes.FETCH_MONTHLY_REPORTS_REPORT: {
+//                         return {
+//                                 ...state,
+//                                 status: 'dirty',
+//                                 data: null
+//                         };
+//                 }
+
+//                 case MonthlyReportReportActionTypes.FETCH_MONTHLY_REPORTS_REPORT_START: {
+//                         return {
+//                                 ...state,
+//                                 status: 'pending'
+//                         };
+//                 }
+
+//                 case MonthlyReportReportActionTypes.FETCH_MONTHLY_REPORTS_REPORT_SUCCEED: {
+//                         return {
+//                                 ...state,
+//                                 status: 'succeed',
+//                                 data: action.payload
+//                         };
+//                 }
+
+//                 case MonthlyReportReportActionTypes.FETCH_MONTHLY_REPORTS_REPORT_FAILED: {
+//                         return {
+//                                 ...state,
+//                                 status: 'failed'
+//                         };
+//                 }
+
+//                 default: {
+//                         return state;
+//                 }
+//         }
+// }
+
+// //#region  selectors
+// export const getMonthlyReportReportDataStatus = (state: State) => state.status;
+// export const getMonthlyReportReportData = (state: State) => state.data;
+// //#endregion

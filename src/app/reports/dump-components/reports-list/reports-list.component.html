@@ -1,0 +1,11 @@
+<div fxLayout='column' fxLayoutGap='15px' fxLayoutAlign='stretch'>
+  <button class='report' mat-raised-button [routerLink]='report.route' *ngFor='let report of reports'>
+
+    <div fxLayout='column' fxLayoutAlign='center center'>
+      <mat-icon color='primary'>{{report.icon}}</mat-icon>
+      <h3 class='title'>{{report.title}}</h3>
+      <div class='description'>{{report.description}}</div>
+    </div>
+  
+  </button>
+</div>

@@ -1,0 +1,46 @@
+﻿<mat-card fxLayout="column" fxFlex="400px">
+  <form [formGroup]="formGroup" fxLayout='column' (ngSubmit)="add()">
+
+    <mat-card-header>
+      <mat-card-title>افزودن بسته جدید</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="عنوان بسته" formControlName="Name">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="قیمت" formControlName="Price">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="قیمت با تخفیف" formControlName="OffPrice">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="مدت مصرف" formControlName="ExpireHours">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="حجم بسته" formControlName="QuotaVolume">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="اعتبار زمانی بسته" formControlName="TimeCredit">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="اولویت نمایش" formControlName="ShowOrder">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="سرعت آپلود" formControlName="UploadSpeed">
+      </mat-form-field>
+      <mat-form-field fxFlexFill>
+        <input matInput placeholder="سرعت دانلود" formControlName="DownloadSpeed">
+      </mat-form-field>
+      <!-- <app-dropdown-date-picker (submited)="birthdateSelected($event)"></app-dropdown-date-picker> -->
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button fxFlex mat-raised-button color="primary" type="submit">ثبت</button>
+      <button fxFlex='nogrow' mat-button routerLink='/packages/list'>انصراف</button>
+    </mat-card-actions>
+
+  </form>
+
+</mat-card>

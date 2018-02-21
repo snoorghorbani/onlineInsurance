@@ -1,0 +1,51 @@
+#con{
+    height: 500px;
+    padding: 15px;
+}
+.agent .message {
+    background-color: #3f51b5;
+    margin-right: 0;
+}
+.agent .time {
+    left: 5px;
+}
+.user .time {
+    right: 5px;
+}
+
+.user .message {
+    // text-align: left;
+    background-color: #666;
+    margin-left: 0;
+}
+
+.agent,.user{
+    position: relative;
+    margin-top:0;
+}
+
+.message {
+    // position: absolute;
+    padding:10px;
+    margin:10px;
+    color: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    max-width: 70%;
+    position: relative;
+}
+.sender{
+    margin:0;
+}
+.time{
+    position: absolute;
+    color: #333;
+    bottom: -21px;
+}
+#new {
+    margin-top:50px;
+}
+
+#new .mat-form-field{
+    width:100%;
+}

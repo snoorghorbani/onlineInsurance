@@ -1,0 +1,1 @@
+﻿export * from "./package-simple-compare-container.component";

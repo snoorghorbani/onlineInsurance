@@ -1,0 +1,40 @@
+{
+	"name": "online-insurance",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"ng": "ng",
+		"start": "ng serve",
+		"test": "ng test",
+		"lint": "ng lint",
+		"ngsw": "node_modules/.bin/ngsw-config dist ./src/ngsw-config.json && cp node_modules/@angular/service-worker/ngsw-worker.js ./dist/ngsw-worker.js",
+		"build": "ng build",
+		"build:prod": "ng build --prod && node ./scripts/copyBuildJsToDistFolder.js",
+		"build:prod:ngsw": "npm run build:prod && npm run ngsw",
+		"serve:prod": "npm run build:prod && lite-server -c configs/bs-config.aot.json",
+		"sme": "node_modules/.bin/source-map-explorer ./dist/build.js",
+		"doc": "compodoc -p ./tsconfig.json",
+		"pretest": "webdriver-manager update",
+		"e2e": "ng e2e",
+		"e2e:p": "protractor configs/protractor.conf.js",
+		"server_start": "npm run server_build && npm run server_watch",
+		"server_build": "npm run server_build-sass && npm run server_build-ts && npm run server_tslint && npm run server_copy-static-assets",
+		"server_serve": "nodemon dist/server/server.js",
+		"server_watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run server_watch-sass\" \"npm run server_watch-ts\" \"npm run server_serve\"",
+		"server_test": "jest --forceExit",
+		"server_build-ts": "tsc --p ./tsconfig.server.json",
+		"server_watch-ts": "tsc --p ./tsconfig.server.json -w",
+		"server_build-sass": "node-sass server/public/css/main.scss dist/server/public/css/main.css",
+		"server_watch-sass": "node-sass -w server/public/css/main.scss dist/server/public/css/main.css",
+		"server_tslint": "tslint -c tslint.server.json -p tsconfig.server.json",
+		"server_copy-static-assets": "node ./scripts/copyStaticAssets.js",
+		"server_debug": "npm run server_build && npm run server_watch-debug",
+		"server_serve-debug": "nodemon --inspect dist/server/server.js",
+		"server_watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run server_watch-sass\" \"npm run server_watch-ts\" \"npm run server_serve-debug\""
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@soushians/starter": "^1.0.493"
+	}
+}
