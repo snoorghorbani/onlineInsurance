@@ -15,7 +15,6 @@ import { SharedModule } from "@soushians/shared";
 import { AuthenticationModule } from "@soushians/authentication";
 import { DashboardModule } from "./dashboard";
 import { InfraModule } from "@soushians/infra";
-import { LayoutModule } from "@soushians/layout";
 import { NgsUserModule } from "@soushians/user";
 import { StaticPageModule } from "app/static-page";
 
@@ -42,6 +41,7 @@ import { FinancialModule } from "app/financial";
 import { PackageModule } from "app/package";
 import { PaymentModule } from "app/payment";
 import { ReportsModule } from "app/reports";
+import { LayoutModule } from "./layout/layout.module";
 
 @NgModule({
 	imports: [
@@ -55,7 +55,7 @@ import { ReportsModule } from "app/reports";
 			maxAge: 25
 		}),
 		EffectsModule.forRoot([ AppEffects ]),
-		LayoutModule.forRoot(),
+		LayoutModule,
 		AuthenticationModule.forRoot(authenticationModuleConfig),
 		NgsUserModule.forRoot(userModuleConfig),
 		InfraModule,

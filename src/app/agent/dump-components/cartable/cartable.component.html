@@ -7,7 +7,7 @@
                     <mat-icon>accessibility</mat-icon>
                 </ng-template>
                 <!-- <h3 mat-subheader>مشخصات بیمه نامه درخواستی</h3> -->
-                <div *ngIf="signinService.is_admin()">
+                <div *ngIf="userService.is_role('Admin')">
                     مشحضات کاریر اینجا نمایش داده می شود
                 </div>
                 <div fxLayout='column' class='list-items'>
@@ -121,7 +121,7 @@
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <div *ngIf="signinService.is_agent()">
+                            <div *ngIf="userService.is_role('agent')">
                                 <mat-form-field>
                                     <input matInput placeholder="نام" (focus)="openRequestDetailsTab()">
                                 </mat-form-field>
@@ -139,17 +139,17 @@
                                 </mat-form-field>
                                 <button mat-button color="primary">آپلود عکس بیمه نامه</button>
                             </div>
-                            <div *ngIf="signinService.is_admin()">
+                            <div *ngIf="userService.is_role('Admin')">
                                 <div>انتخاب و ارسال درخواست نماینده در این قسمت انجام میشود</div>
                             </div>
                             <mat-action-row>
-                                <button *ngIf="signinService.is_agent()" mat-button color="primary" (click)="openCommunicationTab()">تماس با درخواست دهنده</button>
+                                <button *ngIf="userService.is_role('agent')" mat-button color="primary" (click)="openCommunicationTab()">تماس با درخواست دهنده</button>
                                 <button mat-button color="primary" (click)="openHistoryTab()">تاریخچه</button>
                                 <button mat-button color="primary" (click)="openAttachmentTab()">پیوست ها</button>
                                 <button mat-button color="primary" (click)="openMoneyTab()">جزییات مالی</button>
                                 <!-- <button mat-button color="warn" (click)="prevStep()"></button> -->
-                                <button *ngIf="signinService.is_agent()" mat-raised-button color="primary" (click)="submit()">ثبت بیمه نامه</button>
-                                <button *ngIf="signinService.is_admin()" mat-raised-button color="primary" (click)="updatePolicy()">ثبت</button>
+                                <button *ngIf="userService.is_role('agent')" mat-raised-button color="primary" (click)="submit()">ثبت بیمه نامه</button>
+                                <button *ngIf="userService.is_role('Admin')" mat-raised-button color="primary" (click)="updatePolicy()">ثبت</button>
                             </mat-action-row>
                         </mat-expansion-panel>
                     </mat-accordion>

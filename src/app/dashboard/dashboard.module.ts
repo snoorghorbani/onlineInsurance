@@ -2,13 +2,13 @@
 import { CommonModule } from "@angular/common";
 
 import { SharedModule } from "@soushians/shared";
+import { DashboardComponent, BannerComponent, LogosComponent, AgentPanelLinksComponent } from "./smart-components";
 
 import { DashboardRoutingModule } from "./dashboard-routing.module";
-import { DashboardComponent } from "./smart-components";
 
 @NgModule({
 	imports: [ CommonModule, SharedModule, DashboardRoutingModule ],
-	declarations: [ DashboardComponent ],
+	declarations: [ DashboardComponent, BannerComponent, LogosComponent, AgentPanelLinksComponent ],
 	providers: []
 })
 export class DashboardModule {}
