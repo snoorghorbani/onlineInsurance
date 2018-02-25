@@ -10,24 +10,24 @@ import "hammerjs";
 
 import { environment } from "../environments/environment";
 
-import { CoreModule } from "./core";
+import { NgsAuthenticationModule } from "@soushians/authentication";
 import { SharedModule } from "@soushians/shared";
-import { AuthenticationModule } from "@soushians/authentication";
 import { DashboardModule } from "./dashboard";
 import { InfraModule } from "@soushians/infra";
 import { NgsUserModule } from "@soushians/user";
 import { StaticPageModule } from "app/static-page";
 
+import { CoreModule } from "./core";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { reducers } from "./reducers";
 import { AppEffects } from "./effects";
 
 //module configs
-import { authenticationModuleConfig, userModuleConfig } from "./modules-config";
+import { userModuleConfig } from "./modules-config";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { EventHandlerService } from "./services";
-import { ConfigModule } from "@soushians/config";
+import { NgsConfigModule } from "@soushians/config";
 import * as FeatureReducer from "@soushians/config";
 import { SourceModule } from "@soushians/source";
 import { DynamicformComponent } from "./dynamicform/dynamicform.component";
@@ -56,11 +56,15 @@ import { LayoutModule } from "./layout/layout.module";
 		}),
 		EffectsModule.forRoot([ AppEffects ]),
 		LayoutModule,
-		AuthenticationModule.forRoot(authenticationModuleConfig),
+		NgsAuthenticationModule.forRoot({
+			env: environment as any
+		}),
 		NgsUserModule.forRoot(userModuleConfig),
 		InfraModule,
 		SharedModule,
-		ConfigModule,
+		NgsConfigModule.forRoot({
+			env: environment as any
+		}),
 		DashboardModule,
 		SourceModule,
 		StaticPageModule,

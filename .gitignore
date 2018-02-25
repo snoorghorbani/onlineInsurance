@@ -59,3 +59,7 @@ Thumbs.db
 /e2e test report/
 /e2e test report/*
 */e2e test report/*
+
+
+*.zip
+*.rar
