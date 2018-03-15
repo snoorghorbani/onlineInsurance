@@ -1,65 +1,14 @@
-﻿<mat-card id='con'>
+﻿<!-- <mat-card id='con'>
   <mat-card-content>
     <mat-tab-group class="demo-tab-group">
-      <mat-tab label="بیمه ثالث">
-        <mat-horizontal-stepper [linear]="isLinear">
-          <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-              <ng-template matStepLabel>نوع ماشین</ng-template>
-              <div fxLayout="row">
-                <mat-form-field fxFlex>
-                  <mat-select placeholder="شرکت سازنده" formControlName="carBrand">
-                    <mat-option *ngFor="let car of cars" [value]="car">
-                      {{ car.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field fxFlex>
-                  <mat-select placeholder="مدل ماشین" formControlName="carModel">
-                    <mat-option *ngFor="let car of firstFormGroup.get('carBrand').value.model" [value]="car">
-                      {{ car.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel> مشخصات بیمه </ng-template>
-              <div fxLayout="row">
-                <mat-form-field fxFlex>
-                  <mat-select placeholder="سال تولید" formControlName="year">
-                    <mat-option *ngFor="let year of years" [value]="year.value">
-                      {{ year.displayValue }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field fxFlex>
-                  <mat-select placeholder="سابقه ی عدم خسارت" formControlName="takhfif">
-                    <mat-option *ngFor="let takhfif of takhfifs" [value]="takhfif.value">
-                      {{ takhfif.displayValue }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <!-- <div class="tab-actions">
-                <button mat-button matStepperPrevious>بازگشت</button>
-                <button mat-button matStepperNext>مرحله بعد</button>
-              </div> -->
-            </form>
-          </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>مقایسه</ng-template>
-            <package-simple-compare-container></package-simple-compare-container>
-            <div class="tab-actions">
-              <a mat-raised-button color="primary" routerLink="/packages/compare"> مقایسه کامل بیمه های انتخاب شده</a>
-            </div>
-          </mat-step>
-
-        </mat-horizontal-stepper>
+      <mat-tab label="بیمه ثالث"> -->
 
 
+        <ngs-flow-view [id]="proccessId"></ngs-flow-view>
+
+
+        
+<!-- 
       </mat-tab>
       <mat-tab label="">
         <ng-template mat-tab-label>
@@ -78,4 +27,4 @@
 
   </mat-card-content>
 
-</mat-card>
+</mat-card> -->

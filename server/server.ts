@@ -21,9 +21,15 @@ const MongoStore = mongo(session);
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.config({ path: ".env.example" });
+dotenv.config({ path: ".env" });
 
 // import * as admin from "firebase-admin";
+
+/**
+ * Models
+ */
+import "./models/form.model";
+import "./models/bpmn.model";
 
 /**
  * Controllers (route handlers).
@@ -31,6 +37,9 @@ dotenv.config({ path: ".env.example" });
 import * as homeController from "./controllers/home";
 import * as userController from "./controllers/user.controller";
 import * as configController from "./controllers/config.controller";
+import * as formController from "./controllers/form.controller";
+import * as bpmnController from "./controllers/bpmn.controller";
+import * as diagramController from "./controllers/diagram.controller";
 // import * as apiController from "./controllers/api";
 import * as fakeController from "./controllers/fake.controller";
 import * as dataController from "./controllers/data-provider.controller";
@@ -126,6 +135,9 @@ app.use(express.static(path.join(__dirname, "../src"), { maxAge: 31557600000 }))
 app.get("/", homeController.index);
 app.use("/api/user", userController.router);
 app.use("/api/config", configController.router);
+app.use("/api/form", formController.router);
+app.use("/api/bpmn", bpmnController.router);
+app.use("/api/diagram", diagramController.router);
 app.use("/api/fake", fakeController.router);
 app.use("/api/data", dataController.router);
 app.use("/api/event", eventController.router);

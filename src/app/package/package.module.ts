@@ -55,11 +55,12 @@ import { PackageService } from "./services";
 import { PackageReducers } from "./reducers";
 import { UserPackagesEffects, UserEffects, PackageListEffects, PackageAddEffects, PackageEditEffects } from "./effects";
 import { AgentModule } from "app/agent";
+import { NgsBpmnModule } from "app/bpmn";
 
 @NgModule({
 	imports: [
 		SharedModule,
-		// ng2Charts.ChartsModule,
+		NgsBpmnModule,
 		InfraModule,
 		FormsModule,
 		ReactiveFormsModule,
