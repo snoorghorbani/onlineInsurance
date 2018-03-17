@@ -46,7 +46,10 @@ import {
 	AcceptFlowComponent,
 	NotificationTaskComponent,
 	FormTaskComponent,
-	FlowViewEffects
+	FlowViewEffects,
+	SubmitTaskComponent,
+	NavigateTaskComponent,
+	ExclusiveGatewayComponent
 } from "./view";
 import { FlowTestComponent } from "./test";
 
@@ -90,7 +93,10 @@ import { FlowTestComponent } from "./test";
 		StartEventComponent,
 		AcceptFlowComponent,
 		NotificationTaskComponent,
-		FormTaskComponent
+		FormTaskComponent,
+		SubmitTaskComponent,
+		NavigateTaskComponent,
+		ExclusiveGatewayComponent
 	],
 	exports: [ FlowViewContainerComponent ]
 })

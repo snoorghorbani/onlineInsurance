@@ -53,6 +53,7 @@ export class UpsertComponent implements OnInit {
 	elementClick($event) {
 		this.activeFlowIdx = undefined;
 		this.activeEl = undefined;
+		debugger;
 		if ($event.businessObject.$type.includes("Flow")) {
 			this.activeEl = [
 				this.flow.Tasks.find(item => item.Id == $event.source.id),

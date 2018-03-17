@@ -32,7 +32,6 @@ export class BpmnService {
 			.map((response: GetAllApiModel.Response) => response.Result.map(i => new ProcessModel(i)));
 	}
 	upsert(data: UpsertApiModel.Request): Observable<ProcessModel> {
-		debugger;
 		const request = new UpsertApiModel.Request(data);
 		return this.configurationService.config$
 			.filter(config => config.endpoints.upsert != "")

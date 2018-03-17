@@ -4,14 +4,15 @@ import { BpmnElement, ActionTypes } from "../../models";
 import { FormGroup } from "@angular/forms";
 
 @Component({
-	selector: "form-task",
-	templateUrl: "./form-task.component.html"
+	selector: "exclusive-gateway",
+	templateUrl: "./exclusive-gateway.component.html"
 })
-export class FormTaskComponent {
+export class ExclusiveGatewayComponent {
 	done: BehaviorSubject<any> = new BehaviorSubject({});
 	State: BpmnElement;
 	constructor(private injector: Injector) {
 		this.State = this.injector.get("State");
+		debugger;
 	}
 	doned(formGroup: FormGroup) {
 		const data = formGroup.value;

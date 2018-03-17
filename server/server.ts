@@ -30,6 +30,7 @@ dotenv.config({ path: ".env" });
  */
 import "./models/form.model";
 import "./models/bpmn.model";
+import "./models/process.model";
 
 /**
  * Controllers (route handlers).
@@ -39,6 +40,7 @@ import * as userController from "./controllers/user.controller";
 import * as configController from "./controllers/config.controller";
 import * as formController from "./controllers/form.controller";
 import * as bpmnController from "./controllers/bpmn.controller";
+import * as processController from "./controllers/process.controller";
 import * as diagramController from "./controllers/diagram.controller";
 // import * as apiController from "./controllers/api";
 import * as fakeController from "./controllers/fake.controller";
@@ -137,6 +139,7 @@ app.use("/api/user", userController.router);
 app.use("/api/config", configController.router);
 app.use("/api/form", formController.router);
 app.use("/api/bpmn", bpmnController.router);
+app.use("/api/process", processController.router);
 app.use("/api/diagram", diagramController.router);
 app.use("/api/fake", fakeController.router);
 app.use("/api/data", dataController.router);

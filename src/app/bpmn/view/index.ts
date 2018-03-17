@@ -7,4 +7,7 @@ export * from "./view.effects";
 export * from "./accept-flow";
 export * from "./notification-task";
 export * from "./form-task";
+export * from "./submit-task";
+export * from "./navigate-task";
+export * from "./exclusive-gateway";
 // export * from "./add-form.reducer";

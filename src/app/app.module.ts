@@ -16,7 +16,7 @@ import { NgsAuthenticationModule } from "@soushians/authentication";
 import { SharedModule } from "@soushians/shared";
 import { DashboardModule } from "./dashboard";
 import { InfraModule } from "@soushians/infra";
-import { NgsUserModule } from "@soushians/user";
+import { NgsUserModule, NgsUserRoutingModule } from "@soushians/user";
 import { NgsFormModule } from "@soushians/form";
 import { NgsConfigModule } from "@soushians/config";
 import { SourceModule } from "@soushians/source";
@@ -54,6 +54,7 @@ import { LayoutModule } from "./layout/layout.module";
 			env: environment as any
 		}),
 		NgsUserModule.forRoot(),
+		NgsUserRoutingModule,
 		InfraModule,
 		SharedModule,
 		NgsConfigModule.forRoot({
@@ -69,6 +70,7 @@ import { LayoutModule } from "./layout/layout.module";
 		AgentModule.forRoot(),
 		FinancialModule.forRoot(),
 		PackageModule.forRoot(),
+		PaymentModule.forRoot(),
 		ReportsModule.forRoot(),
 		NgsFormModule.forRoot(),
 		NgsBpmnModule.forRoot()

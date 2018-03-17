@@ -10,7 +10,6 @@ export const initialState: State = {
 export function reducer(state = initialState, action: FlowViewActions): State {
 	switch (action.type) {
 		case FlowViewActionTypes.PROCESS_START: {
-			debugger;
 			const data = state.data.concat();
 			var entityIdx = state.data.findIndex(flow => flow._id == action.payload._id);
 			if (entityIdx > -1) {
@@ -23,8 +22,6 @@ export function reducer(state = initialState, action: FlowViewActions): State {
 			};
 		}
 		case FlowViewActionTypes.PROCESS_TRAVERSED: {
-			debugger;
-
 			const data = state.data.concat();
 			var entityIdx = state.data.findIndex(flow => flow._id == action.payload.process._id);
 			if (entityIdx > -1) {

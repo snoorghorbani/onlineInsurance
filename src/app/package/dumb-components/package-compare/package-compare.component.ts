@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+﻿import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import { DataSource } from "@angular/cdk/collections";
@@ -18,7 +18,8 @@ import * as appReducer from "app/reducers";
 })
 export class PackageCompareComponent implements OnInit {
 	@Input() comparision: any;
-	dataSource: ReportDataSource | null;
+	@Output() select = new EventEmitter();
+	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	displayedColumns = [
 		"icon",
@@ -35,6 +36,7 @@ export class PackageCompareComponent implements OnInit {
 	];
 	links: any;
 	policyTimebox: { value: string; dispalyValue: string }[];
+	@ViewChild("selectPolicy") selectPolicy: ElementRef;
 	constructor(private store: Store<appReducer.State>) {
 		this.store.dispatch(new fromLayout.CloseSidenavAction());
 		this.store.dispatch(new fromLayout.ChangeLayout("without-margin"));
@@ -63,35 +65,9 @@ export class PackageCompareComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.dataSource = new ReportDataSource(this.comparision);
+		this.ready = true;
 	}
-}
-
-export interface compareRecord {
-	// "prices": [{ "id": "1396-15-269-386-680-85", "title": "یک ساله", "price": 1005786, "cover": 7000000 }],
-	"companyName": string;
-	"id": number;
-	"totalPenalty": number;
-	"dayPenalty": number;
-	"penalty": number;
-	"icon": string;
-	"satisfaction": number;
-	"portion": number;
-	"complaint": number;
-	"branch": number;
-	"discount": number;
-	// "installment": [{ "percent": 0.3, "date": 0 }, { "percent": 0.35, "date": 2 }, { "percent": 0.35, "date": 4 }]
-}
-
-export class ReportDataSource extends DataSource<any> {
-	constructor(private data) {
-		super();
+	done(policy) {
+		this.select.emit(policy);
 	}
-
-	/** Connect function called by the table to retrieve one stream containing the data to render. */
-	connect(): Observable<compareRecord[]> {
-		return Observable.of(this.data);
-	}
-
-	disconnect() {}
 }

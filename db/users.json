@@ -1,43 +1,31 @@
 {
-	"_id": {
-		"$oid": "5a2fc4c9b61159868ca19d22"
-	},
-	"updatedAt": {
-		"$date": "2018-02-16T13:52:10.524Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-12T12:00:09.085Z"
-	},
-	"Email": "admin@test.test",
-	"Password": "$2a$10$0m21pNuoRsNXjBDKV8XMqeLKvVPzkj9xOpnm8bvp360attpe.P3IK",
-	"tokens": [],
-	"Roles": [
+	"__v" : 0,
+	"_id" : ObjectId("5a2fc4c9b61159868ca19d22"),
+	"createdAt" : ISODate("2017-12-12T15:30:09.085+03:30"),
+	"Groups" : [
+		"test2"
+	],
+	"Password" : "$2a$10$0m21pNuoRsNXjBDKV8XMqeLKvVPzkj9xOpnm8bvp360attpe.P3IK",
+	"Roles" : [
 		"User",
 		"Admin"
 	],
-	"Groups": [
-		"test2"
-	],
-	"__v": 0
-}
+	"tokens" : [ ],
+	"updatedAt" : ISODate("2018-03-01T23:04:56.437+03:30"),
+	"Username" : "admin"
+},
 {
-	"_id": {
-		"$oid": "5a2fc4e0b61159868ca19d23"
-	},
-	"updatedAt": {
-		"$date": "2018-01-17T22:51:15.385Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-12T12:00:32.330Z"
-	},
-	"Email": "user@rasana.ir",
-	"Password": "$2a$10$S/Ofw4FrdhjGOwLXgvu3YO9ysdUglUaH/RO60vOfZXlWeQnYfEsde",
-	"tokens": [],
-	"Roles": [
-		"User"
-	],
-	"Groups": [
+	"__v" : 0,
+	"_id" : ObjectId("5a2fc4e0b61159868ca19d23"),
+	"createdAt" : ISODate("2017-12-12T15:30:32.330+03:30"),
+	"Groups" : [
 		"PublicWifi"
 	],
-	"__v": 0
-}
+	"Password" : "$2a$10$S/Ofw4FrdhjGOwLXgvu3YO9ysdUglUaH/RO60vOfZXlWeQnYfEsde",
+	"Roles" : [
+		"User"
+	],
+	"tokens" : [ ],
+	"updatedAt" : ISODate("2018-01-18T02:21:15.385+03:30"),
+	"Username" : "user"
+},

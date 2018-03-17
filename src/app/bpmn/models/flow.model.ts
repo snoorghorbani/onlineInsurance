@@ -6,6 +6,8 @@ export enum FlowStatus {
 	FINISHED = "FINISHED"
 }
 export enum ActionTypes {
+	NAVIGATE = "NAVIGATE",
+	RESOLVE = "RESOLVE",
 	ACCEPT = "ACCEPT",
 	REJECT = "REJECT",
 	SUBMIT = "SUBMIT",
@@ -25,10 +27,13 @@ export enum EventTypes {
 export enum TaskTypes {
 	FORM = "FORM",
 	CONFIRM = "CONFIRM",
-	NOTIFICATION = "NOTIFICATION"
+	NAVIGATE = "NAVIGATE",
+	NOTIFICATION = "NOTIFICATION",
+	SUBMIT = "SUBMIT"
 }
 export enum GatewayTypes {
-	CONFIRM = "CONFIRM"
+	CONFIRM = "CONFIRM",
+	EXCLUSIVE = "EXCLUSIVE"
 }
 export type BpmElementTypes = EventTypes | TaskTypes | GatewayTypes;
 export class BpmnElement {
@@ -40,6 +45,7 @@ export class BpmnElement {
 	Properties?: {
 		Type?: TaskTypes | GatewayTypes | EventTypes;
 	};
+	ShapeType: BpmnShapesType;
 	constructor({ Id = "", Name = "", MoodleType = MoodleTypes.None, Flows = [], Participants = [], Properties = {} }) {
 		this.Id = Id;
 		this.Name = Name;
@@ -62,6 +68,11 @@ export class FlowModel {
 	ToState: string;
 	Action: ActionTypes;
 	traversed: boolean;
+	Properties?: {
+		Type?: ActionTypes;
+		Route?: string;
+		Condition?: string;
+	};
 	constructor(
 		{
 			Id = "",
@@ -81,6 +92,8 @@ export class FlowModel {
 		this.ToState = ToState;
 		this.Action = Action;
 		this.traversed = traversed;
+		// if (Id == "SequenceFlow_0uwp9h4") debugger;
+		this.Properties = Properties;
 	}
 }
 
@@ -100,7 +113,9 @@ export class TaskModel extends BpmnElement {
 	ShapeType: BpmnShapesType;
 	Properties?: {
 		Type?: TaskTypes;
-		FormId?: String;
+		FormId?: string;
+		Endpoint?: string;
+		Route?: string;
 	};
 	constructor(
 		{ Id = "", MoodleType = MoodleTypes.None, Name = "", Flows = [], Participants = [], Properties = {} } = {}
@@ -118,7 +133,7 @@ export class EventModel extends BpmnElement {
 	Participants: ParticipantModel[];
 	Properties?: {
 		Type?: EventTypes;
-		FormId?: String;
+		FormId?: string;
 	};
 	constructor(
 		{
@@ -143,21 +158,21 @@ export class EventModel extends BpmnElement {
 export class GatewayModel extends BpmnElement {
 	Id: string;
 	Name: string;
-	shapeType: BpmnShapesType;
+	ShapeType: BpmnShapesType;
 	MoodleType: MoodleTypes;
 	Flows: FlowModel[];
 	bpmnEl: any;
 	Participants: ParticipantModel[];
 	Properties?: {
 		Type?: GatewayTypes;
-		FormId?: String;
+		FormId?: string;
 	};
 	constructor(
 		{
 			Id = "",
 			MoodleType = MoodleTypes.None,
 			Name = "",
-			shapeType = "",
+			ShapeType = "",
 			Flows = [],
 			bpmnEl = {},
 			Participants = [],
@@ -165,7 +180,7 @@ export class GatewayModel extends BpmnElement {
 		} = {}
 	) {
 		super({ Id, Name, MoodleType, Flows, Participants, Properties });
-		this.shapeType = BpmnShapesType.GATEWAY;
+		this.ShapeType = BpmnShapesType.GATEWAY;
 		this.MoodleType = MoodleType;
 		this.Flows = Flows.map(t => new FlowModel(t));
 		this.Participants = Participants.map(p => new ParticipantModel(p));
@@ -209,6 +224,9 @@ export class ProcessModel {
 	}
 	get currentState(): BpmnElement {
 		return [ ...this.Tasks, ...this.Events, ...this.Gateways ].find(i => i.Id == this.ActiveStateId);
+	}
+	find(id: string): BpmnElement {
+		return [ ...this.Tasks, ...this.Events, ...this.Gateways ].find(i => i.Id == id);
 	}
 }
 

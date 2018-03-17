@@ -1,61 +1,55 @@
 {
-	"_id": {
-		"$oid": "5a3fb11d45831a6f14b56cf1"
+	"__v" : 0,
+	"_id" : ObjectId("5a3fb11d45831a6f14b56cf1"),
+	"Box" : {
+		"BackgroundColor" : "#ffffff",
+		"TextColor" : "#555",
+		"Rows" : 6,
+		"Cols" : 4
 	},
-	"updatedAt": {
-		"$date": "2018-01-06T19:50:45.389Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-24T13:52:56.980Z"
-	},
-	"Name": "نونو",
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": false
+		"subchart" : {
+			"show" : false
 		},
-		"legend": {
-			"show": false
+		"legend" : {
+			"show" : false
 		},
-		"ColumnMappings": [
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": "data.name",
-				"_id": {
-					"$oid": "5a512895a5aa336761a9844f"
-				}
+				"_id" : ObjectId("5a512895a5aa336761a9844f"),
+				"ValuePath" : "data.value",
+				"NamePath" : "data.name"
 			},
 			{
-				"ValuePath": "data.value",
-				"NamePath": "",
-				"_id": {
-					"$oid": "5a512895a5aa336761a9844e"
-				}
+				"_id" : ObjectId("5a512895a5aa336761a9844e"),
+				"ValuePath" : "data.value",
+				"NamePath" : ""
 			}
 		],
-		"data": {
-			"types": {
-				"value": "area-spline",
-				"": "line",
-				"data4": "donut",
-				"data3": "bar",
-				"data2": "bar",
-				"data1": "donut"
+		"data" : {
+			"types" : {
+				"value" : "area-spline",
+				"" : "line",
+				"data4" : "donut",
+				"data3" : "bar",
+				"data2" : "bar",
+				"data1" : "donut"
 			},
-			"colors": {
-				"value": "#123456",
-				"": "#123456",
-				"data4": "#02665c",
-				"data3": "#123456",
-				"data2": "#16521e",
-				"data1": "#450a5f"
+			"colors" : {
+				"value" : "#123456",
+				"" : "#123456",
+				"data4" : "#02665c",
+				"data3" : "#123456",
+				"data2" : "#16521e",
+				"data1" : "#450a5f"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"data1",
 					20
@@ -80,149 +74,129 @@
 					473
 				]
 			],
-			"type": "line"
+			"type" : "line"
 		}
 	},
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "#ffffff",
-		"TextColor": "#555",
-		"Rows": 6,
-		"Cols": 4
-	},
-	"IsActive": false,
-	"__v": 0,
-	"Type": "line",
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Groups": [
+	"createdAt" : ISODate("2017-12-24T17:22:56.980+03:30"),
+	"Groups" : [
 		"PublicWifi"
-	]
-}
+	],
+	"IsActive" : false,
+	"Name" : "نونو",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "line",
+	"updatedAt" : ISODate("2018-01-06T23:20:45.389+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a40c962509578422cd5baf0"
+	"__v" : 0,
+	"_id" : ObjectId("5a40c962509578422cd5baf0"),
+	"Box" : {
+		"BackgroundColor" : "#ffffff",
+		"TextColor" : "#17cff0",
+		"Rows" : 2,
+		"Cols" : 2
 	},
-	"updatedAt": {
-		"$date": "2018-01-17T22:37:06.033Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-25T09:48:18.614Z"
-	},
-	"Name": "کاپیتان",
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": false
+		"subchart" : {
+			"show" : false
 		},
-		"legend": {
-			"show": true
+		"legend" : {
+			"show" : true
 		},
-		"ColumnMappings": [
+		"ColumnMappings" : [
 			{
-				"ValuePath": "obj.Upload",
-				"NamePath": null,
-				"_id": {
-					"$oid": "5a5fd0126a5dff619541724c"
-				}
+				"_id" : ObjectId("5a5fd0126a5dff619541724c"),
+				"ValuePath" : "obj.Upload",
+				"NamePath" : null
 			}
 		],
-		"data": {
-			"types": {
-				"Upload": "booleano"
+		"data" : {
+			"types" : {
+				"Upload" : "booleano"
 			},
-			"colors": {
-				"value": "#123456",
-				"Upload": "#123456",
-				"data4": "#645ada",
-				"data3": "#f4ef13",
-				"data2": "#fb1afb",
-				"data1": "#1fc1f8"
+			"colors" : {
+				"value" : "#123456",
+				"Upload" : "#123456",
+				"data4" : "#645ada",
+				"data3" : "#f4ef13",
+				"data2" : "#fb1afb",
+				"data1" : "#1fc1f8"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"Upload",
 					3
 				]
 			],
-			"type": "booleano"
+			"type" : "booleano"
 		}
 	},
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "#ffffff",
-		"TextColor": "#17cff0",
-		"Rows": 2,
-		"Cols": 2
-	},
-	"IsActive": true,
-	"__v": 0,
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Type": "booleano",
-	"Groups": [
+	"createdAt" : ISODate("2017-12-25T13:18:18.614+03:30"),
+	"Groups" : [
 		"PublicWifi",
 		"TIF"
-	]
-}
+	],
+	"IsActive" : true,
+	"Name" : "کاپیتان",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "booleano",
+	"updatedAt" : ISODate("2018-01-18T02:07:06.033+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a40cd56509578422cd5bcfc"
+	"__v" : 0,
+	"_id" : ObjectId("5a40cd56509578422cd5bcfc"),
+	"Box" : {
+		"BackgroundColor" : "fff",
+		"TextColor" : "#555",
+		"Rows" : 5,
+		"Cols" : 2
 	},
-	"updatedAt": {
-		"$date": "2018-01-02T05:22:47.200Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-25T10:05:10.860Z"
-	},
-	"Name": "طه",
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": false
+		"subchart" : {
+			"show" : false
 		},
-		"legend": {
-			"show": true
+		"legend" : {
+			"show" : true
 		},
-		"ColumnMappings": [
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": "data.name",
-				"_id": {
-					"$oid": "5a4b1727e3e746e2407ae70b"
-				}
+				"_id" : ObjectId("5a4b1727e3e746e2407ae70b"),
+				"ValuePath" : "data.value",
+				"NamePath" : "data.name"
 			}
 		],
-		"data": {
-			"colors": {
-				"data4": "#123456",
-				"data3": "#123456",
-				"data2": "#123456",
-				"data1": "#123456"
+		"data" : {
+			"colors" : {
+				"data4" : "#123456",
+				"data3" : "#123456",
+				"data2" : "#123456",
+				"data1" : "#123456"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"data1",
 					147
@@ -240,72 +214,62 @@
 					91
 				]
 			],
-			"type": "pie"
+			"type" : "pie"
 		}
 	},
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "fff",
-		"TextColor": "#555",
-		"Rows": 5,
-		"Cols": 2
-	},
-	"IsActive": true,
-	"__v": 0,
-	"Type": "pie",
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Groups": [
+	"createdAt" : ISODate("2017-12-25T13:35:10.860+03:30"),
+	"Groups" : [
 		"TIF"
-	]
-}
+	],
+	"IsActive" : true,
+	"Name" : "طه",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "pie",
+	"updatedAt" : ISODate("2018-01-02T08:52:47.200+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a420ee60f091b540c66fd56"
+	"__v" : 0,
+	"_id" : ObjectId("5a420ee60f091b540c66fd56"),
+	"Box" : {
+		"BackgroundColor" : "#ffffff",
+		"TextColor" : "#555",
+		"Rows" : 6,
+		"Cols" : 4
 	},
-	"updatedAt": {
-		"$date": "2018-01-02T05:13:20.154Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-24T13:52:56.980Z"
-	},
-	"Name": "سارا",
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": true
+		"subchart" : {
+			"show" : true
 		},
-		"legend": {
-			"show": false
+		"legend" : {
+			"show" : false
 		},
-		"ColumnMappings": [
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": "data.name",
-				"_id": {
-					"$oid": "5a4b14f0e3e746e2407ae3e7"
-				}
+				"_id" : ObjectId("5a4b14f0e3e746e2407ae3e7"),
+				"ValuePath" : "data.value",
+				"NamePath" : "data.name"
 			}
 		],
-		"data": {
-			"colors": {
-				"data4": "#2365a7",
-				"data3": "#1e5791",
-				"data2": "#1b4e81",
-				"data1": "#123456"
+		"data" : {
+			"colors" : {
+				"data4" : "#2365a7",
+				"data3" : "#1e5791",
+				"data2" : "#1b4e81",
+				"data1" : "#123456"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"data1",
 					192
@@ -323,77 +287,67 @@
 					226
 				]
 			],
-			"type": "bar"
+			"type" : "bar"
 		}
 	},
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "#ffffff",
-		"TextColor": "#555",
-		"Rows": 6,
-		"Cols": 4
-	},
-	"IsActive": false,
-	"__v": 0,
-	"Type": "bar",
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Groups": [
+	"createdAt" : ISODate("2017-12-24T17:22:56.980+03:30"),
+	"Groups" : [
 		"TIF2"
-	]
-}
+	],
+	"IsActive" : false,
+	"Name" : "سارا",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "bar",
+	"updatedAt" : ISODate("2018-01-02T08:43:20.154+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a4b11e6ff6ae751f281ae55"
+	"__v" : 0,
+	"_id" : ObjectId("5a4b11e6ff6ae751f281ae55"),
+	"Box" : {
+		"BackgroundColor" : "#c1e2bc",
+		"TextColor" : "#17cff0",
+		"Rows" : 3,
+		"Cols" : 2
 	},
-	"updatedAt": {
-		"$date": "2018-01-16T10:28:21.357Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-25T09:48:18.614Z"
-	},
-	"Name": "پگاه",
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": false
+		"subchart" : {
+			"show" : false
 		},
-		"legend": {
-			"show": true
+		"legend" : {
+			"show" : true
 		},
-		"ColumnMappings": [
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": null,
-				"_id": {
-					"$oid": "5a5dd3c59bbce54bdda6335a"
-				}
+				"_id" : ObjectId("5a5dd3c59bbce54bdda6335a"),
+				"ValuePath" : "data.value",
+				"NamePath" : null
 			}
 		],
-		"data": {
-			"types": {
-				"value": "numero"
+		"data" : {
+			"types" : {
+				"value" : "numero"
 			},
-			"colors": {
-				"value": "#123456",
-				"Upload": "#123456",
-				"data4": "#645ada",
-				"data3": "#f4ef13",
-				"data2": "#fb1afb",
-				"data1": "#1fc1f8"
+			"colors" : {
+				"value" : "#123456",
+				"Upload" : "#123456",
+				"data4" : "#645ada",
+				"data3" : "#f4ef13",
+				"data2" : "#fb1afb",
+				"data1" : "#1fc1f8"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"value",
 					310,
@@ -402,78 +356,68 @@
 					308
 				]
 			],
-			"type": "numero"
+			"type" : "numero"
 		}
 	},
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "#c1e2bc",
-		"TextColor": "#17cff0",
-		"Rows": 3,
-		"Cols": 2
-	},
-	"IsActive": true,
-	"__v": 0,
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Type": "numero",
-	"Groups": [
+	"createdAt" : ISODate("2017-12-25T13:18:18.614+03:30"),
+	"Groups" : [
 		"TIF"
-	]
-}
+	],
+	"IsActive" : true,
+	"Name" : "پگاه",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "numero",
+	"updatedAt" : ISODate("2018-01-16T13:58:21.357+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a4b1243ff6ae751f281af92"
+	"__v" : 0,
+	"_id" : ObjectId("5a4b1243ff6ae751f281af92"),
+	"Box" : {
+		"BackgroundColor" : "#9edbed",
+		"TextColor" : "#17cff0",
+		"Rows" : 5,
+		"Cols" : 4
 	},
-	"updatedAt": {
-		"$date": "2018-01-15T15:48:36.669Z"
-	},
-	"createdAt": {
-		"$date": "2017-12-25T09:48:18.614Z"
-	},
-	"Name": "علی",
-	"Chart": {
-		"tooltip": {
-			"grouped": true
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : true
 		},
-		"zoom": {
-			"enabled": true
+		"zoom" : {
+			"enabled" : true
 		},
-		"subchart": {
-			"show": true
+		"subchart" : {
+			"show" : true
 		},
-		"legend": {
-			"show": true
+		"legend" : {
+			"show" : true
 		},
-		"Flow": true,
-		"ColumnMappings": [
+		"Flow" : true,
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": null,
-				"_id": {
-					"$oid": "5a5ccd54ab0eb8cac955f74a"
-				}
+				"_id" : ObjectId("5a5ccd54ab0eb8cac955f74a"),
+				"ValuePath" : "data.value",
+				"NamePath" : null
 			}
 		],
-		"data": {
-			"types": {
-				"value": "area-spline"
+		"data" : {
+			"types" : {
+				"value" : "area-spline"
 			},
-			"colors": {
-				"value": "#3a8b8b",
-				"Upload": "#123456",
-				"data4": "#645ada",
-				"data3": "#f4ef13",
-				"data2": "#fb1afb",
-				"data1": "#1fc1f8"
+			"colors" : {
+				"value" : "#3a8b8b",
+				"Upload" : "#123456",
+				"data4" : "#645ada",
+				"data3" : "#f4ef13",
+				"data2" : "#fb1afb",
+				"data1" : "#1fc1f8"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"value",
 					339,
@@ -482,72 +426,62 @@
 					31
 				]
 			],
-			"type": "line"
+			"type" : "line"
 		}
 	},
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "#9edbed",
-		"TextColor": "#17cff0",
-		"Rows": 5,
-		"Cols": 4
-	},
-	"IsActive": true,
-	"__v": 0,
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Type": "line",
-	"Groups": [
+	"createdAt" : ISODate("2017-12-25T13:18:18.614+03:30"),
+	"Groups" : [
 		"TIF3"
-	]
-}
+	],
+	"IsActive" : true,
+	"Name" : "علی",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "line",
+	"updatedAt" : ISODate("2018-01-15T19:18:36.669+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a4c94661dc653346ccb28d2"
+	"__v" : 0,
+	"_id" : ObjectId("5a4c94661dc653346ccb28d2"),
+	"Box" : {
+		"BackgroundColor" : "#ffffff",
+		"TextColor" : "#000000",
+		"Rows" : 4,
+		"Cols" : 4
 	},
-	"updatedAt": {
-		"$date": "2018-01-03T08:33:41.767Z"
-	},
-	"createdAt": {
-		"$date": "2018-01-03T08:29:26.868Z"
-	},
-	"Name": "test",
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": false
+		"subchart" : {
+			"show" : false
 		},
-		"legend": {
-			"show": true
+		"legend" : {
+			"show" : true
 		},
-		"ColumnMappings": [
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": "data.name",
-				"_id": {
-					"$oid": "5a4c95651dc653346ccb2983"
-				}
+				"_id" : ObjectId("5a4c95651dc653346ccb2983"),
+				"ValuePath" : "data.value",
+				"NamePath" : "data.name"
 			}
 		],
-		"data": {
-			"colors": {
-				"data4": "#123456",
-				"data3": "#123456",
-				"data2": "#123456",
-				"data1": "#123456"
+		"data" : {
+			"colors" : {
+				"data4" : "#123456",
+				"data3" : "#123456",
+				"data2" : "#123456",
+				"data1" : "#123456"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"data1",
 					344
@@ -565,82 +499,69 @@
 					230
 				]
 			],
-			"type": "pie"
+			"type" : "pie"
 		}
 	},
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Type": "pie",
-	"Source": {
-		"$oid": "5a4f827bff6ae751f28d9668"
-	},
-	"Box": {
-		"BackgroundColor": "#ffffff",
-		"TextColor": "#000000",
-		"Rows": 4,
-		"Cols": 4
-	},
-	"IsActive": true,
-	"__v": 0,
-	"Groups": [
+	"createdAt" : ISODate("2018-01-03T11:59:26.868+03:30"),
+	"Groups" : [
 		"TIF"
-	]
-}
+	],
+	"IsActive" : true,
+	"Name" : "test",
+	"Source" : ObjectId("5a4f827bff6ae751f28d9668"),
+	"Type" : "pie",
+	"updatedAt" : ISODate("2018-01-03T12:03:41.767+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},
 {
-	"_id": {
-		"$oid": "5a587249169ff8381a3c5fb5"
+	"__v" : 0,
+	"_id" : ObjectId("5a587249169ff8381a3c5fb5"),
+	"Box" : {
+		"BackgroundColor" : "#ffffff",
+		"TextColor" : "#000000",
+		"Rows" : 5,
+		"Cols" : 12
 	},
-	"updatedAt": {
-		"$date": "2018-01-15T08:56:43.595Z"
-	},
-	"createdAt": {
-		"$date": "2018-01-12T08:31:05.843Z"
-	},
-	"Name": "1111111",
-	"Source": {
-		"$oid": "5a56419f443bcfefc4ed85ff"
-	},
-	"Chart": {
-		"tooltip": {
-			"grouped": false
+	"Chart" : {
+		"tooltip" : {
+			"grouped" : false
 		},
-		"zoom": {
-			"enabled": false
+		"zoom" : {
+			"enabled" : false
 		},
-		"subchart": {
-			"show": false
+		"subchart" : {
+			"show" : false
 		},
-		"legend": {
-			"show": true
+		"legend" : {
+			"show" : true
 		},
-		"Flow": false,
-		"ColumnMappings": [
+		"Flow" : false,
+		"ColumnMappings" : [
 			{
-				"ValuePath": "data.value",
-				"NamePath": "data.name",
-				"_id": {
-					"$oid": "5a5c6ccbdc95821532fc6105"
-				}
+				"_id" : ObjectId("5a5c6ccbdc95821532fc6105"),
+				"ValuePath" : "data.value",
+				"NamePath" : "data.name"
 			}
 		],
-		"data": {
-			"types": {
-				"data4": "line",
-				"data3": "line",
-				"data2": "line",
-				"data1": "area"
+		"data" : {
+			"types" : {
+				"data4" : "line",
+				"data3" : "line",
+				"data2" : "line",
+				"data1" : "area"
 			},
-			"colors": {
-				"data4": "#123456",
-				"data3": "#123456",
-				"data2": "#123456",
-				"data1": "#12564e"
+			"colors" : {
+				"data4" : "#123456",
+				"data3" : "#123456",
+				"data2" : "#123456",
+				"data1" : "#12564e"
 			},
-			"columns": [
+			"columns" : [
 				[
 					"data1",
 					241,
@@ -707,25 +628,22 @@
 					204
 				]
 			],
-			"type": "line"
+			"type" : "line"
 		}
 	},
-	"Widget": {
-		"booleano": {
-			"FailureMessage": "FailureMessage",
-			"SuccessMessage": "SuccessMessage"
-		}
-	},
-	"Type": "line",
-	"Box": {
-		"BackgroundColor": "#ffffff",
-		"TextColor": "#000000",
-		"Rows": 5,
-		"Cols": 12
-	},
-	"IsActive": true,
-	"__v": 0,
-	"Groups": [
+	"createdAt" : ISODate("2018-01-12T12:01:05.843+03:30"),
+	"Groups" : [
 		"TIF"
-	]
-}
+	],
+	"IsActive" : true,
+	"Name" : "1111111",
+	"Source" : ObjectId("5a56419f443bcfefc4ed85ff"),
+	"Type" : "line",
+	"updatedAt" : ISODate("2018-01-15T12:26:43.595+03:30"),
+	"Widget" : {
+		"booleano" : {
+			"FailureMessage" : "FailureMessage",
+			"SuccessMessage" : "SuccessMessage"
+		}
+	}
+},

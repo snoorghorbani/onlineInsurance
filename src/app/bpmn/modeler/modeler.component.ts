@@ -7,7 +7,8 @@ import {
 	ParticipantModel,
 	FlowModel,
 	EventModel,
-	GatewayModel
+	GatewayModel,
+	GatewayTypes
 } from "app/bpmn/models/flow.model";
 import { MoodleElement, MoodleTypes } from "app/bpmn/models/bpmnjs.interface";
 import { BpmnjsEvents } from "../models";
@@ -110,11 +111,15 @@ export class ModelerComponent implements AfterViewInit {
 				].some(state => state)
 			)
 			.map(el => {
-				const gateway = new GatewayModel();
+				let gateway: GatewayModel = this.flow.Gateways.find(s => s.Id == el.bpmnElement.id);
+				if (!gateway) gateway = new GatewayModel();
 				// gateway.bpmnEl = el;
 				gateway.Id = el.bpmnElement.id;
 				gateway.MoodleType = el.bpmnElement.$type;
 				gateway.Name = el.bpmnElement.name;
+				if (el.bpmnElement.$type == MoodleTypes.BpmnExclusiveGateway) {
+					gateway.Properties.Type = GatewayTypes.EXCLUSIVE;
+				}
 				gateway.Participants = this.getParticipant(el);
 				gateway.Flows = this.updateFlows(el, gateway.Flows);
 				return gateway;

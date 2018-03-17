@@ -6,7 +6,5 @@
 })
 export class AcceptFlowComponent {
 	@Output() accept = new EventEmitter();
-	constructor(private injector: Injector) {
-		debugger;
-	}
+	constructor(private injector: Injector) {}
 }

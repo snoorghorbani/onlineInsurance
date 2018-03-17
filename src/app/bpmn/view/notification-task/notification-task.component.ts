@@ -17,7 +17,6 @@ export class NotificationTaskComponent implements AfterViewInit {
 		alert("done!");
 		debugger;
 		setTimeout(() => {
-			this.State.Flows.find(f => true).traverse();
 			this.change.next({});
 		}, 0);
 	}

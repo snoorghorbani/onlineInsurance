@@ -64,8 +64,8 @@
       <mat-card>
         <mat-card-header>
         </mat-card-header>
-        <mat-card-content>
-          <mat-table #table [dataSource]="dataSource" matSort>
+        <mat-card-content *ngIf="ready">
+          <mat-table  #table [dataSource]="comparision">
 
             <ng-container matColumnDef="companyName">
               <mat-header-cell *matHeaderCellDef mat-sort-header> شرکت بیمه </mat-header-cell>
@@ -131,13 +131,13 @@
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell class='left-align' *matCellDef="let row">
-                <button mat-icon-button (click)="selectPlicy(row)">
+                <button mat-icon-button (click)="done(row)">
                   <mat-icon aria-label="انتخاب">arrow_back</mat-icon>
                 </button>
               </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
         </mat-card-content>

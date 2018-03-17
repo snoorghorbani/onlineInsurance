@@ -4,17 +4,27 @@ import { Observable } from "rxjs/Rx";
 import { Store } from "@ngrx/store";
 
 import { stringTemplate } from "@soushians/infra";
-import { UpsertApiModel, ProcessModel, GetApiModel, GetAllApiModel, EditApiModel } from "../models";
+import {
+	UpsertApiModel,
+	ProcessModel,
+	GetApiModel,
+	GetAllApiModel,
+	EditApiModel,
+	TaskModel,
+	ActionTypes
+} from "../models";
 import { BpmnConfigurationService } from "./bpmn-configuration.service";
 
 import { MainContainerState } from "../main-container/main-container.reducers";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class FlowService {
 	constructor(
 		private http: HttpClient,
 		private store: Store<MainContainerState>,
+		private router: Router,
 		private configurationService: BpmnConfigurationService
 	) {}
 
@@ -37,5 +47,17 @@ export class FlowService {
 			.filter(entities => entities != null)
 			.subscribe(enitity => subject.next(new ProcessModel(enitity)));
 		return subject.asObservable().filter(flow => flow != null);
+	}
+	navigate(state: TaskModel) {
+		this.router
+			.navigate([ state.Properties.Route ])
+			.then(response => {
+				const data = ActionTypes.RESOLVE;
+				const flow = state.Flows.find(f => f.Action == ActionTypes.RESOLVE);
+			})
+			.catch(err => {
+				// this.doned(ActionTypes.REJECT);
+				return Observable.empty();
+			});
 	}
 }
