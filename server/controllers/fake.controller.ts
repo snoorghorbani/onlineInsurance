@@ -49,12 +49,10 @@ router.get("/fake2", function(req, res) {
 	}
 });
 
-router.get("/getPolicyCompare", function(req, res) {
-	debugger;
+router.post("/getPolicyCompare", function(req, res) {
 	res.json({});
 });
 router.get("/packgeCompareSimpleList", function(req, res) {
-	debugger;
 	return res.json({
 		displayedColumns: [ "select", "companyName", "price", "cover", "actions" ],
 		filedDisplayedColumns: [ "companyName", "price", "cover" ],

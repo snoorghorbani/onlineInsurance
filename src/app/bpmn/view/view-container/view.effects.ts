@@ -3,7 +3,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/switchMap";
 
-import { Injectable } from "@angular/core";
+import { Injectable, state } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Action } from "@ngrx/store";
@@ -14,10 +14,16 @@ import { Store } from "@ngrx/store";
 import { FlowService } from "../../services";
 import { FlowModel, ProcessModel, ActionTypes, TaskTypes, TaskModel, BpmnShapesType } from "../../models";
 import { FlowViewActionTypes, GoToStateAction, ProcessTraversedAction } from "./view.actions";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class FlowViewEffects {
-	constructor(private actions$: Actions<any>, private router: Router, private service: FlowService) {}
+	constructor(
+		private actions$: Actions<any>,
+		private router: Router,
+		private service: FlowService,
+		private http: HttpClient
+	) {}
 
 	// @Effect()
 	// EditProfileRequest$ = this.actions$.ofType(FormsListActionTypes.FORMS_LIST).map(data => new FormsListStartAction());
@@ -46,7 +52,7 @@ export class FlowViewEffects {
 		.map(({ process, data, flow }: { process: ProcessModel; data: any; flow: FlowModel }) => {
 			var task = process.currentState as TaskModel;
 			var ToState = process.find(flow.ToState);
-			debugger;
+			let selectedflow: FlowModel;
 			if (task.Properties.Type == TaskTypes.NAVIGATE) {
 				this.router.navigate([ task.Properties.Route ]);
 			}
@@ -55,13 +61,10 @@ export class FlowViewEffects {
 			}
 
 			if (ToState.ShapeType == BpmnShapesType.GATEWAY) {
-				debugger;
-				let selectedflow: FlowModel;
 				if (ToState.Flows.length == 1) {
 					selectedflow = ToState.Flows[0];
 				} else {
 					selectedflow = ToState.Flows.find(flowItem => {
-						debugger;
 						var evaluator = function() {
 							return eval(flowItem.Properties.Condition);
 						};
@@ -75,7 +78,49 @@ export class FlowViewEffects {
 					flow: selectedflow
 				});
 			}
-			// return new GoToStateAction({ process, data, flow });
+
 			return { type: "null" };
+		});
+
+	@Effect()
+	submit$ = this.actions$
+		.ofType(FlowViewActionTypes.GO_TO_STATE)
+		.map(action => action.payload)
+		.switchMap(({ process, data, flow }: { process: ProcessModel; data: any; flow: FlowModel }) => {
+			var task = process.currentState as TaskModel;
+			var ToState = process.find(flow.ToState);
+			let selectedflow: FlowModel;
+			debugger;
+
+			if (task.Properties.Type == TaskTypes.SUBMIT) {
+				debugger;
+				let request = this.http.post(task.Properties.Endpoint, process.Data).map(response => {
+					debugger;
+					if (task.Flows.length == 1) {
+						selectedflow = task.Flows[0];
+					} else {
+						selectedflow = task.Flows.find(f => f.Properties.Type == ActionTypes.RESOLVE);
+					}
+					process.ActiveStateId = selectedflow.ToState;
+					return new ProcessTraversedAction({
+						process: process,
+						data: process.Data,
+						flow: selectedflow
+					});
+				});
+				request.subscribe(data => {});
+				return request;
+				// .catch(err => {
+				// 	selectedflow = task.Flows.find(f => f.Action == ActionTypes.REJECT);
+				// 	process.ActiveStateId = selectedflow.ToState;
+				// 	return new ProcessTraversedAction({
+				// 		process: process,
+				// 		data: process.Data,
+				// 		flow: selectedflow
+				// 	});
+				// });
+			}
+			return Observable.empty();
+			// return new GoToStateAction({ process, data, flow });
 		});
 }

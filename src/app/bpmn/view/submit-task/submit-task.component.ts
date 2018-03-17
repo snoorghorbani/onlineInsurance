@@ -17,7 +17,7 @@ export class SubmitTaskComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.http
-			.get(this.State.Properties.Endpoint)
+			.post(this.State.Properties.Endpoint, {})
 			.map(response => {
 				this.doned(ActionTypes.RESOLVE);
 			})

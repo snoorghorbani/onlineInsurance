@@ -12,10 +12,10 @@ const router = express.Router();
 router.get("/", function(req, res) {
 	Model.find().then(Result => res.json({ Result }));
 });
-router.get("/:id", function(req, res) {
-	Model.findById(req.params.id).then(Result => res.json({ Result }));
-});
-router.get("/save", function(req, res) {
+// router.get("/:id", function(req, res) {
+// 	Model.findById(req.params.id).then(Result => res.json({ Result }));
+// });
+router.post("/save", function(req, res) {
 	debugger;
 	if (req.body._id == undefined) {
 		delete req.body._id;

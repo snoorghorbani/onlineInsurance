@@ -35,7 +35,6 @@ export function reducer(state = initialState, action: FlowViewActions): State {
 			};
 		}
 		case FlowViewActionTypes.GO_TO_STATE: {
-			debugger;
 			const data = state.data.concat();
 			var entityIdx = state.data.findIndex(flow => flow._id == action.payload.process._id);
 			data[entityIdx] = Object.assign({}, data[entityIdx], { ActiveStateId: action.payload.flow.ToState });

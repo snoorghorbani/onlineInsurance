@@ -27,8 +27,6 @@ export class FlowViewContainerComponent implements OnInit {
 		this.service.selectById(this.id).subscribe(process => this.process$.next(process));
 	}
 	traversed({ data, flow }: { data: any; flow: FlowModel }) {
-		// this.flow.traverse(State.Flows.filter(f => f.traversed == true));
-		debugger;
 		const process = this.process$.getValue();
 		process.Data = Object.assign({}, process.Data, data);
 		this.store.dispatch(new ProcessTraversedAction({ process, data, flow }));
