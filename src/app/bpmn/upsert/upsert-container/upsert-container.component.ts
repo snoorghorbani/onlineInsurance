@@ -14,7 +14,6 @@ import { BehaviorSubject } from "rxjs";
 @Component({
 	template: `<ngs-bpmn-upsert 
 					[flow]="flow$" 
-					(changes)="update_schema($event)" 
 					(submited)=upsert($event)
 				></ngs-bpmn-upsert>`
 })

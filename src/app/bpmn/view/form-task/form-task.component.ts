@@ -1,6 +1,6 @@
 ﻿import { Component, Output, EventEmitter, Injector } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { BpmnElement, ActionTypes } from "../../models";
+import { BpmnElement, ActionTypes, GatewayModel } from "../../models";
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -9,7 +9,7 @@ import { FormGroup } from "@angular/forms";
 })
 export class FormTaskComponent {
 	done: BehaviorSubject<any> = new BehaviorSubject({});
-	State: BpmnElement;
+	State: GatewayModel;
 	constructor(private injector: Injector) {
 		this.State = this.injector.get("State");
 	}

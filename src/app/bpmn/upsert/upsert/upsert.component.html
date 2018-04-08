@@ -68,14 +68,14 @@
           <div fxFlex="1 1 auto" fxFlexAlign="stretch">
             <ngs-bpmn-view #bpmnView
               [flow]="flow"
-              (submit)="upsert($event)"
+              (submit)="upsert()"
               (elementHover)="elementHover($event)"
               (elementOut)="elementOut($event)"
               (elementClick)="elementClick($event)"
-              (elementDblclick)="flow($event)"
               (elementMousedown)="elementMousedown($event)"
               (elementMouseup)="elementMouseup($event)"
-            ></ngs-bpmn-view>
+              ></ngs-bpmn-view>
+              <!-- (elementDblclick)="flow($event)" -->
           </div>
         </mat-grid-tile>
       </mat-grid-list>
