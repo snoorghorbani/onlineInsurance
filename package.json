@@ -1,6 +1,6 @@
 {
 	"name": "online-insurance",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "",
 	"scripts": {
 		"ng": "ng",
