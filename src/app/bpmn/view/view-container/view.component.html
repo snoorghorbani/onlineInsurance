@@ -1,6 +1,0 @@
-<div *ngIf="process$ | async">
-  <dynamic-state
-    [State]="(process$ | async).currentState"
-    (done)="traversed($event)"
-  ></dynamic-state>
-</div>
