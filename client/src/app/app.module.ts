@@ -31,6 +31,7 @@ import { reducers } from "./app.reducers";
 
 //module configs
 import { DashboardModule } from "./dashboard";
+import { OiModule } from "./oi/oi.module";
 // import { NgsBpmnModule } from "./bpmn";
 
 @NgModule({
@@ -67,7 +68,8 @@ import { DashboardModule } from "./dashboard";
 		NgsFormModule.forRoot(),
 		AppRoutingModule,
 		MatFormFieldModule,
-		DashboardModule
+		DashboardModule,
+		OiModule
 	],
 	declarations: [ AppComponent ],
 	providers: [
