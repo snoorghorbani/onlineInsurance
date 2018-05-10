@@ -1,13 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { TestComponent } from "./test/test.component";
-import { OrderRoutingModule } from "./order-routing.module";
-import { StoreModule } from "@ngrx/store";
-import { FeatureReducers } from "./order.reducers";
-import { EffectsModule } from "@ngrx/effects";
-import { GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects } from "./services/api";
-import { OrderComponent } from "./order.component";
-import { NewOrderComponent } from "./new-order/new-order.component";
 import {
 	MatFormFieldModule,
 	MatButtonModule,
@@ -18,11 +10,27 @@ import {
 	MatInputModule,
 	MatTabsModule,
 	MatDatepickerModule,
-	MatNativeDateModule
+	MatNativeDateModule,
+	MatIconModule,
+	MatTableModule,
+	MatSidenavModule,
+	MatSlideToggleModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
+
+import { InfraModule } from "@soushians/infra";
+
+import { TestComponent } from "./test/test.component";
+import { OrderRoutingModule } from "./order-routing.module";
+import { StoreModule } from "@ngrx/store";
+import { FeatureReducers } from "./order.reducers";
+import { EffectsModule } from "@ngrx/effects";
+import { GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects } from "./services/api";
+import { OrderComponent } from "./order.component";
+import { NewOrderComponent } from "./new-order/new-order.component";
 import { RouterModule } from "@angular/router";
+import { CompareComponent } from "./compare/compare.component";
 
 @NgModule({
 	imports: [
@@ -33,8 +41,12 @@ import { RouterModule } from "@angular/router";
 		FormsModule,
 		MatSelectModule,
 		MatInputModule,
+		MatSlideToggleModule,
 		MatTabsModule,
+		MatIconModule,
 		MatButtonModule,
+		MatTableModule,
+		MatSidenavModule,
 		MatCardModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
@@ -42,9 +54,10 @@ import { RouterModule } from "@angular/router";
 		MatGridListModule,
 		FlexLayoutModule,
 		StoreModule.forFeature("order", FeatureReducers),
+		InfraModule,
 		OrderRoutingModule,
 		EffectsModule.forFeature([ GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects ])
 	],
-	declarations: [ TestComponent, OrderComponent, NewOrderComponent ]
+	declarations: [ TestComponent, OrderComponent, NewOrderComponent, CompareComponent ]
 })
 export class OrderModule {}

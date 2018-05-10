@@ -1,26 +1,31 @@
 import { Component, OnInit } from "@angular/core";
-import { OrderFormModel } from "../models";
-import { Observable } from "rxjs/Observable";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
-import { FieldModel, FieldOptionModel } from "../models/field.model";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
 import {
-	GetCarModelsOfBrandStartAction,
-	GetCarModelsOfBrandApiModel,
 	ComparePoliciesStartAction,
-	ComparePoliciesApiModel
+	ComparePoliciesApiModel,
+	GetCarModelsOfBrandStartAction,
+	GetCarModelsOfBrandApiModel
 } from "../../policy/services/api";
-import { FormGroup, FormControl } from "@angular/forms";
 import { from } from "rxjs";
+import { FormGroup, FormControl } from "@angular/forms";
+import { Observable } from "rxjs/internal/Observable";
+import { FieldModel, FieldOptionModel } from "../models/field.model";
+import { OrderFormModel } from "../models";
 import { Router } from "@angular/router";
+import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
 
 @Component({
-	selector: "app-new-order",
-	templateUrl: "./new-order.component.html",
-	styleUrls: [ "./new-order.component.css" ]
+	selector: "app-compare",
+	templateUrl: "./compare.component.html",
+	styleUrls: [ "./compare.component.css" ]
 })
-export class NewOrderComponent implements OnInit {
+export class CompareComponent implements OnInit {
+	ready = false;
+	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
+	displayedColumns = [ "InsuranceCompany", "actions" ];
+	comparision$: Observable<PolicyCompareModel[]>;
 	formGroup: FormGroup;
 	orderForm$: Observable<OrderFormModel>;
 	CarBrand$: Observable<FieldModel>;
@@ -38,6 +43,7 @@ export class NewOrderComponent implements OnInit {
 			CarYearsWithoutIncident: new FormControl(""),
 			LastPolicyExpirationDate: new FormControl("")
 		});
+		this.comparision$ = this.store.select(state => state.order.compare.data);
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data);
 		this.CarBrand$ = this.orderForm$.filter(orderForm => orderForm != null).map(orderForm => orderForm.CarBrand);
 		this.formGroup.get("CarBrand").valueChanges.subscribe(CarBrand =>
@@ -61,8 +67,20 @@ export class NewOrderComponent implements OnInit {
 
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
+		this.orderForm$
+			.filter(data => data != null)
+			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
+
+		this.comparision$.filter(data => data.length > 0).subscribe(data => (this.ready = true));
 	}
 	compare() {
-		this.router.navigate([ "order/compare" ]);
+		from([ this.formGroup ])
+			.combineLatest(this.orderForm$)
+			.map(([ formGroup, orderForm ]) => {
+				Object.keys(formGroup.value).forEach(key => (orderForm[key].Value = formGroup.value[key]));
+				return orderForm;
+			})
+			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
+	selectPolicy(policy: PolicyCompareModel) {}
 }

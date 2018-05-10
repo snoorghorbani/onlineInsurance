@@ -8,6 +8,7 @@ import { map, switchMap } from "rxjs/operators";
 
 import { HttpRequestBaseModel, HttpResponseBaseModel } from "@soushians/shared";
 import { OrderModel, OrderFormModel } from "../../../../order/models";
+import { PolicyCompareModel } from "../../../models/policy-compare.model";
 
 export namespace ComparePoliciesApiModel {
 	export class Request extends OrderFormModel {
@@ -17,13 +18,14 @@ export namespace ComparePoliciesApiModel {
 		}
 
 		getRequestBody() {
-			debugger;
 			return this;
 		}
 	}
 
 	export class Response {
-		Result: OrderModel[];
+		Result: {
+			Items: PolicyCompareModel[];
+		};
 		constructor() {}
 	}
 }

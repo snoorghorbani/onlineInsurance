@@ -20,11 +20,8 @@ export class ComparePoliciesApiEffects {
 		.ofType(COMPARE_POLICIES_ACTION_TYPES.START)
 		.pipe(
 			map(action => action.payload),
-			switchMap(payload =>
-				this.service
-					.ComparePolicies(payload)
-					.pipe(catchError(err => Observable.of(new ComparePoliciesFailedAction(err))))
-			),
-			map(res => new ComparePoliciesSucceedAction(res))
+			switchMap(payload => this.service.ComparePolicies(payload)),
+			map(res => new ComparePoliciesSucceedAction(res)),
+			catchError(err => Observable.of(new ComparePoliciesFailedAction(err)))
 		);
 }

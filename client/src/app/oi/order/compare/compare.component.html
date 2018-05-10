@@ -1,0 +1,116 @@
+<mat-sidenav-container>
+  <!-- <mat-sidenav mode="side" #requestDetailNav *ngIf='showSidebarMenu | async' [opened]='showSidebarMenu | async'> -->
+  <mat-sidenav position='end' mode="side" #requestDetailNav>
+    <mat-tab-group #requestDetailTabs>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>chat</mat-icon>
+        </ng-template>
+        <!-- <chat></chat> -->
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>account_balance</mat-icon>
+        </ng-template>
+        لورم ایپسوم متن ساختگی با تولید از طراحان گرافیک است.
+      </mat-tab>
+    </mat-tab-group>
+  </mat-sidenav>
+
+  <div fxLayout="row">
+
+    <div fxFlex="20" fxLayout="column">
+      <button [class]="'big-button'" fxFlex="nogrow" class='link' (click)="requestDetailNav.toggle()" mat-raised-button color="primary"
+        *ngFor='let link of links'>
+        <div fxLayout='column' fxLayoutAlign='center center'>
+          <mat-icon>{{link.icon}}</mat-icon>
+          <h3 class='title'>{{link.title}}</h3>
+          <div class='description'>{{link.description}}</div>
+        </div>
+      </button>
+
+      <div fxFlex="25px"></div>
+
+      <mat-card fxFlex>
+        <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
+          <div [formGroup]="formGroup">
+
+            <mat-form-field>
+                <mat-select [placeholder]="(CarBrand$ | async)?.Label" formControlName="CarBrand">
+                  <mat-option *ngFor="let item of (CarBrand$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-select [placeholder]="(CarModel$ | async)?.Label"  formControlName="CarModel">
+                  <mat-option *ngFor="let item of (CarModelOptions$ | async)" [value]="item.Value">
+                    {{ item.DisplayName }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-select [placeholder]="(CarProductionYear$ | async)?.Label"  formControlName="CarProductionYear">
+                  <mat-option *ngFor="let item of (CarProductionYear$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-select [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"  formControlName="CarYearsWithoutIncident">
+                  <mat-option *ngFor="let item of (CarYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
+                <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
+                <mat-datepicker #LastPolicyExpirationDate></mat-datepicker>
+              </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="compare()">مقایسه</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div fxFlex="25px"></div>
+
+    <div fxFlex="80">
+      <mat-card>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-table *ngIf="ready" [dataSource]="comparision$ | async">
+
+            <ng-container matColumnDef="InsuranceCompany">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> شرکت بیمه </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.InsuranceCompany}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell class='left-align' *matCellDef="let row">
+                <button mat-icon-button (click)="selectPolicy(row)">
+                  <mat-icon aria-label="انتخاب">arrow_back</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+
+</mat-sidenav-container>
