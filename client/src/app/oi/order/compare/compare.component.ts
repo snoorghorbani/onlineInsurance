@@ -32,20 +32,46 @@ export class CompareComponent implements OnInit {
 	CarModel$: Observable<FieldModel>;
 	CarModelOptions$: Observable<FieldOptionModel[]>;
 	CarProductionYear$: Observable<FieldModel>;
+	CarUsage$: Observable<FieldModel>;
 	CarYearsWithoutIncident$: Observable<FieldModel>;
 	LastPolicyExpirationDate$: Observable<FieldModel>;
+	PolicyPushesheMali$: Observable<FieldModel>;
+	PolicyTerm$: Observable<FieldModel>;
 
 	constructor(private store: Store<AppState>, private router: Router) {
 		this.formGroup = new FormGroup({
 			CarBrand: new FormControl(""),
 			CarModel: new FormControl(""),
 			CarProductionYear: new FormControl(""),
+			CarUsage: new FormControl(""),
 			CarYearsWithoutIncident: new FormControl(""),
+			PolicyPushesheMali: new FormControl(""),
+			PolicyTerm: new FormControl(""),
 			LastPolicyExpirationDate: new FormControl("")
 		});
 		this.comparision$ = this.store.select(state => state.order.compare.data);
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data);
-		this.CarBrand$ = this.orderForm$.filter(orderForm => orderForm != null).map(orderForm => orderForm.CarBrand);
+		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
+		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
+		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
+		this.CarUsage$ = this.orderForm$.map(orderForm => orderForm.CarUsage);
+		this.CarYearsWithoutIncident$ = this.orderForm$.map(orderForm => orderForm.CarYearsWithoutIncident);
+		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
+		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
+		this.PolicyTerm$ = this.orderForm$.map(orderForm => orderForm.PolicyTerm);
+	}
+
+	ngOnInit() {
+		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
+		this.orderForm$.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
+		this.orderForm$
+			.map(orderForm => {
+				var values = {};
+				Object.keys(orderForm).map(key => (values[key] = orderForm[key].Value));
+				return values;
+			})
+			.subscribe(values => this.formGroup.patchValue(values));
+
 		this.formGroup.get("CarBrand").valueChanges.subscribe(CarBrand =>
 			this.store.dispatch(
 				new GetCarModelsOfBrandStartAction({
@@ -53,23 +79,6 @@ export class CompareComponent implements OnInit {
 				} as GetCarModelsOfBrandApiModel.Request)
 			)
 		);
-		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
-		this.CarProductionYear$ = this.orderForm$
-			.filter(orderForm => orderForm != null)
-			.map(orderForm => orderForm.CarProductionYear);
-		this.CarYearsWithoutIncident$ = this.orderForm$
-			.filter(orderForm => orderForm != null)
-			.map(orderForm => orderForm.CarYearsWithoutIncident);
-		this.LastPolicyExpirationDate$ = this.orderForm$
-			.filter(orderForm => orderForm != null)
-			.map(orderForm => orderForm.LastPolicyExpirationDate);
-	}
-
-	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
-		this.orderForm$
-			.filter(data => data != null)
-			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 
 		this.comparision$.filter(data => data.length > 0).subscribe(data => (this.ready = true));
 	}

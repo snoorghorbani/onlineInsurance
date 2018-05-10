@@ -14,6 +14,7 @@ import {
 import { FormGroup, FormControl } from "@angular/forms";
 import { from } from "rxjs";
 import { Router } from "@angular/router";
+import { NewOrderFormUpdateAction } from "./new-order.actions";
 
 @Component({
 	selector: "app-new-order",
@@ -38,8 +39,8 @@ export class NewOrderComponent implements OnInit {
 			CarYearsWithoutIncident: new FormControl(""),
 			LastPolicyExpirationDate: new FormControl("")
 		});
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data);
-		this.CarBrand$ = this.orderForm$.filter(orderForm => orderForm != null).map(orderForm => orderForm.CarBrand);
+		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
 		this.formGroup.get("CarBrand").valueChanges.subscribe(CarBrand =>
 			this.store.dispatch(
 				new GetCarModelsOfBrandStartAction({
@@ -48,21 +49,23 @@ export class NewOrderComponent implements OnInit {
 			)
 		);
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
-		this.CarProductionYear$ = this.orderForm$
-			.filter(orderForm => orderForm != null)
-			.map(orderForm => orderForm.CarProductionYear);
-		this.CarYearsWithoutIncident$ = this.orderForm$
-			.filter(orderForm => orderForm != null)
-			.map(orderForm => orderForm.CarYearsWithoutIncident);
-		this.LastPolicyExpirationDate$ = this.orderForm$
-			.filter(orderForm => orderForm != null)
-			.map(orderForm => orderForm.LastPolicyExpirationDate);
+		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
+		this.CarYearsWithoutIncident$ = this.orderForm$.map(orderForm => orderForm.CarYearsWithoutIncident);
+		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
 	}
 
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 	}
 	compare() {
+		from([ this.formGroup ])
+			.combineLatest(this.orderForm$)
+			.map(([ formGroup, orderForm ]) => {
+				Object.keys(formGroup.value).forEach(key => (orderForm[key].Value = formGroup.value[key]));
+				return orderForm;
+			})
+			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)));
+
 		this.router.navigate([ "order/compare" ]);
 	}
 }

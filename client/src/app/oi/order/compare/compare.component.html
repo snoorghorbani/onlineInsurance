@@ -20,17 +20,6 @@
   <div fxLayout="row">
 
     <div fxFlex="20" fxLayout="column">
-      <button [class]="'big-button'" fxFlex="nogrow" class='link' (click)="requestDetailNav.toggle()" mat-raised-button color="primary"
-        *ngFor='let link of links'>
-        <div fxLayout='column' fxLayoutAlign='center center'>
-          <mat-icon>{{link.icon}}</mat-icon>
-          <h3 class='title'>{{link.title}}</h3>
-          <div class='description'>{{link.description}}</div>
-        </div>
-      </button>
-
-      <div fxFlex="25px"></div>
-
       <mat-card fxFlex>
         <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
           <div [formGroup]="formGroup">
@@ -67,6 +56,30 @@
                 </mat-select>
             </mat-form-field>
             
+            <mat-form-field>
+                <mat-select [placeholder]="(CarUsage$ | async)?.Label"  formControlName="CarUsage">
+                  <mat-option *ngFor="let item of (CarUsage$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-select [placeholder]="(PolicyPushesheMali$ | async)?.Label"  formControlName="PolicyPushesheMali">
+                  <mat-option *ngFor="let item of (PolicyPushesheMali$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-select [placeholder]="(PolicyTerm$ | async)?.Label"  formControlName="PolicyTerm">
+                  <mat-option *ngFor="let item of (PolicyTerm$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
             <mat-form-field>
                 <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
                 <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
