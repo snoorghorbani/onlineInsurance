@@ -14,7 +14,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceRoot}/dist/server/server.js",
+            "program": "${workspaceRoot}/server/dist/server/server.js",
             "smartStep": true,
             "outFiles": [
                 "../dist/**/*.js"

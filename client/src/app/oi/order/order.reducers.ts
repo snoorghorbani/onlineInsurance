@@ -1,16 +1,13 @@
 import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
 
-// import * as list from "../list/list.reducers";
-// import * as flows from "../view/view-container/view.reducers";
+import * as fromNewOrder from "./new-order/new-order.reducers";
 
 export interface FeatureState {
-	// list: list.State;
-	// flows: flows.State;
+	newOrder: fromNewOrder.State;
 }
 
 export const FeatureReducers = {
-	// list: list.reducer,
-	// flows: flows.reducer
+	newOrder: fromNewOrder.reducer
 };
 
 export interface AppState {

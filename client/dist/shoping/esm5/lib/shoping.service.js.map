@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "shoping.service.js",
+  "sources": [
+    "ng://shoping/projects/shoping/src/lib/shoping.service.ts"
+  ],
+  "sourcesContent": [
+    "import { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class ShopingService {\n\n  constructor() { }\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,eAAe,CAAC;;AAK3C,MAAM;IAEJ,iBAAiB;;;YALlB,UAAU,SAAC;gBACV,UAAU,EAAE,MAAM;aACnB"
+}

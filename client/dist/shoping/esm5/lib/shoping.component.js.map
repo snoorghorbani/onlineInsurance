@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "shoping.component.js",
+  "sources": [
+    "ng://shoping/projects/shoping/src/lib/shoping.component.ts"
+  ],
+  "sourcesContent": [
+    "import { Component, OnInit } from \"@angular/core\";\n\n@Component({\n\tselector: \"lib-shoping\",\n\ttemplate: `\n    <p>\n      shoping workssdf!\n    </p>\n  `,\n\tstyles: []\n})\nexport class ShopingComponent implements OnInit {\n\tconstructor() {}\n\n\tngOnInit() {}\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,SAAS,EAAU,MAAM,eAAe,CAAC;AAWlD,MAAM;IACL,iBAAgB;;;;IAEhB,QAAQ,MAAK;;;YAZb,SAAS,SAAC;gBACV,QAAQ,EAAE,aAAa;gBACvB,QAAQ,EAAE;;;;GAIR;gBACF,MAAM,EAAE,EAAE;aACV"
+}

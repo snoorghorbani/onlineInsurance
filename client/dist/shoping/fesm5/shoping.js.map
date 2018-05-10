@@ -1,0 +1,16 @@
+{
+  "version": 3,
+  "file": "shoping.js",
+  "sources": [
+    "ng://shoping/projects/shoping/src/lib/shoping.module.ts",
+    "ng://shoping/projects/shoping/src/lib/shoping.component.ts",
+    "ng://shoping/projects/shoping/src/lib/shoping.service.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from \"@angular/core\";\nimport { ShopingComponent } from \"./shoping.component\";\n\n@NgModule({\n\timports: [],\n\tdeclarations: [ ShopingComponent ],\n\texports: [ ShopingComponent ]\n})\nexport class ShopingModule {}\n",
+    "import { Component, OnInit } from \"@angular/core\";\n\n@Component({\n\tselector: \"lib-shoping\",\n\ttemplate: `\n    <p>\n      shoping workssdf!\n    </p>\n  `,\n\tstyles: []\n})\nexport class ShopingComponent implements OnInit {\n\tconstructor() {}\n\n\tngOnInit() {}\n}\n",
+    "import { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class ShopingService {\n\n  constructor() { }\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;;;AEAA,AAKA,IAAA,cAAA,kBAAA,YAAA;IAEE,SAAF,cAAA,GAAA;;;CALA,EAAA,CAAA,CAAA;AACA,AACA,cAAA,CAAA,UAAA,GAAA;;;;;;;;;;;;;ADJA,AAWA,IAAA,gBAAA,kBAAA,YAAA;IACC,SAAD,gBAAA,GAAA;;;;;;;CAVA,EAAA,CAAA,CAAA;AACA,AACA,gBAAC,CAAD,UAAA,GAAA;;;;gBAIA,MAAA,EAAA,EAAA;aACA,EAAA,EAAA;CACA,CAAA;;;;;;;;ADVA,AAQA,IAAA,aAAA,kBAAA,YAAA;;;IALA,OAAA,aAAA,CAAA;CACA,EAAA,CAAA,CAAA;AACA,AACA,aAAA,CAAA,UAAA,GAAA;IACA,EAAA,IAAA,EAAA,QAAA,EAAA,IAAA,EAAA,CAAA;;;;;;;;;;;;;;;;;;;"
+}

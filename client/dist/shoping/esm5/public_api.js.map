@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "public_api.js",
+  "sources": [
+    "ng://shoping/projects/shoping/src/public_api.ts"
+  ],
+  "sourcesContent": [
+    "/*\n * Public API Surface of shoping\n */\n\nexport * from \"./lib/shoping.service\";\nexport * from \"./lib/shoping.component\";\nexport * from \"./lib/shoping.module\";\n"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;AAIA,+BAAc,uBAAuB,CAAC;AACtC,iCAAc,yBAAyB,CAAC;AACxC,8BAAc,sBAAsB,CAAC"
+}

@@ -32,8 +32,8 @@ import { reducers } from "./app.reducers";
 //module configs
 import { DashboardModule } from "./dashboard";
 import { OiModule } from "./oi/oi.module";
-// import { NgsBpmnModule } from "./bpmn";
 
+import { ShopingModule } from "shoping";
 @NgModule({
 	imports: [
 		CoreModule,
@@ -69,7 +69,8 @@ import { OiModule } from "./oi/oi.module";
 		AppRoutingModule,
 		MatFormFieldModule,
 		DashboardModule,
-		OiModule
+		OiModule,
+		ShopingModule
 	],
 	declarations: [ AppComponent ],
 	providers: [

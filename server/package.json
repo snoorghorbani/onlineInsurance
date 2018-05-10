@@ -66,7 +66,7 @@
 		"passport-local": "^1.0.0",
 		"pretty": "^2.0.0",
 		"promisify": "0.0.3",
-		"request": "^2.78.0",
+		"request": "^2.85.0",
 		"rxjs": "^6.1.0",
 		"rxjs-compat": "^6.1.0",
 		"shelljs": "^0.7.7",

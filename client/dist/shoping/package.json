@@ -1,0 +1,21 @@
+{
+  "name": "shoping",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "main": "bundles/shoping.umd.js",
+  "module": "fesm5/shoping.js",
+  "es2015": "fesm2015/shoping.js",
+  "esm5": "esm5/shoping.js",
+  "esm2015": "esm2015/shoping.js",
+  "fesm5": "fesm5/shoping.js",
+  "fesm2015": "fesm2015/shoping.js",
+  "typings": "shoping.d.ts",
+  "metadata": "shoping.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
