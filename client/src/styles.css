@@ -408,3 +408,17 @@ diagram-add dynamic-component-selector .mat-card {
 .mat-drawer-container {
 	background-color: inherit;
 }
+
+/* #region order */
+.policy-compare-card .mat-drawer-backdrop.mat-drawer-shown {
+	background-color: transparent !important;
+}
+
+.policy-compare-card mat-sidenav-content {
+	transition: filter 0.5s;
+	filter: blur(0px) !important;
+}
+.policy-compare-card .mat-drawer-transition.mat-drawer-opened mat-sidenav-content {
+	filter: blur(2px) !important;
+}
+/* #endregion */

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
@@ -15,6 +15,7 @@ import { FieldModel, FieldOptionModel } from "../models/field.model";
 import { OrderFormModel } from "../models";
 import { Router } from "@angular/router";
 import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
+import { MatSidenav } from "@angular/material";
 
 @Component({
 	selector: "app-compare",
@@ -24,8 +25,7 @@ import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
 export class CompareComponent implements OnInit {
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
-	displayedColumns = [ "InsuranceCompany", "actions" ];
-	comparision$: Observable<PolicyCompareModel[]>;
+	policies$: Observable<PolicyCompareModel[]>;
 	formGroup: FormGroup;
 	orderForm$: Observable<OrderFormModel>;
 	CarBrand$: Observable<FieldModel>;
@@ -37,8 +37,16 @@ export class CompareComponent implements OnInit {
 	LastPolicyExpirationDate$: Observable<FieldModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyTerm$: Observable<FieldModel>;
-
+	SelectedPolicyTerm$: Observable<string>;
+	FocuseddPolicy: PolicyCompareModel;
+	companyInfoDataSource: any[];
+	policyInfoDataSource: any[];
+	companyInfoDisplayCol: any[];
+	@ViewChild("policyDetailNav") policyDetailNav: MatSidenav;
 	constructor(private store: Store<AppState>, private router: Router) {
+		this.companyInfoDataSource = [];
+		this.policyInfoDataSource = [];
+		this.companyInfoDisplayCol = [ "key", "value" ];
 		this.formGroup = new FormGroup({
 			CarBrand: new FormControl(""),
 			CarModel: new FormControl(""),
@@ -46,10 +54,10 @@ export class CompareComponent implements OnInit {
 			CarUsage: new FormControl(""),
 			CarYearsWithoutIncident: new FormControl(""),
 			PolicyPushesheMali: new FormControl(""),
-			PolicyTerm: new FormControl(""),
+			PolicyTerm: new FormControl(12),
 			LastPolicyExpirationDate: new FormControl("")
 		});
-		this.comparision$ = this.store.select(state => state.order.compare.data);
+		this.policies$ = this.store.select(state => state.order.compare.data);
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
 		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
@@ -64,13 +72,6 @@ export class CompareComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 		this.orderForm$.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
-		this.orderForm$
-			.map(orderForm => {
-				var values = {};
-				Object.keys(orderForm).map(key => (values[key] = orderForm[key].Value));
-				return values;
-			})
-			.subscribe(values => this.formGroup.patchValue(values));
 
 		this.formGroup.get("CarBrand").valueChanges.subscribe(CarBrand =>
 			this.store.dispatch(
@@ -80,7 +81,25 @@ export class CompareComponent implements OnInit {
 			)
 		);
 
-		this.comparision$.filter(data => data.length > 0).subscribe(data => (this.ready = true));
+		this.SelectedPolicyTerm$ = this.formGroup
+			.get("PolicyTerm")
+			.valueChanges.combineLatest(this.PolicyTerm$)
+			.map(
+				([ policyTermValue, policyTermField ]) =>
+					policyTermField.Options.find(item => item.Value == policyTermValue).DisplayValue
+			);
+
+		this.policies$.filter(data => data.length > 0).subscribe(data => (this.ready = true));
+		this.orderForm$
+			.map(orderForm => {
+				var values = {};
+				Object.keys(orderForm)
+					.filter(key => key in this.formGroup.controls)
+					.filter(key => orderForm[key].Value)
+					.map(key => (values[key] = orderForm[key].Value));
+				return values;
+			})
+			.subscribe(values => this.formGroup.patchValue(values));
 	}
 	compare() {
 		from([ this.formGroup ])
@@ -92,4 +111,7 @@ export class CompareComponent implements OnInit {
 			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
 	selectPolicy(policy: PolicyCompareModel) {}
+	showCompanyInfo(policy: PolicyCompareModel) {
+		this.FocuseddPolicy = policy;
+	}
 }

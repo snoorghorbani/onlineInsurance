@@ -1,12 +1,12 @@
 export class PolicyCompareModel {
 	InsuranceCompany: string;
 	InsuranceCompanyStatistics: InsuranceCompanyStatistics;
-	Prices: Price[];
+	Prices: PriceModel[];
 
 	constructor() {}
 }
 
-interface Price {
+export interface PriceModel {
 	Description: string;
 	DiscountPercent: number;
 	FinalPrice: FinalPrice;

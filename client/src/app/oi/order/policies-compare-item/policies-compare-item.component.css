@@ -1,0 +1,22 @@
+.policy-compare-card {
+	padding: 0px;
+}
+.policy-compare-card .mat-drawer-backdrop.mat-drawer-shown {
+	background-color: transparent !important;
+}
+.policy-compare-card .mat-sidenav-container {
+	background-color: transparent !important;
+}
+.policy-compare-sidenav {
+	height: 200px;
+	padding: 0px;
+}
+.logo {
+	width: 32px;
+	height: 32px;
+	padding-top: 13.5px;
+	padding-left: 20px;
+}
+mat-expansion-panel {
+	box-shadow: none !important;
+}
