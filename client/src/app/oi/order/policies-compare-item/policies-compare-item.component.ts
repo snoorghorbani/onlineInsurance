@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { PolicyCompareModel, PriceModel } from "../../policy/models";
+import { MatExpansionPanel } from "@angular/material";
 
 @Component({
 	selector: "order-policies-compare-item",
@@ -45,6 +46,7 @@ export class PoliciesCompareItemComponent implements OnInit {
 		if (!value) return;
 		this.price = this.policy.Prices.find(price => price.Description == value);
 	}
+	@ViewChild("modeDetail") modeDetail: MatExpansionPanel;
 	logos: { [name: string]: string };
 	price: PriceModel;
 	companyInfoDataSource: any[];
@@ -66,5 +68,8 @@ export class PoliciesCompareItemComponent implements OnInit {
 		this.logos = {
 			"بیمه آسیا": "assets\\ins-logos\\asia.png"
 		};
+	}
+	showDetail() {
+		this.modeDetail.toggle();
 	}
 }

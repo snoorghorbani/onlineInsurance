@@ -14,7 +14,8 @@ import {
 	MatIconModule,
 	MatTableModule,
 	MatSidenavModule,
-	MatSlideToggleModule
+	MatSlideToggleModule,
+	MatChipsModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -31,7 +32,7 @@ import { OrderComponent } from "./order.component";
 import { NewOrderComponent } from "./new-order/new-order.component";
 import { RouterModule } from "@angular/router";
 import { CompareComponent } from "./compare/compare.component";
-import { PoliciesCompareItemComponent } from './policies-compare-item/policies-compare-item.component';
+import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
 
 @NgModule({
 	imports: [
@@ -46,6 +47,7 @@ import { PoliciesCompareItemComponent } from './policies-compare-item/policies-c
 		MatTabsModule,
 		MatIconModule,
 		MatButtonModule,
+		MatChipsModule,
 		MatTableModule,
 		MatSidenavModule,
 		MatCardModule,
