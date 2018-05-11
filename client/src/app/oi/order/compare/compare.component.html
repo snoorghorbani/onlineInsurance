@@ -82,8 +82,13 @@
 
     <div fxFlex="25px"></div>
 
-    <div fxFlex="80">
-      <order-policies-compare-item *ngFor="let policy of policies$ | async" [policy]="policy" [policyTerm]="SelectedPolicyTerm$ | async" (click)="showCompanyInfo(policy)">
+    <div fxFlex="80" fxLayout="row">
+      <order-policies-compare-item fxFlex="100"
+        *ngFor="let policy of policies$ | async" 
+        [policy]="policy" 
+        [policyTerm]="SelectedPolicyTerm$ | async" 
+        (click)="showCompanyInfo(policy)"
+        (selected)="selectPolicy($event)">
       </order-policies-compare-item>
     </div>
 

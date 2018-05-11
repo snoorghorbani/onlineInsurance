@@ -33,6 +33,7 @@ import { NewOrderComponent } from "./new-order/new-order.component";
 import { RouterModule } from "@angular/router";
 import { CompareComponent } from "./compare/compare.component";
 import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
+import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
 
 @NgModule({
 	imports: [
@@ -61,6 +62,6 @@ import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-c
 		OrderRoutingModule,
 		EffectsModule.forFeature([ GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects ])
 	],
-	declarations: [ TestComponent, OrderComponent, NewOrderComponent, CompareComponent, PoliciesCompareItemComponent ]
+	declarations: [ TestComponent, OrderComponent, NewOrderComponent, CompareComponent, PoliciesCompareItemComponent, InsurerInfoComponent ]
 })
 export class OrderModule {}

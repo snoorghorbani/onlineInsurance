@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from "@angular/core";
 import { PolicyCompareModel, PriceModel } from "../../policy/models";
 import { MatExpansionPanel } from "@angular/material";
 
@@ -8,6 +8,7 @@ import { MatExpansionPanel } from "@angular/material";
 	styleUrls: [ "./policies-compare-item.component.css" ]
 })
 export class PoliciesCompareItemComponent implements OnInit {
+	@Output() selected = new EventEmitter();
 	_policy: PolicyCompareModel;
 	@Input()
 	set policy(policy: PolicyCompareModel) {
@@ -71,5 +72,8 @@ export class PoliciesCompareItemComponent implements OnInit {
 	}
 	showDetail() {
 		this.modeDetail.toggle();
+	}
+	select() {
+		this.selected.emit(this.price.ProductId);
 	}
 }

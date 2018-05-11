@@ -33,7 +33,7 @@
           </div>
         </div>
     </mat-expansion-panel>
-    <mat-grid-list cols="5" rowHeight="50px">
+    <mat-grid-list cols="2" rowHeight="50px">
         <mat-grid-tile>
           <mat-chip-list>
             <mat-chip color="primary">
@@ -55,6 +55,6 @@
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-button color="primary" (click)="showDetail()">اطلاعات بیشتر</button>
-      <button mat-raised-button color="primary">سفارش</button>
+      <button mat-raised-button color="primary" (click)="select()">سفارش</button>
     </mat-card-actions>
 </mat-card>

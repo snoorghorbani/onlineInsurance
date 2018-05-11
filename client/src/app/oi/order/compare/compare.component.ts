@@ -8,7 +8,7 @@ import {
 	GetCarModelsOfBrandStartAction,
 	GetCarModelsOfBrandApiModel
 } from "../../policy/services/api";
-import { from } from "rxjs";
+import { from, of } from "rxjs";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { FieldModel, FieldOptionModel } from "../models/field.model";
@@ -16,6 +16,7 @@ import { OrderFormModel } from "../models";
 import { Router } from "@angular/router";
 import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
 import { MatSidenav } from "@angular/material";
+import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 
 @Component({
 	selector: "app-compare",
@@ -110,8 +111,19 @@ export class CompareComponent implements OnInit {
 			})
 			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
-	selectPolicy(policy: PolicyCompareModel) {}
 	showCompanyInfo(policy: PolicyCompareModel) {
 		this.FocuseddPolicy = policy;
+	}
+	selectPolicy(ProductId: number) {
+		of(ProductId)
+			.combineLatest(this.orderForm$)
+			.map(([ ProductId, orderForm ]) => {
+				orderForm.ProductId.Value = ProductId;
+				debugger;
+				return orderForm;
+			})
+			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)))
+			.unsubscribe();
+		this.router.navigate([ "/order/insurer-info" ]);
 	}
 }
