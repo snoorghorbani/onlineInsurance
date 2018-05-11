@@ -28,12 +28,12 @@ table {
 	font-weight: bolder;
 	color: green;
 }
-
 h3.card-title {
-	margin-top: 8px;
+	margin-top: 18px;
 }
 .logo {
 	width: 40px;
 	height: 40px;
 	padding-left: 10px;
+	padding-top: 7px;
 }
