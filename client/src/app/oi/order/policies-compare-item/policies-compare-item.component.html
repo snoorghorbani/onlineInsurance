@@ -1,15 +1,11 @@
 <mat-card *ngIf="price" class="policy-compare-card">
-  <mat-card-header>
-    <mat-card-title>
-      <h3>{{policy.InsuranceCompany}}</h3>
-    </mat-card-title>
-    <!-- <mat-card-subtitle>{{policy.InsuranceCompany}}</mat-card-subtitle> -->
-    <img mat-card-avatar [src]="logos[policy.InsuranceCompany]" >
-  </mat-card-header>
   <mat-card-content>
     <mat-expansion-panel #modeDetail>
       <mat-expansion-panel-header>
-        <mat-panel-title></mat-panel-title>
+        <mat-panel-title>
+          <img class="logo" [src]="logos[policy.InsuranceCompany]" >
+          <h3 class="card-title">{{policy.InsuranceCompany}}</h3>
+        </mat-panel-title>
         <mat-panel-description></mat-panel-description>
       </mat-expansion-panel-header>
         <div fxLayout="row">
