@@ -8,7 +8,7 @@ table {
 	width: 100%;
 }
 
-mat-expansion-panel {
+.fit mat-expansion-panel {
 	box-shadow: none !important;
 	width: calc(100% + 48px);
 	position: relative;

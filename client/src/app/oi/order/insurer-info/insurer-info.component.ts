@@ -82,12 +82,8 @@ export class InsurerInfoComponent implements OnInit {
 
 		this.formGroup.get("PolicyAddressSource").valueChanges.subscribe(source => {
 			debugger;
-			if (source != "3") {
-				this.formGroup.get("PolicyAddress").disable();
-				this.PolicyAddressExpansion.close();
-			} else {
-				this.formGroup.get("PolicyAddress").enable();
-			}
+			if (source != "3") this.formGroup.get("PolicyAddress").disable();
+			else this.formGroup.get("PolicyAddress").enable();
 			this.PolicyAddressExpansion.expanded = source == "3";
 		});
 	}
@@ -154,5 +150,19 @@ export class InsurerInfoComponent implements OnInit {
 				this.done.emit();
 			})
 			.unsubscribe();
+	}
+
+	step = 0;
+
+	setStep(index: number) {
+		this.step = index;
+	}
+
+	nextStep() {
+		this.step++;
+	}
+
+	prevStep() {
+		this.step--;
 	}
 }
