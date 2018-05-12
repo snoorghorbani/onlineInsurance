@@ -45,7 +45,7 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                  نشانی درج روی بیمه نامه
+                  اطلاعات بیمه نامه
               </mat-panel-title>
               <mat-panel-description>
                 Type the country name
@@ -53,6 +53,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <form [formGroup]="formGroup">
+              <h4>نشانی درج روی بیمه نامه</h4>
               <mat-accordion class="fit">
                 <mat-expansion-panel  #PolicyAddressExpansion disabled>
                   <mat-expansion-panel-header>
