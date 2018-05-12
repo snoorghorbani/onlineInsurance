@@ -1,0 +1,26 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="66">
+    <mat-horizontal-stepper linear="true" #stepper>
+      <mat-step >
+        <form>
+          <ng-template matStepLabel>مقایسه</ng-template>
+          <order-compare (done)="next()"></order-compare>
+        </form>
+      </mat-step>
+      <mat-step>
+        <form>
+          <ng-template matStepLabel>ثبت مشخصات</ng-template>
+          <order-insurer-info (done)="next()"></order-insurer-info>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>تایید نهایی</ng-template>
+        sdf
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>پرداخت</ng-template>
+        sdfsdfasdf
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

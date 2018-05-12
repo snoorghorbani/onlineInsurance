@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const http = require("http");
 const request_1 = require("request");
-const Observable_1 = require("rxjs/Observable");
+const rxjs_1 = require("rxjs");
 const comparator_enum_1 = require("./models/comparator.enum");
 // import { request } from "https";
 exports.httpGet = (endpoint) => {
-    return Observable_1.Observable.create((observer) => {
+    return rxjs_1.Observable.create((observer) => {
         http
             .get(endpoint, (result) => {
             result.setEncoding("utf8");
@@ -24,10 +24,19 @@ exports.httpGet = (endpoint) => {
     });
 };
 exports.httpPost = (endpoint, body) => {
-    return Observable_1.Observable.create((observer) => {
+    return rxjs_1.Observable.create((observer) => {
         request_1.post({ url: endpoint, form: body }, function (err, httpResponse, body) {
             debugger;
-            observer.next(JSON.parse(body));
+            if (err)
+                return rxjs_1.throwError(err);
+            if (httpResponse.statusCode != 200)
+                return rxjs_1.throwError({});
+            try {
+                observer.next(JSON.parse(body));
+            }
+            catch (err) {
+                rxjs_1.throwError(err);
+            }
         });
     });
 };

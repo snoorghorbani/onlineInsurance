@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel, DeliveryTimeModel } from "../models";
@@ -19,11 +19,12 @@ import { from } from "rxjs";
 import { SaveOrderStartAction } from "../services/api/save-order";
 
 @Component({
-	selector: "app-insurer-info",
+	selector: "order-insurer-info",
 	templateUrl: "./insurer-info.component.html",
 	styleUrls: [ "./insurer-info.component.css" ]
 })
 export class InsurerInfoComponent implements OnInit {
+	@Output() done = new EventEmitter();
 	formGroup: FormGroup;
 	orderForm$: Observable<OrderFormModel>;
 	PolicyholderFirstName$: Observable<FieldModel>;
@@ -150,6 +151,7 @@ export class InsurerInfoComponent implements OnInit {
 			.subscribe(orderForm => {
 				this.store.dispatch(new NewOrderFormUpdateAction(orderForm));
 				this.store.dispatch(new SaveOrderStartAction(orderForm));
+				this.done.emit();
 			})
 			.unsubscribe();
 	}

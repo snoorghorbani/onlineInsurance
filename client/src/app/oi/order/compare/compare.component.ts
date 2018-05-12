@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
@@ -19,11 +19,12 @@ import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 
 @Component({
-	selector: "app-compare",
+	selector: "order-compare",
 	templateUrl: "./compare.component.html",
 	styleUrls: [ "./compare.component.css" ]
 })
 export class CompareComponent implements OnInit {
+	@Output() done = new EventEmitter();
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	policies$: Observable<PolicyCompareModel[]>;
@@ -124,6 +125,7 @@ export class CompareComponent implements OnInit {
 			})
 			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)))
 			.unsubscribe();
-		this.router.navigate([ "/order/insurer-info" ]);
+		// this.router.navigate([ "/order/insurer-info" ]);
+		this.done.emit();
 	}
 }

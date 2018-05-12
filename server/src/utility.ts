@@ -1,7 +1,7 @@
 "use strict";
 const http = require("http");
 import { post } from "request";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError } from "rxjs";
 import { Comparator } from "./models/comparator.enum";
 // import { request } from "https";
 
@@ -27,7 +27,13 @@ export const httpPost = (endpoint: string, body: any): Observable<any> => {
 	return Observable.create((observer: any) => {
 		post({ url: endpoint, form: body }, function(err, httpResponse, body) {
 			debugger;
-			observer.next(JSON.parse(body));
+			if (err) return throwError(err);
+			if (httpResponse.statusCode != 200) return throwError({});
+			try {
+				observer.next(JSON.parse(body));
+			} catch (err) {
+				throwError(err);
+			}
 		});
 	});
 };

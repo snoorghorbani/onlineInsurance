@@ -6,6 +6,7 @@ import { NewOrderComponent } from "./new-order/new-order.component";
 import { OrderComponent } from "./order.component";
 import { CompareComponent } from "./compare/compare.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
+import { PurchaseComponent } from "./purchase/purchase.component";
 
 const routes: Routes = [
 	{
@@ -27,6 +28,10 @@ const routes: Routes = [
 			{
 				path: "insurer-info",
 				component: InsurerInfoComponent
+			},
+			{
+				path: "purchase",
+				component: PurchaseComponent
 			}
 		]
 	}

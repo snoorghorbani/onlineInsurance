@@ -16,6 +16,7 @@ import {
 	MatSidenavModule,
 	MatSlideToggleModule,
 	MatCheckboxModule,
+	MatStepperModule,
 	MatChipsModule,
 	MatRadioModule
 } from "@angular/material";
@@ -38,6 +39,7 @@ import { CompareComponent } from "./compare/compare.component";
 import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { SaveOrderApiEffects } from "./services/api/save-order";
+import { PurchaseComponent } from "./purchase/purchase.component";
 
 @NgModule({
 	imports: [
@@ -55,6 +57,7 @@ import { SaveOrderApiEffects } from "./services/api/save-order";
 		MatChipsModule,
 		MatRadioModule,
 		MatTableModule,
+		MatStepperModule,
 		MatSidenavModule,
 		MatCheckboxModule,
 		MatCardModule,
@@ -80,7 +83,8 @@ import { SaveOrderApiEffects } from "./services/api/save-order";
 		NewOrderComponent,
 		CompareComponent,
 		PoliciesCompareItemComponent,
-		InsurerInfoComponent
+		InsurerInfoComponent,
+		PurchaseComponent
 	]
 })
 export class OrderModule {}

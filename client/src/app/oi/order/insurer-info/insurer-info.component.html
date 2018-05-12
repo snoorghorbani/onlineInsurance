@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="33" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
+  <div fxFlex="66" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
     <mat-card fxFlex="50">
       <mat-card-title>
           مشخصات بیمه گذار
@@ -90,7 +90,7 @@
       </mat-card-title>
       <mat-card-content>
         <h4>
-          نشانی تحویل گیرنده
+          نشانی ارسال
         </h4>
           <form [formGroup]="formGroup" fxLayout="row">
             <mat-form-field fxFlex="20">
@@ -105,7 +105,7 @@
             </mat-form-field>
           </form>
           <h4>
-              انتخاب زمان ارسال
+              زمان ارسال
           </h4>
           <table mat-table [dataSource]="DelieryTimeTableDataSource$ | async">
             <ng-container matColumnDef="Checkbox">
