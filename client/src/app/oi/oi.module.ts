@@ -4,9 +4,10 @@ import { OrderModule } from "./order";
 import { PolicyModule } from "./policy";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ResultInterceptor } from "./result.interceptor";
+import { GeoBoundaryModule } from "./geo-boundary";
 
 @NgModule({
-	imports: [ CommonModule, OrderModule, PolicyModule ],
+	imports: [ CommonModule, OrderModule, PolicyModule, GeoBoundaryModule.forRoot() ],
 	providers: [ { provide: HTTP_INTERCEPTORS, useClass: ResultInterceptor, multi: true } ],
 	declarations: []
 })

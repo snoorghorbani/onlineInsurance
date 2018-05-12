@@ -15,10 +15,12 @@ import {
 	MatTableModule,
 	MatSidenavModule,
 	MatSlideToggleModule,
-	MatChipsModule
+	MatChipsModule,
+	MatRadioModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { FileDropModule } from "ngx-file-drop";
 
 import { InfraModule } from "@soushians/infra";
 
@@ -33,7 +35,7 @@ import { NewOrderComponent } from "./new-order/new-order.component";
 import { RouterModule } from "@angular/router";
 import { CompareComponent } from "./compare/compare.component";
 import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
-import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
+import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 
 @NgModule({
 	imports: [
@@ -49,6 +51,7 @@ import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
 		MatIconModule,
 		MatButtonModule,
 		MatChipsModule,
+		MatRadioModule,
 		MatTableModule,
 		MatSidenavModule,
 		MatCardModule,
@@ -59,9 +62,17 @@ import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
 		FlexLayoutModule,
 		StoreModule.forFeature("order", FeatureReducers),
 		InfraModule,
+		FileDropModule,
 		OrderRoutingModule,
 		EffectsModule.forFeature([ GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects ])
 	],
-	declarations: [ TestComponent, OrderComponent, NewOrderComponent, CompareComponent, PoliciesCompareItemComponent, InsurerInfoComponent ]
+	declarations: [
+		TestComponent,
+		OrderComponent,
+		NewOrderComponent,
+		CompareComponent,
+		PoliciesCompareItemComponent,
+		InsurerInfoComponent
+	]
 })
 export class OrderModule {}

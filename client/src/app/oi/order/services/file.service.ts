@@ -10,19 +10,13 @@ import { GetOrderTypes } from "./mock";
 @Injectable({
 	providedIn: "root"
 })
-export class OrderService {
+export class FileService {
 	constructor(private http: HttpClient) {}
 
-	GetOrderTypes(): Observable<OrderType[]> {
+	AttachFileToOrder(): Observable<OrderType[]> {
 		// return of(GetOrderTypes);
 		return this.http
-			.get("http://185.208.174.92:2000/order/GetOrderTypes")
+			.get("http://185.208.174.92:2000/order/AttachFileToOrder")
 			.map((response: any) => response.Result as OrderType[]);
-	}
-	GetDeliveryTimeTable(): Observable<any> {
-		// return of(GetOrderTypes);
-		return this.http
-			.get("http://185.208.174.92:2000/order/GetDeliveryTimeTable")
-			.map((response: any) => response.Result);
 	}
 }

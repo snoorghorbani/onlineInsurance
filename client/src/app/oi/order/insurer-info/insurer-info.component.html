@@ -1,3 +1,109 @@
-<p>
-  insurer-info works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="33" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
+    <mat-card fxFlex="50">
+      <mat-card-title>
+          مشخصات بیمه گذار
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+            <mat-form-field>
+                <input matInput [placeholder]="(PolicyholderFirstName$ | async)?.Label" formControlName="PolicyholderFirstName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [placeholder]="(PolicyholderLastName$ | async)?.Label" formControlName="PolicyholderLastName">
+            </mat-form-field>
+
+            <div fxLayout="row">
+              <file-drop fxFlex 
+                [headertext]="(LastPolicyImage$ | async)?.Label" 
+                (onFileDrop)="LastPolicyImageDropped($event)" 
+                (onFileOver)="LastPolicyImageFileOver($event)" 
+                (onFileLeave)="LastPolicyImageFileLeave($event)"
+              ></file-drop>
+              <file-drop fxFlex
+                [headertext]="(LastPolicyImage$ | async)?.Label" 
+                (onFileDrop)="LastPolicyImageDropped($event)" 
+                (onFileOver)="LastPolicyImageFileOver($event)" 
+                (onFileLeave)="LastPolicyImageFileLeave($event)"
+              ></file-drop>
+              <file-drop fxFlex
+                [headertext]="(LastPolicyImage$ | async)?.Label" 
+                (onFileDrop)="LastPolicyImageDropped($event)" 
+                (onFileOver)="LastPolicyImageFileOver($event)" 
+                (onFileLeave)="LastPolicyImageFileLeave($event)"
+              ></file-drop>
+            </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card fxFlex="100">
+      <mat-card-title>
+          مشخصات بیمه گذار
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+          <mat-slide-toggle checked="true" (change)="disbaleForm($event)">مشخصات بیمه گذار مطابق با تصویر کارت ماشین ثبت شود</mat-slide-toggle>
+          <mat-form-field>
+            <input matInput [placeholder]="(PolicyholderNationalCode$ | async)?.Label" formControlName="PolicyholderNationalCode">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="(PolicyholderBirthDate$ | async)?.Label" formControlName="PolicyholderBirthDate">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [placeholder]="(PolicyholderFatherName$ | async)?.Label" formControlName="PolicyholderFatherName">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card fxFlex="100">
+      <mat-card-title>
+          آدرس ارسال بیمه نامه
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+          <mat-form-field>
+            <input matInput [placeholder]="(DeliveryAddress$ | async)?.Label" formControlName="DeliveryAddress">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card fxFlex="100">
+      <mat-card-title>
+          نشانی درج روی بیمه نامه
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+          <mat-radio-group formControlName="PolicyAddressSource">
+              <mat-radio-button *ngFor="let source of (PolicyAddressSource$ | async)?.Options" [value]="source.Value">{{source.DisplayValue}}</mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field>
+            <input matInput [placeholder]="(PolicyAddress$ | async)?.Label" formControlName="PolicyAddress">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card fxFlex="100">
+      <mat-card-title>
+          انتخاب زمان ارسال
+      </mat-card-title>
+      <mat-card-content>
+          <table mat-table [dataSource]="DelieryTimeTableDataSource$ | async">
+              <ng-container matColumnDef="day">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+              <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+              <tr mat-row *matRowDef="let row; columns: DelieryTimeTableDisplayColumns;"></tr>
+            </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
