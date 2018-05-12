@@ -15,6 +15,7 @@ import {
 	MatTableModule,
 	MatSidenavModule,
 	MatSlideToggleModule,
+	MatCheckboxModule,
 	MatChipsModule,
 	MatRadioModule
 } from "@angular/material";
@@ -54,6 +55,7 @@ import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 		MatRadioModule,
 		MatTableModule,
 		MatSidenavModule,
+		MatCheckboxModule,
 		MatCardModule,
 		MatDatepickerModule,
 		MatNativeDateModule,

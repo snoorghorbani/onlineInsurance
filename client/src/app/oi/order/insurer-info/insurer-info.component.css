@@ -1,3 +1,16 @@
 :host {
 	width: 100%;
 }
+table {
+	width: 100%;
+}
+.fill {
+	width: 100%;
+}
+
+mat-expansion-panel {
+	box-shadow: none !important;
+	width: calc(100% + 48px);
+	position: relative;
+	right: -24px;
+}

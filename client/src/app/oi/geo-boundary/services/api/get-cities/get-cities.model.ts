@@ -8,21 +8,22 @@ import { map, switchMap } from "rxjs/operators";
 
 import { HttpRequestBaseModel, HttpResponseBaseModel } from "@soushians/shared";
 
-import { DeliveryTimeModel } from "../../../models";
+import { OrderModel } from "../../../models";
 
-export namespace GetDeliveryTimeTableApiModel {
+export namespace GetCitiesApiModel {
 	export class Request {
 		constructor(initValue = {}) {
 			Object.keys(initValue).forEach(key => (this[key] = initValue[key]));
 		}
 
 		getRequestBody() {
-			return {};
+			return {
+			};
 		}
 	}
 
 	export class Response {
-		Result: { Items: DeliveryTimeModel[] };
+		Result: Time;
 		constructor() {}
 	}
 }
