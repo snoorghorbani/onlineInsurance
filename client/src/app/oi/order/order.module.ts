@@ -37,6 +37,7 @@ import { RouterModule } from "@angular/router";
 import { CompareComponent } from "./compare/compare.component";
 import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
+import { SaveOrderApiEffects } from "./services/api/save-order";
 
 @NgModule({
 	imports: [
@@ -66,7 +67,12 @@ import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 		InfraModule,
 		FileDropModule,
 		OrderRoutingModule,
-		EffectsModule.forFeature([ GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects ])
+		EffectsModule.forFeature([
+			GetOrderTypesApiEffects,
+			SaveOrderFormApiEffects,
+			GetNewOrderFormApiEffects,
+			SaveOrderApiEffects
+		])
 	],
 	declarations: [
 		TestComponent,

@@ -14,3 +14,6 @@ mat-expansion-panel {
 	position: relative;
 	right: -24px;
 }
+.mat-expansion-panel-header[aria-disabled=true] {
+	color: inherit !important;
+}

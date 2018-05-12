@@ -9,6 +9,11 @@ router.post("/ComparePolicies", function (req, res) {
         res.json({ Result });
     });
 });
+router.post("/SaveOrder", function (req, res) {
+    utility_1.httpPost("http://185.208.174.92:2000/Policy/SaveOrder", req.body).subscribe(Result => {
+        res.json({ Result });
+    });
+});
 router.get("/", function (req, res) {
     try {
         res.json({

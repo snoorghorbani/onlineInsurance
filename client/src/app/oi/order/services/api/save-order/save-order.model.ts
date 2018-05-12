@@ -8,9 +8,9 @@ import { map, switchMap } from "rxjs/operators";
 
 import { HttpRequestBaseModel, HttpResponseBaseModel } from "@soushians/shared";
 
-import { CityModel } from "../../../models";
+import { OrderFormModel } from "../../../models";
 
-export namespace GetCitiesApiModel {
+export namespace SaveOrderApiModel {
 	export class Request {
 		constructor(initValue = {}) {
 			Object.keys(initValue).forEach(key => (this[key] = initValue[key]));
@@ -22,7 +22,7 @@ export namespace GetCitiesApiModel {
 	}
 
 	export class Response {
-		Result: CityModel[];
+		Result: OrderFormModel;
 		constructor() {}
 	}
 }

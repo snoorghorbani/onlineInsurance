@@ -12,14 +12,12 @@
             <mat-form-field>
                 <input matInput [placeholder]="(PolicyholderLastName$ | async)?.Label" formControlName="PolicyholderLastName">
             </mat-form-field>
-            <mat-expansion-panel>
+            <mat-expansion-panel  #PolicyHolderExpansion disabled>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <mat-slide-toggle checked="true" (change)="disbaleForm($event)">مشخصات بیمه گذار مطابق با تصویر کارت ماشین ثبت شود</mat-slide-toggle>
-                  </mat-panel-title>
-                  <mat-panel-description>
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
+                  <mat-slide-toggle checked="true" (change)="disbaleForm($event)">مشخصات بیمه گذار مطابق با تصویر کارت ماشین ثبت شود</mat-slide-toggle>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
             
                 <mat-form-field fxFlex>
                   <input matInput [placeholder]="(PolicyholderNationalCode$ | async)?.Label" formControlName="PolicyholderNationalCode">
@@ -31,8 +29,38 @@
                   <input matInput [placeholder]="(PolicyholderFatherName$ | async)?.Label" formControlName="PolicyholderFatherName">
                 </mat-form-field>
             </mat-expansion-panel>
+        </form>
+      </mat-card-content>
+    </mat-card>
 
-            <div fxLayout="row">
+    <mat-card fxFlex="100">
+      <mat-card-title>
+          نشانی درج روی بیمه نامه
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+            <mat-expansion-panel #PolicyAddressExpansion disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-radio-group formControlName="PolicyAddressSource">
+                    <mat-radio-button *ngFor="let source of (PolicyAddressSource$ | async)?.Options" [value]="source.Value">{{source.DisplayValue}}</mat-radio-button>
+                  </mat-radio-group>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div fxLayout="row">
+                <mat-form-field fxFlex="20">
+                  <mat-select [placeholder]="(PolicyAddressCityId$ | async)?.Label" formControlName="PolicyAddressCityId">
+                    <mat-option *ngFor="let item of (PolicyAddressCityId$ | async)?.Options" [value]="item.Value">
+                      {{ item.DisplayValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="fill"  fxFlex="80">
+                  <input matInput [placeholder]="(PolicyAddress$ | async)?.Label" formControlName="PolicyAddress">
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+          <div fxLayout="row">
               <file-drop fxFlex 
                 [headertext]="(LastPolicyImage$ | async)?.Label" 
                 (onFileDrop)="LastPolicyImageDropped($event)" 
@@ -52,55 +80,33 @@
                 (onFileLeave)="LastPolicyImageFileLeave($event)"
               ></file-drop>
             </div>
-
         </form>
       </mat-card-content>
     </mat-card>
 
     <mat-card fxFlex="100">
       <mat-card-title>
-          مشخصات بیمه گذار
+          
       </mat-card-title>
       <mat-card-content>
-        <form [formGroup]="formGroup" fxLayout="row">
-        </form>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card fxFlex="100">
-      <mat-card-title>
-          آدرس ارسال بیمه نامه
-      </mat-card-title>
-      <mat-card-content>
-        <form [formGroup]="formGroup">
-          <mat-form-field class="fill">
-            <input matInput [placeholder]="(DeliveryAddress$ | async)?.Label" formControlName="DeliveryAddress">
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card fxFlex="100">
-      <mat-card-title>
-          نشانی درج روی بیمه نامه
-      </mat-card-title>
-      <mat-card-content>
-        <form [formGroup]="formGroup">
-          <mat-radio-group formControlName="PolicyAddressSource">
-              <mat-radio-button *ngFor="let source of (PolicyAddressSource$ | async)?.Options" [value]="source.Value">{{source.DisplayValue}}</mat-radio-button>
-          </mat-radio-group>
-          <mat-form-field class="fill">
-            <input matInput [placeholder]="(PolicyAddress$ | async)?.Label" formControlName="PolicyAddress">
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card fxFlex="100">
-      <mat-card-title>
-          انتخاب زمان ارسال
-      </mat-card-title>
-      <mat-card-content>
+        <h4>
+          نشانی تحویل گیرنده
+        </h4>
+          <form [formGroup]="formGroup" fxLayout="row">
+            <mat-form-field fxFlex="20">
+                <mat-select [placeholder]="(DeliveryAddressCityId$ | async)?.Label" formControlName="DeliveryAddressCityId">
+                  <mat-option *ngFor="let item of (DeliveryAddressCityId$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="fill" fxFlex="80">
+              <input matInput [placeholder]="(DeliveryAddress$ | async)?.Label" formControlName="DeliveryAddress">
+            </mat-form-field>
+          </form>
+          <h4>
+              انتخاب زمان ارسال
+          </h4>
           <table mat-table [dataSource]="DelieryTimeTableDataSource$ | async">
             <ng-container matColumnDef="Checkbox">
               <td mat-cell *matCellDef="let row">
@@ -120,5 +126,6 @@
           </table>
       </mat-card-content>
     </mat-card>
+    <button mat-raised-button (click)="save()" color="primary">ثبت</button>
   </div>
 </div>

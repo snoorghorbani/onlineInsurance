@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel, DeliveryTimeModel } from "../models";
@@ -11,6 +11,12 @@ import { of } from "rxjs/internal/observable/of";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
 import { ComparePoliciesStartAction } from "../../policy/services/api";
 import { OrderService } from "../services";
+import { MatExpansionPanel } from "@angular/material";
+import { GeoBoundaryService } from "../../geo-boundary";
+import { CityModel } from "../../geo-boundary/models";
+import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
+import { from } from "rxjs";
+import { SaveOrderStartAction } from "../services/api/save-order";
 
 @Component({
 	selector: "app-insurer-info",
@@ -28,23 +34,28 @@ export class InsurerInfoComponent implements OnInit {
 	PolicyholderFatherName$: Observable<FieldModel>;
 	DeliveryAddress$: Observable<FieldModel>;
 	DeliveryAddressCityId$: Observable<FieldModel>;
-	PolicyAddress$: Observable<FieldModel>;
 	PolicyAddressCityId$: Observable<FieldModel>;
+	PolicyAddress$: Observable<FieldModel>;
 	PolicyAddressSource$: Observable<FieldModel>;
 	PolicyholderPhone$: Observable<FieldModel>;
 	DeliveryDate$: Observable<FieldModel>;
 	DeliveryTime$: Observable<FieldModel>;
 	DelieryTimeTableDisplayColumns: string[];
 	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
+	Cities$: Observable<CityModel[]>;
+	@ViewChild("PolicyAddressExpansion") PolicyAddressExpansion: MatExpansionPanel;
+	@ViewChild("PolicyHolderExpansion") PolicyHolderExpansion: MatExpansionPanel;
 	constructor(
 		private store: Store<AppState>,
 		private router: Router,
 		private fileService: FileService,
-		private orderService: OrderService
+		private orderService: OrderService,
+		private geoBoundaryService: GeoBoundaryService
 	) {
 		this.initFormGroup();
 		this.DelieryTimeTableDisplayColumns = [ "Checkbox", "Date", "Time" ];
 		this.DelieryTimeTableDataSource$ = this.orderService.GetDeliveryTimeTable();
+		this.Cities$ = this.geoBoundaryService.GetCities();
 		// this.DelieryTimeTableDataSource$.subscribe(data => {
 		// 	debugger;
 		// });
@@ -55,8 +66,8 @@ export class InsurerInfoComponent implements OnInit {
 		this.PolicyholderNationalCode$ = this.orderForm$.map(orderForm => orderForm.PolicyholderNationalCode);
 		this.PolicyholderBirthDate$ = this.orderForm$.map(orderForm => orderForm.PolicyholderBirthDate);
 		this.PolicyholderFatherName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFatherName);
-		this.PolicyAddress$ = this.orderForm$.map(orderForm => orderForm.PolicyAddress);
 		this.PolicyAddressCityId$ = this.orderForm$.map(orderForm => orderForm.PolicyAddressCityId);
+		this.PolicyAddress$ = this.orderForm$.map(orderForm => orderForm.PolicyAddress);
 		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
 		this.PolicyAddressSource$ = this.orderForm$.map(orderForm => orderForm.PolicyAddressSource);
 		this.DeliveryAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryAddress);
@@ -69,8 +80,14 @@ export class InsurerInfoComponent implements OnInit {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 
 		this.formGroup.get("PolicyAddressSource").valueChanges.subscribe(source => {
-			if (source != "3") this.formGroup.get("PolicyAddress").disable();
-			else this.formGroup.get("PolicyAddress").enable();
+			debugger;
+			if (source != "3") {
+				this.formGroup.get("PolicyAddress").disable();
+				this.PolicyAddressExpansion.close();
+			} else {
+				this.formGroup.get("PolicyAddress").enable();
+			}
+			this.PolicyAddressExpansion.expanded = source == "3";
 		});
 	}
 	DeliverDateTime: string;
@@ -84,9 +101,11 @@ export class InsurerInfoComponent implements OnInit {
 			PolicyholderBirthDate: new FormControl(""),
 			PolicyholderFatherName: new FormControl(""),
 
+			DeliveryAddressCityId: new FormControl(""),
 			DeliveryAddress: new FormControl(""),
 
 			PolicyAddressSource: new FormControl(""),
+			PolicyAddressCityId: new FormControl(""),
 			PolicyAddress: new FormControl(""),
 
 			DeliveryDate: new FormControl(""),
@@ -106,6 +125,8 @@ export class InsurerInfoComponent implements OnInit {
 	disbaleForm(e) {
 		var method: "disable" | "enable" = e.checked ? "disable" : "enable";
 
+		this.PolicyHolderExpansion.expanded = !e.checked;
+
 		this.formGroup.get("PolicyholderNationalCode")[method]();
 		this.formGroup.get("PolicyholderBirthDate")[method]();
 		this.formGroup.get("PolicyholderFatherName")[method]();
@@ -116,5 +137,20 @@ export class InsurerInfoComponent implements OnInit {
 			DeliveryDate: row.Date,
 			DeliveryTime: row.TimeFrom.Hours
 		});
+	}
+
+	save() {
+		debugger;
+		from([ this.formGroup.value ])
+			.combineLatest(this.orderForm$)
+			.map(([ formValues, orderForm ]) => {
+				Object.keys(formValues).forEach(key => (orderForm[key].Value = formValues[key]));
+				return orderForm;
+			})
+			.subscribe(orderForm => {
+				this.store.dispatch(new NewOrderFormUpdateAction(orderForm));
+				this.store.dispatch(new SaveOrderStartAction(orderForm));
+			})
+			.unsubscribe();
 	}
 }

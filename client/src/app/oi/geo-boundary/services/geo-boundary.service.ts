@@ -7,11 +7,12 @@ import { of } from "rxjs/internal/observable/of";
 
 import { stringTemplate } from "@soushians/infra";
 
-import { GeoBoundaryModel, TestModel } from "../models";
+import { GeoBoundaryModel, TestModel, CityModel } from "../models";
 import { GeoBoundaryConfigurationService } from "./geo-boundary-configuration.service";
 import { TestApiMock } from "./mock/test.api-mock";
 
 import { AppState } from "../geo-boundary.reducers";
+import { GetCitiesApiModel } from "./api/get-cities";
 
 @Injectable()
 export class GeoBoundaryService {
@@ -21,6 +22,9 @@ export class GeoBoundaryService {
 		private configurationService: GeoBoundaryConfigurationService
 	) {}
 
+	GetCities(): Observable<CityModel[]> {
+		return this.http.get<GetCitiesApiModel.Response>("").map(response => response.Result);
+	}
 	test(): Observable<TestModel> {
 		return of(TestApiMock.Result);
 		// const model = new AddGeoBoundaryApiModel.Request(data);
