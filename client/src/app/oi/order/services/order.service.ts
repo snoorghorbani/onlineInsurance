@@ -27,7 +27,7 @@ export class OrderService {
 	}
 	SaveOrder(order: OrderFormModel): Observable<OrderFormModel> {
 		return this.http
-			.post<SaveOrderApiModel.Response>("http://localhost:3000/api/fake/SaveOrder", order)
+			.post<SaveOrderApiModel.Response>("http://185.208.174.92:2000/order/SaveOrder", order)
 			.map(response => response.Result);
 	}
 }

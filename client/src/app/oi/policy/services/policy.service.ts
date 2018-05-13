@@ -28,10 +28,7 @@ export class PolicyService {
 	ComparePolicies(data: ComparePoliciesApiModel.Request): Observable<PolicyCompareModel[]> {
 		const model = new ComparePoliciesApiModel.Request(data);
 		return this.http
-			.post<ComparePoliciesApiModel.Response>(
-				"http://localhost:3000/api/fake/ComparePolicies",
-				model.getRequestBody()
-			)
+			.post<ComparePoliciesApiModel.Response>(`${URI}ComparePolicies`, model.getRequestBody())
 			.map(response => response.Result.Items);
 	}
 }
