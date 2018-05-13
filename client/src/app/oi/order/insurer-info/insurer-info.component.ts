@@ -30,6 +30,8 @@ export class InsurerInfoComponent implements OnInit {
 	PolicyholderFirstName$: Observable<FieldModel>;
 	PolicyholderLastName$: Observable<FieldModel>;
 	LastPolicyImage$: Observable<FieldModel>;
+	PolicyholderCarIdCardBack$: Observable<FieldModel>;
+	PolicyholderCarIdCardFront$: Observable<FieldModel>;
 	PolicyholderNationalCode$: Observable<FieldModel>;
 	PolicyholderBirthDate$: Observable<FieldModel>;
 	PolicyholderFatherName$: Observable<FieldModel>;
@@ -64,6 +66,8 @@ export class InsurerInfoComponent implements OnInit {
 		this.PolicyholderFirstName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFirstName);
 		this.PolicyholderLastName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderLastName);
 		this.LastPolicyImage$ = this.orderForm$.map(orderForm => orderForm.LastPolicyImage);
+		this.PolicyholderCarIdCardBack$ = this.orderForm$.map(orderForm => orderForm.PolicyholderCarIdCardBack);
+		this.PolicyholderCarIdCardFront$ = this.orderForm$.map(orderForm => orderForm.PolicyholderCarIdCardFront);
 		this.PolicyholderNationalCode$ = this.orderForm$.map(orderForm => orderForm.PolicyholderNationalCode);
 		this.PolicyholderBirthDate$ = this.orderForm$.map(orderForm => orderForm.PolicyholderBirthDate);
 		this.PolicyholderFatherName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFatherName);

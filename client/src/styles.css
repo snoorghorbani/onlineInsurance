@@ -104,6 +104,7 @@ body .mat-card mat-card-subtitle,
 .mat-menu-item,
 .mat-checkbox-label,
 .mat-toolbar,
+.mat-form-field,
 .mat-tab-label,
 .mat-select,
 .mat-calendar,
@@ -422,3 +423,9 @@ diagram-add dynamic-component-selector .mat-card {
 	filter: blur(2px) !important;
 }
 /* #endregion */
+
+.review-component figure.mat-figure {
+	justify-content: right !important;
+	padding: 10px;
+	box-sizing: border-box;
+}

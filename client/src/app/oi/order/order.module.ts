@@ -40,6 +40,7 @@ import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-c
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { SaveOrderApiEffects } from "./services/api/save-order";
 import { PurchaseComponent } from "./purchase/purchase.component";
+import { ReviewOrderComponent } from './review-order/review-order.component';
 
 @NgModule({
 	imports: [
@@ -84,7 +85,8 @@ import { PurchaseComponent } from "./purchase/purchase.component";
 		CompareComponent,
 		PoliciesCompareItemComponent,
 		InsurerInfoComponent,
-		PurchaseComponent
+		PurchaseComponent,
+		ReviewOrderComponent
 	]
 })
 export class OrderModule {}

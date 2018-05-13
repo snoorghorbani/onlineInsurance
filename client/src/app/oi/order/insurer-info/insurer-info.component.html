@@ -79,13 +79,13 @@
               </mat-accordion>
               <div fxLayout="row">
                   <file-drop fxFlex 
-                    [headertext]="(LastPolicyImage$ | async)?.Label" 
+                    [headertext]="(PolicyholderCarIdCardBack$ | async)?.Label" 
                     (onFileDrop)="LastPolicyImageDropped($event)" 
                     (onFileOver)="LastPolicyImageFileOver($event)" 
                     (onFileLeave)="LastPolicyImageFileLeave($event)"
                   ></file-drop>
                   <file-drop fxFlex
-                    [headertext]="(LastPolicyImage$ | async)?.Label" 
+                    [headertext]="(PolicyholderCarIdCardFront$ | async)?.Label" 
                     (onFileDrop)="LastPolicyImageDropped($event)" 
                     (onFileOver)="LastPolicyImageFileOver($event)" 
                     (onFileLeave)="LastPolicyImageFileLeave($event)"

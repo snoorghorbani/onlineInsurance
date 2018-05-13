@@ -22,6 +22,8 @@ export class OrderFormModel {
 	NetPremium: FieldModel;
 	PaymentId: FieldModel;
 	PaymentMethod: FieldModel;
+	PolicyholderCarIdCardBack: FieldModel;
+	PolicyholderCarIdCardFront: FieldModel;
 	PolicyAddress: FieldModel;
 	PolicyAddressCityId: FieldModel;
 	PolicyAddressSource: FieldModel;
