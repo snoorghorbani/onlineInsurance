@@ -9,7 +9,7 @@ import {
 	GetCarModelsOfBrandApiModel
 } from "../../policy/services/api";
 import { from, of } from "rxjs";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { FieldModel, FieldOptionModel } from "../models/field.model";
 import { OrderFormModel } from "../models";
@@ -73,7 +73,16 @@ export class CompareComponent implements OnInit {
 
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
-		this.orderForm$.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
+
+		this.orderForm$.subscribe(orderForm => {
+			Object.keys(this.formGroup.controls).forEach(key => {
+				if (orderForm[key].Status == 1) {
+					this.formGroup.get(key).setValidators([ Validators.required ]);
+					this.formGroup.get(key).updateValueAndValidity();
+				}
+			});
+			this.formGroup.updateValueAndValidity();
+		});
 
 		this.formGroup.get("CarBrand").valueChanges.subscribe(CarBrand =>
 			this.store.dispatch(
@@ -102,8 +111,12 @@ export class CompareComponent implements OnInit {
 				return values;
 			})
 			.subscribe(values => this.formGroup.patchValue(values));
+
+		this.orderForm$.subscribe(orderForm => this.compare());
 	}
 	compare() {
+		debugger;
+		if (this.formGroup.invalid) return;
 		from([ this.formGroup ])
 			.combineLatest(this.orderForm$)
 			.map(([ formGroup, orderForm ]) => {

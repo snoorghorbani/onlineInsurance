@@ -66,6 +66,6 @@ export class NewOrderComponent implements OnInit {
 			})
 			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)));
 
-		this.router.navigate([ "order/compare" ]);
+		this.router.navigate([ "order/purchase" ]);
 	}
 }

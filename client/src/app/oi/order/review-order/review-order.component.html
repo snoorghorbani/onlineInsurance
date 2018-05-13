@@ -69,11 +69,11 @@
           <mat-grid-tile colspan="3" class="th">{{(LastPolicyYearsWithoutIncident$ | async)?.Label}}</mat-grid-tile>
           <mat-grid-tile colspan="3">{{(LastPolicyYearsWithoutIncident$ | async)?.Value}}</mat-grid-tile>
           <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheMali$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{(PolicyPushesheMali$ | async)?.Value}}</mat-grid-tile>
+          <mat-grid-tile colspan="1">{{(PolicyPushesheMali$ | async)?.DisplayValue}}</mat-grid-tile>
           <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheRanande$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{(PolicyPushesheRanande$ | async)?.Value}}</mat-grid-tile>
+          <mat-grid-tile colspan="1">{{(PolicyPushesheRanande$ | async)?.DisplayValue}}</mat-grid-tile>
           <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheSarneshin$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{(PolicyPushesheSarneshin$ | async)?.Value}}</mat-grid-tile>
+          <mat-grid-tile colspan="1">{{(PolicyPushesheSarneshin$ | async)?.DisplayValue}}</mat-grid-tile>
         </mat-grid-list>
       </mat-card>
       

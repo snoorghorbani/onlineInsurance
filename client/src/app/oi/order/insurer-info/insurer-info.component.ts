@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel, DeliveryTimeModel } from "../models";
 import { Router } from "@angular/router";
@@ -17,6 +17,7 @@ import { CityModel } from "../../geo-boundary/models";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 import { from } from "rxjs";
 import { SaveOrderStartAction } from "../services/api/save-order";
+import { UploadEvent } from "ngx-file-drop";
 
 @Component({
 	selector: "order-insurer-info",
@@ -84,8 +85,16 @@ export class InsurerInfoComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 
+		this.orderForm$.subscribe(orderForm => {
+			Object.keys(this.formGroup.controls).forEach(key => {
+				if (orderForm[key].Status == 1) {
+					this.formGroup.get(key).setValidators([ Validators.required ]);
+					this.formGroup.get(key).updateValueAndValidity();
+				}
+			});
+		});
+
 		this.formGroup.get("PolicyAddressSource").valueChanges.subscribe(source => {
-			debugger;
 			if (source != "3") this.formGroup.get("PolicyAddress").disable();
 			else this.formGroup.get("PolicyAddress").enable();
 			this.PolicyAddressExpansion.expanded = source == "3";
@@ -97,6 +106,15 @@ export class InsurerInfoComponent implements OnInit {
 			PolicyholderFirstName: new FormControl(""),
 			PolicyholderLastName: new FormControl(""),
 			LastPolicyImage: new FormControl(""),
+			LastPolicyExpirationDate: new FormControl("1990/11/11"),
+			// ProductId: new FormControl("1"),
+			// CarBrand: new FormControl("1"),
+			// CarModel: new FormControl("1"),
+			LastPolicyYearsWithoutIncident: new FormControl("1"),
+			LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
+			LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
+			PolicyPushesheMali: new FormControl(7700000),
+			DeliveryTime: new FormControl(1),
 
 			PolicyholderNationalCode: new FormControl(""),
 			PolicyholderBirthDate: new FormControl(""),
@@ -109,15 +127,16 @@ export class InsurerInfoComponent implements OnInit {
 			PolicyAddressCityId: new FormControl(""),
 			PolicyAddress: new FormControl(""),
 
-			DeliveryDate: new FormControl(""),
-			DeliveryTime: new FormControl("")
+			DeliveryDate: new FormControl("")
+			// DeliveryTime: new FormControl("")
 		});
 		this.formGroup.get("PolicyholderNationalCode").disable();
 		this.formGroup.get("PolicyholderBirthDate").disable();
 		this.formGroup.get("PolicyholderFatherName").disable();
 	}
-	LastPolicyImageDropped(e) {
-		this.fileService.AttachFileToOrder().subscribe(data => {
+	LastPolicyImageDropped(e: UploadEvent) {
+		debugger;
+		this.fileService.AttachFileToOrder(e.files[0]).subscribe(data => {
 			debugger;
 		});
 	}
@@ -141,7 +160,9 @@ export class InsurerInfoComponent implements OnInit {
 	}
 
 	save() {
-		debugger;
+		// if (this.formGroup.invalid) {
+		// 	return;
+		// }
 		from([ this.formGroup.value ])
 			.combineLatest(this.orderForm$)
 			.map(([ formValues, orderForm ]) => {
@@ -157,15 +178,12 @@ export class InsurerInfoComponent implements OnInit {
 	}
 
 	step = 0;
-
 	setStep(index: number) {
 		this.step = index;
 	}
-
 	nextStep() {
 		this.step++;
 	}
-
 	prevStep() {
 		this.step--;
 	}
