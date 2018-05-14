@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="25px" fxFlex="60">
+    <mat-card *ngFor="let order of orders$ | async" fxFlex>
+      {{order.Summary}}
+      {{order.Type}}
+      {{order.WorkflowState}}
+      <button mat-icon-button color="primary" [routerLink]="['/order',order.Id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+</div>

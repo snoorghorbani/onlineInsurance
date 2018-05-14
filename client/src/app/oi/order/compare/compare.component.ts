@@ -39,6 +39,9 @@ export class CompareComponent implements OnInit {
 	LastPolicyExpirationDate$: Observable<FieldModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyTerm$: Observable<FieldModel>;
+	LastPolicyYearsWithoutIncident$: Observable<FieldModel>;
+	LastPolicyNumOfUsedPropertyCoupon$: Observable<FieldModel>;
+	LastPolicyNumOfUsedPersonCoupon$: Observable<FieldModel>;
 	SelectedPolicyTerm$: Observable<string>;
 	FocuseddPolicy: PolicyCompareModel;
 	companyInfoDataSource: any[];
@@ -57,7 +60,10 @@ export class CompareComponent implements OnInit {
 			CarYearsWithoutIncident: new FormControl(""),
 			PolicyPushesheMali: new FormControl(""),
 			PolicyTerm: new FormControl(12),
-			LastPolicyExpirationDate: new FormControl("")
+			LastPolicyExpirationDate: new FormControl(""),
+			LastPolicyYearsWithoutIncident: new FormControl("0"),
+			LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
+			LastPolicyNumOfUsedPersonCoupon: new FormControl("0")
 		});
 		this.policies$ = this.store.select(state => state.order.compare.data);
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
@@ -69,6 +75,15 @@ export class CompareComponent implements OnInit {
 		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
 		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
 		this.PolicyTerm$ = this.orderForm$.map(orderForm => orderForm.PolicyTerm);
+		this.LastPolicyYearsWithoutIncident$ = this.orderForm$.map(
+			orderForm => orderForm.LastPolicyYearsWithoutIncident
+		);
+		this.LastPolicyNumOfUsedPropertyCoupon$ = this.orderForm$.map(
+			orderForm => orderForm.LastPolicyNumOfUsedPropertyCoupon
+		);
+		this.LastPolicyNumOfUsedPersonCoupon$ = this.orderForm$.map(
+			orderForm => orderForm.LastPolicyNumOfUsedPersonCoupon
+		);
 	}
 
 	ngOnInit() {
@@ -92,6 +107,10 @@ export class CompareComponent implements OnInit {
 			)
 		);
 
+		this.formGroup
+			.get("CarYearsWithoutIncident")
+			.valueChanges.subscribe(years => this.checkAndContolIncidentFormControls(years));
+
 		this.SelectedPolicyTerm$ = this.formGroup
 			.get("PolicyTerm")
 			.valueChanges.combineLatest(this.PolicyTerm$)
@@ -110,7 +129,9 @@ export class CompareComponent implements OnInit {
 					.map(key => (values[key] = orderForm[key].Value));
 				return values;
 			})
-			.subscribe(values => this.formGroup.patchValue(values));
+			.subscribe(values => {
+				this.formGroup.patchValue(values);
+			});
 
 		this.orderForm$.subscribe(orderForm => this.compare());
 	}
@@ -129,16 +150,27 @@ export class CompareComponent implements OnInit {
 		this.FocuseddPolicy = policy;
 	}
 	selectPolicy(ProductId: number) {
-		of(ProductId)
+		from([ ProductId ])
 			.combineLatest(this.orderForm$)
 			.map(([ ProductId, orderForm ]) => {
+				Object.keys(this.formGroup.value).forEach(key => (orderForm[key].Value = this.formGroup.value[key]));
 				orderForm.ProductId.Value = ProductId;
-				debugger;
 				return orderForm;
 			})
 			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)))
 			.unsubscribe();
 		// this.router.navigate([ "/order/insurer-info" ]);
 		this.done.emit();
+	}
+	checkAndContolIncidentFormControls(years) {
+		if (years > 1) {
+			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
+			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
+			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
+		} else {
+			this.formGroup.get("LastPolicyYearsWithoutIncident").enable();
+			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").enable();
+			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").enable();
+		}
 	}
 }

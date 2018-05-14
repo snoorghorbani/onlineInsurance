@@ -15,7 +15,8 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>تایید نهایی</ng-template>
-        <order-review-order (done)="next()"></order-review-order>
+        <!-- <order-review-order (done)="next()"></order-review-order> -->
+        <order-view-order [orderForm]="orderForm$ | async" (done)="next()"></order-view-order>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>پرداخت</ng-template>

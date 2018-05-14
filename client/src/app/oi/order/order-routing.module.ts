@@ -7,6 +7,8 @@ import { OrderComponent } from "./order.component";
 import { CompareComponent } from "./compare/compare.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { PurchaseComponent } from "./purchase/purchase.component";
+import { MyOrdersComponent } from "./my-orders/my-orders.component";
+import { ViewOrderComponent } from "./view-order/view-order.component";
 
 const routes: Routes = [
 	{
@@ -32,6 +34,14 @@ const routes: Routes = [
 			{
 				path: "purchase",
 				component: PurchaseComponent
+			},
+			{
+				path: "my-orders",
+				component: MyOrdersComponent
+			},
+			{
+				path: ":Id",
+				component: ViewOrderComponent
 			}
 		]
 	}

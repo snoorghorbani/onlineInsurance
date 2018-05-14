@@ -44,6 +44,30 @@
             </mat-form-field>
             
             <mat-form-field class="fit">
+                <mat-select [placeholder]="(LastPolicyYearsWithoutIncident$ | async)?.Label"  formControlName="LastPolicyYearsWithoutIncident">
+                  <mat-option *ngFor="let item of (LastPolicyYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="fit">
+                <mat-select [placeholder]="(LastPolicyNumOfUsedPropertyCoupon$ | async)?.Label"  formControlName="LastPolicyNumOfUsedPropertyCoupon">
+                  <mat-option *ngFor="let item of (LastPolicyNumOfUsedPropertyCoupon$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="fit">
+                <mat-select [placeholder]="(LastPolicyNumOfUsedPersonCoupon$ | async)?.Label"  formControlName="LastPolicyNumOfUsedPersonCoupon">
+                  <mat-option *ngFor="let item of (LastPolicyNumOfUsedPersonCoupon$ | async)?.Options" [value]="item.Value">
+                    {{ item.DisplayValue }}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field class="fit">
                 <mat-select [placeholder]="(CarUsage$ | async)?.Label"  formControlName="CarUsage">
                   <mat-option *ngFor="let item of (CarUsage$ | async)?.Options" [value]="item.Value">
                     {{ item.DisplayValue }}

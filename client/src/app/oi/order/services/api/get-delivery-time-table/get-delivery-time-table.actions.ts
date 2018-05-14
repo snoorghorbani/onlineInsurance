@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 
 import { GetDeliveryTimeTableApiModel } from "./get-delivery-time-table.model";
-import { OrderModel } from "../../../models/order.model";
+import { DeliveryTimeModel } from "../../../models";
 
 export const enum GET_DELIVERY_TIME_TABLE_ACTION_TYPES {
 	START = "[GET_DELIVERY_TIME_TABLE][API][GetDeliveryTimeTable] start",
@@ -15,11 +15,14 @@ export class GetDeliveryTimeTableStartAction implements Action {
 }
 export class GetDeliveryTimeTableSucceedAction implements Action {
 	readonly type = GET_DELIVERY_TIME_TABLE_ACTION_TYPES.SUCCEED;
-	constructor(public payload: OrderModel) {}
+	constructor(public payload: DeliveryTimeModel[]) {}
 }
 export class GetDeliveryTimeTableFailedAction implements Action {
 	readonly type = GET_DELIVERY_TIME_TABLE_ACTION_TYPES.FAILED;
 	constructor(public payload: any) {}
 }
 
-export type GetDeliveryTimeTableActions = GetDeliveryTimeTableStartAction | GetDeliveryTimeTableSucceedAction | GetDeliveryTimeTableFailedAction;
+export type GetDeliveryTimeTableActions =
+	| GetDeliveryTimeTableStartAction
+	| GetDeliveryTimeTableSucceedAction
+	| GetDeliveryTimeTableFailedAction;

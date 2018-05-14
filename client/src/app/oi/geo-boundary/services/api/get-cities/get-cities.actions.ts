@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 
 import { GetCitiesApiModel } from "./get-cities.model";
-import { TimeModel } from "../../../models/time.model";
+import { CityModel } from "../../../models";
 
 export const enum GET_CITIES_ACTION_TYPES {
 	START = "[GET_CITIES][API][GetCities] start",
@@ -15,7 +15,7 @@ export class GetCitiesStartAction implements Action {
 }
 export class GetCitiesSucceedAction implements Action {
 	readonly type = GET_CITIES_ACTION_TYPES.SUCCEED;
-	constructor(public payload: TimeModel) {}
+	constructor(public payload: CityModel[]) {}
 }
 export class GetCitiesFailedAction implements Action {
 	readonly type = GET_CITIES_ACTION_TYPES.FAILED;

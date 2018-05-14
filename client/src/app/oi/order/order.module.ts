@@ -41,6 +41,8 @@ import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { SaveOrderApiEffects } from "./services/api/save-order";
 import { PurchaseComponent } from "./purchase/purchase.component";
 import { ReviewOrderComponent } from './review-order/review-order.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { ViewOrderComponent } from './view-order/view-order.component';
 
 @NgModule({
 	imports: [
@@ -86,7 +88,9 @@ import { ReviewOrderComponent } from './review-order/review-order.component';
 		PoliciesCompareItemComponent,
 		InsurerInfoComponent,
 		PurchaseComponent,
-		ReviewOrderComponent
+		ReviewOrderComponent,
+		MyOrdersComponent,
+		ViewOrderComponent
 	]
 })
 export class OrderModule {}

@@ -3,54 +3,46 @@
       <mat-accordion>
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
             <mat-expansion-panel-header>
-              <mat-panel-title>
                   مشخصات بیمه گذار
-              </mat-panel-title>
-              <mat-panel-description>
-                Type your name and age
-                <mat-icon>account_circle</mat-icon>
-              </mat-panel-description>
             </mat-expansion-panel-header>
             <form [formGroup]="formGroup">
-                <mat-form-field>
-                    <input matInput [placeholder]="(PolicyholderFirstName$ | async)?.Label" formControlName="PolicyholderFirstName">
+              <div fxLayout="row" fxLayoutGap="25px">
+                <mat-form-field fxFlex>
+                  <input matInput [placeholder]="(PolicyholderFirstName$ | async)?.Label" formControlName="PolicyholderFirstName">
                 </mat-form-field>
-                <mat-form-field>
-                    <input matInput [placeholder]="(PolicyholderLastName$ | async)?.Label" formControlName="PolicyholderLastName">
+                <mat-form-field fxFlex>
+                  <input matInput [placeholder]="(PolicyholderLastName$ | async)?.Label" formControlName="PolicyholderLastName">
                 </mat-form-field>
+              </div>
                 <mat-accordion class="fit">
-                  <mat-expansion-panel  #PolicyHolderExpansion disabled>
+                  <mat-expansion-panel expanded="true"  #PolicyHolderExpansion disabled>
                     <mat-expansion-panel-header>
                       <mat-panel-title>
-                        <mat-slide-toggle checked="true" (change)="disbaleForm($event)">مشخصات بیمه گذار مطابق با تصویر کارت ماشین ثبت شود</mat-slide-toggle>
+                        <mat-slide-toggle checked="false" (change)="disbaleForm($event)">مشخصات بیمه گذار مطابق با تصویر کارت ماشین ثبت شود</mat-slide-toggle>
                       </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-form-field fxFlex>
-                      <input matInput [placeholder]="(PolicyholderNationalCode$ | async)?.Label" formControlName="PolicyholderNationalCode">
-                    </mat-form-field>
-                    <mat-form-field fxFlex>
-                      <input matInput [placeholder]="(PolicyholderBirthDate$ | async)?.Label" formControlName="PolicyholderBirthDate">
-                    </mat-form-field>
-                    <mat-form-field fxFlex>
-                      <input matInput [placeholder]="(PolicyholderFatherName$ | async)?.Label" formControlName="PolicyholderFatherName">
-                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutGap="25px">
+                      <mat-form-field fxFlex>
+                        <input matInput [placeholder]="(PolicyholderNationalCode$ | async)?.Label" formControlName="PolicyholderNationalCode">
+                      </mat-form-field>
+                      <mat-form-field fxFlex>
+                        <input matInput [placeholder]="(PolicyholderBirthDate$ | async)?.Label" formControlName="PolicyholderBirthDate">
+                      </mat-form-field>
+                      <mat-form-field fxFlex>
+                        <input matInput [placeholder]="(PolicyholderFatherName$ | async)?.Label" formControlName="PolicyholderFatherName">
+                      </mat-form-field>
+                    </div>
                   </mat-expansion-panel>
                 </mat-accordion>
             </form>
             <mat-action-row>
-              <button mat-button color="primary" (click)="nextStep()">ادامه</button>
+              <button mat-raised-button color="primary" (click)="nextStep()">ادامه</button>
             </mat-action-row>
           </mat-expansion-panel>
         
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
             <mat-expansion-panel-header>
-              <mat-panel-title>
                   اطلاعات بیمه نامه
-              </mat-panel-title>
-              <mat-panel-description>
-                Type the country name
-                <mat-icon>map</mat-icon>
-              </mat-panel-description>
             </mat-expansion-panel-header>
             <form [formGroup]="formGroup">
               <h4>نشانی درج روی بیمه نامه</h4>
@@ -58,8 +50,8 @@
                 <mat-expansion-panel  #PolicyAddressExpansion disabled>
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      <mat-radio-group formControlName="PolicyAddressSource">
-                        <mat-radio-button *ngFor="let source of (PolicyAddressSource$ | async)?.Options" [value]="source.Value">{{source.DisplayValue}}</mat-radio-button>
+                      <mat-radio-group fxLayout="row" fxLayoutGap="25px" formControlName="PolicyAddressSource">
+                        <mat-radio-button fxFlex="0 0 auto" *ngFor="let source of (PolicyAddressSource$ | async)?.Options" [value]="source.Value">{{source.DisplayValue}}</mat-radio-button>
                       </mat-radio-group>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
@@ -77,7 +69,7 @@
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
-              <div fxLayout="row">
+              <div fxLayout="row" fxLayoutGap="25px">
                   <file-drop fxFlex 
                     [headertext]="(PolicyholderCarIdCardBack$ | async)?.Label" 
                     (onFileDrop)="LastPolicyImageDropped($event)" 
@@ -100,19 +92,13 @@
             </form>
             <mat-action-row>
               <button mat-button color="warn" (click)="prevStep()">بازگشت</button>
-              <button mat-button color="primary" (click)="nextStep()">ادامه</button>
+              <button mat-raised-button color="primary" (click)="nextStep()">ادامه</button>
             </mat-action-row>
           </mat-expansion-panel>
         
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
             <mat-expansion-panel-header>
-              <mat-panel-title>
                 اطلاعات ارسال
-              </mat-panel-title>
-              <mat-panel-description>
-                Inform the date you wish to travel
-                <mat-icon>date_range</mat-icon>
-              </mat-panel-description>
             </mat-expansion-panel-header>
             <h4>
                 نشانی ارسال

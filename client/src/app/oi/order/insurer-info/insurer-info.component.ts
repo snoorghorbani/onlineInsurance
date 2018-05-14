@@ -106,14 +106,14 @@ export class InsurerInfoComponent implements OnInit {
 			PolicyholderFirstName: new FormControl(""),
 			PolicyholderLastName: new FormControl(""),
 			LastPolicyImage: new FormControl(""),
-			LastPolicyExpirationDate: new FormControl("1990/11/11"),
+			// LastPolicyExpirationDate: new FormControl(),
 			// ProductId: new FormControl("1"),
 			// CarBrand: new FormControl("1"),
 			// CarModel: new FormControl("1"),
-			LastPolicyYearsWithoutIncident: new FormControl("1"),
-			LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
-			LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
-			PolicyPushesheMali: new FormControl(7700000),
+			// LastPolicyYearsWithoutIncident: new FormControl("1"),
+			// LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
+			// LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
+			// PolicyPushesheMali: new FormControl(7700000),
 			DeliveryTime: new FormControl(1),
 
 			PolicyholderNationalCode: new FormControl(""),
@@ -130,9 +130,6 @@ export class InsurerInfoComponent implements OnInit {
 			DeliveryDate: new FormControl("")
 			// DeliveryTime: new FormControl("")
 		});
-		this.formGroup.get("PolicyholderNationalCode").disable();
-		this.formGroup.get("PolicyholderBirthDate").disable();
-		this.formGroup.get("PolicyholderFatherName").disable();
 	}
 	LastPolicyImageDropped(e: UploadEvent) {
 		debugger;
@@ -160,9 +157,7 @@ export class InsurerInfoComponent implements OnInit {
 	}
 
 	save() {
-		// if (this.formGroup.invalid) {
-		// 	return;
-		// }
+		// if (this.formGroup.invalid) return;
 		from([ this.formGroup.value ])
 			.combineLatest(this.orderForm$)
 			.map(([ formValues, orderForm ]) => {

@@ -3,7 +3,7 @@ import { Observable } from "rxjs/Observable";
 import { Actions, Effect } from "@ngrx/effects";
 import { map, switchMap, catchError } from "rxjs/operators";
 
-import { TimeService } from "../../time.service";
+import { GeoBoundaryService } from "../../geo-boundary.service";
 import {
 	GET_CITIES_ACTION_TYPES,
 	GetCitiesActions,
@@ -13,7 +13,7 @@ import {
 
 @Injectable()
 export class GetCitiesApiEffects {
-	constructor(private actions$: Actions<GetCitiesActions>, private service: TimeService) {}
+	constructor(private actions$: Actions<GetCitiesActions>, private service: GeoBoundaryService) {}
 
 	@Effect()
 	start$ = this.actions$

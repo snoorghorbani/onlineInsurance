@@ -6,7 +6,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { TestComponent } from "./test/test.component";
 import { PolicyRoutingModule } from "./policy-routing.module";
 import { FeatureReducers } from "./policy.reducers";
-import { GetCarModelsOfBrandApiEffects, ComparePoliciesApiEffects } from "./services/api";
+import { ComparePoliciesApiEffects, GetCarModelsOfBrandApiEffects } from "./services/api/effects";
 
 @NgModule({
 	imports: [
