@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import {
 	MatFormFieldModule,
@@ -40,9 +40,10 @@ import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-c
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { SaveOrderApiEffects } from "./services/api/save-order";
 import { PurchaseComponent } from "./purchase/purchase.component";
-import { ReviewOrderComponent } from './review-order/review-order.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ViewOrderComponent } from './view-order/view-order.component';
+import { ReviewOrderComponent } from "./review-order/review-order.component";
+import { MyOrdersComponent } from "./my-orders/my-orders.component";
+import { ViewOrderComponent } from "./view-order/view-order.component";
+import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 
 @NgModule({
 	imports: [
@@ -69,16 +70,8 @@ import { ViewOrderComponent } from './view-order/view-order.component';
 		MatExpansionModule,
 		MatGridListModule,
 		FlexLayoutModule,
-		StoreModule.forFeature("order", FeatureReducers),
 		InfraModule,
-		FileDropModule,
-		OrderRoutingModule,
-		EffectsModule.forFeature([
-			GetOrderTypesApiEffects,
-			SaveOrderFormApiEffects,
-			GetNewOrderFormApiEffects,
-			SaveOrderApiEffects
-		])
+		FileDropModule
 	],
 	declarations: [
 		TestComponent,
@@ -91,6 +84,30 @@ import { ViewOrderComponent } from './view-order/view-order.component';
 		ReviewOrderComponent,
 		MyOrdersComponent,
 		ViewOrderComponent
-	]
+	],
+	exports: [ NewOrderComponent ]
 })
-export class OrderModule {}
+export class OrderModule {
+	static forRoot(config?: OrderModuleConfig): ModuleWithProviders {
+		return {
+			ngModule: RootOrderModule,
+			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config } ]
+		};
+	}
+}
+
+@NgModule({
+	imports: [
+		OrderModule,
+		StoreModule.forFeature("order", FeatureReducers),
+		EffectsModule.forFeature([
+			GetOrderTypesApiEffects,
+			SaveOrderFormApiEffects,
+			GetNewOrderFormApiEffects,
+			SaveOrderApiEffects
+		]),
+		OrderRoutingModule
+	],
+	exports: [ OrderModule ]
+})
+export class RootOrderModule {}

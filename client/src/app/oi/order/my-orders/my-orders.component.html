@@ -1,12 +1,18 @@
 <div fxLayout="row" fxLayoutAlign="center center">
   <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="25px" fxFlex="60">
-    <mat-card *ngFor="let order of orders$ | async" fxFlex>
-      {{order.Summary}}
-      {{order.Type}}
-      {{order.WorkflowState}}
-      <button mat-icon-button color="primary" [routerLink]="['/order',order.Id]">
-        <mat-icon>edit</mat-icon>
-      </button>
+    <mat-card *ngFor="let order of orders$ | async" fxFlex fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex>
+        <h3>
+          {{order.Summary}}
+        </h3>
+      </div>
+      <div fxFlex>
+        {{order.WorkflowState}}
+      </div>
+      <div fxFlex="0 0 auto">
+        <button mat-button [routerLink]="['/order',order.Id]">نمایش جزییات</button>
+        <button mat-button>پرداخت</button>
+      </div>
     </mat-card>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { ResultInterceptor } from "./result.interceptor";
 import { GeoBoundaryModule } from "./geo-boundary";
 
 @NgModule({
-	imports: [ CommonModule, OrderModule, PolicyModule, GeoBoundaryModule.forRoot() ],
+	imports: [ CommonModule, OrderModule.forRoot(), PolicyModule, GeoBoundaryModule.forRoot() ],
 	providers: [ { provide: HTTP_INTERCEPTORS, useClass: ResultInterceptor, multi: true } ],
 	declarations: []
 })

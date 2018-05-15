@@ -1,54 +1,79 @@
-<mat-card>
-  <mat-tab-group>
-    <mat-tab label="بیمه شخص ثالث خودرو">
-      
-      <div [formGroup]="formGroup">
+<div id="bg" fxLayout="row" fxLayoutAlign="center center">
+<!-- <mat-grid-list [cols]="4" gutterSize="25px"> -->
+  <!-- <mat-grid-tile>
+    <mat-card class="bimeh" fxLayout="row" fxLayoutAlign="center center">
+        بیمه شخص ثالث خودرو
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <mat-card class="bimeh" fxLayout="row" fxLayoutAlign="center center">
+          بیمه شخص ثالث خودرو
+      </mat-card>
+    </mat-grid-tile>
+  <mat-grid-tile>
+      <mat-card class="bimeh" fxLayout="row" fxLayoutAlign="center center">
+          بیمه شخص ثالث خودرو
+      </mat-card>
+    </mat-grid-tile>
+  <mat-grid-tile>
+      <mat-card class="bimeh" fxLayout="row" fxLayoutAlign="center center">
+          بیمه شخص ثالث خودرو
+      </mat-card>
+    </mat-grid-tile>
+</mat-grid-list> -->
 
-        <mat-form-field>
-            <mat-select [placeholder]="(CarBrand$ | async)?.Label" formControlName="CarBrand">
-              <mat-option *ngFor="let item of (CarBrand$ | async)?.Options" [value]="item.Value">
-                {{ item.DisplayValue }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
+  <mat-card>
+    <mat-tab-group>
+      <mat-tab label="بیمه شخص ثالث خودرو">
+        
+        <div class="padding" [formGroup]="formGroup" fxLayout="row wrap" fxLayoutGap="25px">
 
-        <mat-form-field>
-            <mat-select [placeholder]="(CarModel$ | async)?.Label"  formControlName="CarModel">
-              <mat-option *ngFor="let item of (CarModelOptions$ | async)" [value]="item.Value">
-                {{ item.DisplayName }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-        
-        <mat-form-field>
-            <mat-select [placeholder]="(CarProductionYear$ | async)?.Label"  formControlName="CarProductionYear">
-              <mat-option *ngFor="let item of (CarProductionYear$ | async)?.Options" [value]="item.Value">
-                {{ item.DisplayValue }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-        
-        <mat-form-field>
-            <mat-select [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"  formControlName="CarYearsWithoutIncident">
-              <mat-option *ngFor="let item of (CarYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
-                {{ item.DisplayValue }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-        
-        <mat-form-field>
-            <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
-            <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
-            <mat-datepicker #LastPolicyExpirationDate></mat-datepicker>
+          <mat-form-field fxFlex="46">
+              <mat-select [placeholder]="(CarBrand$ | async)?.Label" formControlName="CarBrand">
+                <mat-option *ngFor="let item of (CarBrand$ | async)?.Options" [value]="item.Value">
+                  {{ item.DisplayValue }}
+                </mat-option>
+              </mat-select>
           </mat-form-field>
-      </div>
-      
-    </mat-tab>
-    <mat-tab disabled="true" label="بیمه بدنه خودرو"></mat-tab>
-    <mat-tab disabled="true" label="بیمه آتش سوزی"></mat-tab>
-    <mat-tab disabled="true" label="بیمه عمر"></mat-tab>
-  </mat-tab-group>
-  <mat-card-actions>
-      <button mat-raised-button (click)="compare()" color="primary">مقایسه</button>
-  </mat-card-actions>
-</mat-card>
+
+          <mat-form-field fxFlex="46">
+              <mat-select [placeholder]="(CarModel$ | async)?.Label"  formControlName="CarModel">
+                <mat-option *ngFor="let item of (CarModelOptions$ | async)" [value]="item.Value">
+                  {{ item.DisplayName }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field fxFlex="46">
+              <mat-select [placeholder]="(CarProductionYear$ | async)?.Label"  formControlName="CarProductionYear">
+                <mat-option *ngFor="let item of (CarProductionYear$ | async)?.Options" [value]="item.Value">
+                  {{ item.DisplayValue }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field fxFlex="46">
+              <mat-select [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"  formControlName="CarYearsWithoutIncident">
+                <mat-option *ngFor="let item of (CarYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
+                  {{ item.DisplayValue }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field fxFlex="46">
+              <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
+              <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
+              <mat-datepicker #LastPolicyExpirationDate></mat-datepicker>
+            </mat-form-field>
+        </div>
+        
+      </mat-tab>
+      <mat-tab disabled="true" label="بیمه بدنه خودرو"></mat-tab>
+      <mat-tab disabled="true" label="بیمه آتش سوزی"></mat-tab>
+      <mat-tab disabled="true" label="بیمه عمر"></mat-tab>
+    </mat-tab-group>
+    <mat-card-actions class="padding-right">
+        <button mat-raised-button (click)="compare()" color="primary">مقایسه</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

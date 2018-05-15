@@ -6,7 +6,7 @@ import { CoreModule } from "./core";
 const routes: Routes = [
 	{
 		path: "",
-		redirectTo: "/",
+		redirectTo: "/dashboard",
 		pathMatch: "full"
 	}
 ];

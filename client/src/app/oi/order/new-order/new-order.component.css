@@ -1,0 +1,26 @@
+:host {
+	height: 70vh;
+}
+#bg {
+	height: 70vh;
+	/* background-image: url("/assets/images/car.jpg"); */
+}
+.bimeh {
+	position: absolute;
+	top: 4px;
+	right: 3px;
+	left: 2px;
+	bottom: 4px;
+}
+
+mat-card {
+	padding: 0;
+}
+.padding {
+	padding: 25px !important;
+}
+.padding-right {
+	padding-right: 25px !important;
+	padding-left: 25px !important;
+	padding-bottom: 25px !important;
+}

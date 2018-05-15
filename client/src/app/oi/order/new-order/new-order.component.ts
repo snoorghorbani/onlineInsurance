@@ -17,7 +17,7 @@ import { Router } from "@angular/router";
 import { NewOrderFormUpdateAction } from "./new-order.actions";
 
 @Component({
-	selector: "app-new-order",
+	selector: "order-new-order",
 	templateUrl: "./new-order.component.html",
 	styleUrls: [ "./new-order.component.css" ]
 })
