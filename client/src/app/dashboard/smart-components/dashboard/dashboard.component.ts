@@ -1,19 +1,23 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SocketService } from "@soushians/infra";
+import { Store } from "@ngrx/store";
+
+import { EnableComfortableModeAction, DisableComfortableModeAction } from "@soushians/layout";
+
+import { AppState } from "../../../app.states";
 
 @Component({
 	selector: "app-dashboard",
 	templateUrl: "./dashboard.component.html",
 	styleUrls: [ "./dashboard.component.css" ]
 })
-export class DashboardComponent implements OnInit {
-	constructor(private socketService: SocketService) {}
+export class DashboardComponent implements OnInit, OnDestroy {
+	constructor(private socketService: SocketService, private store: Store<AppState>) {
+		this.store.dispatch(new EnableComfortableModeAction());
+	}
 
-	ngOnInit() {
-		// this.socketService.initSocket();
-		// this.socketService.send("add-message");
-		// this.socketService.onMessage().subscribe(msg=>{
-		//         debugger
-		// });
+	ngOnInit() {}
+	ngOnDestroy() {
+		this.store.dispatch(new DisableComfortableModeAction());
 	}
 }

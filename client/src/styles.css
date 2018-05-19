@@ -424,12 +424,15 @@ diagram-add dynamic-component-selector .mat-card {
 	box-sizing: border-box;
 	/* height: 100vh !important; */
 }
-mat-sidenav-content {
+#layout-sidnav > mat-sidenav-content {
 	transition: all 400ms;
 }
-.comfortable mat-sidenav-content {
+.comfortable #layout-sidnav > mat-sidenav-content {
 	padding-top: 33vh;
 }
-.summary mat-sidenav-content {
-	padding-top: 80px;
+.compact #layout-sidnav > mat-sidenav-content {
+	padding-top: 128px;
+}
+.summary #layout-sidnav > mat-sidenav-content {
+	padding-top: 64px;
 }

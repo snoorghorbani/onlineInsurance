@@ -8,7 +8,8 @@ import { FormGroup } from "@angular/forms";
 import { FieldModel } from "../models/field.model";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, from } from "rxjs";
+import { PlaceOrderStartAction } from "../services/api";
 
 @Component({
 	selector: "order-view-order",
@@ -92,5 +93,10 @@ export class ViewOrderComponent implements OnInit {
 
 	ngOnInit() {}
 	initFormGroup() {}
-	pay() {}
+	pay() {
+		from([ 1 ])
+			.combineLatest(this.orderForm$)
+			.map(([ formGroup, orderForm ]) => orderForm)
+			.subscribe(orderForm => this.store.dispatch(new PlaceOrderStartAction(orderForm)));
+	}
 }

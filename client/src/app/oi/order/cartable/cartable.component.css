@@ -1,0 +1,35 @@
+/**/
+
+:host {
+	width: 100%;
+}
+mat-card-content > .list-item {
+	margin-right: -16px;
+	width: calc(100% + 32px);
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+mat-card-content > .list-item:not(:last-child) {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.list-item > p:first-child {
+	margin-right: 20px;
+}
+
+.list-item > p:nth-child(4) {
+	font-weight: bold;
+}
+
+mat-panel-description {
+	flex-basis: 0;
+}
+
+mat-panel-description {
+	justify-content: space-between;
+	align-items: center;
+}
+.mat-sidenav {
+	width: 25vw;
+}

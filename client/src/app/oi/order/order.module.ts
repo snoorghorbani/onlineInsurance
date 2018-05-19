@@ -31,7 +31,13 @@ import { OrderRoutingModule } from "./order-routing.module";
 import { StoreModule } from "@ngrx/store";
 import { FeatureReducers } from "./order.reducers";
 import { EffectsModule } from "@ngrx/effects";
-import { GetOrderTypesApiEffects, SaveOrderFormApiEffects, GetNewOrderFormApiEffects } from "./services/api";
+import {
+	GetOrderTypesApiEffects,
+	SaveOrderFormApiEffects,
+	GetNewOrderFormApiEffects,
+	PlaceOrderApiEffects,
+	GetMyCartableApiEffects
+} from "./services/api";
 import { OrderComponent } from "./order.component";
 import { NewOrderComponent } from "./new-order/new-order.component";
 import { RouterModule } from "@angular/router";
@@ -44,6 +50,7 @@ import { ReviewOrderComponent } from "./review-order/review-order.component";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { ViewOrderComponent } from "./view-order/view-order.component";
 import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
+import { CartableComponent } from "./cartable/cartable.component";
 
 @NgModule({
 	imports: [
@@ -83,7 +90,8 @@ import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 		PurchaseComponent,
 		ReviewOrderComponent,
 		MyOrdersComponent,
-		ViewOrderComponent
+		ViewOrderComponent,
+		CartableComponent
 	],
 	exports: [ NewOrderComponent ]
 })
@@ -104,7 +112,9 @@ export class OrderModule {
 			GetOrderTypesApiEffects,
 			SaveOrderFormApiEffects,
 			GetNewOrderFormApiEffects,
-			SaveOrderApiEffects
+			SaveOrderApiEffects,
+			PlaceOrderApiEffects,
+			GetMyCartableApiEffects
 		]),
 		OrderRoutingModule
 	],

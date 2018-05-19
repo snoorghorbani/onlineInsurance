@@ -9,6 +9,7 @@ import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { PurchaseComponent } from "./purchase/purchase.component";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { ViewOrderComponent } from "./view-order/view-order.component";
+import { CartableComponent } from "./cartable/cartable.component";
 
 const routes: Routes = [
 	{
@@ -40,8 +41,12 @@ const routes: Routes = [
 				component: MyOrdersComponent
 			},
 			{
-				path: ":Id",
+				path: "view/:Id",
 				component: ViewOrderComponent
+			},
+			{
+				path: "cartable",
+				component: CartableComponent
 			}
 		]
 	}
