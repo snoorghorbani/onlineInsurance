@@ -10,6 +10,7 @@ import { GetDeliveryTimeTableApiModel, PlaceOrderApiModel, GetMyCartableApiModel
 import { SaveOrderApiModel } from "./api/save-order";
 import { GetMyOrdersApiModel } from "./api/get-my-orders";
 import { GetOrderApiModel } from "./api/get-order";
+import { share, map } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root"
@@ -25,27 +26,27 @@ export class OrderService {
 	GetDeliveryTimeTable(): Observable<DeliveryTimeModel[]> {
 		return this.http
 			.get<GetDeliveryTimeTableApiModel.Response>("http://185.208.174.92:2000/order/GetDeliveryTimeTable")
-			.map(response => response.Result.Items);
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	SaveOrder(order: OrderFormModel): Observable<OrderFormModel> {
 		return this.http
 			.post<SaveOrderApiModel.Response>("http://185.208.174.92:2000/order/SaveOrder", order)
-			.map(response => response.Result);
+			.pipe(share(), map(response => response.Result));
 	}
 	GetMyOrders(): Observable<OrderSummaryModel[]> {
 		return this.http
 			.get<GetMyOrdersApiModel.Response>("http://185.208.174.92:2000/order/GetMyOrders")
-			.map(response => response.Result.Items);
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetMyCartable(): Observable<OrderSummaryModel[]> {
 		return this.http
 			.get<GetMyCartableApiModel.Response>("http://185.208.174.92:2000/order/GetMyCartable")
-			.map(response => response.Result.Items);
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetOrder({ Id }: Partial<GetOrderApiModel.Request>): Observable<OrderFormModel> {
 		return this.http
 			.get<GetOrderApiModel.Response>(`http://185.208.174.92:2000/order/GetOrder/${Id}`)
-			.map(response => response.Result);
+			.pipe(share(), map(response => response.Result));
 	}
 	PlaceOrder(orderForm: Partial<PlaceOrderApiModel.Request>): Observable<any> {
 		debugger;

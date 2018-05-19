@@ -19,9 +19,10 @@ import { UtilityService, DateClass } from "@soushians/infra";
 import { responseStatusTypes } from "@soushians/shared";
 import { SigninService } from "@soushians/authentication";
 
-import { OrderSummaryModel, OrderModel } from "../models";
+import { OrderSummaryModel, OrderModel, OrderFormModel } from "../models";
 import { GetMyCartableStartAction } from "../services/api";
 import { OrderService } from "../services";
+import { FieldModel } from "../models/field.model";
 
 @Component({
 	selector: "cartable",
@@ -32,17 +33,19 @@ export class CartableComponent implements AfterViewInit {
 	@Input("status") status$: Observable<responseStatusTypes>;
 	@Input() formGroup: FormGroup;
 	orders$: Observable<OrderSummaryModel[]>;
-	activeRequest: OrderModel;
+	activeOrder$: Observable<OrderFormModel>;
+	activeOrderEditableField$: Observable<FieldModel[]>;
+	activeOrderReadonlyField$: Observable<FieldModel[]>;
 	nowInPersian: DateClass;
 	years: string[];
 	months: string[];
 	monthAndYearFormGroup: FormGroup;
 	set RequestFinalPrice(value) {
-		// this.activeRequest.Request.FinalPrice = value;
-		// this.activeRequest.Request.Marketing = this.activeRequest.Request.FinalPrice * 0.1;
+		// this.activeOrder$.Request.FinalPrice = value;
+		// this.activeOrder$.Request.Marketing = this.activeOrder$.Request.FinalPrice * 0.1;
 	}
 	get RequestFinalPrice() {
-		// return this.activeRequest.Request.FinalPrice;
+		// return this.activeOrder$.Request.FinalPrice;
 		return "";
 	}
 	@ViewChild("requestDetailNav") sidebar: MatSidenav;
@@ -57,11 +60,35 @@ export class CartableComponent implements AfterViewInit {
 	) {
 		// this.store.dispatch(new fromLayout.ChangeLayout("without-margin"));
 		this.orders$ = this.service.GetMyCartable();
-		this.activeRequest = new OrderModel();
+		// this.activeOrder$ = new OrderModel();
 	}
 
-	openRequest(request: OrderSummaryModel) {
-		// this.activeRequest = request;
+	openRequest(OrderSummary: OrderSummaryModel) {
+		debugger;
+		this.activeOrder$ = this.service.GetOrder(OrderSummary);
+		this.activeOrderEditableField$ = this.activeOrder$.map(orderForm => {
+			const fields = [];
+			Object.keys(orderForm).forEach(key => {
+				if (orderForm[key].Status == 2) fields.push(orderForm[key]);
+			});
+			return fields;
+		});
+		this.activeOrderEditableField$.subscribe();
+		this.activeOrderReadonlyField$ = this.activeOrder$.map(orderForm => {
+			const fields: FieldModel[] = [];
+			Object.keys(orderForm).forEach(key => {
+				if (orderForm[key].Status == 4) fields.push(orderForm[key]);
+			});
+			fields.forEach(item => {
+				if (item.Options != null) {
+					const selectedOption = item.Options.find(option => option.Value == item.Value);
+					if (selectedOption) item.Value = selectedOption.DisplayValue || selectedOption.DisplayName;
+					if (!selectedOption) debugger;
+				}
+			});
+			return fields;
+		});
+		debugger;
 		setTimeout(() => {
 			if (!this.sidebar.opened) this.sidebar.open();
 		}, 100);

@@ -3,7 +3,7 @@
     <!-- <mat-sidenav mode="side" #requestDetailNav *ngIf='showSidebarMenu | async' [opened]='showSidebarMenu | async'> -->
     <mat-sidenav position='end' mode="side" #requestDetailNav>
         <mat-tab-group #requestDetailTabs>
-            <mat-tab label="مشخصات" *ngIf="activeRequest.Id">
+            <mat-tab label="مشخصات" *ngIf="(activeOrder$|async)?.Id">
                 <ng-template mat-tab-label>
                     <mat-icon>accessibility</mat-icon>
                 </ng-template>
@@ -12,47 +12,11 @@
                     مشحضات کاریر اینجا نمایش داده می شود
                 </div> -->
                 <div fxLayout='column' class='list-items'>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
+                    <div class='list-item' *ngFor="let item of activeOrderReadonlyField$ | async" fxLayout='row' fxLayoutAlign='center center'>
                         <mat-icon fxFlex='nogrow'>laptop</mat-icon>
                         <div fxFlex='15px'></div>
-                        <p fxFlex='40'>سطح پوشش</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.Coveragelevel | currencyUnit}}</p>
-                    </div>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
-                        <mat-icon fxFlex='nogrow'>laptop</mat-icon>
-                        <div fxFlex='15px'></div>
-                        <p fxFlex='40'>سابقه عدم خسارت</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.DamageHistoy}}</p>
-                    </div>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
-                        <mat-icon fxFlex='nogrow'>laptop</mat-icon>
-                        <div fxFlex='15px'></div>
-                        <p fxFlex='40'>مدت بیمه</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.InsuranceTerm}}</p>
-                    </div>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
-                        <mat-icon fxFlex='nogrow'>laptop</mat-icon>
-                        <div fxFlex='15px'></div>
-                        <p fxFlex='40'>سال تولید خودرو</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.CarProductionYear}}</p>
-                    </div>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
-                        <mat-icon fxFlex='nogrow'>laptop</mat-icon>
-                        <div fxFlex='15px'></div>
-                        <p fxFlex='40'>تاریخ سررسید</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.DueDate | persianDate}}</p>
-                    </div>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
-                        <mat-icon fxFlex='nogrow'>laptop</mat-icon>
-                        <div fxFlex='15px'></div>
-                        <p fxFlex='40'>مبلغ پرداختی</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.PaidMoney | currencyUnit}}</p>
-                    </div>
-                    <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
-                        <mat-icon fxFlex='nogrow'>laptop</mat-icon>
-                        <div fxFlex='15px'></div>
-                        <p fxFlex='40'>شرکت بیمه</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.insuranceCompany}}</p>
+                        <p fxFlex='40'>{{item.Label}}</p>
+                        <p fxFlex='60' fxLayoutAlign="end">{{item.Value}}</p>
                     </div>
                 </div>
             </mat-tab>
@@ -79,7 +43,7 @@
                 </ng-template>
                 <!-- <chat></chat> -->
             </mat-tab>
-            <mat-tab *ngIf="activeRequest.Request">
+            <mat-tab *ngIf="(activeOrder$|async)">
                 <ng-template mat-tab-label>
                     <mat-icon>attach_money</mat-icon>
                 </ng-template>
@@ -88,13 +52,13 @@
                         <mat-icon fxFlex='nogrow'>laptop</mat-icon>
                         <div fxFlex='15px'></div>
                         <p fxFlex='40'>قیمت</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.FinalPrice | currencyUnit}}</p>
+                        <!-- <p fxFlex='60' fxLayoutAlign="end">{{(activeOrder$|async)?.Request.FinalPrice | currencyUnit}}</p> -->
                     </div>
                     <div class='list-item' fxLayout='row' fxLayoutAlign='center center'>
                         <mat-icon fxFlex='nogrow'>laptop</mat-icon>
                         <div fxFlex='15px'></div>
                         <p fxFlex='40'>کارمزد بازاریابی</p>
-                        <p fxFlex='60' fxLayoutAlign="end">{{activeRequest.Request.Marketing | currencyUnit}}</p>
+                        <!-- <p fxFlex='60' fxLayoutAlign="end">{{(activeOrder$|async)?.Request.Marketing | currencyUnit}}</p> -->
                     </div>
                 </div>
             </mat-tab>
@@ -106,7 +70,7 @@
             <div fxFlexLayout="row">
                 <div fxFlex="grow">
                     <mat-accordion>
-                        <mat-expansion-panel *ngFor='let item of orders$ | async' (click)="openRequest(item);">
+                        <mat-expansion-panel *ngFor='let item of orders$ | async' (opened)="openRequest(item);">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     <span fxShow>
