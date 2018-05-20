@@ -13,11 +13,13 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import { MatSidenav, MatTabGroup, MatSnackBar } from "@angular/material";
 import { Store } from "@ngrx/store";
+import { BehaviorSubject } from "rxjs";
 
 import * as fromLayout from "@soushians/layout";
 import { UtilityService, DateClass } from "@soushians/infra";
 import { responseStatusTypes } from "@soushians/shared";
 import { SigninService } from "@soushians/authentication";
+import { FormSchemaModel, FormControlSchema } from "@soushians/form";
 
 import { OrderSummaryModel, OrderModel, OrderFormModel } from "../models";
 import { GetMyCartableStartAction } from "../services/api";
@@ -35,6 +37,7 @@ export class CartableComponent implements AfterViewInit {
 	orders$: Observable<OrderSummaryModel[]>;
 	activeOrder$: Observable<OrderFormModel>;
 	activeOrderEditableField$: Observable<FieldModel[]>;
+	activeOrderEditableFieldSchema: FormSchemaModel;
 	activeOrderReadonlyField$: Observable<FieldModel[]>;
 	nowInPersian: DateClass;
 	years: string[];
@@ -73,7 +76,23 @@ export class CartableComponent implements AfterViewInit {
 			});
 			return fields;
 		});
-		this.activeOrderEditableField$.subscribe();
+		this.activeOrderEditableField$.subscribe(fields => {
+			var schema = new FormSchemaModel();
+			schema.init();
+			schema.form.name = "test";
+			schema.form.fields = fields.map(field => {
+				var fieldSchema = new FormControlSchema("control");
+				fieldSchema.name = field.Name;
+				fieldSchema.title = field.Label;
+				// fieldSchema.inputType = field.Options ? "select" : "text";
+				fieldSchema.inputType = "text";
+				// fieldSchema.options = field.Options.map;
+				fieldSchema.value = field.DisplayValue || field.Value;
+				return fieldSchema;
+			});
+			debugger;
+			this.activeOrderEditableFieldSchema = schema;
+		});
 		this.activeOrderReadonlyField$ = this.activeOrder$.map(orderForm => {
 			const fields: FieldModel[] = [];
 			Object.keys(orderForm).forEach(key => {
@@ -88,7 +107,6 @@ export class CartableComponent implements AfterViewInit {
 			});
 			return fields;
 		});
-		debugger;
 		setTimeout(() => {
 			if (!this.sidebar.opened) this.sidebar.open();
 		}, 100);

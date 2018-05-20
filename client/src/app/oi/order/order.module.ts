@@ -22,15 +22,16 @@ import {
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { EffectsModule } from "@ngrx/effects";
 import { FileDropModule } from "ngx-file-drop";
 
 import { InfraModule } from "@soushians/infra";
+import { NgsFormModule } from "@soushians/form";
 
 import { TestComponent } from "./test/test.component";
 import { OrderRoutingModule } from "./order-routing.module";
 import { StoreModule } from "@ngrx/store";
 import { FeatureReducers } from "./order.reducers";
-import { EffectsModule } from "@ngrx/effects";
 import {
 	GetOrderTypesApiEffects,
 	SaveOrderFormApiEffects,
@@ -78,7 +79,8 @@ import { CartableComponent } from "./cartable/cartable.component";
 		MatGridListModule,
 		FlexLayoutModule,
 		InfraModule,
-		FileDropModule
+		FileDropModule,
+		NgsFormModule.forRoot()
 	],
 	declarations: [
 		TestComponent,

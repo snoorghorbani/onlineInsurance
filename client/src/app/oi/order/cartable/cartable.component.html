@@ -83,26 +83,8 @@
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <div >
-                                <mat-form-field>
-                                    <input matInput placeholder="نام" (focus)="openRequestDetailsTab()">
-                                </mat-form-field>
-                                <mat-form-field>
-                                    <input matInput placeholder="نام خانوادگی" (focus)="openRequestDetailsTab()">
-                                </mat-form-field>
-                                <mat-form-field>
-                                    <input matInput placeholder="قیمت" (focus)="openMoneyTab()" [(ngModel)]='RequestFinalPrice'>
-                                    <span matSuffix>ريال&nbsp;</span>
-                                </mat-form-field>
-                                <mat-form-field>
-                                    <input matInput [matDatepicker]="picker" placeholder="تاریخ سررسید">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker touchUi="true" #picker></mat-datepicker>
-                                </mat-form-field>
-                                <button mat-button color="primary">آپلود عکس بیمه نامه</button>
-                            </div>
-                            <div >
-                                <div>انتخاب و ارسال درخواست نماینده در این قسمت انجام میشود</div>
+                            <div>
+                              <ngs-form-view [schema]="activeOrderEditableFieldSchema"></ngs-form-view>
                             </div>
                             <mat-action-row>
                                 <button  mat-button color="primary" (click)="openCommunicationTab()">تماس با درخواست دهنده</button>
