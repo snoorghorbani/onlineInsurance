@@ -84,7 +84,7 @@
                             </mat-expansion-panel-header>
 
                             <div>
-                              <ngs-form-view [schema]="activeOrderEditableFieldSchema"></ngs-form-view>
+                              <ngs-form-view [schema]="activeOrderEditableFieldSchema$ | async"></ngs-form-view>
                             </div>
                             <mat-action-row>
                                 <button  mat-button color="primary" (click)="openCommunicationTab()">تماس با درخواست دهنده</button>
