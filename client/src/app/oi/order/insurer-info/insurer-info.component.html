@@ -13,6 +13,12 @@
                 <mat-form-field fxFlex>
                   <input matInput [placeholder]="(PolicyholderLastName$ | async)?.Label" formControlName="PolicyholderLastName">
                 </mat-form-field>
+                <mat-form-field class="fill">
+                    <input matInput [placeholder]="(PolicyholderMobile$ | async)?.Label" formControlName="PolicyholderMobile">
+                </mat-form-field>
+                <mat-form-field class="fill">
+                    <input matInput [placeholder]="(PolicyholderPhone$ | async)?.Label" formControlName="PolicyholderPhone">
+                </mat-form-field>
               </div>
                 <mat-accordion class="fit">
                   <mat-expansion-panel expanded="true"  #PolicyHolderExpansion disabled>

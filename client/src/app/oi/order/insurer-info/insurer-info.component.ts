@@ -44,6 +44,7 @@ export class InsurerInfoComponent implements OnInit {
 	PolicyholderPhone$: Observable<FieldModel>;
 	DeliveryDate$: Observable<FieldModel>;
 	DeliveryTime$: Observable<FieldModel>;
+	PolicyholderMobile$: Observable<FieldModel>;
 	DelieryTimeTableDisplayColumns: string[];
 	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
 	Cities$: Observable<CityModel[]>;
@@ -80,6 +81,8 @@ export class InsurerInfoComponent implements OnInit {
 		this.DeliveryAddressCityId$ = this.orderForm$.map(orderForm => orderForm.DeliveryAddressCityId);
 		this.DeliveryDate$ = this.orderForm$.map(orderForm => orderForm.DeliveryDate);
 		this.DeliveryTime$ = this.orderForm$.map(orderForm => orderForm.DeliveryTime);
+		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
+		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
 	}
 
 	ngOnInit() {
@@ -105,16 +108,15 @@ export class InsurerInfoComponent implements OnInit {
 		this.formGroup = new FormGroup({
 			PolicyholderFirstName: new FormControl(""),
 			PolicyholderLastName: new FormControl(""),
-			LastPolicyImage: new FormControl(""),
-			// LastPolicyExpirationDate: new FormControl(),
-			// ProductId: new FormControl("1"),
-			// CarBrand: new FormControl("1"),
-			// CarModel: new FormControl("1"),
+			PolicyholderMobile: new FormControl(""),
+			PolicyholderPhone: new FormControl(""),
+			LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
+			PolicyholderCarIdCardBack: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
+			PolicyholderCarIdCardFront: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
+
 			// LastPolicyYearsWithoutIncident: new FormControl("1"),
 			// LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
 			// LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
-			// PolicyPushesheMali: new FormControl(7700000),
-			// DeliveryTime: new FormControl(1),
 
 			PolicyholderNationalCode: new FormControl(""),
 			PolicyholderBirthDate: new FormControl(""),

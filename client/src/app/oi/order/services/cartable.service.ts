@@ -19,7 +19,7 @@ export class CartableService {
 		return orderForm$.map(orderForm => {
 			const fields: FieldModel[] = [];
 			Object.keys(orderForm).forEach(key => {
-				if (orderForm[key].Status == 4) fields.push(orderForm[key]);
+				if (orderForm[key].Status == 2) fields.push(orderForm[key]);
 			});
 			fields.forEach(item => {
 				if (item.Options != null) {
@@ -35,7 +35,7 @@ export class CartableService {
 		return orderForm$.map(orderForm => {
 			const fields = [];
 			Object.keys(orderForm).forEach(key => {
-				if (orderForm[key].Status == 1) fields.push(orderForm[key]);
+				if ([ 3, 4 ].includes(orderForm[key].Status)) fields.push(orderForm[key]);
 			});
 			return fields;
 		});
@@ -54,7 +54,11 @@ export class CartableService {
 				fieldSchema.subtype = this.getInputType(field);
 				fieldSchema.width = 3;
 				// fieldSchema.inputType = "text";
-				// fieldSchema.options = field.Options.map;
+				if (field.Options) {
+					fieldSchema.options = field.Options.map(option => {
+						return { key: option.DisplayValue, value: option.Value };
+					});
+				}
 				fieldSchema.value = field.DisplayValue || field.Value;
 				return fieldSchema;
 			});

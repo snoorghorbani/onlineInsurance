@@ -2,7 +2,7 @@ import { Component, Input, ViewChild, ElementRef } from "@angular/core";
 import { PlaceOrderApiModel } from "../services/api";
 import { InitiationGatewayResultuModel } from "../models";
 import { MatButton } from "@angular/material";
-import { empty } from "rxjs";
+import { empty, of } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 
 @Component({
@@ -19,7 +19,7 @@ export class RedirectToBankComponent {
 		if (!data) return;
 		this.PaymentRequestData = data.PaymentRequestData;
 		this.GatewayUrl = data.GatewayUrl;
-		empty().pipe(delay(300), tap(() => this.form.nativeElement.submit()));
+		setTimeout(() => this.form.nativeElement.submit(), 300);
 	}
 	constructor() {
 		this.PaymentRequestData = [];
