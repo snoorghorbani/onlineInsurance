@@ -1,6 +1,7 @@
 import { NgModule, LOCALE_ID } from "@angular/core";
 import { MatSidenavModule, MatToolbarModule, MatFormFieldModule } from "@angular/material";
-// import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule, Store } from "@ngrx/store";
 import { StoreRouterConnectingModule, routerReducer } from "@ngrx/router-store";
 import { EffectsModule } from "@ngrx/effects";
@@ -42,6 +43,8 @@ import { ShopingModule } from "shoping";
 		MatSidenavModule,
 		MatToolbarModule,
 		FormsModule,
+		BrowserAnimationsModule,
+		BrowserModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(reducers),
 		StoreDevtoolsModule.instrument({
@@ -55,7 +58,7 @@ import { ShopingModule } from "shoping";
 		NgsConfigModule.forRoot({
 			env: environment as any,
 			dev_api_host: "http://localhost:3000",
-			prod_api_host: "http://localhost:3000"
+			prod_api_host: "http://185.208.174.92:3000"
 		}),
 		NgsDiagramModule.forRoot(),
 		NgsUserModule.forRoot(),
