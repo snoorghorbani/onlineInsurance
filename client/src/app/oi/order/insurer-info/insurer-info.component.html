@@ -124,7 +124,7 @@
                   <ng-container matColumnDef="Checkbox">
                     <td mat-cell *matCellDef="let row">
                       <mat-radio-group [(ngModel)]="DeliverDateTime">
-                        <mat-radio-button (click)="selectDeliveryTime(row)" [value]="row.DayOfWeek + row.TimeFrom.Hours + row.TimeTo.Hours"></mat-radio-button>
+                        <mat-radio-button (click)="selectDeliveryTime(row)" [value]="row.Id"></mat-radio-button>
                       </mat-radio-group>
                     </td>
                   </ng-container>

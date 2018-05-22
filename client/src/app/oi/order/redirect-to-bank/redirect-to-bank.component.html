@@ -1,0 +1,3 @@
+<form id="__payment_form" method="post" [action]="GatewayUrl"  #form>
+  <input *ngFor="let item of PaymentRequestData" [name]="item.Name" type="hidden" [value]="item.Value" />
+</form>

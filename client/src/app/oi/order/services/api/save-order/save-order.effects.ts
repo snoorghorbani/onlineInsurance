@@ -10,6 +10,7 @@ import {
 	SaveOrderSucceedAction,
 	SaveOrderFailedAction
 } from "./save-order.actions";
+import { NewOrderFormUpdateAction } from "../../../new-order/new-order.actions";
 
 @Injectable()
 export class SaveOrderApiEffects {
@@ -24,4 +25,8 @@ export class SaveOrderApiEffects {
 			map(res => new SaveOrderSucceedAction(res)),
 			catchError(err => Observable.of(new SaveOrderFailedAction(err)))
 		);
+	@Effect()
+	update_store$ = this.actions$
+		.ofType(SAVE_ORDER_ACTION_TYPES.SUCCEED)
+		.pipe(map(action => action.payload), map(res => new NewOrderFormUpdateAction(res)));
 }

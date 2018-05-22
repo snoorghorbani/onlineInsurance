@@ -24,6 +24,7 @@ export class ViewOrderComponent implements OnInit {
 		if (!orderForm) return;
 		this.orderForm$.next(orderForm);
 	}
+	InitiationPaymentResult$: any;
 	orderForm$: BehaviorSubject<OrderFormModel>;
 	SellerAddress$: Observable<FieldModel>;
 	SellerEconomicNo$: Observable<FieldModel>;
@@ -97,6 +98,6 @@ export class ViewOrderComponent implements OnInit {
 		from([ 1 ])
 			.combineLatest(this.orderForm$)
 			.map(([ formGroup, orderForm ]) => orderForm)
-			.subscribe(orderForm => this.store.dispatch(new PlaceOrderStartAction(orderForm)));
+			.subscribe(orderForm => (this.InitiationPaymentResult$ = this.service.PlaceOrder(orderForm)));
 	}
 }

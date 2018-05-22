@@ -114,7 +114,7 @@ export class InsurerInfoComponent implements OnInit {
 			// LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
 			// LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
 			// PolicyPushesheMali: new FormControl(7700000),
-			DeliveryTime: new FormControl(1),
+			// DeliveryTime: new FormControl(1),
 
 			PolicyholderNationalCode: new FormControl(""),
 			PolicyholderBirthDate: new FormControl(""),

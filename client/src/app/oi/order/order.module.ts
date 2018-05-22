@@ -52,6 +52,7 @@ import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { ViewOrderComponent } from "./view-order/view-order.component";
 import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 import { CartableComponent } from "./cartable/cartable.component";
+import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
 
 @NgModule({
 	imports: [
@@ -93,7 +94,8 @@ import { CartableComponent } from "./cartable/cartable.component";
 		ReviewOrderComponent,
 		MyOrdersComponent,
 		ViewOrderComponent,
-		CartableComponent
+		CartableComponent,
+		RedirectToBankComponent
 	],
 	exports: [ NewOrderComponent ]
 })

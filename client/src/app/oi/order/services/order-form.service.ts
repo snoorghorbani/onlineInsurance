@@ -15,13 +15,13 @@ export class OrderFormService {
 	GetNewOrderForm(): Observable<OrderFormModel> {
 		// return of(GetNewOrderForm as OrderFormModel);
 		return this.http
-			.get("http://185.208.174.92:2000/order/GetNewOrderForm/?type=1")
+			.get("http://185.208.174.92:2500/order/GetNewOrderForm/?type=1")
 			.map((response: any) => response.Result as OrderFormModel);
 	}
 	SaveOrderForm(): Observable<OrderFormModel> {
 		// return of(SaveOrderForm as OrderFormModel);
 		return this.http
-			.get("http://185.208.174.92:2000/order/SaveOrderForm")
+			.get("http://185.208.174.92:2500/order/SaveOrderForm")
 			.map((response: any) => response.Result as OrderFormModel);
 	}
 }

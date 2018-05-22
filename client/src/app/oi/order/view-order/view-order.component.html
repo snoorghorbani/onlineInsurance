@@ -120,6 +120,7 @@
             <h3 fxFlex="50">
               1,350,000 تومان
             </h3>
+            <order-redirect-to-bank [data]="InitiationPaymentResult$ | async"></order-redirect-to-bank>
           </mat-card-footer>
         </mat-card>
       </div>

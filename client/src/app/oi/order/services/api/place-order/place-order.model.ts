@@ -8,7 +8,7 @@ import { map, switchMap } from "rxjs/operators";
 
 import { HttpRequestBaseModel, HttpResponseBaseModel } from "@soushians/shared";
 
-import { OrderModel } from "../../../models";
+import { OrderModel, InitiationGatewayResultuModel } from "../../../models";
 
 export namespace PlaceOrderApiModel {
 	export class Request {
@@ -22,7 +22,7 @@ export namespace PlaceOrderApiModel {
 	}
 
 	export class Response {
-		Result: any;
+		Result: InitiationGatewayResultuModel;
 		constructor() {}
 	}
 }
