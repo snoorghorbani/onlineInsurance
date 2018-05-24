@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "helper.js",
+  "sources": [
+    "ng://@soushians/infra/projects/soushians/infra/src/lib/helper.ts"
+  ],
+  "sourcesContent": [
+    "export const stringTemplate = (template: any, model: any) => {\r\n\treturn eval('`' + template + '`');\r\n};\r\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,MAAM,CAAC,uBAAM,cAAc,GAAG,CAAC,QAAa,EAAE,KAAU,EAAE,EAAE;IAC3D,MAAM,CAAC,IAAI,CAAC,GAAG,GAAG,QAAQ,GAAG,GAAG,CAAC,CAAC;CAClC,CAAC"
+}

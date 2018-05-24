@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "footer.component.ngfactory.js",
+  "sourceRoot": "",
+  "sources": [
+    "ng://@soushians/layout/projects/soushians/layout/src/lib/dumb-components/footer/footer.component.ngfactory.ts"
+  ],
+  "names": [],
+  "mappings": "",
+  "sourcesContent": [
+    "import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"
+  ]
+}

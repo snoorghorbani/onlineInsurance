@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "data-unit.pipe.js",
+  "sources": [
+    "ng://@soushians/infra/projects/soushians/infra/src/lib/pipes/pipes/data-unit.pipe.ts"
+  ],
+  "sourcesContent": [
+    "import { PipeTransform, Pipe } from \"@angular/core\";\r\n\r\n@Pipe({ name: 'dataUnit' })\r\nexport class DataUnitPipe implements PipeTransform {\r\n    transform(value: number, exponent: string): string {\r\n        if (value == 0) return '0 بایت';\r\n        if (value == null) return 'نامحدود'\r\n\r\n        let B = 1;\r\n        let KB = B * 1024;\r\n        let MB = KB * 1024;\r\n        let GB = MB * 1024;\r\n\r\n        let convertedValue;\r\n        let suffix = 'بایت';\r\n\r\n        if (value >= GB) {\r\n            suffix = 'گیگا بایت';\r\n            convertedValue = (value / GB).toFixed(2)\r\n        }\r\n        else if (value >= MB) {\r\n            suffix = 'مگا بایت';\r\n            convertedValue = (value / MB).toFixed(2)\r\n        }\r\n        else if (value >= KB) {\r\n            suffix = 'کیلو بایت';\r\n            convertedValue = (value / KB).toFixed(2)\r\n        } \r\n        else {\r\n            suffix = 'بایت';\r\n            convertedValue = (value).toFixed(2)\r\n\r\n        }\r\n\r\n        return convertedValue + ' ' + suffix;\r\n    }\r\n}"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAiB,IAAI,EAAE,MAAM,eAAe,CAAC;AAGpD,MAAM;;;;;;IACF,SAAS,CAAC,KAAa,EAAE,QAAgB;QACrC,EAAE,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC;YAAC,MAAM,CAAC,QAAQ,CAAC;QAChC,EAAE,CAAC,CAAC,KAAK,IAAI,IAAI,CAAC;YAAC,MAAM,CAAC,SAAS,CAAA;QAEnC,qBAAI,CAAC,GAAG,CAAC,CAAC;QACV,qBAAI,EAAE,GAAG,CAAC,GAAG,IAAI,CAAC;QAClB,qBAAI,EAAE,GAAG,EAAE,GAAG,IAAI,CAAC;QACnB,qBAAI,EAAE,GAAG,EAAE,GAAG,IAAI,CAAC;QAEnB,qBAAI,cAAc,CAAC;QACnB,qBAAI,MAAM,GAAG,MAAM,CAAC;QAEpB,EAAE,CAAC,CAAC,KAAK,IAAI,EAAE,CAAC,CAAC,CAAC;YACd,MAAM,GAAG,WAAW,CAAC;YACrB,cAAc,GAAG,CAAC,KAAK,GAAG,EAAE,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,CAAA;SAC3C;QACD,IAAI,CAAC,EAAE,CAAC,CAAC,KAAK,IAAI,EAAE,CAAC,CAAC,CAAC;YACnB,MAAM,GAAG,UAAU,CAAC;YACpB,cAAc,GAAG,CAAC,KAAK,GAAG,EAAE,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,CAAA;SAC3C;QACD,IAAI,CAAC,EAAE,CAAC,CAAC,KAAK,IAAI,EAAE,CAAC,CAAC,CAAC;YACnB,MAAM,GAAG,WAAW,CAAC;YACrB,cAAc,GAAG,CAAC,KAAK,GAAG,EAAE,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,CAAA;SAC3C;QACD,IAAI,CAAC,CAAC;YACF,MAAM,GAAG,MAAM,CAAC;YAChB,cAAc,GAAG,CAAC,KAAK,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,CAAA;SAEtC;QAED,MAAM,CAAC,cAAc,GAAG,GAAG,GAAG,MAAM,CAAC;KACxC;;;YAjCJ,IAAI,SAAC,EAAE,IAAI,EAAE,UAAU,EAAE"
+}

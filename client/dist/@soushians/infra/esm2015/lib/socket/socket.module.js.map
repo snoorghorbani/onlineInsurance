@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "socket.module.js",
+  "sources": [
+    "ng://@soushians/infra/projects/soushians/infra/src/lib/socket/socket.module.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nimport { SocketService } from './socket.service';\r\n\r\n@NgModule({\r\n  imports: [\r\n    CommonModule\r\n  ],\r\n  providers: [\r\n    SocketService\r\n  ],\r\n  declarations: [\r\n  ],\r\n  exports: [\r\n  ]\r\n})\r\nexport class SocketModule { }\r\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,eAAe,CAAC;AACzC,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAE/C,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAC;AAcjD,MAAM;;;YAZL,QAAQ,SAAC;gBACR,OAAO,EAAE;oBACP,YAAY;iBACb;gBACD,SAAS,EAAE;oBACT,aAAa;iBACd;gBACD,YAAY,EAAE,EACb;gBACD,OAAO,EAAE,EACR;aACF"
+}

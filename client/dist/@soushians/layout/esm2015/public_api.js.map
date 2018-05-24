@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "public_api.js",
+  "sources": [
+    "ng://@soushians/layout/projects/soushians/layout/src/public_api.ts"
+  ],
+  "sourcesContent": [
+    "/*\n * Public API Surface of layout\n */\n\nexport * from \"./lib\";\n"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;AAIA,ooBAAc,OAAO,CAAC"
+}

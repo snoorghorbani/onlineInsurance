@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "infra.module.js",
+  "sources": [
+    "ng://@soushians/infra/projects/soushians/infra/src/lib/infra.module.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\r\n\r\nimport { PipesModule } from './pipes';\r\nimport { UtilityService } from \"./utility.service\";\r\nimport { SocketModule } from \"./socket\";\r\nimport './helper';\r\nimport './validators';\r\n\r\n@NgModule({\r\n        imports: [\r\n                PipesModule,\r\n                SocketModule\r\n        ],\r\n        declarations: [],\r\n        providers: [UtilityService],\r\n        exports: [\r\n                PipesModule,\r\n        ]\r\n})\r\nexport class InfraModule { }\r\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,eAAe,CAAC;AAEzC,OAAO,EAAE,WAAW,EAAE,MAAM,SAAS,CAAC;AACtC,OAAO,EAAE,cAAc,EAAE,MAAM,mBAAmB,CAAC;AACnD,OAAO,EAAE,YAAY,EAAE,MAAM,UAAU,CAAC;AACxC,OAAO,UAAU,CAAC;AAClB,OAAO,cAAc,CAAC;AAatB,MAAM;;;YAXL,QAAQ,SAAC;gBACF,OAAO,EAAE;oBACD,WAAW;oBACX,YAAY;iBACnB;gBACD,YAAY,EAAE,EAAE;gBAChB,SAAS,EAAE,CAAC,cAAc,CAAC;gBAC3B,OAAO,EAAE;oBACD,WAAW;iBAClB;aACR"
+}

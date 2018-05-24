@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "layout-configuration.service.ngfactory.js",
+  "sourceRoot": "",
+  "sources": [
+    "ng://@soushians/layout/projects/soushians/layout/src/lib/services/layout-module-configuration/layout-configuration.service.ngfactory.ts"
+  ],
+  "names": [],
+  "mappings": "",
+  "sourcesContent": [
+    "import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"
+  ]
+}

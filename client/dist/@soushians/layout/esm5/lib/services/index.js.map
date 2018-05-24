@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sources": [
+    "ng://@soushians/layout/projects/soushians/layout/src/lib/services/index.ts"
+  ],
+  "sourcesContent": [
+    "export * from \"./layout-module-configuration\";"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,2CAAc,+BAA+B,CAAC"
+}

@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sources": [
+    "ng://@soushians/config/projects/soushians/config/src/lib/dumb-components/index.ts"
+  ],
+  "sourcesContent": [
+    "export * from \"./app-config\";\r\nexport * from \"./authentication-module-config\";\r\nexport * from \"./layout-config\";\r\nexport * from \"./user-module-config\";\r\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,yCAAc,cAAc,CAAC;AAC7B,oDAAc,gCAAgC,CAAC;AAC/C,4CAAc,iBAAiB,CAAC;AAChC,0CAAc,sBAAsB,CAAC"
+}

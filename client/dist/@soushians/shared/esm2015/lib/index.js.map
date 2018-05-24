@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sources": [
+    "ng://@soushians/shared/projects/soushians/shared/src/lib/index.ts"
+  ],
+  "sourcesContent": [
+    "export * from './http-response-base-model'\r\nexport * from './http-request-base-model'\r\nexport * from \"./shared.module\";\r\n// export * from './animations';\r\nexport * from './enums';"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,sCAAc,4BAA4B,CAAA;AAC1C,qCAAc,2BAA2B,CAAA;AACzC,6BAAc,iBAAiB,CAAC"
+}

@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "file": "soushians-shared.umd.js",
+  "sources": [
+    "ng://@soushians/shared/projects/soushians/shared/src/lib/shared.module.ts",
+    "ng://@soushians/shared/projects/soushians/shared/src/lib/http-request-base-model.ts",
+    "ng://@soushians/shared/projects/soushians/shared/src/lib/http-response-base-model.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { RouterModule } from '@angular/router';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport \"./http-request-base-model\";\r\nimport \"./http-response-base-model\";\r\nimport \"./enums\";\r\n// import \"./animations\";\r\n\r\n\r\nimport {\r\n        MatIconModule, MatButtonModule,\r\n        MatCardModule, MatSnackBarModule,\r\n        MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule,\r\n        MatRadioModule, MatInputModule,\r\n        MatToolbarModule, MatDatepickerModule, MatProgressBarModule\r\n} from '@angular/material';\r\nimport { FlexLayoutModule } from '@angular/flex-layout';\r\n\r\n@NgModule({\r\n        imports: [\r\n                CommonModule,\r\n                RouterModule,\r\n                FormsModule,\r\n                HttpClientModule,\r\n                FlexLayoutModule,\r\n                MatIconModule, MatButtonModule,\r\n                MatCardModule, MatSnackBarModule,\r\n                MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule,\r\n                MatRadioModule, MatInputModule,\r\n                MatToolbarModule, MatDatepickerModule, MatProgressBarModule,\r\n                BrowserAnimationsModule\r\n        ],\r\n        declarations: [],\r\n        exports: [\r\n                CommonModule,\r\n                RouterModule,\r\n                FormsModule,\r\n                HttpClientModule,\r\n                FlexLayoutModule,\r\n                MatIconModule, MatButtonModule,\r\n                MatCardModule, MatSnackBarModule,\r\n                MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule,\r\n                MatRadioModule, MatInputModule,\r\n                MatToolbarModule, MatDatepickerModule, MatProgressBarModule\r\n        ]\r\n})\r\nexport class SharedModule { }",
+    "import { FormGroup, FormControl, Validators } from \"@angular/forms\";\r\nimport { HttpParams } from \"@angular/common/http\";\r\n\r\nexport abstract class HttpRequestBaseModel<T> {\r\n\tconstructor() {}\r\n\r\n\tabstract getRequestBody?<K extends keyof T>(keys: any): { [key: string]: any };\r\n\tabstract getRequestQueryParams?<K extends keyof T>(keys: any): HttpParams;\r\n\r\n\t// static get formGroup(): FormGroup | null {\r\n\t// \treturn;\r\n\t// }\r\n}\r\n",
+    "import { FormGroup, FormControl, Validators } from '@angular/forms';\r\nimport { HttpParams } from '@angular/common/http';\r\n\r\nexport abstract class HttpResponseBaseModel<T> {\r\n    Result: any;\r\n    constructor() { }\r\n    abstract extractData?(): any;\r\n}"
+  ],
+  "names": [
+    "MatSidenavModule",
+    "MatExpansionModule",
+    "MatSelectModule",
+    "MatFormFieldModule",
+    "MatListModule",
+    "MatMenuModule",
+    "MatCardModule",
+    "MatSnackBarModule",
+    "MatIconModule",
+    "MatButtonModule",
+    "FlexLayoutModule",
+    "HttpClientModule",
+    "FormsModule",
+    "RouterModule",
+    "CommonModule",
+    "BrowserAnimationsModule",
+    "MatToolbarModule",
+    "MatDatepickerModule",
+    "MatProgressBarModule",
+    "MatRadioModule",
+    "MatInputModule",
+    "NgModule"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AEGA,QAAA,qBAAA,IAAA;QAEI;SAEJ;;;;;;;;;;;ADJA,QAAA,oBAAA,IAAA;QACC;SAQD;;;;;;;;;;;ADZA,QAiDA,YAAA,IAAA;;;QA5BA,OAAA,YAAA,CAAA;IACA,CAAA,EAAA,CAAA,CAAA;IACA,YACA,CAAA,UAAA,GAAA;QACA,EAAA,IAAA,EAAAqB,aAAgB,EAAhB,IAAA,EAAA,CAAA;oBACA,OAAA,EAAA;wBACgBP,mBAAhB;wBACgBD,mBAAhB;wBACgBD,iBAAhB;wBACgBD,qBAAgB;wBAChBD,2BAAgB;wBAChBF,sBAAhB,EAAAC,wBAAA;wBACgBH,sBAAhB,EAAAC,0BAAA;wBACAP,yBAAA,EAAAC,2BAAA,EAAAC,wBAAA,EAAAC,2BAAA,EAAAC,sBAAA,EAAAC,sBAAA;wBACAc,uBAAA,EAAAC,uBAAA;wBACAJ,yBAAA,EAAAC,4BAAA,EAAAC,6BAAA;wBACgBH,kCAAhB;qBACA;oBACA,YAAA,EAAA,EAAA;oBACA,OAAA,EAAA;wBACgBD,mBAAhB;wBACgBD,mBAAhB;wBACgBD,iBAAhB;wBACgBD,qBAAgB;wBAChBD,2BAAgB;wBAChBF,sBAAhB,EAAAC,wBAAA;wBACAH,sBAAA,EAAAC,0BAAA;wBACAP,yBAAA,EAAAC,2BAAA,EAAAC,wBAAA,EAAAC,2BAAA,EAAAC,sBAAA,EAAAC,sBAAA;;;;;;;;;;;;;;;;;;;"
+}
