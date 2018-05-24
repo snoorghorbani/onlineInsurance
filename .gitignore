@@ -63,9 +63,9 @@ Thumbs.db
 
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+/client/dist
+/client//tmp
+/client//out-tsc
 
 
 # System Files
