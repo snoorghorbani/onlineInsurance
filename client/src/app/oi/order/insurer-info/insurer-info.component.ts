@@ -9,7 +9,6 @@ import { FieldModel } from "../models/field.model";
 import { FileService } from "../services/file.service";
 import { of } from "rxjs/internal/observable/of";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
-import { ComparePoliciesStartAction } from "../../policy/services/api";
 import { OrderService } from "../services";
 import { MatExpansionPanel } from "@angular/material";
 import { GeoBoundaryService } from "../../geo-boundary";
@@ -135,9 +134,12 @@ export class InsurerInfoComponent implements OnInit {
 	}
 	LastPolicyImageDropped(e: UploadEvent) {
 		debugger;
-		this.fileService.AttachFileToOrder(e.files[0]).subscribe(data => {
-			debugger;
-		});
+		this.fileService
+			.AttachFileToOrder(e.files[0])
+			.subscribe(data => {
+				debugger;
+			})
+			.unsubscribe();
 	}
 	LastPolicyImageFileOver(e) {}
 	LastPolicyImageFileLeave(e) {}

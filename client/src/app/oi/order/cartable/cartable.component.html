@@ -84,7 +84,7 @@
                             </mat-expansion-panel-header>
 
                             <div>
-                              <ngs-form-view [schema]="activeOrderEditableFieldSchema$ | async"></ngs-form-view>
+                              <ngs-form-view *ngIf="item.Id==activeOrderId" #orderForm [schema]="activeOrderEditableFieldSchema$ | async"></ngs-form-view>
                             </div>
                             <mat-action-row>
                                 <button  mat-button color="primary" (click)="openCommunicationTab()">تماس با درخواست دهنده</button>
@@ -92,8 +92,8 @@
                                 <button mat-button color="primary" (click)="openAttachmentTab()">پیوست ها</button>
                                 <button mat-button color="primary" (click)="openMoneyTab()">جزییات مالی</button>
                                 <!-- <button mat-button color="warn" (click)="prevStep()"></button> -->
-                                <button  mat-raised-button color="primary" (click)="submit()">ثبت بیمه نامه</button>
-                                <button  mat-raised-button color="primary" (click)="updatePolicy()">ثبت</button>
+                                <button  mat-raised-button (click)="rejectOrder()">رد</button>
+                                <button  mat-raised-button color="primary" (click)="approveOrder()">ثبت</button>
                             </mat-action-row>
                         </mat-expansion-panel>
                     </mat-accordion>

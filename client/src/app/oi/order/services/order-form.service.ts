@@ -24,4 +24,14 @@ export class OrderFormService {
 			.get("http://185.208.174.92:2500/order/SaveOrderForm")
 			.map((response: any) => response.Result as OrderFormModel);
 	}
+	ApproveOrder(orderForm: OrderFormModel): Observable<OrderFormModel> {
+		return this.http
+			.post("http://185.208.174.92:2500/order/ApproveOrder", orderForm)
+			.map((response: any) => response.Result as OrderFormModel);
+	}
+	RejectOrder(orderForm: OrderFormModel): Observable<OrderFormModel> {
+		return this.http
+			.post("http://185.208.174.92:2500/order/RejectOrder", orderForm)
+			.map((response: any) => response.Result as OrderFormModel);
+	}
 }

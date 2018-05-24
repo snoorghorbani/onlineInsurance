@@ -18,7 +18,6 @@ export class PolicyService {
 
 	GetCarModelsOfBrand(data: GetCarModelsOfBrandApiModel.Request): Observable<PolicyModel[]> {
 		const model = new GetCarModelsOfBrandApiModel.Request(data);
-		model.carBrand = 1;
 		return this.http
 			.get<GetCarModelsOfBrandApiModel.Response>(`${URI}GetCarModelsOfBrand`, {
 				params: model.getRequestQueryParams()

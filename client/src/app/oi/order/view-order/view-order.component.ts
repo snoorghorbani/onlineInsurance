@@ -1,14 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { OrderService } from "../services";
 import { OrderFormModel } from "../models";
 import { Observable } from "rxjs/internal/Observable";
-import { switchMap, map, filter } from "rxjs/operators";
+import { switchMap, map, filter, takeUntil, combineLatest } from "rxjs/operators";
 import { FormGroup } from "@angular/forms";
 import { FieldModel } from "../models/field.model";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
-import { BehaviorSubject, from } from "rxjs";
+import { BehaviorSubject, from, Subject } from "rxjs";
 import { PlaceOrderStartAction } from "../services/api";
 
 @Component({
@@ -16,7 +16,8 @@ import { PlaceOrderStartAction } from "../services/api";
 	templateUrl: "./view-order.component.html",
 	styleUrls: [ "./view-order.component.css" ]
 })
-export class ViewOrderComponent implements OnInit {
+export class ViewOrderComponent implements OnInit, OnDestroy {
+	unsubscribe = new Subject<void>();
 	@Output() done = new EventEmitter();
 	formGroup: FormGroup;
 	@Input("orderForm")
@@ -24,7 +25,7 @@ export class ViewOrderComponent implements OnInit {
 		if (!orderForm) return;
 		this.orderForm$.next(orderForm);
 	}
-	InitiationPaymentResult$: any;
+	InitiationPaymentResult$: Observable<any>;
 	orderForm$: BehaviorSubject<OrderFormModel>;
 	SellerAddress$: Observable<FieldModel>;
 	SellerEconomicNo$: Observable<FieldModel>;
@@ -61,7 +62,12 @@ export class ViewOrderComponent implements OnInit {
 		this.orderForm$ = new BehaviorSubject(new OrderFormModel());
 		this.initFormGroup();
 		this.activeRoute.params
-			.pipe(map(params => params.Id), filter(Id => Id != null), switchMap(Id => this.service.GetOrder({ Id })))
+			.pipe(
+				takeUntil(this.unsubscribe),
+				map(params => params.Id),
+				filter(Id => Id != null),
+				switchMap(Id => this.service.GetOrder({ Id }))
+			)
 			.subscribe(orderForm => this.orderForm$.next(orderForm));
 		this.SellerAddress$ = this.orderForm$.map(orderForm => orderForm.SellerAddress);
 		this.SellerEconomicNo$ = this.orderForm$.map(orderForm => orderForm.SellerEconomicNo);
@@ -93,11 +99,19 @@ export class ViewOrderComponent implements OnInit {
 	}
 
 	ngOnInit() {}
+	ngOnDestroy() {
+		debugger;
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
 	initFormGroup() {}
 	pay() {
 		from([ 1 ])
-			.combineLatest(this.orderForm$)
-			.map(([ formGroup, orderForm ]) => orderForm)
+			.pipe(
+				takeUntil(this.unsubscribe),
+				combineLatest(this.orderForm$),
+				map(([ formGroup, orderForm ]) => orderForm)
+			)
 			.subscribe(orderForm => (this.InitiationPaymentResult$ = this.service.PlaceOrder(orderForm)));
 	}
 }

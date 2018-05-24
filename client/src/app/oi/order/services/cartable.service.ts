@@ -42,7 +42,6 @@ export class CartableService {
 	}
 	getEditableFieldSchema(fields$: Observable<FieldModel[]>): Observable<FormSchemaModel> {
 		return fields$.map(fields => {
-			debugger;
 			var schema = new FormSchemaModel();
 			schema.init();
 			schema.form.name = "test";

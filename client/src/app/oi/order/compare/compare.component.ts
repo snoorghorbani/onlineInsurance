@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from "@angular/core";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
@@ -8,7 +8,7 @@ import {
 	GetCarModelsOfBrandStartAction,
 	GetCarModelsOfBrandApiModel
 } from "../../policy/services/api";
-import { from, of } from "rxjs";
+import { from, of, Subject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { FieldModel, FieldOptionModel } from "../models/field.model";
@@ -17,14 +17,16 @@ import { Router } from "@angular/router";
 import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
 import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
+import { takeUntil, map, combineLatest } from "rxjs/operators";
 
 @Component({
 	selector: "order-compare",
 	templateUrl: "./compare.component.html",
 	styleUrls: [ "./compare.component.css" ]
 })
-export class CompareComponent implements OnInit {
+export class CompareComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
+	unsubscribe = new Subject<void>();
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	policies$: Observable<PolicyCompareModel[]>;
@@ -89,7 +91,7 @@ export class CompareComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 
-		this.orderForm$.subscribe(orderForm => {
+		this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => {
 			Object.keys(this.formGroup.controls).forEach(key => {
 				if (orderForm[key].Status == 1) {
 					this.formGroup.get(key).setValidators([ Validators.required ]);
@@ -99,17 +101,14 @@ export class CompareComponent implements OnInit {
 			this.formGroup.updateValueAndValidity();
 		});
 
-		this.formGroup.get("CarBrand").valueChanges.subscribe(CarBrand =>
-			this.store.dispatch(
-				new GetCarModelsOfBrandStartAction({
-					carBrand: CarBrand
-				} as GetCarModelsOfBrandApiModel.Request)
-			)
-		);
-
+		this.formGroup
+			.get("CarBrand")
+			.valueChanges.pipe(takeUntil(this.unsubscribe))
+			.subscribe(CarBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand: CarBrand })));
 		this.formGroup
 			.get("CarYearsWithoutIncident")
-			.valueChanges.subscribe(years => this.checkAndContolIncidentFormControls(years));
+			.valueChanges.pipe(takeUntil(this.unsubscribe))
+			.subscribe(years => this.checkAndContolIncidentFormControls(years));
 
 		this.SelectedPolicyTerm$ = this.formGroup
 			.get("PolicyTerm")
@@ -121,29 +120,39 @@ export class CompareComponent implements OnInit {
 
 		this.policies$.filter(data => data.length > 0).subscribe(data => (this.ready = true));
 		this.orderForm$
-			.map(orderForm => {
-				var values = {};
-				Object.keys(orderForm)
-					.filter(key => key in this.formGroup.controls)
-					.filter(key => orderForm[key].Value)
-					.map(key => (values[key] = orderForm[key].Value));
-				return values;
-			})
+			.pipe(
+				takeUntil(this.unsubscribe),
+				map(orderForm => {
+					var values = {};
+					Object.keys(orderForm)
+						.filter(key => key in this.formGroup.controls)
+						.filter(key => orderForm[key].Value)
+						.map(key => (values[key] = orderForm[key].Value));
+					return values;
+				})
+			)
 			.subscribe(values => {
 				this.formGroup.patchValue(values);
 			});
 
-		this.orderForm$.subscribe(orderForm => this.compare());
+		this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => this.compare());
 	}
+	ngOnDestroy() {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
 	compare() {
-		debugger;
 		if (this.formGroup.invalid) return;
 		from([ this.formGroup ])
-			.combineLatest(this.orderForm$)
-			.map(([ formGroup, orderForm ]) => {
-				Object.keys(formGroup.value).forEach(key => (orderForm[key].Value = formGroup.value[key]));
-				return orderForm;
-			})
+			.pipe(
+				takeUntil(this.unsubscribe),
+				combineLatest(this.orderForm$),
+				map(([ formGroup, orderForm ]) => {
+					Object.keys(formGroup.value).forEach(key => (orderForm[key].Value = formGroup.value[key]));
+					return orderForm;
+				})
+			)
 			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
 	showCompanyInfo(policy: PolicyCompareModel) {
@@ -151,15 +160,19 @@ export class CompareComponent implements OnInit {
 	}
 	selectPolicy(ProductId: number) {
 		from([ ProductId ])
-			.combineLatest(this.orderForm$)
-			.map(([ ProductId, orderForm ]) => {
-				Object.keys(this.formGroup.value).forEach(key => (orderForm[key].Value = this.formGroup.value[key]));
-				orderForm.ProductId.Value = ProductId;
-				return orderForm;
-			})
+			.pipe(
+				takeUntil(this.unsubscribe),
+				combineLatest(this.orderForm$),
+				map(([ ProductId, orderForm ]) => {
+					Object.keys(this.formGroup.value).forEach(
+						key => (orderForm[key].Value = this.formGroup.value[key])
+					);
+					orderForm.ProductId.Value = ProductId;
+					return orderForm;
+				})
+			)
 			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)))
 			.unsubscribe();
-		// this.router.navigate([ "/order/insurer-info" ]);
 		this.done.emit();
 	}
 	checkAndContolIncidentFormControls(years) {

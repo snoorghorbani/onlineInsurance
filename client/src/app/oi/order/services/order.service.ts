@@ -10,7 +10,7 @@ import { GetDeliveryTimeTableApiModel, PlaceOrderApiModel, GetMyCartableApiModel
 import { SaveOrderApiModel } from "./api/save-order";
 import { GetMyOrdersApiModel } from "./api/get-my-orders";
 import { GetOrderApiModel } from "./api/get-order";
-import { share, map, switchMap } from "rxjs/operators";
+import { share, map, switchMap, withLatestFrom, publishLast, refCount } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root"
@@ -48,9 +48,14 @@ export class OrderService {
 		);
 	}
 	GetOrder({ Id }: Partial<GetOrderApiModel.Request>): Observable<OrderFormModel> {
-		return this.http
-			.get<GetOrderApiModel.Response>(`http://185.208.174.92:2500/order/GetOrder/${Id}`)
-			.pipe(share(), map(response => response.Result));
+		debugger;
+		return this.http.get<GetOrderApiModel.Response>(`http://185.208.174.92:2500/order/GetOrder/${Id}`).pipe(
+			map(response => {
+				debugger;
+				return response.Result;
+			}),
+			share()
+		);
 	}
 	PlaceOrder(orderForm: OrderFormModel): Observable<any> {
 		return this.http

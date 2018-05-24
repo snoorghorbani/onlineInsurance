@@ -10,7 +10,7 @@ export const enum GET_CAR_MODELS_OF_BRAND_ACTION_TYPES {
 
 export class GetCarModelsOfBrandStartAction implements Action {
 	readonly type = GET_CAR_MODELS_OF_BRAND_ACTION_TYPES.START;
-	constructor(public payload: GetCarModelsOfBrandApiModel.Request) {}
+	constructor(public payload: Partial<GetCarModelsOfBrandApiModel.Request>) {}
 }
 export class GetCarModelsOfBrandSucceedAction implements Action {
 	readonly type = GET_CAR_MODELS_OF_BRAND_ACTION_TYPES.SUCCEED;

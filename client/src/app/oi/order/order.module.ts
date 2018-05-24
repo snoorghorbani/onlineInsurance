@@ -37,7 +37,9 @@ import {
 	SaveOrderFormApiEffects,
 	GetNewOrderFormApiEffects,
 	PlaceOrderApiEffects,
-	GetMyCartableApiEffects
+	GetMyCartableApiEffects,
+	ApproveOrderApiEffects,
+	RejectOrderApiEffects
 } from "./services/api";
 import { OrderComponent } from "./order.component";
 import { NewOrderComponent } from "./new-order/new-order.component";
@@ -53,6 +55,7 @@ import { ViewOrderComponent } from "./view-order/view-order.component";
 import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 import { CartableComponent } from "./cartable/cartable.component";
 import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
+import { DestroyableComponent } from './destroyable/destroyable.component';
 
 @NgModule({
 	imports: [
@@ -95,7 +98,8 @@ import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.com
 		MyOrdersComponent,
 		ViewOrderComponent,
 		CartableComponent,
-		RedirectToBankComponent
+		RedirectToBankComponent,
+		DestroyableComponent
 	],
 	exports: [ NewOrderComponent ]
 })
@@ -118,7 +122,9 @@ export class OrderModule {
 			GetNewOrderFormApiEffects,
 			SaveOrderApiEffects,
 			PlaceOrderApiEffects,
-			GetMyCartableApiEffects
+			GetMyCartableApiEffects,
+			ApproveOrderApiEffects,
+			RejectOrderApiEffects
 		]),
 		OrderRoutingModule
 	],
