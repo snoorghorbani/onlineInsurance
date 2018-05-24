@@ -1,5 +1,4 @@
-import { Injectable, NgModule, Pipe } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Injectable, Pipe, NgModule } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -401,41 +400,6 @@ function MatchValidator(destination) {
             : { key: "don't matched" };
     };
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class SocketService {
-}
-SocketService.decorators = [
-    { type: Injectable },
-];
-var /** @type {?} */ SocketServiceStub = {};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class SocketModule {
-}
-SocketModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule
-                ],
-                providers: [
-                    SocketService
-                ],
-                declarations: [],
-                exports: []
-            },] },
-];
 
 /**
  * @fileoverview added by tsickle
@@ -1007,57 +971,14 @@ DataUnitService.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-class PipesModule {
-}
-PipesModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule
-                ],
-                providers: [
-                    DataUnitService
-                ],
-                declarations: [
-                    DataUnitPipe,
-                    TimeUnitPipe,
-                    PersianDatePipe,
-                    CurrencyUnitPipe,
-                    PersianNumberPipe,
-                    TimeCounterPipe
-                ],
-                exports: [
-                    DataUnitPipe,
-                    TimeUnitPipe,
-                    PersianDatePipe,
-                    CurrencyUnitPipe,
-                    PersianNumberPipe,
-                    TimeCounterPipe
-                ]
-            },] },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 class InfraModule {
 }
 InfraModule.decorators = [
     { type: NgModule, args: [{
-                imports: [
-                    PipesModule,
-                    SocketModule
-                ],
-                declarations: [],
-                providers: [UtilityService],
-                exports: [
-                    PipesModule,
-                ]
+                imports: [],
+                declarations: [DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe],
+                providers: [UtilityService, DataUnitService],
+                exports: [DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe]
             },] },
 ];
 
@@ -1076,5 +997,5 @@ InfraModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { PERSIAN_MONTH_DAYS_COUNT, PERSIAN_MONTH_NAMES, DateClass, UtilityService, stringTemplate, MatchValidator, SocketService, SocketServiceStub, SocketModule, InfraModule };
+export { PERSIAN_MONTH_DAYS_COUNT, PERSIAN_MONTH_NAMES, DateClass, UtilityService, stringTemplate, MatchValidator, InfraModule };
 //# sourceMappingURL=soushians-infra.js.map

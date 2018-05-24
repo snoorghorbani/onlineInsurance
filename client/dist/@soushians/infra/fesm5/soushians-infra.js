@@ -1,6 +1,5 @@
 import { __read } from 'tslib';
-import { Injectable, NgModule, Pipe } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Injectable, Pipe, NgModule } from '@angular/core';
 
 var /** @type {?} */ PERSIAN_MONTH_DAYS_COUNT = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 30];
 var /** @type {?} */ PERSIAN_MONTH_NAMES = [
@@ -390,47 +389,6 @@ function MatchValidator(destination) {
             : { key: "don't matched" };
     };
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var SocketService = /** @class */ (function () {
-    function SocketService() {
-    }
-    return SocketService;
-}());
-SocketService.decorators = [
-    { type: Injectable },
-];
-var /** @type {?} */ SocketServiceStub = {};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-var SocketModule = /** @class */ (function () {
-    function SocketModule() {
-    }
-    return SocketModule;
-}());
-SocketModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule
-                ],
-                providers: [
-                    SocketService
-                ],
-                declarations: [],
-                exports: []
-            },] },
-];
 
 /**
  * @fileoverview added by tsickle
@@ -1009,47 +967,6 @@ DataUnitService.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var PipesModule = /** @class */ (function () {
-    function PipesModule() {
-    }
-    return PipesModule;
-}());
-PipesModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule
-                ],
-                providers: [
-                    DataUnitService
-                ],
-                declarations: [
-                    DataUnitPipe,
-                    TimeUnitPipe,
-                    PersianDatePipe,
-                    CurrencyUnitPipe,
-                    PersianNumberPipe,
-                    TimeCounterPipe
-                ],
-                exports: [
-                    DataUnitPipe,
-                    TimeUnitPipe,
-                    PersianDatePipe,
-                    CurrencyUnitPipe,
-                    PersianNumberPipe,
-                    TimeCounterPipe
-                ]
-            },] },
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var InfraModule = /** @class */ (function () {
     function InfraModule() {
     }
@@ -1057,15 +974,10 @@ var InfraModule = /** @class */ (function () {
 }());
 InfraModule.decorators = [
     { type: NgModule, args: [{
-                imports: [
-                    PipesModule,
-                    SocketModule
-                ],
-                declarations: [],
-                providers: [UtilityService],
-                exports: [
-                    PipesModule,
-                ]
+                imports: [],
+                declarations: [DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe],
+                providers: [UtilityService, DataUnitService],
+                exports: [DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe]
             },] },
 ];
 
@@ -1084,5 +996,5 @@ InfraModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { PERSIAN_MONTH_DAYS_COUNT, PERSIAN_MONTH_NAMES, DateClass, UtilityService, stringTemplate, MatchValidator, SocketService, SocketServiceStub, SocketModule, InfraModule };
+export { PERSIAN_MONTH_DAYS_COUNT, PERSIAN_MONTH_NAMES, DateClass, UtilityService, stringTemplate, MatchValidator, InfraModule };
 //# sourceMappingURL=soushians-infra.js.map

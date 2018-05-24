@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/infra/projects/soushians/infra/src/lib/pipes/index.ts"
+    "ng://@soushians/infra/ng:/@soushians/infra/projects/soushians/infra/src/lib/pipes/index.ts"
   ],
   "sourcesContent": [
     "import './pipes';\r\nexport * from './pipes.module';"

@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/infra/projects/soushians/infra/src/lib/socket/index.ts"
+    "ng://@soushians/infra/ng:/@soushians/infra/ng:/@soushians/infra/ng:/@soushians/infra/projects/soushians/infra/src/lib/socket/index.ts"
   ],
   "sourcesContent": [
     "export * from './socket.service';\r\nexport * from './socket.module';"

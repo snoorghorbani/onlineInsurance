@@ -1,5 +1,5 @@
 ﻿export * from "./utility.service";
 export * from "./helper";
 export * from "./validators";
-export * from "./socket";
+// export * from "./pipes";
 export * from "./infra.module";

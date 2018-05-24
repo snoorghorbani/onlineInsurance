@@ -63,7 +63,7 @@ Thumbs.db
 
 
 # compiled output
-/client/dist
+client/dist
 /client//tmp
 /client//out-tsc
 

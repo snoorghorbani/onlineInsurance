@@ -1,20 +1,23 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { NgModule } from "@angular/core";
 
-import { PipesModule } from './pipes';
+import {
+	DataUnitPipe,
+	TimeUnitPipe,
+	CurrencyUnitPipe,
+	PersianDatePipe,
+	PersianNumberPipe,
+	TimeCounterPipe,
+	DataUnitService
+} from "./pipes/pipes";
+// import { PipesModule } from "./pipes";
 import { UtilityService } from "./utility.service";
-import { SocketModule } from "./socket";
-import './helper';
-import './validators';
+import "./helper";
+import "./validators";
 
 @NgModule({
-        imports: [
-                PipesModule,
-                SocketModule
-        ],
-        declarations: [],
-        providers: [UtilityService],
-        exports: [
-                PipesModule,
-        ]
+	imports: [],
+	declarations: [ DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe ],
+	providers: [ UtilityService, DataUnitService ],
+	exports: [ DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe ]
 })
-export class InfraModule { }
+export class InfraModule {}

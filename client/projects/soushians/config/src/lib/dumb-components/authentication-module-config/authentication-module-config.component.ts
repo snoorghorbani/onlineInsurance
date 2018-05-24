@@ -3,10 +3,6 @@ import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 
-import { EditConfigApiModel } from "../../models";
-import { ConfigService } from "../../services";
-import { UtilityService } from "@soushians/infra";
-
 @Component({
 	selector: "config-authentication-module-config",
 	templateUrl: "./authentication-module-config.component.html"
@@ -25,7 +21,7 @@ export class AuthenticationModuleConfigComponent {
 	@Input()
 	set configFormGroup(configFormGroup: FormGroup) {
 		this.formGroup.patchValue(configFormGroup.value);
-		configFormGroup.valueChanges.subscribe((data) => {
+		configFormGroup.valueChanges.subscribe(data => {
 			this.formGroup.patchValue(data);
 		});
 	}

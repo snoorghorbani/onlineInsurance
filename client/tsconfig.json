@@ -33,7 +33,16 @@
         "dist/@soushians/shared"
       ],
       "@soushians/authentication": [
-        "dist/soushians/authentication"
+        "dist/@soushians/authentication"
+      ],
+      "@soushians/form": [
+        "dist/@soushians/form"
+      ],
+      "@soushians/diagram": [
+        "dist/@soushians/diagram"
+      ],
+      "@soushians/source": [
+        "dist/@soushians/source"
       ]
     }
   }

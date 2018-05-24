@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@soushians/infra', ['exports', 'tslib', '@angular/core', '@angular/common'], factory) :
-    (factory((global.soushians = global.soushians || {}, global.soushians.infra = {}),global.tslib,global.ng.core,global.ng.common));
-}(this, (function (exports,tslib,core,common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('tslib'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@soushians/infra', ['exports', 'tslib', '@angular/core'], factory) :
+    (factory((global.soushians = global.soushians || {}, global.soushians.infra = {}),global.tslib,global.ng.core));
+}(this, (function (exports,tslib,core) { 'use strict';
 
     var /** @type {?} */ PERSIAN_MONTH_DAYS_COUNT = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 30];
     var /** @type {?} */ PERSIAN_MONTH_NAMES = [
@@ -392,44 +392,6 @@
                 : { key: "don't matched" };
         };
     }
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes} checked by tsc
-     */
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes} checked by tsc
-     */
-    var SocketService = (function () {
-        function SocketService() {
-        }
-        return SocketService;
-    }());
-    SocketService.decorators = [
-        { type: core.Injectable },
-    ];
-    var /** @type {?} */ SocketServiceStub = {};
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes} checked by tsc
-     */
-    var SocketModule = (function () {
-        function SocketModule() {
-        }
-        return SocketModule;
-    }());
-    SocketModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule
-                    ],
-                    providers: [
-                        SocketService
-                    ],
-                    declarations: [],
-                    exports: []
-                },] },
-    ];
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes} checked by tsc
@@ -998,45 +960,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes} checked by tsc
      */
-    var PipesModule = (function () {
-        function PipesModule() {
-        }
-        return PipesModule;
-    }());
-    PipesModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule
-                    ],
-                    providers: [
-                        DataUnitService
-                    ],
-                    declarations: [
-                        DataUnitPipe,
-                        TimeUnitPipe,
-                        PersianDatePipe,
-                        CurrencyUnitPipe,
-                        PersianNumberPipe,
-                        TimeCounterPipe
-                    ],
-                    exports: [
-                        DataUnitPipe,
-                        TimeUnitPipe,
-                        PersianDatePipe,
-                        CurrencyUnitPipe,
-                        PersianNumberPipe,
-                        TimeCounterPipe
-                    ]
-                },] },
-    ];
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes} checked by tsc
-     */
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes} checked by tsc
-     */
     var InfraModule = (function () {
         function InfraModule() {
         }
@@ -1044,15 +967,10 @@
     }());
     InfraModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [
-                        PipesModule,
-                        SocketModule
-                    ],
-                    declarations: [],
-                    providers: [UtilityService],
-                    exports: [
-                        PipesModule,
-                    ]
+                    imports: [],
+                    declarations: [DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe],
+                    providers: [UtilityService, DataUnitService],
+                    exports: [DataUnitPipe, TimeUnitPipe, CurrencyUnitPipe, PersianDatePipe, PersianNumberPipe, TimeCounterPipe]
                 },] },
     ];
 
@@ -1062,9 +980,6 @@
     exports.UtilityService = UtilityService;
     exports.stringTemplate = stringTemplate;
     exports.MatchValidator = MatchValidator;
-    exports.SocketService = SocketService;
-    exports.SocketServiceStub = SocketServiceStub;
-    exports.SocketModule = SocketModule;
     exports.InfraModule = InfraModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });

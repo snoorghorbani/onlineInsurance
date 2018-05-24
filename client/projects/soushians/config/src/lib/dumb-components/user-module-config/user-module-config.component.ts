@@ -3,10 +3,6 @@ import { FormGroup, Validators, FormControl, FormArray } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 
-import { EditConfigApiModel } from "../../models";
-import { ConfigService } from "../../services";
-import { UtilityService } from "@soushians/infra";
-
 @Component({
 	selector: "config-user-module-config",
 	templateUrl: "./user-module-config.component.html"
@@ -28,7 +24,7 @@ export class UserModuleConfigComponent {
 	@Input()
 	set configFormGroup(configFormGroup: FormGroup) {
 		this._configFormGroup = configFormGroup;
-		(configFormGroup.controls.dashboardLinks as FormArray).controls.forEach((control) => {
+		(configFormGroup.controls.dashboardLinks as FormArray).controls.forEach(control => {
 			(this.formGroup.controls.dashboardLinks as FormArray).push(
 				new FormGroup({
 					route: new FormControl("", [ Validators.required ]),
@@ -39,7 +35,7 @@ export class UserModuleConfigComponent {
 		});
 
 		this.formGroup.patchValue(configFormGroup.value);
-		configFormGroup.valueChanges.subscribe((data) => {
+		configFormGroup.valueChanges.subscribe(data => {
 			this.formGroup.patchValue(data);
 		});
 	}

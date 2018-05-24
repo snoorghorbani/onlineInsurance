@@ -25,15 +25,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
-import { InfraModule } from "@soushians/infra";
 import { NgsFormModule } from "@soushians/form";
 
 import { AuthenticationModuleConfig, MODULE_CONFIG_TOKEN } from "./authentication.config";
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
-import {
-	SigninContainerComponent,
-	AuthenticationContainerComponent
-} from "./smart-components";
+import { SigninContainerComponent, AuthenticationContainerComponent } from "./smart-components";
 import { SigninComponent } from "./dump-components";
 import { AuthenticationConfigurationService, SigninService } from "./services";
 import { UserGuard, SigninGuard, AgentGuard, AdminGuard } from "./routing-guards";
@@ -71,14 +67,9 @@ import "./effects";
 		BrowserAnimationsModule,
 		ReactiveFormsModule,
 		FormsModule,
-		InfraModule,
 		NgsFormModule
 	],
-	declarations: [
-		SigninContainerComponent,
-		SigninComponent,
-		AuthenticationContainerComponent
-	],
+	declarations: [ SigninContainerComponent, SigninComponent, AuthenticationContainerComponent ],
 	exports: []
 })
 export class NgsAuthenticationModule {
@@ -111,9 +102,9 @@ export class NgsAuthenticationModule {
 @NgModule({
 	imports: [
 		StoreModule.forFeature("authentication", AuthenticationReducers),
-		EffectsModule.forFeature([SigninEffects, AuthenticationEffects]),
+		EffectsModule.forFeature([ SigninEffects, AuthenticationEffects ]),
 		AuthenticationRoutingModule,
 		NgsAuthenticationModule
 	]
 })
-export class RootNgsAuthenticationModule { }
+export class RootNgsAuthenticationModule {}

@@ -397,6 +397,126 @@
           }
         }
       }
+    },
+    "@soushians/form": {
+      "root": "projects/soushians/form",
+      "sourceRoot": "projects/soushians/form/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/soushians/form/tsconfig.lib.json",
+            "project": "projects/soushians/form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/soushians/form/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/soushians/form/src/test.ts",
+            "tsConfig": "projects/soushians/form/tsconfig.spec.json",
+            "karmaConfig": "projects/soushians/form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/soushians/form/tsconfig.lib.json",
+              "projects/soushians/form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@soushians/diagram": {
+      "root": "projects/soushians/diagram",
+      "sourceRoot": "projects/soushians/diagram/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/soushians/diagram/tsconfig.lib.json",
+            "project": "projects/soushians/diagram/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/soushians/diagram/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/soushians/diagram/src/test.ts",
+            "tsConfig": "projects/soushians/diagram/tsconfig.spec.json",
+            "karmaConfig": "projects/soushians/diagram/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/soushians/diagram/tsconfig.lib.json",
+              "projects/soushians/diagram/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@soushians/source": {
+      "root": "projects/soushians/source",
+      "sourceRoot": "projects/soushians/source/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/soushians/source/tsconfig.lib.json",
+            "project": "projects/soushians/source/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/soushians/source/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/soushians/source/src/test.ts",
+            "tsConfig": "projects/soushians/source/tsconfig.spec.json",
+            "karmaConfig": "projects/soushians/source/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/soushians/source/tsconfig.lib.json",
+              "projects/soushians/source/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng2-starter"

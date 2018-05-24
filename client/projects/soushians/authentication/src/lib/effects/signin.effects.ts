@@ -7,7 +7,7 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/empty";
 import { Action } from "@ngrx/store";
-import { Actions, Effect, toPayload } from "@ngrx/effects";
+import { Actions, Effect } from "@ngrx/effects";
 import { RouterAction } from "@ngrx/router-store";
 import { switchMap, map, catchError, tap } from "rxjs/operators";
 
@@ -21,7 +21,7 @@ import { Signin_ApiModel } from "../models";
 
 @Injectable()
 export class SigninEffects {
-	constructor(private actions$: Actions, private router: Router, public signinService: SigninService) { }
+	constructor(private actions$: Actions, private router: Router, public signinService: SigninService) {}
 
 	@Effect()
 	preSignUpStart$ = this.actions$
@@ -35,18 +35,14 @@ export class SigninEffects {
 	@Effect({ dispatch: false })
 	SigninSucceed$ = this.actions$
 		.ofType(SignInActionTypes.SIGNIN_SUCCEED)
-		.pipe(
-			tap((data: any) => this.router.navigate(["/"]))
-		)
+		.pipe(tap((data: any) => this.router.navigate([ "/" ])));
 
 	@Effect() AfterSigninFiled$ = this.actions$.ofType(SignInActionTypes.SIGNIN_FAILURE).map(() => new NewCaptcha());
 
 	@Effect({ dispatch: false })
 	redirectToLoginPage$ = this.actions$
 		.ofType(SignInActionTypes.SIGNIN_REDIRECT, SignInActionTypes.SIGNOUT)
-		.pipe(
-			tap(authed => this.router.navigate(["auth/signin"]))
-		);
+		.pipe(tap(authed => this.router.navigate([ "auth/signin" ])));
 
 	// TODO:
 	// @Effect({ dispatch: false })

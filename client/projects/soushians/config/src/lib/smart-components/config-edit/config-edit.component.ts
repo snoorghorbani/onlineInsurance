@@ -4,7 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 
 import { EditConfigApiModel, PartialConfig } from "../../models";
-import { UtilityService } from "@soushians/infra";
 import { ConfigService } from "../../services";
 
 @Component({
@@ -17,9 +16,9 @@ export class ConfigEditComponent implements OnInit {
 	partialConfigModel: PartialConfig;
 
 	constructor(private configService: ConfigService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
-		this.route.params.subscribe((params) => {
+		this.route.params.subscribe(params => {
 			const configName: string = params["name"];
-			this.configService.getConfigByName(configName).subscribe((data) => {
+			this.configService.getConfigByName(configName).subscribe(data => {
 				this.partialConfigModel = {
 					type: data.Result.Name,
 					inputs: {
@@ -30,7 +29,7 @@ export class ConfigEditComponent implements OnInit {
 					_id: data.Result._id,
 					Name: data.Result.Name
 				});
-				Object.keys(data.Result.Config).forEach((key) => {
+				Object.keys(data.Result.Config).forEach(key => {
 					this.addControl(this.formGroup.controls.Config as FormGroup, key, data.Result.Config[key]);
 				});
 			});
@@ -55,7 +54,7 @@ export class ConfigEditComponent implements OnInit {
 	edit() {
 		debugger;
 		if (!this.formGroup.valid) return;
-		this.configService.editConfig(this.formGroup.value).subscribe((config) => {
+		this.configService.editConfig(this.formGroup.value).subscribe(config => {
 			debugger;
 		});
 	}
