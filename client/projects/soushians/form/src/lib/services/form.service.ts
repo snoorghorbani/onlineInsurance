@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 import { Store } from "@ngrx/store";
 
-import { stringTemplate } from "@soushians/infra";
+import { stringTemplate } from "@soushians/shared";
 import { FormSchemaModel, AddFormApiModel, EditFormApiModel, FormListApiModel } from "../models";
 import { FormConfigurationService } from "./form-configuration.service";
 

@@ -25,7 +25,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { EffectsModule } from "@ngrx/effects";
 import { FileDropModule } from "ngx-file-drop";
 
-import { InfraModule } from "@soushians/infra";
 import { NgsFormModule } from "@soushians/form";
 
 import { TestComponent } from "./test/test.component";
@@ -55,7 +54,7 @@ import { ViewOrderComponent } from "./view-order/view-order.component";
 import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 import { CartableComponent } from "./cartable/cartable.component";
 import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
-import { DestroyableComponent } from './destroyable/destroyable.component';
+import { DestroyableComponent } from "./destroyable/destroyable.component";
 
 @NgModule({
 	imports: [
@@ -82,7 +81,6 @@ import { DestroyableComponent } from './destroyable/destroyable.component';
 		MatExpansionModule,
 		MatGridListModule,
 		FlexLayoutModule,
-		InfraModule,
 		FileDropModule,
 		NgsFormModule.forRoot()
 	],

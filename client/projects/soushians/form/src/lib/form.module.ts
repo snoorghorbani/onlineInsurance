@@ -26,7 +26,7 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule, mergeEffects } from "@ngrx/effects";
 
-import { SharedModule } from "@soushians/shared";
+// import { SharedModule } from "@soushians/shared";
 
 import { RoutingModule } from "./form-routing.module";
 import { FormModuleConfig, MODULE_CONFIG_TOKEN } from "./form.config";

@@ -980,7 +980,21 @@
     exports.UtilityService = UtilityService;
     exports.stringTemplate = stringTemplate;
     exports.MatchValidator = MatchValidator;
+    exports.DataUnitPipe = DataUnitPipe;
+    exports.TimeUnitPipe = TimeUnitPipe;
+    exports.PersianDatePipe = PersianDatePipe;
+    exports.CurrencyUnitPipe = CurrencyUnitPipe;
+    exports.PersianNumberPipe = PersianNumberPipe;
+    exports.TimeCounterPipe = TimeCounterPipe;
+    exports.DataUnitService = DataUnitService;
     exports.InfraModule = InfraModule;
+    exports.ɵc = CurrencyUnitPipe;
+    exports.ɵa = DataUnitPipe;
+    exports.ɵg = DataUnitService;
+    exports.ɵd = PersianDatePipe;
+    exports.ɵe = PersianNumberPipe;
+    exports.ɵf = TimeCounterPipe;
+    exports.ɵb = TimeUnitPipe;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

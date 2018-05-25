@@ -43,6 +43,9 @@
       ],
       "@soushians/source": [
         "dist/@soushians/source"
+      ],
+      "@soushians/test": [
+        "dist/soushians/test"
       ]
     }
   }

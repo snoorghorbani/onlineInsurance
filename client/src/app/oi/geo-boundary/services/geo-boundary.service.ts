@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { of } from "rxjs/internal/observable/of";
 
-import { stringTemplate } from "@soushians/infra";
+import { stringTemplate } from "@soushians/shared";
 
 import { GeoBoundaryModel, TestModel, CityModel } from "../models";
 import { GeoBoundaryConfigurationService } from "./geo-boundary-configuration.service";

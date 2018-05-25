@@ -1,5 +1,4 @@
 ﻿import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SocketService } from "@soushians/infra";
 import { Store } from "@ngrx/store";
 
 import { EnableComfortableModeAction, DisableComfortableModeAction } from "@soushians/layout";
@@ -12,7 +11,7 @@ import { AppState } from "../../../app.states";
 	styleUrls: [ "./dashboard.component.css" ]
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-	constructor(private socketService: SocketService, private store: Store<AppState>) {
+	constructor(private store: Store<AppState>) {
 		this.store.dispatch(new EnableComfortableModeAction());
 	}
 

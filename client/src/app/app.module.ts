@@ -14,7 +14,6 @@ import { environment } from "../environments/environment";
 
 import { SharedModule } from "@soushians/shared";
 import { NgsAuthenticationModule } from "@soushians/authentication";
-import { InfraModule } from "@soushians/infra";
 import { NgsLayoutModule } from "@soushians/layout";
 import { NgsUserModule, NgsUserRoutingModule } from "@soushians/user";
 import { NgsConfigModule } from "@soushians/config";
@@ -34,7 +33,6 @@ import { reducers } from "./app.reducers";
 import { DashboardModule } from "./dashboard";
 import { OiModule } from "./oi/oi.module";
 
-import { ShopingModule } from "shoping";
 @NgModule({
 	imports: [
 		CoreModule,
@@ -64,7 +62,6 @@ import { ShopingModule } from "shoping";
 		NgsUserModule.forRoot(),
 		NgsUserRoutingModule,
 		// NgsBpmnModule.forRoot(),
-		InfraModule,
 		SharedModule,
 		SourceModule,
 		StaticPageModule,
@@ -72,8 +69,7 @@ import { ShopingModule } from "shoping";
 		AppRoutingModule,
 		MatFormFieldModule,
 		DashboardModule,
-		OiModule,
-		ShopingModule
+		OiModule
 	],
 	declarations: [ AppComponent ],
 	providers: [

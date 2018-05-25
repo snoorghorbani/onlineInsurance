@@ -16,32 +16,10 @@ import {
 	OnDestroy
 } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import {
-	FormControl,
-	FormGroup,
-	FormArray,
-	AbstractControl,
-	FormsModule,
-	ReactiveFormsModule,
-	Validators
-} from "@angular/forms";
-import {
-	MatSidenavModule,
-	MatToolbarModule,
-	MatFormFieldModule,
-	MatCardModule,
-	MatButtonModule,
-	MatIconModule,
-	MatInputModule,
-	MatCheckboxModule,
-	MatRadioModule,
-	MatSelectModule,
-	MatSliderModule
-} from "@angular/material";
-import { CommonModule } from "@angular/common";
+import { FormControl, FormGroup, FormArray, AbstractControl, Validators } from "@angular/forms";
+
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ComponentRef } from "@angular/core/src/linker/component_factory";
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { Store } from "@ngrx/store";
 
 import {

@@ -27,7 +27,6 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule, mergeEffects } from "@ngrx/effects";
 
 import { SharedModule } from "@soushians/shared";
-import { InfraModule } from "@soushians/infra";
 
 import { GeoBoundaryModuleConfig, MODULE_CONFIG_TOKEN } from "./geo-boundary.config";
 import { RoutingModule } from "./geo-boundary-routing.module";
@@ -41,7 +40,6 @@ import { TestComponent } from "./test";
 @NgModule({
 	imports: [
 		HttpClientModule,
-		InfraModule,
 		FormsModule,
 		RouterModule,
 		CommonModule,
@@ -63,19 +61,19 @@ import { TestComponent } from "./test";
 		ReactiveFormsModule,
 		BrowserAnimationsModule
 	],
-	declarations: [
-		GeoBoundaryComponent,
-		TestComponent
-	],
-	entryComponents: [
-	],
+	declarations: [ GeoBoundaryComponent, TestComponent ],
+	entryComponents: [],
 	exports: []
 })
 export class GeoBoundaryModule {
 	static forRoot(config?: GeoBoundaryModuleConfig): ModuleWithProviders {
 		return {
 			ngModule: RootGeoBoundaryModule,
-			providers: [{ provide: MODULE_CONFIG_TOKEN, useValue: config }, GeoBoundaryService, GeoBoundaryConfigurationService]
+			providers: [
+				{ provide: MODULE_CONFIG_TOKEN, useValue: config },
+				GeoBoundaryService,
+				GeoBoundaryConfigurationService
+			]
 		};
 	}
 }
@@ -84,9 +82,9 @@ export class GeoBoundaryModule {
 	imports: [
 		GeoBoundaryModule,
 		StoreModule.forFeature("geo-boundary", GeoBoundaryReducers),
-		EffectsModule.forFeature([TestApiEffects]),
+		EffectsModule.forFeature([ TestApiEffects ]),
 		RoutingModule
 	],
-	exports: [GeoBoundaryModule]
+	exports: [ GeoBoundaryModule ]
 })
-export class RootGeoBoundaryModule { }
+export class RootGeoBoundaryModule {}
