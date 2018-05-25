@@ -2,7 +2,7 @@
   "version": 3,
   "file": "layout.config.js",
   "sources": [
-    "ng://@soushians/layout/projects/soushians/layout/src/lib/layout.config.ts"
+    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/layout.config.ts"
   ],
   "sourcesContent": [
     "import { InjectionToken } from \"@angular/core\";\r\n\r\nimport { LayoutConfigModel } from \"@soushians/config\";\r\n\r\nexport interface LayoutModuleConfig extends LayoutConfigModel {}\r\n\r\nexport const MODULE_DEFAULT_CONFIG: LayoutModuleConfig = {\r\n\tshowMainSidenav: false,\r\n\tshowSecondSideNav: true,\r\n\tsecondSideNavMode: \"over\", //| \"push\" | \"side\",\r\n\tmainSideNavMode: \"over\", //| \"push\" | \"side\",\r\n\tshowLeftNavBar: false,\r\n\tstickyLeftNavBar: false,\r\n\tlayoutMode: \"with-margin\", // | \"without-margin\" | \"default\",\r\n\ttitle: \"\",\r\n\tmenuItems: [\r\n\t\t{\r\n\t\t\troute: \"/\",\r\n\t\t\ticon: \"multiline_chart\",\r\n\t\t\troles: [ \"Admin\", \"User\" ],\r\n\t\t\ttitle: \"صفحه اصلی\"\r\n\t\t},\r\n\t\t{\r\n\t\t\troute: \"/configs\",\r\n\t\t\ticon: \"settings\",\r\n\t\t\troles: [ \"Admin\" ],\r\n\t\t\ttitle: \"تنظیمات\"\r\n\t\t},\r\n\t\t{\r\n\t\t\troute: \"/source\",\r\n\t\t\ticon: \"device_hub\",\r\n\t\t\troles: [ \"Admin\" ],\r\n\t\t\ttitle: \"آدرس سرویس ها\"\r\n\t\t}\r\n\t]\r\n};\r\n\r\nexport const MODULE_CONFIG_TOKEN = new InjectionToken<LayoutModuleConfig>(\"LayoutModuleConfig\");\r\n"

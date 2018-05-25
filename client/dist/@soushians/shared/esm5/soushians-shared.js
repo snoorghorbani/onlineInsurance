@@ -5,5 +5,5 @@
 /**
  * Generated bundle index. Do not edit.
  */
-export { HttpResponseBaseModel, HttpRequestBaseModel, SharedModule, stringTemplate, MatchValidator } from './public_api';
+export { SharedModule, HttpResponseBaseModel, HttpRequestBaseModel, stringTemplate, MatchValidator } from './public_api';
 //# sourceMappingURL=soushians-shared.js.map

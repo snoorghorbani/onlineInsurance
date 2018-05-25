@@ -25,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
-import { NgsFormModule } from "@soushians/form";
+// import { NgsFormModule } from "@soushians/form";
 
 import { AuthenticationModuleConfig, MODULE_CONFIG_TOKEN } from "./authentication.config";
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
@@ -66,8 +66,8 @@ import "./effects";
 		MatProgressBarModule,
 		BrowserAnimationsModule,
 		ReactiveFormsModule,
-		FormsModule,
-		NgsFormModule
+		FormsModule
+		// NgsFormModule
 	],
 	declarations: [ SigninContainerComponent, SigninComponent, AuthenticationContainerComponent ],
 	exports: []

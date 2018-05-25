@@ -2,7 +2,7 @@
   "version": 3,
   "file": "config.routing-module.js",
   "sources": [
-    "ng://@soushians/config/projects/soushians/config/src/lib/config.routing-module.ts"
+    "ng://@soushians/config/ng:/@soushians/config/ng:/@soushians/config/ng:/@soushians/config/projects/soushians/config/src/lib/config.routing-module.ts"
   ],
   "sourcesContent": [
     "import { ModuleWithProviders } from '@angular/core';\r\nimport { RouterModule, Routes } from '@angular/router';\r\n\r\nimport { ConfigsComponent, ConfigEditComponent, ConfigModuleContainerComponent } from './smart-components';\r\n\r\nconst routes: Routes = [\r\n        {\r\n                path: 'configs',\r\n                component: ConfigModuleContainerComponent,\r\n                children: [\r\n                        {\r\n                                path: '',\r\n                                component: ConfigsComponent\r\n                        },\r\n                        {\r\n                                path: 'edit/:name',\r\n                                component: ConfigEditComponent\r\n                        }\r\n                ]\r\n        }\r\n];\r\n\r\nexport const RoutingModule: ModuleWithProviders = RouterModule.forChild(routes);\r\n"

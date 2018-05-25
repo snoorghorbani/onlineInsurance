@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/layout/projects/soushians/layout/src/lib/dumb-components/index.ts"
+    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/dumb-components/index.ts"
   ],
   "sourcesContent": [
     "export * from \"./main-menu/main-menu.component\";\r\nexport * from \"./search-box/search-box.component\";\r\nexport * from \"./logo-container/logo-container.component\";\r\nexport * from \"./toolbar-menu/toolbar-menu.component\";\r\nexport * from \"./footer/footer.component\";\r\nexport * from \"./title/title.component\";\r\nexport * from \"./main\";\r\n"

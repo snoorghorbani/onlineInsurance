@@ -43,17 +43,10 @@ ConfigurationService.decorators = [
 ];
 /** @nocollapse */
 ConfigurationService.ctorParameters = function () { return [
-    { type: undefined, decorators: [{ type: Inject, args: [MODULE_CONFIG_TOKEN,] },] },
-    { type: Store, },
+    { type: undefined, decorators: [{ type: Inject, args: [MODULE_CONFIG_TOKEN,] }] },
+    { type: Store }
 ]; };
 function ConfigurationService_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ConfigurationService.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ConfigurationService.ctorParameters;
     /** @type {?} */
     ConfigurationService.prototype._config;
     /** @type {?} */

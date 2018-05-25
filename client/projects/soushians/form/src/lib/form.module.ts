@@ -4,7 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
 	MatExpansionModule,
 	MatSnackBarModule,
@@ -26,30 +25,26 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule, mergeEffects } from "@ngrx/effects";
 
-// import { SharedModule } from "@soushians/shared";
-
-import { RoutingModule } from "./form-routing.module";
-import { FormModuleConfig, MODULE_CONFIG_TOKEN } from "./form.config";
-import { MainContainerComponent, FormReducers } from "./main-container";
-import { AddFormComponent, AddFormContainerComponent } from "./add";
-import { FormService, FormConfigurationService } from "./services";
-import { FormListComponent, FormsListEffects, FormListContainerComponent } from "./list";
-import { EditFormComponent, EditFormContainerComponent, EditFormEffects } from "./edit";
-import { AddFormEffects } from "./add/add-form.effects";
-import { FormViewComponent, DynamicFieldDirective } from "./view";
-import { FormGroupComponent } from "./add/form-group";
-import { FormArrayComponent } from "./add/form-array";
-import { FormControlComponent } from "./add/form-control";
-import { NgsFormSelectorComponent } from "./form-selector";
-import {
-	SelectComponent,
-	CheckboxComponent,
-	EmailComponent,
-	ColorComponent,
-	TextComponent,
-	NumberComponent,
-	TableComponent
-} from "./view/form-controls";
+import { FormModuleConfig, MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "./form.config";
+import { FormReducers } from "./main-container/main-container.reducers";
+import { SelectComponent } from "./view/form-controls/select/select.component";
+import { FormGroupComponent } from "./add/form-group/form-group.component";
+import { FormArrayComponent } from "./add/form-array/form-array.component";
+import { FormControlComponent } from "./add/form-control/form-control.component";
+import { FormViewComponent, DynamicFieldDirective } from "./view/form-view/form-view.component";
+import { TextComponent } from "./view/form-controls/text/text.component";
+import { CheckboxComponent } from "./view/form-controls/checkbox/checkbox.component";
+import { EmailComponent } from "./view/form-controls/email/email.component";
+import { ColorComponent } from "./view/form-controls/color/color.component";
+import { NumberComponent } from "./view/form-controls/number/number.component";
+import { TableComponent } from "./view/form-controls/table/table.component";
+import { EditFormContainerComponent } from "./edit/edit-form-container/edit-form-container.component";
+import { EditFormComponent } from "./edit/edit-form/edit-form.component";
+import { FormListContainerComponent } from "./list/form-list-container/form-list.container.component";
+import { FormListComponent } from "./list/form-list/form-list.component";
+import { AddFormContainerComponent } from "./add/add-form-container/add-form-container.component";
+import { MainContainerComponent } from "./main-container/main-container.component/main-container.component";
+import { AddFormComponent } from "./add/add-form/add-form.component";
 
 @NgModule({
 	imports: [
@@ -72,8 +67,7 @@ import {
 		FlexLayoutModule,
 		MatRadioModule,
 		MatSlideToggleModule,
-		ReactiveFormsModule,
-		BrowserAnimationsModule
+		ReactiveFormsModule
 	],
 	declarations: [
 		EditFormContainerComponent,
@@ -94,8 +88,8 @@ import {
 		ColorComponent,
 		TextComponent,
 		NumberComponent,
-		TableComponent,
-		NgsFormSelectorComponent
+		TableComponent
+		// NgsFormSelectorComponent
 	],
 	entryComponents: [
 		SelectComponent,
@@ -106,13 +100,14 @@ import {
 		NumberComponent,
 		TableComponent
 	],
-	exports: [ FormViewComponent, NgsFormSelectorComponent ]
+	exports: [ FormViewComponent ]
+	// exports: [ FormViewComponent, NgsFormSelectorComponent ]
 })
 export class NgsFormModule {
 	static forRoot(config?: FormModuleConfig): ModuleWithProviders {
 		return {
 			ngModule: RootNgsFormModule,
-			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config }, FormService, FormConfigurationService ]
+			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config } ]
 		};
 	}
 }
@@ -120,9 +115,9 @@ export class NgsFormModule {
 @NgModule({
 	imports: [
 		NgsFormModule,
-		StoreModule.forFeature("form", FormReducers),
-		EffectsModule.forFeature([ AddFormEffects, EditFormEffects, FormsListEffects ]),
-		RoutingModule
+		StoreModule.forFeature("form", FormReducers)
+		// EffectsModule.forFeature([ AddFormEffects, EditFormEffects, FormsListEffects ]),
+		// RoutingModule
 	],
 	exports: [ NgsFormModule ]
 })

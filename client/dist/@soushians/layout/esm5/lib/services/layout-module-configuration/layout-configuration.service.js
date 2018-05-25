@@ -4,9 +4,9 @@
  */
 import { Injectable, Inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "../../layout.config";
-import { getlayoutModuleConfig } from "@soushians/config";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { getlayoutModuleConfig } from "@soushians/config";
+import { MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "../../layout.config";
 import { UpdateLayoutConfigAction } from "../../actions";
 var LayoutConfigurationService = /** @class */ (function () {
     /**

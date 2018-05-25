@@ -1,14 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 
-import { MainContainerState } from "../../main-container";
+import { MainContainerState } from "../../main-container/main-container.reducers";
 import { FormSchemaModel } from "../../models";
 import { AddFormAction } from "../add-form.actions";
-import { AddFormSchemaAction, UpdateFormSchemaAction } from "../../list";
-import { FormService } from "../../services";
+import { AddFormSchemaAction, UpdateFormSchemaAction } from "../../list/list.actions";
+import { FormService } from "../../services/form.service";
 
 @Component({
 	template: `<ngs-form-add 
@@ -19,7 +18,7 @@ import { FormService } from "../../services";
 })
 export class AddFormContainerComponent implements OnInit {
 	schema: FormSchemaModel;
-	constructor(public store: Store<MainContainerState>, public service: FormService) { }
+	constructor(public store: Store<MainContainerState>, public service: FormService) {}
 	ngOnInit() {
 		debugger;
 		this.schema = new FormSchemaModel();

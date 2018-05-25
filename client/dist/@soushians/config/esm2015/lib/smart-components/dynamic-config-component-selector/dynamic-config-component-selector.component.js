@@ -3,10 +3,10 @@
  * @suppress {checkTypes} checked by tsc
  */
 import { Component, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ReflectiveInjector, Output, EventEmitter } from "@angular/core";
-import { AuthenticationModuleConfigComponent } from "../../dumb-components/authentication-module-config";
-import { ConfigAppConfigComponent } from "../../dumb-components/app-config";
-import { UserModuleConfigComponent } from "../../dumb-components/user-module-config";
-import { LayoutModuleConfigComponent } from "../../dumb-components";
+import { AuthenticationModuleConfigComponent } from "../../dumb-components/authentication-module-config/authentication-module-config.component";
+import { ConfigAppConfigComponent } from "../../dumb-components/app-config/app-config.component";
+import { UserModuleConfigComponent } from "../../dumb-components/user-module-config/user-module-config.component";
+import { LayoutModuleConfigComponent } from "../../dumb-components/layout-config/layout-module-config.component";
 export class DynamicConfigComponentSelectorComponent {
     /**
      * @param {?} resolver
@@ -35,7 +35,7 @@ export class DynamicConfigComponentSelectorComponent {
             return;
         }
         let /** @type {?} */ _component = this.typeMapToDiagram[data.type];
-        let /** @type {?} */ inputProviders = Object.keys(data.inputs).map((inputName) => {
+        let /** @type {?} */ inputProviders = Object.keys(data.inputs).map(inputName => {
             return { provide: inputName, useValue: (/** @type {?} */ (data.inputs))[inputName] };
         });
         let /** @type {?} */ resolvedInputs = ReflectiveInjector.resolve(inputProviders);
@@ -71,23 +71,14 @@ DynamicConfigComponentSelectorComponent.decorators = [
 ];
 /** @nocollapse */
 DynamicConfigComponentSelectorComponent.ctorParameters = () => [
-    { type: ComponentFactoryResolver, },
+    { type: ComponentFactoryResolver }
 ];
 DynamicConfigComponentSelectorComponent.propDecorators = {
-    "dynamicComponentContainer": [{ type: ViewChild, args: ["dynamicComponentContainer", { read: ViewContainerRef },] },],
-    "configChanged": [{ type: Output },],
-    "data": [{ type: Input },],
+    dynamicComponentContainer: [{ type: ViewChild, args: ["dynamicComponentContainer", { read: ViewContainerRef },] }],
+    configChanged: [{ type: Output }],
+    data: [{ type: Input }]
 };
 function DynamicConfigComponentSelectorComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    DynamicConfigComponentSelectorComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    DynamicConfigComponentSelectorComponent.ctorParameters;
-    /** @type {!Object<string,!Array<{type: !Function, args: (undefined|!Array<?>)}>>} */
-    DynamicConfigComponentSelectorComponent.propDecorators;
     /** @type {?} */
     DynamicConfigComponentSelectorComponent.prototype.typeMapToDiagram;
     /** @type {?} */

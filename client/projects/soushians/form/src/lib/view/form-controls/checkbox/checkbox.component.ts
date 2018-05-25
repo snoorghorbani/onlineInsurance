@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Field, FieldConfig } from "../../../models";
 import { FormGroup } from "@angular/forms";
+
+import { Field, FieldConfig } from "../../../models";
 
 @Component({
 	selector: "ngs-form-control-checkbox",

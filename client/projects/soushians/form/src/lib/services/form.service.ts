@@ -11,7 +11,9 @@ import { MainContainerState } from "../main-container/main-container.reducers";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { filter, map, withLatestFrom } from "rxjs/operators";
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class FormService {
 	responseCache: AddFormApiModel.Response;
 

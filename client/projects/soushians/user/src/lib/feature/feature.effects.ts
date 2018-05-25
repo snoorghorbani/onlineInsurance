@@ -2,26 +2,23 @@
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/mergeMap";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
+import { map } from "rxjs/operators";
 
 import { SignInActionTypes } from "@soushians/authentication";
 
-import { UserService } from "../services";
-import { GetProfile } from "../profile-view";
-import { map } from "rxjs/operators";
+import { UserService } from "../services/user.service";
+import { GetProfile } from "../profile-view/profile-view.actions";
 
 @Injectable()
 export class UserEffects {
-	constructor(private actions$: Actions<any>, private router: Router, private service: UserService) { }
+	constructor(private actions$: Actions<any>, private router: Router, private service: UserService) {}
 
 	@Effect()
-	getProfileInformation$ = this.actions$.ofType(SignInActionTypes.SIGNIN_SUCCEED)
-		.pipe(
-			map(() => {
-				return new GetProfile();
-			})
-		);
+	getProfileInformation$ = this.actions$.ofType(SignInActionTypes.SIGNIN_SUCCEED).pipe(
+		map(() => {
+			return new GetProfile();
+		})
+	);
 }

@@ -24,29 +24,22 @@ import {
 	MatProgressBarModule,
 	MatSlideToggleModule
 } from "@angular/material";
-
-import { ConfigReducers } from "./reducers";
-import {
-	ConfigAppConfigComponent,
-	AuthenticationModuleConfigComponent,
-	UserModuleConfigComponent,
-	LayoutModuleConfigComponent
-} from "./dumb-components";
-import { ConfigService, ConfigurationService } from "./services";
-import {
-	ConfigModuleContainerComponent,
-	ConfigsComponent,
-	ConfigEditComponent,
-	DynamicConfigComponentSelectorComponent
-} from "./smart-components";
-import { RoutingModule } from "./config.routing-module";
-import { GetConfigsApiModel } from "./models";
 import { Observable } from "rxjs/Observable";
-import * as FeatureReducer from "./reducers";
 import { EffectsModule } from "@ngrx/effects";
 
-import { LoadConfigEffects } from "./effects";
-import { ConfigModuleConfig, MODULE_CONFIG_TOKEN } from "./config.config";
+import { GetConfigsApiModel } from "./models";
+import { ConfigModuleConfig, MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "./config.config";
+import { ConfigsComponent } from "./smart-components/configs/configs.component";
+import { ConfigEditComponent } from "./smart-components/config-edit/config-edit.component";
+import { ConfigAppConfigComponent } from "./dumb-components/app-config/app-config.component";
+import { UserModuleConfigComponent } from "./dumb-components/user-module-config/user-module-config.component";
+import { LayoutModuleConfigComponent } from "./dumb-components/layout-config/layout-module-config.component";
+import { ConfigModuleContainerComponent } from "./smart-components/config-module-container/config-module-container.component";
+import { AuthenticationModuleConfigComponent } from "./dumb-components/authentication-module-config/authentication-module-config.component";
+import { DynamicConfigComponentSelectorComponent } from "./smart-components/dynamic-config-component-selector/dynamic-config-component-selector.component";
+import { LoadConfigEffects } from "./effects/load-config.effects";
+import { ConfigReducers } from "./reducers";
+// import { RoutingModule } from "./config.routing-module";
 
 @NgModule({
 	imports: [
@@ -72,8 +65,8 @@ import { ConfigModuleConfig, MODULE_CONFIG_TOKEN } from "./config.config";
 		MatToolbarModule,
 		MatDatepickerModule,
 		MatProgressBarModule,
-		BrowserAnimationsModule,
-		RoutingModule
+		BrowserAnimationsModule
+		// RoutingModule
 	],
 	declarations: [
 		ConfigsComponent,
@@ -85,23 +78,13 @@ import { ConfigModuleConfig, MODULE_CONFIG_TOKEN } from "./config.config";
 		AuthenticationModuleConfigComponent,
 		DynamicConfigComponentSelectorComponent
 	],
-	providers: [],
-	exports: [
-		ConfigsComponent,
-		ConfigEditComponent,
-		ConfigAppConfigComponent,
-		UserModuleConfigComponent,
-		LayoutModuleConfigComponent,
-		ConfigModuleContainerComponent,
-		AuthenticationModuleConfigComponent,
-		DynamicConfigComponentSelectorComponent
-	]
+	providers: []
 })
 export class NgsConfigModule {
 	static forRoot(config: ConfigModuleConfig): ModuleWithProviders {
 		return {
 			ngModule: RootNgsConfigModule,
-			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config }, ConfigurationService, ConfigService ]
+			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config } ]
 		};
 	}
 }

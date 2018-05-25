@@ -4,9 +4,9 @@
  */
 import { Injectable, Inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "../../layout.config";
-import { getlayoutModuleConfig } from "@soushians/config";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { getlayoutModuleConfig } from "@soushians/config";
+import { MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "../../layout.config";
 import { UpdateLayoutConfigAction } from "../../actions";
 export class LayoutConfigurationService {
     /**
@@ -18,7 +18,7 @@ export class LayoutConfigurationService {
         this.config$ = new BehaviorSubject(this._config);
         this._config = Object.assign({}, MODULE_DEFAULT_CONFIG, configFile);
         this.config$.next(this._config);
-        this.store.select(getlayoutModuleConfig).subscribe((config) => {
+        this.store.select(getlayoutModuleConfig).subscribe(config => {
             if (!config)
                 return;
             this.store.dispatch(new UpdateLayoutConfigAction(config.Config));

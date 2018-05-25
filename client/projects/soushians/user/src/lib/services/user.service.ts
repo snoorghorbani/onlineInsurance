@@ -6,12 +6,15 @@ import { UserModel, EditProfile_ApiModel, ProfileViewModel, FailedLoginReportMod
 import { UserConfigurationService } from "./user-configuration.service";
 import { Store } from "@ngrx/store";
 
+import { stringTemplate } from "@soushians/shared";
+
 // import * as userReducers from "../../feature/feature.reducers";
 import { GetProfile } from "../profile-view/profile-view.actions";
-import { stringTemplate } from "@soushians/shared";
 import { getUser } from "../dashboard/user.reducer";
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class UserService {
 	responseCache: ProfileViewModel.Response;
 

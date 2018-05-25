@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Input } from "@angular/core";
-import { UserConfigurationService } from "../../services";
+import { UserConfigurationService } from "../../services/user-configuration.service";
 import { Observable } from "rxjs/Observable";
 @Component({
 	selector: "user-dashboard-links",

@@ -5,8 +5,8 @@
     "ng://@soushians/config/projects/soushians/config/src/lib/smart-components/config-module-container/config-module-container.component.ts"
   ],
   "sourcesContent": [
-    "import { Component, OnInit } from '@angular/core';\r\nimport { Observable } from 'rxjs/Observable';\r\n// import { UserModel } from 'app/models/authentication';\r\nimport { Store } from '@ngrx/store';\r\nimport { ConfigService } from '../../services';\r\n\r\n// import * as appReducer from 'app/reducers';\r\n\r\n@Component({\r\n        selector: 'config-module-container',\r\n        template: `<div fxLayoutAlign=\"\" fxflex=\"100\" fxLayout=\"column\">\r\n    <router-outlet></router-outlet>\r\n</div>\r\n`\r\n})\r\nexport class ConfigModuleContainerComponent implements OnInit {\r\n       \r\n        constructor(\r\n               private service : ConfigService\r\n        ) {\r\n          \r\n        }\r\n\r\n        ngOnInit() {\r\n\r\n        }\r\n}\r\n"
+    "import { Component, OnInit } from \"@angular/core\";\r\nimport { Observable } from \"rxjs/Observable\";\r\nimport { Store } from \"@ngrx/store\";\r\n\r\n@Component({\r\n\tselector: \"config-module-container\",\r\n\ttemplate: `<div fxLayoutAlign=\"\" fxflex=\"100\" fxLayout=\"column\">\r\n    <router-outlet></router-outlet>\r\n</div>\r\n`\r\n})\r\nexport class ConfigModuleContainerComponent implements OnInit {\r\n\tconstructor() {}\r\n\r\n\tngOnInit() {}\r\n}\r\n"
   ],
   "names": [],
-  "mappings": ";;;;AAAA,OAAO,EAAE,SAAS,EAAU,MAAM,eAAe,CAAC;AAIlD,OAAO,EAAE,aAAa,EAAE,MAAM,gBAAgB,CAAC;AAW/C,MAAM;;;;IAEE,YACe;QAAA,YAAO,GAAP,OAAO;KAGrB;;;;IAED,QAAQ;KAEP;;;YAjBR,SAAS,SAAC;gBACH,QAAQ,EAAE,yBAAyB;gBACnC,QAAQ,EAAE;;;CAGjB;aACA;;;;YAVQ,aAAa"
+  "mappings": ";;;;AAAA,OAAO,EAAE,SAAS,EAAU,MAAM,eAAe,CAAC;AAWlD,MAAM;IACL,iBAAgB;;;;IAEhB,QAAQ,MAAK;;;YAVb,SAAS,SAAC;gBACV,QAAQ,EAAE,yBAAyB;gBACnC,QAAQ,EAAE;;;CAGV;aACA"
 }

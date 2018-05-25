@@ -4,7 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 
 import { EditConfigApiModel, PartialConfig } from "../../models";
-import { ConfigService } from "../../services";
+import { ConfigService } from "../../services/config.service";
 
 @Component({
 	selector: "config-config-edit",

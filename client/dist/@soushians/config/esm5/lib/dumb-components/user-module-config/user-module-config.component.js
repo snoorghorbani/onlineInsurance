@@ -77,22 +77,13 @@ UserModuleConfigComponent.decorators = [
 ];
 /** @nocollapse */
 UserModuleConfigComponent.ctorParameters = function () { return [
-    { type: Injector, },
+    { type: Injector }
 ]; };
 UserModuleConfigComponent.propDecorators = {
-    "configFormGroup": [{ type: Input },],
-    "configChanged": [{ type: Output },],
+    configFormGroup: [{ type: Input }],
+    configChanged: [{ type: Output }]
 };
 function UserModuleConfigComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    UserModuleConfigComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    UserModuleConfigComponent.ctorParameters;
-    /** @type {!Object<string,!Array<{type: !Function, args: (undefined|!Array<?>)}>>} */
-    UserModuleConfigComponent.propDecorators;
     /** @type {?} */
     UserModuleConfigComponent.prototype.formGroup;
     /** @type {?} */

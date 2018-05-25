@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FieldConfig, Field } from "../../../models";
 import { FormGroup } from "@angular/forms";
+
+import { FieldConfig, Field } from "../../../models";
 
 @Component({
 	selector: "ngs-form-control-color",

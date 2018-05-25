@@ -8,7 +8,9 @@ import { FormModuleConfig } from "../form.config";
 import { MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "../form.config";
 import { MainContainerState } from "../main-container";
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class FormConfigurationService {
 	private _config: FormModuleConfig;
 	get config() {

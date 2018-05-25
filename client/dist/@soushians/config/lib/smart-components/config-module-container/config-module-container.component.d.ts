@@ -1,7 +1,5 @@
-import { OnInit } from '@angular/core';
-import { ConfigService } from '../../services';
+import { OnInit } from "@angular/core";
 export declare class ConfigModuleContainerComponent implements OnInit {
-    private service;
-    constructor(service: ConfigService);
+    constructor();
     ngOnInit(): void;
 }

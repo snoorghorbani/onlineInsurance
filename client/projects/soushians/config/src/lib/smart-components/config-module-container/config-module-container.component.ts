@@ -1,24 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-// import { UserModel } from 'app/models/authentication';
-import { Store } from '@ngrx/store';
-import { ConfigService } from '../../services';
-
-// import * as appReducer from 'app/reducers';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { Store } from "@ngrx/store";
 
 @Component({
-        selector: 'config-module-container',
-        templateUrl: './config-module-container.component.html'
+	selector: "config-module-container",
+	templateUrl: "./config-module-container.component.html"
 })
 export class ConfigModuleContainerComponent implements OnInit {
-       
-        constructor(
-               private service : ConfigService
-        ) {
-          
-        }
+	constructor() {}
 
-        ngOnInit() {
-
-        }
+	ngOnInit() {}
 }

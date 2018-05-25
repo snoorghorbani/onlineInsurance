@@ -2,19 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 import { ConfigState } from "../reducers";
-
-declare var c3: any;
-
-import { EditConfigApiModel, GetConfigsApiModel, ConfigModel, LayoutConfigModel } from "../models";
 import { Store } from "@ngrx/store";
 
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
-import { GetConfigAction } from "../actions";
-import { ConfigurationService } from "./module-configuration";
-import {} from "../../";
-declare var _: any;
+import { EditConfigApiModel, GetConfigsApiModel, ConfigModel, LayoutConfigModel } from "../models";
 
-@Injectable()
+import { GetConfigAction } from "../actions";
+import { ConfigurationService } from "./configuration.service";
+
+@Injectable({
+	providedIn: "root"
+})
 export class ConfigService {
 	responseCache: any;
 	configsEndpoint: string;

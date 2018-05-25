@@ -72,9 +72,7 @@ import { OiModule } from "./oi/oi.module";
 		OiModule
 	],
 	declarations: [ AppComponent ],
-	providers: [
-		// { provide: LOCALE_ID, useValue: 'fa-IR' },
-	],
+	providers: [ { provide: LOCALE_ID, useValue: "fa-IR" } ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule {}

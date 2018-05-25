@@ -5,10 +5,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
-import { EditConfigApiModel } from "../models";
 import { Store } from "@ngrx/store";
+import { EditConfigApiModel } from "../models";
 import { GetConfigAction } from "../actions";
-import { ConfigurationService } from "./module-configuration";
+import { ConfigurationService } from "./configuration.service";
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/common/http";
+import * as i2 from "@ngrx/store";
+import * as i3 from "./configuration.service";
 var ConfigService = /** @class */ (function () {
     /**
      * @param {?} http
@@ -86,22 +90,18 @@ var ConfigService = /** @class */ (function () {
 }());
 export { ConfigService };
 ConfigService.decorators = [
-    { type: Injectable },
+    { type: Injectable, args: [{
+                providedIn: "root"
+            },] },
 ];
 /** @nocollapse */
 ConfigService.ctorParameters = function () { return [
-    { type: HttpClient, },
-    { type: Store, },
-    { type: ConfigurationService, },
+    { type: HttpClient },
+    { type: Store },
+    { type: ConfigurationService }
 ]; };
+/** @nocollapse */ ConfigService.ngInjectableDef = i0.defineInjectable({ factory: function ConfigService_Factory() { return new ConfigService(i0.inject(i1.HttpClient), i0.inject(i2.Store), i0.inject(i3.ConfigurationService)); }, token: ConfigService, providedIn: "root" });
 function ConfigService_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ConfigService.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ConfigService.ctorParameters;
     /** @type {?} */
     ConfigService.prototype.responseCache;
     /** @type {?} */

@@ -1,9 +1,12 @@
 {
   "name": "@soushians/config",
-  "version": "0.0.1",
+  "version": "6.1.0",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "dependencies": {
+    "tslib": "^1.9.0"
   },
   "main": "bundles/soushians-config.umd.js",
   "module": "fesm5/soushians-config.js",
@@ -14,8 +17,5 @@
   "fesm2015": "fesm2015/soushians-config.js",
   "typings": "soushians-config.d.ts",
   "metadata": "soushians-config.metadata.json",
-  "sideEffects": false,
-  "dependencies": {
-    "tslib": "^1.9.0"
-  }
+  "sideEffects": false
 }

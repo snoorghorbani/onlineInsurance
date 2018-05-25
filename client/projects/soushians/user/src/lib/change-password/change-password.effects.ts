@@ -9,7 +9,7 @@ import { map, switchMap } from "rxjs/operators";
 
 import { ChangePasswordModel } from "../models";
 
-import { PasswordService } from "../services";
+import { PasswordService } from "../services/password.service";
 import {
 	ChangePasswordActionTypes,
 	ChangePasswordStart,
@@ -19,27 +19,23 @@ import {
 
 @Injectable()
 export class ChangePasswordEffects {
-	constructor(private actions$: Actions<any>, private router: Router, private passwordService: PasswordService) { }
+	constructor(private actions$: Actions<any>, private router: Router, private passwordService: PasswordService) {}
 
 	@Effect()
 	ChangePasswordRequest$ = this.actions$
 		.ofType(ChangePasswordActionTypes.CHANGE_PASSWORD)
-		.pipe(
-			map(action => action.payload),
-			map((data) => new ChangePasswordStart(data))
-		);
+		.pipe(map(action => action.payload), map(data => new ChangePasswordStart(data)));
 
 	@Effect()
-	RequestChangePasswordLink$ = this.actions$
-		.ofType(ChangePasswordActionTypes.PASSWORD_CHANGED_START)
-		.pipe(
-			map(action => action.payload),
-			switchMap((data: ChangePasswordModel.Request) => {
-				return this.passwordService
-					.changePassword(data)
-					.map((res) => new ChangePasswordSucceed(res))
-					.catch(() => Observable.of(new ChangePasswordFailed()));
-			}));
+	RequestChangePasswordLink$ = this.actions$.ofType(ChangePasswordActionTypes.PASSWORD_CHANGED_START).pipe(
+		map(action => action.payload),
+		switchMap((data: ChangePasswordModel.Request) => {
+			return this.passwordService
+				.changePassword(data)
+				.map(res => new ChangePasswordSucceed(res))
+				.catch(() => Observable.of(new ChangePasswordFailed()));
+		})
+	);
 
 	//@Effect()
 	//    ResetPassword$ = this.actions$

@@ -4,13 +4,12 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
 
-import { MainContainerState } from "../../main-container";
-import { FormSchemaModel, EditFormApiModel } from "../../models";
-import { FormService } from "../../services";
-import { AddFormAction } from "../../add/add-form.actions";
+import { MainContainerState } from "../../main-container/main-container.reducers";
+import { EditFormApiModel } from "../../models";
+import { FormService } from "../../services/form.service";
 import { EditFormAction } from "../../edit/edit-form.actions";
-import { AddFormContainerComponent } from "../../add";
-import { GetFormSchemaAction } from "../../list";
+import { AddFormContainerComponent } from "../../add/add-form-container";
+import { GetFormSchemaAction } from "../../list/list.actions";
 
 @Component({
 	template: `<edit-form

@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/layout/projects/soushians/layout/src/lib/dumb-components/main/index.ts"
+    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/dumb-components/main/index.ts"
   ],
   "sourcesContent": [
     "export * from \"./main.component\";\r\n"

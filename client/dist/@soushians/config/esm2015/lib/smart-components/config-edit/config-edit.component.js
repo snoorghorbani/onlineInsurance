@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormControl } from "@angular/forms";
 import { EditConfigApiModel } from "../../models";
-import { ConfigService } from "../../services";
+import { ConfigService } from "../../services/config.service";
 export class ConfigEditComponent {
     /**
      * @param {?} configService
@@ -18,9 +18,9 @@ export class ConfigEditComponent {
         this.formBuilder = formBuilder;
         this.route = route;
         this.formGroup = EditConfigApiModel.Request.formGroup;
-        this.route.params.subscribe((params) => {
+        this.route.params.subscribe(params => {
             const /** @type {?} */ configName = params["name"];
-            this.configService.getConfigByName(configName).subscribe((data) => {
+            this.configService.getConfigByName(configName).subscribe(data => {
                 this.partialConfigModel = {
                     type: data.Result.Name,
                     inputs: {
@@ -31,7 +31,7 @@ export class ConfigEditComponent {
                     _id: data.Result._id,
                     Name: data.Result.Name
                 });
-                Object.keys(data.Result.Config).forEach((key) => {
+                Object.keys(data.Result.Config).forEach(key => {
                     this.addControl(/** @type {?} */ (this.formGroup.controls["Config"]), key, data.Result.Config[key]);
                 });
             });
@@ -73,7 +73,7 @@ export class ConfigEditComponent {
         debugger;
         if (!this.formGroup.valid)
             return;
-        this.configService.editConfig(this.formGroup.value).subscribe((config) => {
+        this.configService.editConfig(this.formGroup.value).subscribe(config => {
             debugger;
         });
     }
@@ -98,18 +98,11 @@ ConfigEditComponent.decorators = [
 ];
 /** @nocollapse */
 ConfigEditComponent.ctorParameters = () => [
-    { type: ConfigService, },
-    { type: FormBuilder, },
-    { type: ActivatedRoute, },
+    { type: ConfigService },
+    { type: FormBuilder },
+    { type: ActivatedRoute }
 ];
 function ConfigEditComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ConfigEditComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ConfigEditComponent.ctorParameters;
     /** @type {?} */
     ConfigEditComponent.prototype.configInforamation;
     /** @type {?} */

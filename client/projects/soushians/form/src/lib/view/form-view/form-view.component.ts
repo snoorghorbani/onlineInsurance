@@ -17,8 +17,9 @@ import {
 } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { FormControl, FormGroup, FormArray, AbstractControl, Validators } from "@angular/forms";
-
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { ComponentRef } from "@angular/core/src/linker/component_factory";
 import { Store } from "@ngrx/store";
 
@@ -30,12 +31,10 @@ import {
 	TextComponent,
 	TableComponent
 } from "../form-controls";
-import { FormService } from "../../services";
-import { MainContainerState } from "../../main-container";
-import { GetFormSchemaAction } from "../../list";
+import { FormService } from "../../services/form.service";
+import { MainContainerState } from "../../main-container/main-container.reducers";
+import { GetFormSchemaAction } from "../../list/list.actions";
 import { Field, FieldConfig, FormSchemaModel } from "../../models";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 
 @Component({
 	selector: "ngs-form-view",

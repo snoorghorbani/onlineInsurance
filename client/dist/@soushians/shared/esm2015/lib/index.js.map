@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/shared/projects/soushians/shared/src/lib/index.ts"
+    "ng://@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/ng:/@soushians/shared/projects/soushians/shared/src/lib/index.ts"
   ],
   "sourcesContent": [
     "export * from './http-response-base-model'\r\nexport * from './http-request-base-model'\r\nexport * from \"./shared.module\";\r\n// export * from './animations';\r\nexport * from './enums';"

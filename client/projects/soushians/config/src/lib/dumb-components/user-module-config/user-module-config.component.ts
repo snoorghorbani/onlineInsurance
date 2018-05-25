@@ -1,7 +1,6 @@
 import { NgModule, Component, OnInit, Output, EventEmitter, Input, Injector } from "@angular/core";
 import { FormGroup, Validators, FormControl, FormArray } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { Store } from "@ngrx/store";
 
 @Component({
 	selector: "config-user-module-config",

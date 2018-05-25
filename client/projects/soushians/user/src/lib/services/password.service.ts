@@ -9,7 +9,9 @@ import * as FeatureReducer from "../feature/feature.reducers";
 import { ResetPasswordModel, ResetPasswordRequestModel, ChangePasswordModel } from "../models";
 import { UserConfigurationService } from "./user-configuration.service";
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class PasswordService {
 	numberOfRequeseted$: Observable<number>;
 

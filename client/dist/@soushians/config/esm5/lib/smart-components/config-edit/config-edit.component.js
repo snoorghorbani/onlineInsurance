@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormControl } from "@angular/forms";
 import { EditConfigApiModel } from "../../models";
-import { ConfigService } from "../../services";
+import { ConfigService } from "../../services/config.service";
 var ConfigEditComponent = /** @class */ (function () {
     /**
      * @param {?} configService
@@ -89,18 +89,11 @@ ConfigEditComponent.decorators = [
 ];
 /** @nocollapse */
 ConfigEditComponent.ctorParameters = function () { return [
-    { type: ConfigService, },
-    { type: FormBuilder, },
-    { type: ActivatedRoute, },
+    { type: ConfigService },
+    { type: FormBuilder },
+    { type: ActivatedRoute }
 ]; };
 function ConfigEditComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ConfigEditComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ConfigEditComponent.ctorParameters;
     /** @type {?} */
     ConfigEditComponent.prototype.configInforamation;
     /** @type {?} */

@@ -5,7 +5,9 @@
 /*
  * Public API Surface of shared
  */
-export { HttpResponseBaseModel, HttpRequestBaseModel, SharedModule } from "./lib";
+export { SharedModule } from "./lib/shared.module";
+export { HttpResponseBaseModel } from "./lib/http-response-base-model";
+export { HttpRequestBaseModel } from "./lib/http-request-base-model";
 export { stringTemplate } from "./lib/helpers";
 export { MatchValidator } from "./lib/validators";
 //# sourceMappingURL=public_api.js.map

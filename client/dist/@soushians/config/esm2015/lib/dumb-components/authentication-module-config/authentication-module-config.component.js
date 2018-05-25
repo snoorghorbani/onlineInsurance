@@ -29,7 +29,7 @@ export class AuthenticationModuleConfigComponent {
      */
     set configFormGroup(configFormGroup) {
         this.formGroup.patchValue(configFormGroup.value);
-        configFormGroup.valueChanges.subscribe((data) => {
+        configFormGroup.valueChanges.subscribe(data => {
             this.formGroup.patchValue(data);
         });
     }
@@ -69,22 +69,13 @@ AuthenticationModuleConfigComponent.decorators = [
 ];
 /** @nocollapse */
 AuthenticationModuleConfigComponent.ctorParameters = () => [
-    { type: Injector, },
+    { type: Injector }
 ];
 AuthenticationModuleConfigComponent.propDecorators = {
-    "configFormGroup": [{ type: Input },],
-    "configChanged": [{ type: Output },],
+    configFormGroup: [{ type: Input }],
+    configChanged: [{ type: Output }]
 };
 function AuthenticationModuleConfigComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    AuthenticationModuleConfigComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    AuthenticationModuleConfigComponent.ctorParameters;
-    /** @type {!Object<string,!Array<{type: !Function, args: (undefined|!Array<?>)}>>} */
-    AuthenticationModuleConfigComponent.propDecorators;
     /** @type {?} */
     AuthenticationModuleConfigComponent.prototype.formGroup;
     /** @type {?} */

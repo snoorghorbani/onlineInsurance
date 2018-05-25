@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/config/projects/soushians/config/src/lib/smart-components/dynamic-config-component-selector/index.ts"
+    "ng://@soushians/config/ng:/@soushians/config/ng:/@soushians/config/ng:/@soushians/config/projects/soushians/config/src/lib/smart-components/dynamic-config-component-selector/index.ts"
   ],
   "sourcesContent": [
     "export * from './dynamic-config-component-selector.component'"

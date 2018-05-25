@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 import { StoreModule } from "@ngrx/store";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
@@ -24,19 +25,18 @@ import {
 	MatProgressBarModule
 } from "@angular/material";
 
-import { LayoutReducers } from "./reducers";
-import {
-	MainMenuComponent,
-	SearchBoxComponent,
-	LogoContainerComponent,
-	ToolbarMenuComponent,
-	FooterComponent,
-	TitleComponent,
-	MainComponent
-} from "./dumb-components";
-import { LayoutConfigurationService } from "./services";
-import { MODULE_CONFIG_TOKEN, LayoutModuleConfig } from "./layout.config";
-import { BrowserModule } from "@angular/platform-browser";
+import { NgsConfigModule } from "@soushians/config";
+
+// import { LayoutReducers } from "./reducers";
+
+// import { MODULE_CONFIG_TOKEN, LayoutModuleConfig } from "./layout.config";
+// import { MainMenuComponent } from "./dumb-components/main-menu/main-menu.component";
+// import { SearchBoxComponent } from "./dumb-components/search-box/search-box.component";
+// import { LogoContainerComponent } from "./dumb-components/logo-container/logo-container.component";
+// import { ToolbarMenuComponent } from "./dumb-components/toolbar-menu/toolbar-menu.component";
+// import { FooterComponent } from "./dumb-components/footer/footer.component";
+// import { TitleComponent } from "./dumb-components/title/title.component";
+// import { MainComponent } from "./dumb-components/main/main.component";
 
 @NgModule({
 	imports: [
@@ -62,37 +62,38 @@ import { BrowserModule } from "@angular/platform-browser";
 		MatDatepickerModule,
 		MatProgressBarModule,
 		RouterModule
+		// NgsConfigModule
 	],
 	declarations: [
-		MainMenuComponent,
-		SearchBoxComponent,
-		LogoContainerComponent,
-		ToolbarMenuComponent,
-		FooterComponent,
-		TitleComponent,
-		MainComponent
+		// MainMenuComponent,
+		// SearchBoxComponent,
+		// LogoContainerComponent,
+		// ToolbarMenuComponent,
+		// FooterComponent,
+		// TitleComponent,
+		// MainComponent
 	],
 	exports: [
-		MainMenuComponent,
-		SearchBoxComponent,
-		LogoContainerComponent,
-		ToolbarMenuComponent,
-		FooterComponent,
-		TitleComponent,
-		MainComponent
+		// MainMenuComponent,
+		// SearchBoxComponent,
+		// LogoContainerComponent,
+		// ToolbarMenuComponent,
+		// FooterComponent,
+		// TitleComponent,
+		// MainComponent
 	]
 })
 export class NgsLayoutModule {
-	static forRoot(config?: LayoutModuleConfig): ModuleWithProviders {
-		return {
-			ngModule: RootNgsLayoutModule,
-			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config }, LayoutConfigurationService ]
-		};
-	}
+	// static forRoot(config?: LayoutModuleConfig): ModuleWithProviders {
+	// 	return {
+	// 		ngModule: RootNgsLayoutModule,
+	// 		providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config } ]
+	// 	};
+	// }
 }
 
-@NgModule({
-	imports: [ NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers), EffectsModule.forFeature([]) ],
-	exports: [ NgsLayoutModule ]
-})
-export class RootNgsLayoutModule {}
+// @NgModule({
+// 	imports: [ NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers), EffectsModule.forFeature([]) ],
+// 	exports: [ NgsLayoutModule ]
+// })
+// export class RootNgsLayoutModule {}

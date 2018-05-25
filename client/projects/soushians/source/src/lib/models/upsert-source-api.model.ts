@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpRequestBaseModel } from "@soushians/shared";
+// import { HttpRequestBaseModel } from "@soushians/shared";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { SourceModel } from "../models";
 
 export namespace UpsertSourceApiModel {
-	export class Request implements HttpRequestBaseModel<Request> {
+	// export class Request implements HttpRequestBaseModel<Request> {
+	export class Request {
 		_id: string;
 		Endpoint: string;
 		Interval: number;
@@ -16,7 +17,7 @@ export namespace UpsertSourceApiModel {
 			Type: boolean;
 		}[];
 		constructor(initValue = {} as UpsertSourceApiModel.Request) {
-			Object.keys(initValue).forEach((key) => (this[key] = initValue[key]));
+			Object.keys(initValue).forEach(key => (this[key] = initValue[key]));
 		}
 
 		getRequestBody() {

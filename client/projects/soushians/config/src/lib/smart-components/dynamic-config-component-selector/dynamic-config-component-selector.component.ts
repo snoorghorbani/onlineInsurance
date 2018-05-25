@@ -12,17 +12,12 @@ import {
 	EventEmitter
 } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Subscription } from "rxjs";
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
-import { AuthenticationModuleConfigComponent } from "../../dumb-components/authentication-module-config";
-import { ConfigAppConfigComponent } from "../../dumb-components/app-config";
-import { UserModuleConfigComponent } from "../../dumb-components/user-module-config";
-import { FormGroup } from "@angular/forms/src/model";
 import { PartialConfig } from "../../models";
-import { LayoutModuleConfigComponent } from "../../dumb-components";
+import { AuthenticationModuleConfigComponent } from "../../dumb-components/authentication-module-config/authentication-module-config.component";
+import { ConfigAppConfigComponent } from "../../dumb-components/app-config/app-config.component";
+import { UserModuleConfigComponent } from "../../dumb-components/user-module-config/user-module-config.component";
+import { LayoutModuleConfigComponent } from "../../dumb-components/layout-config/layout-module-config.component";
 
 @Component({
 	selector: "dynamic-config-component-selector",
@@ -54,7 +49,7 @@ export class DynamicConfigComponentSelectorComponent implements AfterViewInit {
 			return;
 		}
 		let _component: any = this.typeMapToDiagram[data.type];
-		let inputProviders = Object.keys(data.inputs).map((inputName) => {
+		let inputProviders = Object.keys(data.inputs).map(inputName => {
 			return { provide: inputName, useValue: (data.inputs as any)[inputName] };
 		});
 		let resolvedInputs = ReflectiveInjector.resolve(inputProviders);

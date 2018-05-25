@@ -9,7 +9,7 @@ import { ConfigModel, getAppConfig } from "@soushians/config";
 import { UserModel, EditProfile_ApiModel } from "../../models";
 import * as FeatureReducer from "../../feature/feature.reducers";
 import { EditProfile } from "../edit-profile.actions";
-import { UserConfigurationService } from "../../services";
+import { UserConfigurationService } from "../../services/user-configuration.service";
 import { UserModuleConfig } from "../../user.config";
 
 @Component({

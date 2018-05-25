@@ -1,6 +1,6 @@
 import { Store } from "@ngrx/store";
-import { ConfigState } from "@soushians/config";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { ConfigState } from "@soushians/config";
 import { LayoutModuleConfig } from "../../layout.config";
 export declare class LayoutConfigurationService {
     private store;

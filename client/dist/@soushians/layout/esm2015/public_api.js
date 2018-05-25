@@ -5,5 +5,28 @@
 /*
  * Public API Surface of layout
  */
-export { LayoutActionTypes, TitleChangedAction, OpenSidenavAction, CloseSidenavAction, ChangeSideNavMode, ChangeLayout, CloseSecondSidenavAction, ChangeSecondSidenavMode, OpenSecondSidenavAction, ChangeToolbatToComfortableModeAction, ChangeToolbatToCompactModeAction, DisableComfortableModeAction, EnableComfortableModeAction, LayoutReducers, selectLayoutState, getLayout, getTitle, getShowMainSidenav, getMainSideNavMode, getLayoutMode, getShowSecondSidebarStatus, getSecondSidebarMode, getLayoutToolbar, getLayoutToolbarMode, NgsLayoutModule, RootNgsLayoutModule, MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN, LayoutConfigurationService } from "./lib";
+//routings
+// export {} from "./lib/reducers";
+//models
+// export * from "./lib/models";
+//modules
+export { NgsLayoutModule } from "./lib/layout.module";
+// export * from "./lib/layout.config";
+//actions
+// export {
+// 	LayoutActionTypes,
+// 	TitleChangedAction,
+// 	OpenSidenavAction,
+// 	CloseSidenavAction,
+// 	ChangeSideNavMode,
+// 	ChangeLayout,
+// 	CloseSecondSidenavAction,
+// 	ChangeSecondSidenavMode,
+// 	OpenSecondSidenavAction,
+// 	ChangeToolbatToComfortableModeAction,
+// 	ChangeToolbatToCompactModeAction,
+// 	DisableComfortableModeAction,
+// 	EnableComfortableModeAction
+// } from "./lib/actions";
+//components
 //# sourceMappingURL=public_api.js.map

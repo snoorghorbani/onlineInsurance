@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 import { ConfigState } from "../reducers";
-import { EditConfigApiModel, ConfigModel, LayoutConfigModel } from "../models";
 import { Store } from "@ngrx/store";
-import { ConfigurationService } from "./module-configuration";
+import { EditConfigApiModel, ConfigModel, LayoutConfigModel } from "../models";
+import { ConfigurationService } from "./configuration.service";
 export declare class ConfigService {
     private http;
     private store;

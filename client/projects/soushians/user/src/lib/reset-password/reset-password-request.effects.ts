@@ -1,14 +1,10 @@
-// ./effects/auth.ts
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/mergeMap";
-import "rxjs/add/operator/switchMap";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
 import { of } from "rxjs/observable/of";
 import { Store } from "@ngrx/store";
+import { switchMap, map, takeUntil, delay, catchError } from "rxjs/operators";
 
 import { ResetPasswordRequestModel } from "../models";
 
@@ -21,22 +17,19 @@ import {
 	ResetPasswordLinkRequestSucceed,
 	ResetPasswordLinkRequestFailed
 } from "./reset-password-request.actions";
-import { PasswordService } from "../services";
-import { switchMap, map, takeUntil, delay, catchError } from "rxjs/operators";
+import { PasswordService } from "../services/password.service";
 
 @Injectable()
 export class ResetPasswordRequestEffects {
-	constructor(private actions$: Actions<any>, private router: Router, private passwordService: PasswordService) { }
+	constructor(private actions$: Actions<any>, private passwordService: PasswordService) {}
 
 	@Effect()
-	ResetPasswordRequest$ = this.actions$
-		.ofType(ResetPasswordRequestActionTypes.GET_RESET_PASSWORD_LINK)
-		.pipe(
-			map(action => action.payload),
-			// switchMap((data: ResetPasswordRequestModel.Request) => this.passwordService.isValidResetPasswordRequest()),
-			// map((isValid: boolean) => isValid ? new ResetPasswordLinkRequestStart(data) : new MaximumTryHappend())
-			map((data) => new ResetPasswordLinkRequestStart(data))
-		)
+	ResetPasswordRequest$ = this.actions$.ofType(ResetPasswordRequestActionTypes.GET_RESET_PASSWORD_LINK).pipe(
+		map(action => action.payload),
+		// switchMap((data: ResetPasswordRequestModel.Request) => this.passwordService.isValidResetPasswordRequest()),
+		// map((isValid: boolean) => isValid ? new ResetPasswordLinkRequestStart(data) : new MaximumTryHappend())
+		map(data => new ResetPasswordLinkRequestStart(data))
+	);
 
 	@Effect()
 	MaximumTryHappend$ = this.actions$
@@ -44,9 +37,7 @@ export class ResetPasswordRequestEffects {
 			ResetPasswordRequestActionTypes.MAXIMUM_TRY_HAPPEND,
 			ResetPasswordRequestActionTypes.RESET_PASSWORD_LINK_REQUEST_START
 		)
-		.pipe(
-			map(() => new DisableGetLink())
-		);
+		.pipe(map(() => new DisableGetLink()));
 
 	@Effect()
 	enableAfterTime$ = this.actions$

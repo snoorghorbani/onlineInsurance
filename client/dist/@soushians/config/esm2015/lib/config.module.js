@@ -11,14 +11,18 @@ import { HttpClientModule } from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule, MatButtonModule, MatCardModule, MatSnackBarModule, MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule, MatRadioModule, MatInputModule, MatToolbarModule, MatDatepickerModule, MatProgressBarModule, MatSlideToggleModule } from "@angular/material";
-import { ConfigReducers } from "./reducers";
-import { ConfigAppConfigComponent, AuthenticationModuleConfigComponent, UserModuleConfigComponent, LayoutModuleConfigComponent } from "./dumb-components";
-import { ConfigService, ConfigurationService } from "./services";
-import { ConfigModuleContainerComponent, ConfigsComponent, ConfigEditComponent, DynamicConfigComponentSelectorComponent } from "./smart-components";
-import { RoutingModule } from "./config.routing-module";
 import { EffectsModule } from "@ngrx/effects";
-import { LoadConfigEffects } from "./effects";
 import { MODULE_CONFIG_TOKEN } from "./config.config";
+import { ConfigsComponent } from "./smart-components/configs/configs.component";
+import { ConfigEditComponent } from "./smart-components/config-edit/config-edit.component";
+import { ConfigAppConfigComponent } from "./dumb-components/app-config/app-config.component";
+import { UserModuleConfigComponent } from "./dumb-components/user-module-config/user-module-config.component";
+import { LayoutModuleConfigComponent } from "./dumb-components/layout-config/layout-module-config.component";
+import { ConfigModuleContainerComponent } from "./smart-components/config-module-container/config-module-container.component";
+import { AuthenticationModuleConfigComponent } from "./dumb-components/authentication-module-config/authentication-module-config.component";
+import { DynamicConfigComponentSelectorComponent } from "./smart-components/dynamic-config-component-selector/dynamic-config-component-selector.component";
+import { LoadConfigEffects } from "./effects/load-config.effects";
+import { ConfigReducers } from "./reducers";
 export class NgsConfigModule {
     /**
      * @param {?} config
@@ -27,7 +31,7 @@ export class NgsConfigModule {
     static forRoot(config) {
         return {
             ngModule: RootNgsConfigModule,
-            providers: [{ provide: MODULE_CONFIG_TOKEN, useValue: config }, ConfigurationService, ConfigService]
+            providers: [{ provide: MODULE_CONFIG_TOKEN, useValue: config }]
         };
     }
 }
@@ -56,8 +60,7 @@ NgsConfigModule.decorators = [
                     MatToolbarModule,
                     MatDatepickerModule,
                     MatProgressBarModule,
-                    BrowserAnimationsModule,
-                    RoutingModule
+                    BrowserAnimationsModule
                 ],
                 declarations: [
                     ConfigsComponent,
@@ -69,28 +72,9 @@ NgsConfigModule.decorators = [
                     AuthenticationModuleConfigComponent,
                     DynamicConfigComponentSelectorComponent
                 ],
-                providers: [],
-                exports: [
-                    ConfigsComponent,
-                    ConfigEditComponent,
-                    ConfigAppConfigComponent,
-                    UserModuleConfigComponent,
-                    LayoutModuleConfigComponent,
-                    ConfigModuleContainerComponent,
-                    AuthenticationModuleConfigComponent,
-                    DynamicConfigComponentSelectorComponent
-                ]
+                providers: []
             },] },
 ];
-function NgsConfigModule_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    NgsConfigModule.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    NgsConfigModule.ctorParameters;
-}
 export class RootNgsConfigModule {
 }
 RootNgsConfigModule.decorators = [
@@ -103,13 +87,4 @@ RootNgsConfigModule.decorators = [
                 exports: [NgsConfigModule]
             },] },
 ];
-function RootNgsConfigModule_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    RootNgsConfigModule.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    RootNgsConfigModule.ctorParameters;
-}
 //# sourceMappingURL=config.module.js.map

@@ -37,22 +37,13 @@ ConfigAppConfigComponent.decorators = [
 ];
 /** @nocollapse */
 ConfigAppConfigComponent.ctorParameters = () => [
-    { type: Injector, },
+    { type: Injector }
 ];
 ConfigAppConfigComponent.propDecorators = {
-    "configFormGroup": [{ type: Input },],
-    "configChanged": [{ type: Output },],
+    configFormGroup: [{ type: Input }],
+    configChanged: [{ type: Output }]
 };
 function ConfigAppConfigComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ConfigAppConfigComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ConfigAppConfigComponent.ctorParameters;
-    /** @type {!Object<string,!Array<{type: !Function, args: (undefined|!Array<?>)}>>} */
-    ConfigAppConfigComponent.propDecorators;
     /** @type {?} */
     ConfigAppConfigComponent.prototype.formGroup;
     /** @type {?} */

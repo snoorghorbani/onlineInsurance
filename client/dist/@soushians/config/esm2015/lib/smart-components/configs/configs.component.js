@@ -2,24 +2,21 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-import { Component } from '@angular/core';
-import { ConfigService } from '../../services';
-import { Store } from '@ngrx/store';
-import { getConfigs } from '../../reducers';
+import { Component } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { getConfigs } from "../../reducers";
 export class ConfigsComponent {
     /**
-     * @param {?} configService
      * @param {?} store
      */
-    constructor(configService, store) {
-        this.configService = configService;
+    constructor(store) {
         this.store = store;
         this.configs = this.store.select(getConfigs);
     }
 }
 ConfigsComponent.decorators = [
     { type: Component, args: [{
-                selector: 'configs',
+                selector: "configs",
                 template: `<div fxFlexLayout="row" fxLayoutWrap fxLayoutAlign="center center">
   <mat-card class="config-box" *ngFor="let config of (configs | async)" [fxFlex]="50">
       <h3>
@@ -35,21 +32,11 @@ ConfigsComponent.decorators = [
 ];
 /** @nocollapse */
 ConfigsComponent.ctorParameters = () => [
-    { type: ConfigService, },
-    { type: Store, },
+    { type: Store }
 ];
 function ConfigsComponent_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    ConfigsComponent.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    ConfigsComponent.ctorParameters;
     /** @type {?} */
     ConfigsComponent.prototype.configs;
-    /** @type {?} */
-    ConfigsComponent.prototype.configService;
     /** @type {?} */
     ConfigsComponent.prototype.store;
 }

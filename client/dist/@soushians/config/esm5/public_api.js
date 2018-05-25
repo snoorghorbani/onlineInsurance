@@ -5,5 +5,9 @@
 /*
  * Public API Surface of config
  */
-export { NgsConfigModule, RootNgsConfigModule, MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN, ConfigReducers, selectConfigState, getConfigListState, getConfigs, getAppConfig, getAuthenticationModuleConfig, getUserModuleConfig, getlayoutModuleConfig, getConfigModuleConfig, getFormModuleConfig, getSocketModuleConfig, ConfigurationService, ConfigService, ConfigModel, GetConfigsApiModel, EditConfigApiModel } from "./lib";
+export { ConfigModel, GetConfigsApiModel, EditConfigApiModel } from "./lib/models";
+export { MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN } from "./lib/config.config";
+export { ConfigReducers, selectConfigState, getConfigListState, getConfigs, getAppConfig, getAuthenticationModuleConfig, getUserModuleConfig, getlayoutModuleConfig, getConfigModuleConfig, getFormModuleConfig, getSocketModuleConfig } from "./lib/reducers";
+export { ConfigService } from "./lib/services/config.service";
+export { NgsConfigModule, RootNgsConfigModule } from "./lib/config.module";
 //# sourceMappingURL=public_api.js.map

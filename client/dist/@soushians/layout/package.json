@@ -5,6 +5,13 @@
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
   },
+  "dependencies": {
+    "@soushians/config": "*",
+    "@soushians/authentication": "*",
+    "@soushians/shared": "*",
+    "@soushians/user": "*",
+    "tslib": "^1.9.0"
+  },
   "main": "bundles/soushians-layout.umd.js",
   "module": "fesm5/soushians-layout.js",
   "es2015": "fesm2015/soushians-layout.js",
@@ -14,8 +21,5 @@
   "fesm2015": "fesm2015/soushians-layout.js",
   "typings": "soushians-layout.d.ts",
   "metadata": "soushians-layout.metadata.json",
-  "sideEffects": false,
-  "dependencies": {
-    "tslib": "^1.9.0"
-  }
+  "sideEffects": false
 }
