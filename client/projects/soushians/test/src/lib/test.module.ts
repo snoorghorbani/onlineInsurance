@@ -1,15 +1,26 @@
 import { NgModule } from "@angular/core";
 import { TestComponent } from "./test.component";
 
-import { NgsFormModule } from "@soushians/form";
-import { SharedModule } from "@soushians/shared";
+// import { NgsAuthenticationModule } from "@soushians/authentication";
 import { NgsConfigModule } from "@soushians/config";
-// import { SharedModule } from "@soushians/shared";
-
-console.assert(NgsFormModule != null, "NgsFormModule");
+// import { NgsDiagramModule } from "@soushians/diagram";
+import { NgsFormModule } from "@soushians/form";
+import { NgsLayoutModule } from "@soushians/layout";
+import { SharedModule } from "@soushians/shared";
+// import { SourceModule } from "@soushians/source";
+import { NgsUserModule } from "@soushians/user";
 
 @NgModule({
-	imports: [ NgsFormModule, SharedModule, NgsConfigModule ],
+	imports: [
+		// NgsAuthenticationModule,
+		NgsConfigModule,
+		// NgsDiagramModule,
+		NgsFormModule,
+		NgsLayoutModule,
+		SharedModule,
+		// SourceModule,
+		NgsUserModule
+	],
 	declarations: [ TestComponent ],
 	exports: [ TestComponent ]
 })

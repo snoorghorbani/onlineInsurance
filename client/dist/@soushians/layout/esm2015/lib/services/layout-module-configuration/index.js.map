@@ -2,7 +2,7 @@
   "version": 3,
   "file": "index.js",
   "sources": [
-    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/services/layout-module-configuration/index.ts"
+    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/services/layout-module-configuration/index.ts"
   ],
   "sourcesContent": [
     "export * from './layout-configuration.service';"

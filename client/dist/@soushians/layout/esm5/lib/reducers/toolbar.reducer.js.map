@@ -2,7 +2,7 @@
   "version": 3,
   "file": "toolbar.reducer.js",
   "sources": [
-    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/reducers/toolbar.reducer.ts"
+    "ng://@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/ng:/@soushians/layout/projects/soushians/layout/src/lib/reducers/toolbar.reducer.ts"
   ],
   "sourcesContent": [
     "import { ToolbarActionTypes, ToolbarActions } from \"../actions\";\r\n\r\nexport interface State {\r\n\tmode: \"comfortable\" | \"compact\" | \"summary\";\r\n\tenableComfortableMode: boolean;\r\n\tcomfortableModeHaveBeenDone: boolean;\r\n}\r\n\r\nconst initialState: State = {\r\n\tmode: \"compact\",\r\n\tenableComfortableMode: false,\r\n\tcomfortableModeHaveBeenDone: false\r\n};\r\n\r\nexport function Reducer(state = initialState, action: ToolbarActions): State {\r\n\tswitch (action.type) {\r\n\t\tcase ToolbarActionTypes.COMPACT:\r\n\t\t\treturn {\r\n\t\t\t\t...state,\r\n\t\t\t\tmode: \"compact\"\r\n\t\t\t};\r\n\t\tcase ToolbarActionTypes.COMPORTABLE:\r\n\t\t\treturn {\r\n\t\t\t\t...state,\r\n\t\t\t\tmode: state.enableComfortableMode ? \"comfortable\" : \"compact\"\r\n\t\t\t};\r\n\t\tcase ToolbarActionTypes.SUMMARY:\r\n\t\t\treturn {\r\n\t\t\t\t...state,\r\n\t\t\t\tmode: \"summary\"\r\n\t\t\t};\r\n\t\tcase ToolbarActionTypes.ENABLE_COMFORTABLE_MODE:\r\n\t\t\treturn {\r\n\t\t\t\t...state,\r\n\t\t\t\tenableComfortableMode: true\r\n\t\t\t};\r\n\t\tcase ToolbarActionTypes.DISBALE_COMFORTABLE_MODE:\r\n\t\t\treturn {\r\n\t\t\t\t...state,\r\n\t\t\t\tmode: \"compact\",\r\n\t\t\t\tenableComfortableMode: false\r\n\t\t\t};\r\n\t\tdefault:\r\n\t\t\treturn state;\r\n\t}\r\n}\r\n\r\nexport const getToolbarMode = (state: State) => state.mode;\r\n"
