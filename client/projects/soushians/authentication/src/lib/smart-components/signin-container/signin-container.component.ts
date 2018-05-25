@@ -6,7 +6,7 @@ import { Store } from "@ngrx/store";
 import * as FeatureReducer from "../../reducers";
 import { Signin, ClearCaptcha } from "../../actions";
 import { CaptchaModel } from "../../models";
-import { SigninService, AuthenticationConfigurationService } from "../../services";
+import { AuthenticationConfigurationService } from "../../services/authentication-configuration.service";
 
 @Component({
 	template: `

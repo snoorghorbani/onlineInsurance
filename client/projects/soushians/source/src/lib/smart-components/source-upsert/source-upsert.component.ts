@@ -2,7 +2,7 @@ import { NgModule, Component, OnInit, Output, EventEmitter, Input, ViewChild, Vi
 
 import { FormGroup, FormBuilder, FormControl, AbstractControl, FormArray, Validators } from "@angular/forms";
 import { UpsertSourceApiModel, SourceModel } from "../../models";
-import { SourceService } from "../../services";
+import { SourceService } from "../../services/source.service";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";

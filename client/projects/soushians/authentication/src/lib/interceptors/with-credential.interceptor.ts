@@ -6,7 +6,7 @@ import { HttpHandler } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { HttpEvent } from "@angular/common/http";
 import { HttpResponse } from "@angular/common/http";
-import { AuthenticationConfigurationService } from "../services";
+import { AuthenticationConfigurationService } from "../services/authentication-configuration.service";
 // import { environment } from "../../../environments/environment";
 
 @Injectable()

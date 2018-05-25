@@ -31,7 +31,6 @@ import { AuthenticationModuleConfig, MODULE_CONFIG_TOKEN } from "./authenticatio
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { SigninContainerComponent, AuthenticationContainerComponent } from "./smart-components";
 import { SigninComponent } from "./dump-components";
-import { AuthenticationConfigurationService, SigninService } from "./services";
 import { UserGuard, SigninGuard, AgentGuard, AdminGuard } from "./routing-guards";
 import { UnauthorizedInterceptor, WithCredentialInterceptor } from "./interceptors";
 
@@ -78,8 +77,6 @@ export class NgsAuthenticationModule {
 			ngModule: RootNgsAuthenticationModule,
 			providers: [
 				{ provide: MODULE_CONFIG_TOKEN, useValue: config },
-				AuthenticationConfigurationService,
-				SigninService,
 				UserGuard,
 				AdminGuard,
 				AgentGuard,

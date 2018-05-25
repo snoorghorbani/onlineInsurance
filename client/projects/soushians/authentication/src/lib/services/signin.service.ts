@@ -2,13 +2,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 import { MatSnackBar } from "@angular/material";
-
-// import { environment } from "../../../../environments/environment";
-
-import { Signin_ApiModel, UserModel } from "../../models";
-import { AuthenticationConfigurationService } from "../../services/authentication-module-configuration";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map, switchMap, take, filter, tap } from "rxjs/operators";
+
+// import { environment } from "../../environments/environment";
+
+import { Signin_ApiModel, UserModel } from "../models";
+import { AuthenticationConfigurationService } from "./authentication-configuration.service";
 
 const SIGNIN_RESPONSE = "[APP] SIGNIN_RESPONSE";
 

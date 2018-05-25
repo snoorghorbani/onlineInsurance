@@ -31,10 +31,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from "@soushians/shared";
 
 import { SourceReducers } from "./reducers";
-import { SourceService } from "./services";
-import { SourceListComponent, SourceUpsertComponent, SourceModuleContainerComponent } from "./smart-components";
 import { RoutingModule } from "./source.routing-module";
-import { SourceEffects } from "./effects";
+import { SourceEffects } from "./effects/source.effects";
+import { SourceListComponent } from "./smart-components/source-list/source-list.component";
+import { SourceUpsertComponent } from "./smart-components/source-upsert/source-upsert.component";
+import { SourceModuleContainerComponent } from "./smart-components/source-module-container/source-module-container.component";
 
 @NgModule({
 	imports: [
@@ -68,7 +69,6 @@ import { SourceEffects } from "./effects";
 		SharedModule
 	],
 	declarations: [ SourceListComponent, SourceUpsertComponent, SourceModuleContainerComponent ],
-	providers: [ SourceService ],
 	exports: []
 })
 export class SourceModule {}

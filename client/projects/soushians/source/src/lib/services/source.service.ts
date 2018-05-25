@@ -1,17 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
-declare var c3: any;
 
 import { UpsertSourceApiModel, GetSourcesApiModel, SourceModel } from "../models";
-import { Store } from "@ngrx/store";
 
-import * as sourceReducers from "../reducers";
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
-import { debug } from "util";
-declare var _: any;
-
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class SourceService {
 	responseCache: any;
 

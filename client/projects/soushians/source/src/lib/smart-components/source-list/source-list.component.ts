@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { SourceService } from "../../services";
+import { SourceService } from "../../services/source.service";
 import { Observable } from "rxjs/Observable";
 import { GetSourcesApiModel } from "../../models";
 import { Store } from "@ngrx/store";
