@@ -9,3 +9,11 @@ ul {
 img#tejarat {
 	width: 100%;
 }
+.fill {
+	height: 100%;
+	width: 100%;
+}
+.links .mat-button {
+	text-align: right;
+	padding-right: 10px !important;
+}
