@@ -1,11 +1,16 @@
 import { ModuleWithProviders } from "@angular/core";
 import { RouterModule, Routes, PreloadAllModules } from "@angular/router";
-import { FooterComponent } from "./common";
+import { FooterComponent, NewsletterComponent } from "./common";
 
 const routes: Routes = [
 	{
 		path: "",
-		outlet: "footer",
+		outlet: "footer_A",
+		component: NewsletterComponent
+	},
+	{
+		path: "",
+		outlet: "footer_B",
 		component: FooterComponent
 	}
 ];
