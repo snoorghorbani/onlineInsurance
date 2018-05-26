@@ -33,7 +33,8 @@
         "dist/@soushians/shared"
       ],
       "@soushians/authentication": [
-        "dist/@soushians/authentication"
+        // "dist/@soushians/authentication"
+        "projects/soushians/authentication/src"
       ],
       "@soushians/form": [
         "dist/@soushians/form"

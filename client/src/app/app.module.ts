@@ -1,5 +1,12 @@
 import { NgModule, LOCALE_ID } from "@angular/core";
-import { MatSidenavModule, MatToolbarModule, MatFormFieldModule } from "@angular/material";
+import {
+	MatSidenavModule,
+	MatToolbarModule,
+	MatFormFieldModule,
+	DateAdapter,
+	MAT_DATE_FORMATS,
+	MAT_DATE_LOCALE
+} from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule, Store } from "@ngrx/store";
@@ -32,6 +39,7 @@ import { reducers } from "./app.reducers";
 //module configs
 import { DashboardModule } from "./dashboard";
 import { OiModule } from "./oi/oi.module";
+import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-adapter";
 
 @NgModule({
 	imports: [
@@ -72,7 +80,11 @@ import { OiModule } from "./oi/oi.module";
 		OiModule
 	],
 	declarations: [ AppComponent ],
-	providers: [ { provide: LOCALE_ID, useValue: "fa-IR" } ],
+	providers: [
+		{ provide: LOCALE_ID, useValue: "fa-IR" },
+		{ provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
+		{ provide: MAT_DATE_FORMATS, useValue: JALALI_MOMENT_FORMATS }
+	],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule {}

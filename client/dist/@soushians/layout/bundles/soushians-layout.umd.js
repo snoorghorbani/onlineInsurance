@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ngrx/store'), require('@angular/core'), require('rxjs/BehaviorSubject'), require('@soushians/config'), require('@angular/animations'), require('@soushians/authentication'), require('@angular/common'), require('@angular/platform-browser'), require('rxjs/observable/fromEvent'), require('@angular/router'), require('rxjs'), require('@angular/forms'), require('@angular/common/http'), require('@angular/flex-layout'), require('@ngrx/effects'), require('@angular/material')) :
-    typeof define === 'function' && define.amd ? define('@soushians/layout', ['exports', '@ngrx/store', '@angular/core', 'rxjs/BehaviorSubject', '@soushians/config', '@angular/animations', '@soushians/authentication', '@angular/common', '@angular/platform-browser', 'rxjs/observable/fromEvent', '@angular/router', 'rxjs', '@angular/forms', '@angular/common/http', '@angular/flex-layout', '@ngrx/effects', '@angular/material'], factory) :
-    (factory((global.soushians = global.soushians || {}, global.soushians.layout = {}),null,global.ng.core,global.Rx,null,global.ng.animations,null,global.ng.common,global.ng.platformBrowser,global.Rx.Observable,global.ng.router,null,global.ng.forms,global.ng.common.http,global.ng['flex-layout'],null,global.ng.material));
-}(this, (function (exports,store,core,BehaviorSubject,config,animations,authentication,common,platformBrowser,fromEvent,router,rxjs,forms,http,flexLayout,effects,material) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ngrx/store'), require('@angular/core'), require('rxjs/BehaviorSubject'), require('@soushians/config'), require('@angular/animations'), require('@soushians/authentication'), require('@angular/common'), require('@angular/platform-browser'), require('rxjs/observable/fromEvent'), require('@angular/router'), require('rxjs'), require('@angular/forms'), require('@angular/common/http'), require('@angular/flex-layout'), require('@angular/material')) :
+    typeof define === 'function' && define.amd ? define('@soushians/layout', ['exports', '@ngrx/store', '@angular/core', 'rxjs/BehaviorSubject', '@soushians/config', '@angular/animations', '@soushians/authentication', '@angular/common', '@angular/platform-browser', 'rxjs/observable/fromEvent', '@angular/router', 'rxjs', '@angular/forms', '@angular/common/http', '@angular/flex-layout', '@angular/material'], factory) :
+    (factory((global.soushians = global.soushians || {}, global.soushians.layout = {}),null,global.ng.core,global.Rx,null,global.ng.animations,null,global.ng.common,global.ng.platformBrowser,global.Rx.Observable,global.ng.router,null,global.ng.forms,global.ng.common.http,global.ng['flex-layout'],global.ng.material));
+}(this, (function (exports,store,core,BehaviorSubject,config,animations,authentication,common,platformBrowser,fromEvent,router,rxjs,forms,http,flexLayout,material) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -483,8 +483,8 @@
             this.menuItems$ = this.configurationService.config$.map(function (config$$1) { return config$$1.menuItems; });
             fromEvent.fromEvent(this.document.body, "scroll").subscribe(function () {
                 var /** @type {?} */ scrolledAmount = _this.document.body.scrollTop;
-                // let scrollToTop = (scrolledAmount - this.lastScroll < 0) && (this.document.body.scrollHeight - ) ;
-                var /** @type {?} */ scrollToTop = scrolledAmount - _this.lastScroll < 0;
+                var /** @type {?} */ scrollToTop = scrolledAmount - _this.lastScroll < 0 && _this.document.body.scrollHeight - scrolledAmount < 100;
+                // let scrollToTop = scrolledAmount - this.lastScroll < 0;
                 _this.lastScroll = _this.document.body.scrollTop;
                 if (scrolledAmount == 0) {
                     if (_this.config.mode == "comfortable")
@@ -546,7 +546,7 @@
     ToolbarMenuComponent.decorators = [
         { type: core.Component, args: [{
                     selector: "layout-toolbar",
-                    template: "<mat-toolbar [@toolbarAnimation]=\"toolbarAnimationState | async\">\n  <mat-toolbar-row>\n    <app-logo-container fxFlex=\"none\" fxLayoutAlign=\"end center\"></app-logo-container>\n\n    <button type=\"button\" *ngIf='showSidebarMenu' (click)=\"toggleMainSidebar()\" mat-icon-button fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>menu</mat-icon>\n    </button>\n    <span id='app-name'>\n      {{app_config?.Config.AppTitle}}\n    </span>\n    <app-title fxFlex fxLayoutAlign=\"start center\"></app-title>\n    <app-search-box fxFlex fxLayoutAlign=\"end center\"></app-search-box>\n    \n    <button mat-icon-button type=\"button\" (click)=\"toggleSecondSidebar()\" fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>notifications</mat-icon>\n    </button>\n    <button *ngIf=\"user\" mat-icon-button [matMenuTriggerFor]=\"toolbarMenu1\">\n      <mat-icon>account_circle</mat-icon>\n    </button>\n        <mat-menu #toolbarMenu1>\n          <button routerLink='/user/panel' mat-menu-item>\n            <mat-icon>fingerprint</mat-icon>\n            <span>{{user?.Username}}</span>\n          </button>\n          \n          <button (click)='signout()' mat-menu-item>\n            <mat-icon>exit_to_app</mat-icon>\n            <span>\u062E\u0631\u0648\u062C</span>\n          </button>\n        </mat-menu>\n    <button mat-icon-button (click)='goback()'>\n      <mat-icon>arrow_back</mat-icon>\n    </button>\n    \n  </mat-toolbar-row>\n  <mat-toolbar-row>\n    <button mat-button \n    *ngFor=\"let menu of menuItems$ | async\"\n    routerLinkActive=\"active\"\n    [routerLink]=\"[menu.route]\" \n    >\n    <!-- <mat-icon mat-list-icon>{{menu.icon}}</mat-icon> -->\n    <span>{{menu.title}}</span>\n  </button>\n</mat-toolbar-row>\n</mat-toolbar>",
+                    template: "<mat-toolbar [@toolbarAnimation]=\"toolbarAnimationState | async\">\n  <mat-toolbar-row>\n    <app-logo-container fxFlex=\"none\" fxLayoutAlign=\"end center\"></app-logo-container>\n\n    <button type=\"button\" *ngIf='showSidebarMenu' (click)=\"toggleMainSidebar()\" mat-icon-button fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>menu</mat-icon>\n    </button>\n    <span id='app-name'>\n      {{app_config?.Config.AppTitle}}\n    </span>\n    <app-title fxFlex fxLayoutAlign=\"start center\"></app-title>\n    <app-search-box fxFlex fxLayoutAlign=\"end center\"></app-search-box>\n    \n    <button *ngIf=\"!user.Username\" mat-button routerLink=\"auth/signin\">\n      \u0648\u0631\u0648\u062F\n    </button>\n    <button *ngIf=\"user.Username\" mat-button [matMenuTriggerFor]=\"toolbarMenu1\">\n      <mat-icon>account_circle</mat-icon>\n      <span>\n        {{user?.Username}}\n      </span>\n    </button>\n    <mat-menu #toolbarMenu1>\n      <button routerLink='/user/panel' mat-menu-item>\n        <mat-icon>fingerprint</mat-icon>\n        <span>\n          \u0645\u062F\u06CC\u0631\u06CC\u062A \u06A9\u0627\u0631\u0628\u0631\u06CC\n        </span>\n      </button>\n      <button (click)='signout()' mat-menu-item>\n        <mat-icon>exit_to_app</mat-icon>\n        <span>\u062E\u0631\u0648\u062C</span>\n      </button>\n    </mat-menu>\n    <button mat-icon-button type=\"button\" (click)=\"toggleSecondSidebar()\" fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>notifications</mat-icon>\n    </button>\n    <button mat-icon-button (click)='goback()'>\n      <mat-icon>arrow_back</mat-icon>\n    </button>\n    \n  </mat-toolbar-row>\n  <mat-toolbar-row>\n    <button mat-button \n    *ngFor=\"let menu of menuItems$ | async\"\n    routerLinkActive=\"active\"\n    [routerLink]=\"[menu.route]\" \n    >\n    <!-- <mat-icon mat-list-icon>{{menu.icon}}</mat-icon> -->\n    <span>{{menu.title}}</span>\n  </button>\n</mat-toolbar-row>\n</mat-toolbar>",
                     styles: [""],
                     animations: [
                         animations.trigger("toolbarAnimation", [
@@ -604,19 +604,21 @@
         /**
          * @return {?}
          */
-        FooterComponent.prototype.ngOnInit = function () {
-        };
+        FooterComponent.prototype.ngOnInit = function () { };
         return FooterComponent;
     }());
     FooterComponent.decorators = [
         { type: core.Component, args: [{
-                    selector: 'app-footer',
-                    template: "<div fxLayoutAlign=\"center center\" class=\"footer-text\">&copy; 2005-2017 \u0647\u0645\u0647 \u062D\u0642\u0648\u0642 \u0628\u0631\u0627\u06CC \u0634\u0631\u06A9\u062A \u0634\u0627\u062A\u0644 \u0645\u062D\u0641\u0648\u0638 \u0627\u0633\u062A. </div>\n",
+                    selector: "app-footer",
+                    template: "<div fxLayoutAlign=\"center center\" class=\"footer-text\">\n    {{app_config?.Config.FooterCopyright}}\n</div>",
                     styles: [":host{position:absolute;bottom:0;left:0;right:0;border-top:1px solid #e5e5e5;padding:8px;overflow:hidden}.footer-text{position:relative;top:12px}"]
                 },] },
     ];
     /** @nocollapse */
     FooterComponent.ctorParameters = function () { return []; };
+    FooterComponent.propDecorators = {
+        app_config: [{ type: core.Input, args: ["app-config",] }]
+    };
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes} checked by tsc
@@ -757,7 +759,7 @@
     MainComponent.decorators = [
         { type: core.Component, args: [{
                     selector: "layout-main",
-                    template: "<div #mainSideNav [className]=\"toolbarAnimationState | async\">\n  <!-- <mat-progress-bar *ngIf='progressStatus$ | async' color=\"primary\" mode=\"query\"></mat-progress-bar> -->\n  <layout-toolbar [user]=\"user$ | async\" [showSidebarMenu]='showSidebarMenu | async' [app-config]=\"app_config\"></layout-toolbar>\n  \n  <mat-sidenav-container id=\"layout-sidnav\">\n    <mat-sidenav [mode]=\"mainSidenavMode | async\" [opened]='showMainSidenav | async' #sidebar (closedStart)=\"onSidebarClosedStart()\">\n      <mat-nav-list>\n        <ngs-layout-main-menu [authenticated]='showSidebarMenu' (closeSidebar)=\"sidebar.close()\" (click)=\"onSecondSidebarClosedStart()\"></ngs-layout-main-menu>\n      </mat-nav-list>\n    </mat-sidenav>\n    <!-- <mat-sidenav [mode]=\"secondSidenavMode | async\" [opened]='showSecondSidenav | async' (closedStart)=\"onSecondSidebarClosedStart()\"\n      position=\"end\" #second_sidebar class=\"second_sidebar\">\n      <mat-nav-list fxLayout='column'>\n      </mat-nav-list>\n    </mat-sidenav> -->\n    <div fxFlexLayout='column' id=\"app-main-container\" fxLayoutAlign='center center'>\n      <div fxFlex='0 0 100'>\n        <router-outlet></router-outlet>\n        <footer>\n          <app-footer></app-footer>\n        </footer>\n      </div>\n    </div>\n  </mat-sidenav-container>\n</div>",
+                    template: "<div #mainSideNav [className]=\"toolbarAnimationState | async\">\n  <!-- <mat-progress-bar *ngIf='progressStatus$ | async' color=\"primary\" mode=\"query\"></mat-progress-bar> -->\n  <layout-toolbar [user]=\"user$ | async\" [showSidebarMenu]='showSidebarMenu | async' [app-config]=\"app_config\"></layout-toolbar>\n  \n  <mat-sidenav-container id=\"layout-sidnav\">\n    <mat-sidenav [mode]=\"mainSidenavMode | async\" [opened]='showMainSidenav | async' #sidebar (closedStart)=\"onSidebarClosedStart()\">\n      <mat-nav-list>\n        <ngs-layout-main-menu [authenticated]='showSidebarMenu' (closeSidebar)=\"sidebar.close()\" (click)=\"onSecondSidebarClosedStart()\"></ngs-layout-main-menu>\n      </mat-nav-list>\n    </mat-sidenav>\n    <!-- <mat-sidenav [mode]=\"secondSidenavMode | async\" [opened]='showSecondSidenav | async' (closedStart)=\"onSecondSidebarClosedStart()\"\n      position=\"end\" #second_sidebar class=\"second_sidebar\">\n      <mat-nav-list fxLayout='column'>\n      </mat-nav-list>\n    </mat-sidenav> -->\n    <div fxFlexLayout='column' id=\"app-main-container\" fxLayoutAlign='center center'>\n      <div fxFlex='0 0 100'>\n        <router-outlet></router-outlet>\n        <router-outlet name=\"footer\"></router-outlet>\n        <footer>\n          <app-footer [app-config]=\"app_config\"></app-footer>\n        </footer>\n      </div>\n    </div>\n  </mat-sidenav-container>\n</div>",
                     styles: ["#purchase-fab-button{position:fixed;bottom:23px;left:31px}md-progress-bar{position:absolute!important}.with-margin #app-main-container{margin-top:25px;padding-right:25px;padding-left:25px}.second_sidebar{width:380px}.more-detail{margin:8px;box-sizing:border-box;padding:10px;text-align:center;width:96%;border:1px solid #dedede;outline:0;cursor:pointer;transition:all .3s ease}.more-detail:hover{background:#eee}"]
                 },] },
     ];
@@ -845,7 +847,7 @@
     }());
     RootNgsLayoutModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [NgsLayoutModule, store.StoreModule.forFeature("layout", LayoutReducers), effects.EffectsModule.forFeature([])],
+                    imports: [NgsLayoutModule, store.StoreModule.forFeature("layout", LayoutReducers)],
                     exports: [NgsLayoutModule]
                 },] },
     ];
@@ -865,15 +867,16 @@
     exports.EnableComfortableModeAction = EnableComfortableModeAction;
     exports.NgsLayoutModule = NgsLayoutModule;
     exports.RootNgsLayoutModule = RootNgsLayoutModule;
-    exports.ɵi = FooterComponent;
-    exports.ɵg = LogoContainerComponent;
+    exports.MODULE_DEFAULT_CONFIG = MODULE_DEFAULT_CONFIG;
+    exports.MODULE_CONFIG_TOKEN = MODULE_CONFIG_TOKEN;
+    exports.ɵg = FooterComponent;
+    exports.ɵe = LogoContainerComponent;
     exports.ɵa = MainMenuComponent;
-    exports.ɵk = MainComponent;
-    exports.ɵf = SearchBoxComponent;
-    exports.ɵj = TitleComponent;
-    exports.ɵh = ToolbarMenuComponent;
-    exports.ɵd = MODULE_CONFIG_TOKEN;
-    exports.ɵl = LayoutReducers;
+    exports.ɵi = MainComponent;
+    exports.ɵd = SearchBoxComponent;
+    exports.ɵh = TitleComponent;
+    exports.ɵf = ToolbarMenuComponent;
+    exports.ɵj = LayoutReducers;
     exports.ɵc = LayoutConfigurationService;
 
     Object.defineProperty(exports, '__esModule', { value: true });

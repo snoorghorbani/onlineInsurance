@@ -1,0 +1,58 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="50">
+    <mat-grid-list cols="4" rowHeight="100px">
+      <mat-grid-tile colspan="1" rowspan="3">
+        <mat-list fxFlex>
+          <h3 matSubheader>راهنما</h3>    
+          <mat-divider [vertical]="true"></mat-divider>    
+          <mat-list-item *ngFor="let item of GuidesFooterItem">
+            <p matLine > {{item.lable}} </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="3">
+        <mat-list fxFlex>
+          <h3 matSubheader>پیوندها</h3>    
+          <mat-divider [vertical]="true"></mat-divider>    
+          <mat-list-item *ngFor="let item of LinksFooterItem">
+            <p matLine > {{item.lable}} </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="2">
+        <ul>
+          <li>
+              <mat-icon >location_on</mat-icon>
+              <span>تهران، خیابان شهید بهشتی، بین سهند و سهروردی پلاک ۸۷، واحد ۱</span>
+          </li>
+          <li>
+              <mat-icon >phone</mat-icon>
+              <span>021-54897000۱</span>
+          </li>
+          <li>
+              <mat-icon >mail</mat-icon>
+              <span>info@bime.com</span>
+          </li>      
+        </ul>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
+        <button fxFlex mat-button><mat-icon >location_on</mat-icon></button>
+        <button fxFlex mat-button><mat-icon >cloud</mat-icon></button>
+        <button fxFlex mat-button><mat-icon >mail</mat-icon></button>
+        <button fxFlex mat-button><mat-icon >phone</mat-icon></button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="3">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <div fxFlex>
+            <h2>بیمه آنلاین</h2>
+            <p>
+              بیمه آنلاین، نخستین وبسایت خرید اینترنتی بیمه در ایران است. شما می توانید خدمات مشاوره خرید، مقایسه قیمت بیمه از شرکت‌های مختلف و خرید آنلاین را در بیمه آنلاین دریافت نمایید. مقایسه قیمت بیمه‌های خودرو ( بیمه شخص ثالث و بیمه بدنه)، بیمه آتش سوزی و بیمه عمر‌ مطابق با آخرین تغییرات شرکت‌های بیمه (ایران، پارسیان، آسیا، البرز و...) می‌باشد و تمامی مراحل مقایسه قیمت بیمه، تمدید و خرید بیمه نامه های شخص ثالث، بدنه، آتش سوزی و عمر تحت نظارت بیمه مرکزی ایران است. انتخاب تنها بر اساس قیمت کافی نیست بلکه عواملی چون میزان رضایت از پرداخت خسارت و اعتبار شرکت‌ها بر پایه اطلاعات شفاف و بیطرفانه در خرید بیمه موثر است. همچنین مشاوران بیمه آنلاین شما را در انتخاب بهترین بیمه یاری خواهند کرد. برای مشاوره میتوانید از طریق تلفن، ایمیل و تلگرام با مشاوران بیمه آنلاین در تماس باشید.
+            </p>
+          </div>
+          <div fxFlex="0 0 110px"><img id="tejarat" src="https://image.ibb.co/jEx688/Enamad.png"></div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

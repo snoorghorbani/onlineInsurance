@@ -27,9 +27,7 @@ export class SigninService {
 		return this.configurationService.config$.pipe(
 			filter(config => config.endpoints.signIn != ""),
 			take(1),
-			switchMap(config =>
-				this.http.post<Signin_ApiModel.Response>(this.configurationService.config.endpoints.signIn, model)
-			),
+			switchMap(config => this.http.post<Signin_ApiModel.Response>(config.endpoints.signIn, model)),
 			map(response => {
 				const userModel = new Signin_ApiModel.Response(response).extractData();
 				// this.SigninResponse.next(userModel);

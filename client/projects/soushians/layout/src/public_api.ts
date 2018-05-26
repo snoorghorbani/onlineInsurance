@@ -10,7 +10,7 @@
 
 //modules
 export * from "./lib/layout.module";
-// export * from "./lib/layout.config";
+export * from "./lib/layout.config";
 
 //actions
 export {

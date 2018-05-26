@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector, Store, StoreModule } from '@ngrx/store';
-import { InjectionToken, Injectable, Inject, Component, Output, EventEmitter, Input, ViewChild, HostListener, NgModule, defineInjectable, inject } from '@angular/core';
+import { InjectionToken, Injectable, Inject, Component, Input, Output, EventEmitter, ViewChild, HostListener, NgModule, defineInjectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { getlayoutModuleConfig, NgsConfigModule } from '@soushians/config';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -12,7 +12,6 @@ import { BehaviorSubject as BehaviorSubject$1 } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { EffectsModule } from '@ngrx/effects';
 import { MatIconModule, MatButtonModule, MatCardModule, MatSnackBarModule, MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule, MatRadioModule, MatInputModule, MatToolbarModule, MatDatepickerModule, MatProgressBarModule } from '@angular/material';
 
 /**
@@ -495,8 +494,8 @@ var ToolbarMenuComponent = /** @class */ (function () {
         this.menuItems$ = this.configurationService.config$.map(function (config) { return config.menuItems; });
         fromEvent(this.document.body, "scroll").subscribe(function () {
             var /** @type {?} */ scrolledAmount = _this.document.body.scrollTop;
-            // let scrollToTop = (scrolledAmount - this.lastScroll < 0) && (this.document.body.scrollHeight - ) ;
-            var /** @type {?} */ scrollToTop = scrolledAmount - _this.lastScroll < 0;
+            var /** @type {?} */ scrollToTop = scrolledAmount - _this.lastScroll < 0 && _this.document.body.scrollHeight - scrolledAmount < 100;
+            // let scrollToTop = scrolledAmount - this.lastScroll < 0;
             _this.lastScroll = _this.document.body.scrollTop;
             if (scrolledAmount == 0) {
                 if (_this.config.mode == "comfortable")
@@ -558,7 +557,7 @@ var ToolbarMenuComponent = /** @class */ (function () {
 ToolbarMenuComponent.decorators = [
     { type: Component, args: [{
                 selector: "layout-toolbar",
-                template: "<mat-toolbar [@toolbarAnimation]=\"toolbarAnimationState | async\">\n  <mat-toolbar-row>\n    <app-logo-container fxFlex=\"none\" fxLayoutAlign=\"end center\"></app-logo-container>\n\n    <button type=\"button\" *ngIf='showSidebarMenu' (click)=\"toggleMainSidebar()\" mat-icon-button fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>menu</mat-icon>\n    </button>\n    <span id='app-name'>\n      {{app_config?.Config.AppTitle}}\n    </span>\n    <app-title fxFlex fxLayoutAlign=\"start center\"></app-title>\n    <app-search-box fxFlex fxLayoutAlign=\"end center\"></app-search-box>\n    \n    <button mat-icon-button type=\"button\" (click)=\"toggleSecondSidebar()\" fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>notifications</mat-icon>\n    </button>\n    <button *ngIf=\"user\" mat-icon-button [matMenuTriggerFor]=\"toolbarMenu1\">\n      <mat-icon>account_circle</mat-icon>\n    </button>\n        <mat-menu #toolbarMenu1>\n          <button routerLink='/user/panel' mat-menu-item>\n            <mat-icon>fingerprint</mat-icon>\n            <span>{{user?.Username}}</span>\n          </button>\n          \n          <button (click)='signout()' mat-menu-item>\n            <mat-icon>exit_to_app</mat-icon>\n            <span>\u062E\u0631\u0648\u062C</span>\n          </button>\n        </mat-menu>\n    <button mat-icon-button (click)='goback()'>\n      <mat-icon>arrow_back</mat-icon>\n    </button>\n    \n  </mat-toolbar-row>\n  <mat-toolbar-row>\n    <button mat-button \n    *ngFor=\"let menu of menuItems$ | async\"\n    routerLinkActive=\"active\"\n    [routerLink]=\"[menu.route]\" \n    >\n    <!-- <mat-icon mat-list-icon>{{menu.icon}}</mat-icon> -->\n    <span>{{menu.title}}</span>\n  </button>\n</mat-toolbar-row>\n</mat-toolbar>",
+                template: "<mat-toolbar [@toolbarAnimation]=\"toolbarAnimationState | async\">\n  <mat-toolbar-row>\n    <app-logo-container fxFlex=\"none\" fxLayoutAlign=\"end center\"></app-logo-container>\n\n    <button type=\"button\" *ngIf='showSidebarMenu' (click)=\"toggleMainSidebar()\" mat-icon-button fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>menu</mat-icon>\n    </button>\n    <span id='app-name'>\n      {{app_config?.Config.AppTitle}}\n    </span>\n    <app-title fxFlex fxLayoutAlign=\"start center\"></app-title>\n    <app-search-box fxFlex fxLayoutAlign=\"end center\"></app-search-box>\n    \n    <button *ngIf=\"!user.Username\" mat-button routerLink=\"auth/signin\">\n      \u0648\u0631\u0648\u062F\n    </button>\n    <button *ngIf=\"user.Username\" mat-button [matMenuTriggerFor]=\"toolbarMenu1\">\n      <mat-icon>account_circle</mat-icon>\n      <span>\n        {{user?.Username}}\n      </span>\n    </button>\n    <mat-menu #toolbarMenu1>\n      <button routerLink='/user/panel' mat-menu-item>\n        <mat-icon>fingerprint</mat-icon>\n        <span>\n          \u0645\u062F\u06CC\u0631\u06CC\u062A \u06A9\u0627\u0631\u0628\u0631\u06CC\n        </span>\n      </button>\n      <button (click)='signout()' mat-menu-item>\n        <mat-icon>exit_to_app</mat-icon>\n        <span>\u062E\u0631\u0648\u062C</span>\n      </button>\n    </mat-menu>\n    <button mat-icon-button type=\"button\" (click)=\"toggleSecondSidebar()\" fxFlex=\"nogrow\" fxLayoutAlign=\"center center\">\n      <mat-icon>notifications</mat-icon>\n    </button>\n    <button mat-icon-button (click)='goback()'>\n      <mat-icon>arrow_back</mat-icon>\n    </button>\n    \n  </mat-toolbar-row>\n  <mat-toolbar-row>\n    <button mat-button \n    *ngFor=\"let menu of menuItems$ | async\"\n    routerLinkActive=\"active\"\n    [routerLink]=\"[menu.route]\" \n    >\n    <!-- <mat-icon mat-list-icon>{{menu.icon}}</mat-icon> -->\n    <span>{{menu.title}}</span>\n  </button>\n</mat-toolbar-row>\n</mat-toolbar>",
                 styles: [""],
                 animations: [
                     trigger("toolbarAnimation", [
@@ -615,19 +614,21 @@ var FooterComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    FooterComponent.prototype.ngOnInit = function () {
-    };
+    FooterComponent.prototype.ngOnInit = function () { };
     return FooterComponent;
 }());
 FooterComponent.decorators = [
     { type: Component, args: [{
-                selector: 'app-footer',
-                template: "<div fxLayoutAlign=\"center center\" class=\"footer-text\">&copy; 2005-2017 \u0647\u0645\u0647 \u062D\u0642\u0648\u0642 \u0628\u0631\u0627\u06CC \u0634\u0631\u06A9\u062A \u0634\u0627\u062A\u0644 \u0645\u062D\u0641\u0648\u0638 \u0627\u0633\u062A. </div>\n",
+                selector: "app-footer",
+                template: "<div fxLayoutAlign=\"center center\" class=\"footer-text\">\n    {{app_config?.Config.FooterCopyright}}\n</div>",
                 styles: [":host{position:absolute;bottom:0;left:0;right:0;border-top:1px solid #e5e5e5;padding:8px;overflow:hidden}.footer-text{position:relative;top:12px}"]
             },] },
 ];
 /** @nocollapse */
 FooterComponent.ctorParameters = function () { return []; };
+FooterComponent.propDecorators = {
+    app_config: [{ type: Input, args: ["app-config",] }]
+};
 
 /**
  * @fileoverview added by tsickle
@@ -768,7 +769,7 @@ var MainComponent = /** @class */ (function () {
 MainComponent.decorators = [
     { type: Component, args: [{
                 selector: "layout-main",
-                template: "<div #mainSideNav [className]=\"toolbarAnimationState | async\">\n  <!-- <mat-progress-bar *ngIf='progressStatus$ | async' color=\"primary\" mode=\"query\"></mat-progress-bar> -->\n  <layout-toolbar [user]=\"user$ | async\" [showSidebarMenu]='showSidebarMenu | async' [app-config]=\"app_config\"></layout-toolbar>\n  \n  <mat-sidenav-container id=\"layout-sidnav\">\n    <mat-sidenav [mode]=\"mainSidenavMode | async\" [opened]='showMainSidenav | async' #sidebar (closedStart)=\"onSidebarClosedStart()\">\n      <mat-nav-list>\n        <ngs-layout-main-menu [authenticated]='showSidebarMenu' (closeSidebar)=\"sidebar.close()\" (click)=\"onSecondSidebarClosedStart()\"></ngs-layout-main-menu>\n      </mat-nav-list>\n    </mat-sidenav>\n    <!-- <mat-sidenav [mode]=\"secondSidenavMode | async\" [opened]='showSecondSidenav | async' (closedStart)=\"onSecondSidebarClosedStart()\"\n      position=\"end\" #second_sidebar class=\"second_sidebar\">\n      <mat-nav-list fxLayout='column'>\n      </mat-nav-list>\n    </mat-sidenav> -->\n    <div fxFlexLayout='column' id=\"app-main-container\" fxLayoutAlign='center center'>\n      <div fxFlex='0 0 100'>\n        <router-outlet></router-outlet>\n        <footer>\n          <app-footer></app-footer>\n        </footer>\n      </div>\n    </div>\n  </mat-sidenav-container>\n</div>",
+                template: "<div #mainSideNav [className]=\"toolbarAnimationState | async\">\n  <!-- <mat-progress-bar *ngIf='progressStatus$ | async' color=\"primary\" mode=\"query\"></mat-progress-bar> -->\n  <layout-toolbar [user]=\"user$ | async\" [showSidebarMenu]='showSidebarMenu | async' [app-config]=\"app_config\"></layout-toolbar>\n  \n  <mat-sidenav-container id=\"layout-sidnav\">\n    <mat-sidenav [mode]=\"mainSidenavMode | async\" [opened]='showMainSidenav | async' #sidebar (closedStart)=\"onSidebarClosedStart()\">\n      <mat-nav-list>\n        <ngs-layout-main-menu [authenticated]='showSidebarMenu' (closeSidebar)=\"sidebar.close()\" (click)=\"onSecondSidebarClosedStart()\"></ngs-layout-main-menu>\n      </mat-nav-list>\n    </mat-sidenav>\n    <!-- <mat-sidenav [mode]=\"secondSidenavMode | async\" [opened]='showSecondSidenav | async' (closedStart)=\"onSecondSidebarClosedStart()\"\n      position=\"end\" #second_sidebar class=\"second_sidebar\">\n      <mat-nav-list fxLayout='column'>\n      </mat-nav-list>\n    </mat-sidenav> -->\n    <div fxFlexLayout='column' id=\"app-main-container\" fxLayoutAlign='center center'>\n      <div fxFlex='0 0 100'>\n        <router-outlet></router-outlet>\n        <router-outlet name=\"footer\"></router-outlet>\n        <footer>\n          <app-footer [app-config]=\"app_config\"></app-footer>\n        </footer>\n      </div>\n    </div>\n  </mat-sidenav-container>\n</div>",
                 styles: ["#purchase-fab-button{position:fixed;bottom:23px;left:31px}md-progress-bar{position:absolute!important}.with-margin #app-main-container{margin-top:25px;padding-right:25px;padding-left:25px}.second_sidebar{width:380px}.more-detail{margin:8px;box-sizing:border-box;padding:10px;text-align:center;width:96%;border:1px solid #dedede;outline:0;cursor:pointer;transition:all .3s ease}.more-detail:hover{background:#eee}"]
             },] },
 ];
@@ -855,7 +856,7 @@ var RootNgsLayoutModule = /** @class */ (function () {
 }());
 RootNgsLayoutModule.decorators = [
     { type: NgModule, args: [{
-                imports: [NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers), EffectsModule.forFeature([])],
+                imports: [NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers)],
                 exports: [NgsLayoutModule]
             },] },
 ];
@@ -871,5 +872,5 @@ RootNgsLayoutModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { LayoutActionTypes, TitleChangedAction, OpenSidenavAction, CloseSidenavAction, ChangeSideNavMode, ChangeLayout, CloseSecondSidenavAction, ChangeSecondSidenavMode, OpenSecondSidenavAction, ChangeToolbatToComfortableModeAction, ChangeToolbatToCompactModeAction, DisableComfortableModeAction, EnableComfortableModeAction, NgsLayoutModule, RootNgsLayoutModule, FooterComponent as ɵi, LogoContainerComponent as ɵg, MainMenuComponent as ɵa, MainComponent as ɵk, SearchBoxComponent as ɵf, TitleComponent as ɵj, ToolbarMenuComponent as ɵh, MODULE_CONFIG_TOKEN as ɵd, LayoutReducers as ɵl, LayoutConfigurationService as ɵc };
+export { LayoutActionTypes, TitleChangedAction, OpenSidenavAction, CloseSidenavAction, ChangeSideNavMode, ChangeLayout, CloseSecondSidenavAction, ChangeSecondSidenavMode, OpenSecondSidenavAction, ChangeToolbatToComfortableModeAction, ChangeToolbatToCompactModeAction, DisableComfortableModeAction, EnableComfortableModeAction, NgsLayoutModule, RootNgsLayoutModule, MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN, FooterComponent as ɵg, LogoContainerComponent as ɵe, MainMenuComponent as ɵa, MainComponent as ɵi, SearchBoxComponent as ɵd, TitleComponent as ɵh, ToolbarMenuComponent as ɵf, LayoutReducers as ɵj, LayoutConfigurationService as ɵc };
 //# sourceMappingURL=soushians-layout.js.map

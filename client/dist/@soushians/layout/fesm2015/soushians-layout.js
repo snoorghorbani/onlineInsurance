@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector, Store, StoreModule } from '@ngrx/store';
-import { InjectionToken, Injectable, Inject, Component, Output, EventEmitter, Input, ViewChild, HostListener, NgModule, defineInjectable, inject } from '@angular/core';
+import { InjectionToken, Injectable, Inject, Component, Input, Output, EventEmitter, ViewChild, HostListener, NgModule, defineInjectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { getlayoutModuleConfig, NgsConfigModule } from '@soushians/config';
 import 'rxjs/Observable';
@@ -14,7 +14,6 @@ import { BehaviorSubject as BehaviorSubject$1 } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { EffectsModule } from '@ngrx/effects';
 import { MatIconModule, MatButtonModule, MatCardModule, MatSnackBarModule, MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule, MatRadioModule, MatInputModule, MatToolbarModule, MatDatepickerModule, MatProgressBarModule } from '@angular/material';
 
 /**
@@ -482,8 +481,8 @@ class ToolbarMenuComponent {
         this.menuItems$ = this.configurationService.config$.map(config => config.menuItems);
         fromEvent(this.document.body, "scroll").subscribe(() => {
             let /** @type {?} */ scrolledAmount = this.document.body.scrollTop;
-            // let scrollToTop = (scrolledAmount - this.lastScroll < 0) && (this.document.body.scrollHeight - ) ;
-            let /** @type {?} */ scrollToTop = scrolledAmount - this.lastScroll < 0;
+            let /** @type {?} */ scrollToTop = scrolledAmount - this.lastScroll < 0 && this.document.body.scrollHeight - scrolledAmount < 100;
+            // let scrollToTop = scrolledAmount - this.lastScroll < 0;
             this.lastScroll = this.document.body.scrollTop;
             if (scrolledAmount == 0) {
                 if (this.config.mode == "comfortable")
@@ -557,23 +556,30 @@ ToolbarMenuComponent.decorators = [
     <app-title fxFlex fxLayoutAlign="start center"></app-title>
     <app-search-box fxFlex fxLayoutAlign="end center"></app-search-box>
     
+    <button *ngIf="!user.Username" mat-button routerLink="auth/signin">
+      ورود
+    </button>
+    <button *ngIf="user.Username" mat-button [matMenuTriggerFor]="toolbarMenu1">
+      <mat-icon>account_circle</mat-icon>
+      <span>
+        {{user?.Username}}
+      </span>
+    </button>
+    <mat-menu #toolbarMenu1>
+      <button routerLink='/user/panel' mat-menu-item>
+        <mat-icon>fingerprint</mat-icon>
+        <span>
+          مدیریت کاربری
+        </span>
+      </button>
+      <button (click)='signout()' mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>خروج</span>
+      </button>
+    </mat-menu>
     <button mat-icon-button type="button" (click)="toggleSecondSidebar()" fxFlex="nogrow" fxLayoutAlign="center center">
       <mat-icon>notifications</mat-icon>
     </button>
-    <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="toolbarMenu1">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-        <mat-menu #toolbarMenu1>
-          <button routerLink='/user/panel' mat-menu-item>
-            <mat-icon>fingerprint</mat-icon>
-            <span>{{user?.Username}}</span>
-          </button>
-          
-          <button (click)='signout()' mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span>خروج</span>
-          </button>
-        </mat-menu>
     <button mat-icon-button (click)='goback()'>
       <mat-icon>arrow_back</mat-icon>
     </button>
@@ -645,19 +651,22 @@ class FooterComponent {
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 FooterComponent.decorators = [
     { type: Component, args: [{
-                selector: 'app-footer',
-                template: `<div fxLayoutAlign="center center" class="footer-text">&copy; 2005-2017 همه حقوق برای شرکت شاتل محفوظ است. </div>
-`,
+                selector: "app-footer",
+                template: `<div fxLayoutAlign="center center" class="footer-text">
+    {{app_config?.Config.FooterCopyright}}
+</div>`,
                 styles: [`:host{position:absolute;bottom:0;left:0;right:0;border-top:1px solid #e5e5e5;padding:8px;overflow:hidden}.footer-text{position:relative;top:12px}`]
             },] },
 ];
 /** @nocollapse */
 FooterComponent.ctorParameters = () => [];
+FooterComponent.propDecorators = {
+    app_config: [{ type: Input, args: ["app-config",] }]
+};
 
 /**
  * @fileoverview added by tsickle
@@ -814,8 +823,9 @@ MainComponent.decorators = [
     <div fxFlexLayout='column' id="app-main-container" fxLayoutAlign='center center'>
       <div fxFlex='0 0 100'>
         <router-outlet></router-outlet>
+        <router-outlet name="footer"></router-outlet>
         <footer>
-          <app-footer></app-footer>
+          <app-footer [app-config]="app_config"></app-footer>
         </footer>
       </div>
     </div>
@@ -901,7 +911,7 @@ class RootNgsLayoutModule {
 }
 RootNgsLayoutModule.decorators = [
     { type: NgModule, args: [{
-                imports: [NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers), EffectsModule.forFeature([])],
+                imports: [NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers)],
                 exports: [NgsLayoutModule]
             },] },
 ];
@@ -917,5 +927,5 @@ RootNgsLayoutModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { LayoutActionTypes, TitleChangedAction, OpenSidenavAction, CloseSidenavAction, ChangeSideNavMode, ChangeLayout, CloseSecondSidenavAction, ChangeSecondSidenavMode, OpenSecondSidenavAction, ChangeToolbatToComfortableModeAction, ChangeToolbatToCompactModeAction, DisableComfortableModeAction, EnableComfortableModeAction, NgsLayoutModule, RootNgsLayoutModule, FooterComponent as ɵi, LogoContainerComponent as ɵg, MainMenuComponent as ɵa, MainComponent as ɵk, SearchBoxComponent as ɵf, TitleComponent as ɵj, ToolbarMenuComponent as ɵh, MODULE_CONFIG_TOKEN as ɵd, LayoutReducers as ɵl, LayoutConfigurationService as ɵc };
+export { LayoutActionTypes, TitleChangedAction, OpenSidenavAction, CloseSidenavAction, ChangeSideNavMode, ChangeLayout, CloseSecondSidenavAction, ChangeSecondSidenavMode, OpenSecondSidenavAction, ChangeToolbatToComfortableModeAction, ChangeToolbatToCompactModeAction, DisableComfortableModeAction, EnableComfortableModeAction, NgsLayoutModule, RootNgsLayoutModule, MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN, FooterComponent as ɵg, LogoContainerComponent as ɵe, MainMenuComponent as ɵa, MainComponent as ɵi, SearchBoxComponent as ɵd, TitleComponent as ɵh, ToolbarMenuComponent as ɵf, LayoutReducers as ɵj, LayoutConfigurationService as ɵc };
 //# sourceMappingURL=soushians-layout.js.map

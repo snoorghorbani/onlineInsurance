@@ -10,7 +10,6 @@ import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { EffectsModule } from "@ngrx/effects";
 import { MatIconModule, MatButtonModule, MatCardModule, MatSnackBarModule, MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule, MatRadioModule, MatInputModule, MatToolbarModule, MatDatepickerModule, MatProgressBarModule } from "@angular/material";
 import { NgsConfigModule } from "@soushians/config";
 import { LayoutReducers } from "./reducers";
@@ -85,7 +84,7 @@ export class RootNgsLayoutModule {
 }
 RootNgsLayoutModule.decorators = [
     { type: NgModule, args: [{
-                imports: [NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers), EffectsModule.forFeature([])],
+                imports: [NgsLayoutModule, StoreModule.forFeature("layout", LayoutReducers)],
                 exports: [NgsLayoutModule]
             },] },
 ];

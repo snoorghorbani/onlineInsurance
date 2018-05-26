@@ -8,7 +8,7 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
 import { responseStatusTypes } from "@soushians/shared";
 import { SigninService } from "@soushians/authentication";
 
-import * as layoutReducer from "../../reducers";
+import { FeatureState } from "../../reducers";
 import { LayoutConfigurationService } from "../../services/layout-configuration.service";
 import { LayoutModuleConfig } from "../../layout.config";
 
@@ -65,7 +65,7 @@ export class MainMenuComponent {
 
 	@ViewChild("customerMobileInput") customerMobileInput: ElementRef;
 	constructor(
-		private store: Store<layoutReducer.State>,
+		private store: Store<FeatureState>,
 		public signinService: SigninService,
 		public configurationService: LayoutConfigurationService
 	) {}
