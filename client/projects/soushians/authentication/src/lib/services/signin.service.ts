@@ -12,7 +12,9 @@ import { AuthenticationConfigurationService } from "./authentication-configurati
 
 const SIGNIN_RESPONSE = "[APP] SIGNIN_RESPONSE";
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class SigninService {
 	// SigninResponse = new BehaviorSubject<UserModel>(new UserModel());
 	constructor(
