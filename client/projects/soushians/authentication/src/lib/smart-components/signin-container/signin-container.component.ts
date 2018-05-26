@@ -1,12 +1,11 @@
 ﻿import { Component, OnInit, OnDestroy } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
 
-import * as FeatureReducer from "../../reducers";
-import { Signin, ClearCaptcha } from "../../actions";
+import { Signin } from "../../actions";
 import { CaptchaModel } from "../../models";
 import { AuthenticationConfigurationService } from "../../services/authentication-configuration.service";
+import { FeatureState } from "../../reducers";
 
 @Component({
 	template: `
@@ -18,10 +17,7 @@ import { AuthenticationConfigurationService } from "../../services/authenticatio
 })
 export class SigninContainerComponent {
 	formId$: Observable<string>;
-	constructor(
-		private configurationService: AuthenticationConfigurationService,
-		private store: Store<FeatureReducer.FeatureState>
-	) {
+	constructor(private configurationService: AuthenticationConfigurationService, private store: Store<FeatureState>) {
 		this.formId$ = this.configurationService.config$.map(config => config.forms.signIn);
 	}
 

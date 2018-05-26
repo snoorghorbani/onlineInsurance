@@ -1,7 +1,6 @@
 import { Injectable, Inject } from "@angular/core";
 
-import { DiagramModuleConfig } from "../diagram.config";
-import { MODULE_CONFIG_TOKEN, MODULE_DEFAULT_CONFIG } from "../diagram.config";
+import { MODULE_CONFIG_TOKEN, DiagramModuleConfig, MODULE_DEFAULT_CONFIG } from "../diagram.config";
 
 @Injectable()
 export class DiagramConfigurationService {

@@ -1,24 +1,17 @@
-﻿import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/map';
-import { Injectable } from '@angular/core';
-import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+﻿import { Injectable } from "@angular/core";
+import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs/Observable";
 
-import * as fromAuth from '../reducers';
+import { FeatureState, getLoggedIn } from "../reducers";
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class SigninGuard implements CanActivate {
-        constructor(
-                private store: Store<fromAuth.FeatureState>
-        ) { }
+	constructor(private store: Store<FeatureState>) {}
 
-        canActivate(
-                route: ActivatedRouteSnapshot,
-                state: RouterStateSnapshot
-        ): Observable<boolean> {
-                return this.store.select(fromAuth.getLoggedIn)
-                        .take(1)
-                        .map(authed => !authed);
-        }
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+		return this.store.select(getLoggedIn).take(1).map(authed => !authed);
+	}
 }

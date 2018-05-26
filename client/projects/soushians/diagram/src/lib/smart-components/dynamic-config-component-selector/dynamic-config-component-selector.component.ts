@@ -12,17 +12,15 @@
 	EventEmitter
 } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { DiagramModel } from "../../models";
 import { Subscription } from "rxjs";
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
-import { DiagramService } from "../../services";
-import { DiagramPartialConfigEditComponent } from "../../dumb-components/diagram-partial-config-edit";
-import { PieDiagramPartialConfigComponent } from "../../dumb-components/pie-diagram-partial-config";
-import { BooleanoWidgetPartialConfigComponent } from "../../dumb-components/booleano-widget-partial-config";
-import { LinearDiagramPartialConfigComponent } from "../../dumb-components";
+import { DiagramModel } from "../../models";
+import { DiagramService } from "../../services/diagram.service";
+import { DiagramPartialConfigEditComponent } from "../../dumb-components/diagram-partial-config-edit/diagram-partial-config-edit.component";
+import { PieDiagramPartialConfigComponent } from "../../dumb-components/pie-diagram-partial-config/pie-diagram-partial-config.component";
+import { BooleanoWidgetPartialConfigComponent } from "../../dumb-components/booleano-widget-partial-config/booleano-widget-partial-config.component";
+import { LinearDiagramPartialConfigComponent } from "../../dumb-components/linear-diagram-partial-config/linear-diagram-partial-config.component";
 
 declare var c3: any;
 

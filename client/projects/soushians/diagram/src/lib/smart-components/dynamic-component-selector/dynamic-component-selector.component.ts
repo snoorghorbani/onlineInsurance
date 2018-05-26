@@ -1,6 +1,5 @@
 ﻿import {
 	Component,
-	OnInit,
 	Input,
 	AfterViewInit,
 	ComponentFactoryResolver,
@@ -9,26 +8,18 @@
 	ReflectiveInjector,
 	OnDestroy
 } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { DiagramModel } from "../../models";
-import { Subscription } from "rxjs";
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
-import { DiagramService } from "../../services";
-import { NumericDiagramComponent } from "../../dumb-components/numeric-diagram";
-import { ServerStatusDiagramComponent } from "../../dumb-components/server-status-diagram";
-import { ServerConnectingTimeDiagramComponent } from "../../dumb-components/server-connecting-time-diagram";
-import { DiagramComponent } from "../../smart-components/diagram";
-
-declare var c3: any;
+import { DiagramModel } from "../../models/diagram.model";
+import { DiagramService } from "../../services/diagram.service";
+import { NumericDiagramComponent } from "../../dumb-components/numeric-diagram/numeric-diagram.component";
+import { ServerStatusDiagramComponent } from "../../dumb-components/server-status-diagram/server-status-diagram.component";
+import { ServerConnectingTimeDiagramComponent } from "../../dumb-components/server-connecting-time-diagram/server-connecting-time-diagram.component";
+import { DiagramComponent } from "../../smart-components/diagram/diagram.component";
 
 @Component({
 	selector: "dynamic-component-selector",
 	templateUrl: "./dynamic-component-selector.component.html",
 	styleUrls: [ "./dynamic-component-selector.component.scss" ],
-	// entryComponents: [DiagramComponent, NumericDiagramComponent]
 	entryComponents: [
 		NumericDiagramComponent,
 		ServerConnectingTimeDiagramComponent,
@@ -46,8 +37,8 @@ export class DynamicComponentSelectorComponent implements AfterViewInit {
 		area: DiagramComponent,
 		"area-spline": DiagramComponent,
 		numero: NumericDiagramComponent,
-		booleano: ServerStatusDiagramComponent,
-		tempo: ServerConnectingTimeDiagramComponent
+		tempo: ServerConnectingTimeDiagramComponent,
+		booleano: ServerStatusDiagramComponent
 	};
 	@ViewChild("dynamicComponentContainer", { read: ViewContainerRef })
 	dynamicComponentContainer: ViewContainerRef;

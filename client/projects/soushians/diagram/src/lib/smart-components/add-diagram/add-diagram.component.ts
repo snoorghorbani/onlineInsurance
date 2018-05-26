@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder, AbstractControl } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
 import { Route, ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
+import { publish } from "rxjs/operator/publish";
+import { Effect } from "@ngrx/effects";
 declare var c3: any;
 
 import { addDiagramReducer } from "../../reducers/add-diagram.reducer";
-import { DiagramService } from "../../services";
+import { DiagramService } from "../../services/diagram.service";
 import { AddDiagramApiModel, DiagramModel, SourceModel } from "../../models";
-import * as FeatureReducer from "../../reducers";
 import {
 	AddDiagramAction,
 	ColumnAdded,
@@ -17,10 +19,8 @@ import {
 	ColumnsMappingChangedAction,
 	DataLoadedAction
 } from "../../actions";
-import { AbstractControl } from "@angular/forms/src/model";
-import { Subscription } from "rxjs/Subscription";
-import { publish } from "rxjs/operator/publish";
-import { Effect } from "@ngrx/effects";
+
+import { FeatureState } from "../../reducers";
 
 @Component({
 	selector: "diagram-add",
@@ -51,7 +51,7 @@ export class AddDiagramComponent implements OnInit, OnDestroy {
 	constructor(
 		private diagramService: DiagramService,
 		private formBuilder: FormBuilder,
-		private store: Store<FeatureReducer.FeatureState>,
+		private store: Store<FeatureState>,
 		private route: ActivatedRoute
 	) {
 		this.sources = this.diagramService.getSources();

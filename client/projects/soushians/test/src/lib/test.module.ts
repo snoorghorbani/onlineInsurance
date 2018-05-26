@@ -3,7 +3,7 @@ import { TestComponent } from "./test.component";
 
 import { NgsAuthenticationModule } from "@soushians/authentication";
 import { NgsConfigModule } from "@soushians/config";
-// import { NgsDiagramModule } from "@soushians/diagram";
+import { NgsDiagramModule } from "@soushians/diagram";
 import { NgsFormModule } from "@soushians/form";
 import { NgsLayoutModule } from "@soushians/layout";
 import { SharedModule } from "@soushians/shared";
@@ -14,7 +14,7 @@ import { NgsUserModule } from "@soushians/user";
 	imports: [
 		NgsAuthenticationModule,
 		NgsConfigModule,
-		// NgsDiagramModule,
+		NgsDiagramModule,
 		NgsFormModule,
 		NgsLayoutModule,
 		SharedModule,

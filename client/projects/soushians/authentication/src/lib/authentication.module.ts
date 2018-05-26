@@ -25,21 +25,21 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
-// import { NgsFormModule } from "@soushians/form";
+import { NgsFormModule } from "@soushians/form";
 
 import { AuthenticationModuleConfig, MODULE_CONFIG_TOKEN } from "./authentication.config";
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
-import { SigninContainerComponent, AuthenticationContainerComponent } from "./smart-components";
-import { SigninComponent } from "./dump-components";
-import { UserGuard, SigninGuard, AgentGuard, AdminGuard } from "./routing-guards";
-import { UnauthorizedInterceptor, WithCredentialInterceptor } from "./interceptors";
+import { SigninContainerComponent } from "./smart-components/signin-container/signin-container.component";
+import { SigninComponent } from "./dump-components/signin/signin.component";
+import { AuthenticationContainerComponent } from "./smart-components/authentication-container/authentication-container.component";
 
-import { SigninEffects, AuthenticationEffects } from "./effects";
+import { WithCredentialInterceptor } from "./interceptors/with-credential.interceptor";
+import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
+
 import { AuthenticationReducers } from "./reducers";
 
-import "./smart-components";
-import "./dump-components";
-import "./effects";
+import { SigninEffects } from "./effects/signin.effects";
+import { AuthenticationEffects } from "./effects/authentication.effects";
 
 @NgModule({
 	imports: [
@@ -65,8 +65,8 @@ import "./effects";
 		MatProgressBarModule,
 		BrowserAnimationsModule,
 		ReactiveFormsModule,
-		FormsModule
-		// NgsFormModule
+		FormsModule,
+		NgsFormModule
 	],
 	declarations: [ SigninContainerComponent, SigninComponent, AuthenticationContainerComponent ],
 	exports: []
@@ -77,10 +77,6 @@ export class NgsAuthenticationModule {
 			ngModule: RootNgsAuthenticationModule,
 			providers: [
 				{ provide: MODULE_CONFIG_TOKEN, useValue: config },
-				UserGuard,
-				AdminGuard,
-				AgentGuard,
-				SigninGuard,
 				{
 					provide: HTTP_INTERCEPTORS,
 					useClass: UnauthorizedInterceptor,

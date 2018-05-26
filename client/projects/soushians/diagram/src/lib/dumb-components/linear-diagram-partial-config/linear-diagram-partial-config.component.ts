@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, Injector, OnDestroy } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { DiagramModel } from "../../models";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-
-import { DiagramService } from "../../services";
-import { Subscription } from "rxjs";
 import { FormGroup } from "@angular/forms";
+import { Subscription } from "rxjs";
+
+import { DiagramModel } from "../../models";
+import { DiagramService } from "../../services/diagram.service";
 
 @Component({
 	selector: "linear-diagram-partial-config",
@@ -28,7 +28,6 @@ export class LinearDiagramPartialConfigComponent implements OnInit, OnDestroy {
 	diagramService: DiagramService;
 	formGroup: FormGroup;
 	constructor(private injector: Injector) {
-		debugger;
 		this.formGroup = this.injector.get("formGroup");
 		this.diagramService = this.injector.get("diagramService");
 	}
@@ -42,7 +41,6 @@ export class LinearDiagramPartialConfigComponent implements OnInit, OnDestroy {
 		// this.dataSubscribtion.unsubscribe();
 	}
 	configChanged() {
-		debugger;
 		this.ConfigChanged.emit();
 	}
 }

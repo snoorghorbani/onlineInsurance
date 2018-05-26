@@ -1,13 +1,12 @@
 ﻿import { ActivatedRoute } from "@angular/router";
-import { addDiagramReducer } from "../../reducers/add-diagram.reducer";
 import { Component, OnInit } from "@angular/core";
-import { DiagramService } from "../../services";
 import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
-
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+
+import { DiagramService } from "../../services/diagram.service";
+import { FeatureState } from "../../reducers";
 import { DiagramModel, EditDiagramApiModel } from "../../models";
-import * as FeatureReducer from "../../reducers";
 import { EditDiagramAction } from "../../actions";
 
 @Component({
@@ -20,7 +19,7 @@ export class EditDiagramComponent implements OnInit {
 	constructor(
 		private diagramService: DiagramService,
 		private route: ActivatedRoute,
-		private store: Store<FeatureReducer.FeatureState>
+		private store: Store<FeatureState>
 	) {
 		let Route = this.route.params.subscribe(params => {
 			const diagramId: string = params["id"];

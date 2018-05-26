@@ -1,7 +1,6 @@
 ﻿import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Observable } from "rxjs/Rx";
-import { AbstractControl } from "@angular/forms/src/model";
 
 @Component({
 	selector: "auth-signin",

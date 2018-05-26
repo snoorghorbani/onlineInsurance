@@ -1,11 +1,6 @@
 import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
 import { UserModel, ProfileViewModel } from "../models";
-import {
-	ChangePassword,
-	ChangePasswordFailed,
-	ChangePasswordStart,
-	ChangePasswordSucceed
-} from "../change-password/index";
+import { ChangePassword, ChangePasswordFailed, ChangePasswordStart, ChangePasswordSucceed } from "../change-password";
 import {
 	DisableGetLink,
 	EnableGetLink,
@@ -16,10 +11,10 @@ import {
 	ResetPasswordLinkRequestFailed,
 	ResetPasswordLinkRequestStart,
 	ResetPasswordLinkRequestSucceed
-} from "../reset-password/index";
-import { EditProfile, EditProfileFailed, EditProfileStart, EditProfileSucceed } from "../profile-edit/index";
-import { RefreshUserInfoAction, UserSelectedAction } from "../dashboard/index";
-import { SearchFailed, SearchStartAction, SearchSucceed } from "../search-account/index";
+} from "../reset-password";
+import { EditProfile, EditProfileFailed, EditProfileStart, EditProfileSucceed } from "../profile-edit";
+import { RefreshUserInfoAction, UserSelectedAction } from "../dashboard";
+import { SearchFailed, SearchStartAction, SearchSucceed } from "../search-account";
 
 //TODO : remove these lines
 //import {

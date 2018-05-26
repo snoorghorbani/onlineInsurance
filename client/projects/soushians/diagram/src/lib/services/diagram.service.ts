@@ -6,15 +6,15 @@ declare var c3: any;
 
 import { AddDiagramApiModel, GetDiagramsApiModel, DiagramModel, SourceModel } from "../models";
 import { DiagramConfigurationService } from "./diagram-configuration.service";
+import { FeatureState } from "../reducers";
 
-import * as diagramReducers from "../reducers";
 declare var _: any;
 
 @Injectable()
 export class DiagramService {
 	constructor(
 		private http: HttpClient,
-		private store: Store<diagramReducers.FeatureState>,
+		private store: Store<FeatureState>,
 		private userConfigurationService: DiagramConfigurationService
 	) {}
 

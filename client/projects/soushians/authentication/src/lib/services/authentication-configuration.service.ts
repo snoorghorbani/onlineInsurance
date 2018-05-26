@@ -5,8 +5,7 @@ import { BehaviorSubject } from "rxjs";
 
 import { getAuthenticationModuleConfig } from "@soushians/config";
 
-import { AuthenticationModuleConfig, MODULE_DEFAULT_CONFIG } from "../authentication.config";
-import { MODULE_CONFIG_TOKEN } from "../authentication.config";
+import { MODULE_CONFIG_TOKEN, AuthenticationModuleConfig, MODULE_DEFAULT_CONFIG } from "../authentication.config";
 import { AuthenticationState } from "../reducers";
 
 @Injectable()

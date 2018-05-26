@@ -1,5 +1,5 @@
-import { SigninAction, SignInActionTypes } from "../actions";
-import { UserModel } from "../models";
+import { SigninAction, SignInActionTypes } from "../actions/signin.actions";
+import { UserModel } from "../models/user.model";
 
 export interface State {
 	loggedIn: boolean;

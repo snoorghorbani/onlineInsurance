@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from "@angular/core";
-import { DiagramService } from "../../services";
 import { Observable } from "rxjs/Observable";
-import { GetDiagramsApiModel } from "../../models";
 
+import { GetDiagramsApiModel } from "../../models";
+import { DiagramService } from "../../services/diagram.service";
 @Component({
 	selector: "diagrams",
 	templateUrl: "./diagrams.component.html",

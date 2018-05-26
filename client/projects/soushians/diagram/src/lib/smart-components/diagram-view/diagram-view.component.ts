@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit, Input } from "@angular/core";
-import { DiagramService } from "../../services";
 import { Observable } from "rxjs/Observable";
+
+import { DiagramService } from "../../services/diagram.service";
 import { GetDiagramsApiModel } from "../../models";
 
 @Component({

@@ -1,34 +1,31 @@
 import { Injectable } from "@angular/core";
-import { HttpRequestBaseModel } from "@soushians/shared";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { DiagramModel } from ".";
 
-export module GetDiagramsApiModel {
+import { HttpRequestBaseModel } from "@soushians/shared";
 
-    export class Request implements HttpRequestBaseModel<Request>{
-        diagram: string;
+import { DiagramModel } from "./diagram.model";
 
-        constructor(initValue: GetDiagramsApiModel.Request = {} as GetDiagramsApiModel.Request) {
-            Object.keys(initValue).forEach(key => this[key] = initValue[key]);
-        }
+export namespace GetDiagramsApiModel {
+	export class Request implements HttpRequestBaseModel<Request> {
+		diagram: string;
 
-        getRequestBody() {
-            return {
-            }
-        }
+		constructor(initValue: GetDiagramsApiModel.Request = {} as GetDiagramsApiModel.Request) {
+			Object.keys(initValue).forEach(key => (this[key] = initValue[key]));
+		}
 
-        //static get formGroup() {
-        // return new FormGroup({
-        //   diagram: new FormControl('', [Validators.minLength(8), Validators.required])
-        // })
-        //}
-    }
+		getRequestBody() {
+			return {};
+		}
 
-    export class Response {
-        Result: DiagramModel[];
-        constructor() {
+		//static get formGroup() {
+		// return new FormGroup({
+		//   diagram: new FormControl('', [Validators.minLength(8), Validators.required])
+		// })
+		//}
+	}
 
-        }
-    }
-
+	export class Response {
+		Result: DiagramModel[];
+		constructor() {}
+	}
 }

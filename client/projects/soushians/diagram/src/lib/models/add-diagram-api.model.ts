@@ -1,7 +1,9 @@
-import { HttpRequestBaseModel } from "@soushians/shared";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
+
+import { HttpRequestBaseModel } from "@soushians/shared";
+
 import { DiagramModel } from "./diagram.model";
-import { SourceModel } from ".";
+import { SourceModel } from "./source.model";
 
 export namespace AddDiagramApiModel {
 	export class Request implements HttpRequestBaseModel<Request> {

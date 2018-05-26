@@ -1,17 +1,14 @@
 ﻿import { Component, OnInit, Input, AfterViewInit, OnDestroy, Injector } from "@angular/core";
-import { DiagramService } from "../../services";
-import { Observable } from "rxjs/Observable";
-import { DiagramModel } from "../../models";
 import { Subscription } from "rxjs";
-import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { GenerateDiagramAction } from "../../actions";
 import { Store } from "@ngrx/store";
-
-import * as FeatureReducer from "../../reducers";
 import { MatSliderChange } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
+
+import { DiagramService } from "../../services/diagram.service";
+import { DiagramModel } from "../../models";
+import { FeatureState } from "../../reducers";
 
 declare var c3: any;
 
@@ -37,7 +34,7 @@ export class DiagramComponent implements AfterViewInit, OnDestroy {
 	time: number;
 	now: number = Date.now();
 	constructor(
-		private store: Store<FeatureReducer.FeatureState>,
+		private store: Store<FeatureState>,
 		private diagramService: DiagramService,
 		private http: HttpClient,
 		private injector: Injector,

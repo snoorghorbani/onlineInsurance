@@ -1,4 +1,4 @@
-import { SourceModel } from ".";
+import { SourceModel } from "./source.model";
 
 export class DiagramModel {
 	_id: string;

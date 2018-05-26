@@ -1,15 +1,13 @@
 ﻿import { createSelector, createFeatureSelector, MemoizedSelector } from "@ngrx/store";
 
-import { CaptchaAction } from "../actions";
-
 import * as userReducer from "./user.reducer";
-import * as captchaReducer from "./captcha.reducer";
+// import * as captchaReducer from "./captcha.reducer";
 
-import { UserModel, CaptchaModel } from "../models";
+import { UserModel } from "../models/user.model";
 
 export interface AuthenticationState {
 	userStatus: userReducer.State;
-	captcha: captchaReducer.State;
+	// captcha: captchaReducer.State;
 }
 
 export interface FeatureState {
@@ -17,8 +15,8 @@ export interface FeatureState {
 }
 
 export const AuthenticationReducers = {
-	userStatus: userReducer.UserReducer,
-	captcha: captchaReducer.CaptchaReducer
+	userStatus: userReducer.UserReducer
+	// captcha: captchaReducer.CaptchaReducer
 };
 
 //#region selectors
@@ -33,8 +31,8 @@ export const selectAuthState = createSelector(
 export const getLoggedIn = createSelector(selectAuthState, userReducer.getLoggedIn);
 export const getUser = createSelector(selectAuthState, userReducer.getUser);
 
-export const selectCaptchaState = createSelector(selectAuthenticationState, (state: AuthenticationState) => {
-	return state.captcha;
-});
+// export const selectCaptchaState = createSelector(selectAuthenticationState, (state: AuthenticationState) => {
+// 	return state.captcha;
+// });
 
-export const getCaptcha = createSelector(selectCaptchaState, captchaReducer.getCaptcha);
+// export const getCaptcha = createSelector(selectCaptchaState, captchaReducer.getCaptcha);

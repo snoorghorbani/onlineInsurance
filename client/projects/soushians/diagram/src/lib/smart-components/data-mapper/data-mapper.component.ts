@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { DiagramService } from "../../services";
 import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
-
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+
+import { DiagramService } from "../../services/diagram.service";
 import { AddDiagramApiModel } from "../../models";
 import * as FeatureReducer from "../../reducers";
 import { AddDiagramAction } from "../../actions";
