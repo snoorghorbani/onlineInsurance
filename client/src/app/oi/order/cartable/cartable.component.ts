@@ -18,7 +18,6 @@ import { MatSidenav, MatTabGroup, MatSnackBar, MatExpansionPanel, MatAccordion }
 import { Store } from "@ngrx/store";
 import { BehaviorSubject, from, Subject } from "rxjs";
 
-import * as fromLayout from "@soushians/layout";
 import { SigninService } from "@soushians/authentication";
 import { FormSchemaModel, FieldConfig, FormViewComponent } from "@soushians/form";
 
@@ -29,6 +28,7 @@ import { FieldModel } from "../models/field.model";
 import { ViewOrderComponent } from "../view-order/view-order.component";
 import { delay, map, tap, filter, takeUntil, combineLatest, take } from "rxjs/operators";
 import { takeWhile } from "rxjs-compat/operator/takeWhile";
+import { FeatureState } from "../order.reducers";
 
 @Component({
 	selector: "cartable",
@@ -50,7 +50,7 @@ export class CartableComponent implements OnDestroy {
 	@ViewChild(FormViewComponent) viewFormComponent: FormViewComponent;
 
 	constructor(
-		private store: Store<fromLayout.FeatureState>,
+		private store: Store<FeatureState>,
 		private service: OrderService,
 		private orderFormService: OrderFormService,
 		private signinService: SigninService,

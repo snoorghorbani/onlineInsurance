@@ -13,20 +13,20 @@ export * from "./lib/layout.module";
 // export * from "./lib/layout.config";
 
 //actions
-// export {
-// 	LayoutActionTypes,
-// 	TitleChangedAction,
-// 	OpenSidenavAction,
-// 	CloseSidenavAction,
-// 	ChangeSideNavMode,
-// 	ChangeLayout,
-// 	CloseSecondSidenavAction,
-// 	ChangeSecondSidenavMode,
-// 	OpenSecondSidenavAction,
-// 	ChangeToolbatToComfortableModeAction,
-// 	ChangeToolbatToCompactModeAction,
-// 	DisableComfortableModeAction,
-// 	EnableComfortableModeAction
-// } from "./lib/actions";
+export {
+	LayoutActionTypes,
+	TitleChangedAction,
+	OpenSidenavAction,
+	CloseSidenavAction,
+	ChangeSideNavMode,
+	ChangeLayout,
+	CloseSecondSidenavAction,
+	ChangeSecondSidenavMode,
+	OpenSecondSidenavAction,
+	ChangeToolbatToComfortableModeAction,
+	ChangeToolbatToCompactModeAction,
+	DisableComfortableModeAction,
+	EnableComfortableModeAction
+} from "./lib/actions";
 
 //components

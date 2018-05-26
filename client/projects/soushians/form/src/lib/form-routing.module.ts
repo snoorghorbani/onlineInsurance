@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { MainContainerComponent } from "./main-container";
+import { MainContainerComponent } from "./main-container/main-container.component/main-container.component";
 import { AddFormContainerComponent } from "./add";
 import { EditFormContainerComponent } from "./edit";
 import { FormListContainerComponent } from "./list";

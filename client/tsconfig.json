@@ -44,6 +44,9 @@
       "@soushians/source": [
         "dist/@soushians/source"
       ],
+      "@soushians/socket": [
+        "dist/@soushians/socket"
+      ],
       "@soushians/test": [
         "dist/soushians/test"
       ]

@@ -7,7 +7,7 @@ export * from "./lib/form.config";
 export * from "./lib/services";
 
 //components and actions
-// export * from "./lib/view/form-view";
+export * from "./lib/view/form-view/form-view.component";
 //models
 export * from "./lib/models";
 

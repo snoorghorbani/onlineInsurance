@@ -25,7 +25,7 @@ import {
 } from "../../actions";
 import { FeatureState, getShowSecondSidebarStatus, getLayoutToolbar } from "../../reducers";
 
-import { LayoutConfigurationService } from "../../services";
+import { LayoutConfigurationService } from "../../services/layout-configuration.service";
 import { State as toolbarState } from "../../reducers/toolbar.reducer";
 
 @Component({
