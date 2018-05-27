@@ -58,6 +58,7 @@ import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 import { CartableComponent } from "./cartable/cartable.component";
 import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
 import { DestroyableComponent } from "./destroyable/destroyable.component";
+import { OiCommonModule } from "../common/common.module";
 
 @NgModule({
 	imports: [
@@ -88,7 +89,8 @@ import { DestroyableComponent } from "./destroyable/destroyable.component";
 		MatGridListModule,
 		FlexLayoutModule,
 		FileDropModule,
-		NgsFormModule.forRoot()
+		NgsFormModule.forRoot(),
+		OiCommonModule
 	],
 	declarations: [
 		TestComponent,

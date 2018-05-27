@@ -16,10 +16,11 @@ import {
 } from "@angular/material";
 
 import { FooterComponent } from "./footer/footer.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { RouterModule } from "@angular/router";
 import { NewsletterComponent } from "./newsletter/newsletter.component";
+import { ReminderComponent } from "./reminder/reminder.component";
 
 @NgModule({
 	imports: [
@@ -27,6 +28,7 @@ import { NewsletterComponent } from "./newsletter/newsletter.component";
 		MatGridListModule,
 		MatListModule,
 		MatInputModule,
+		FormsModule,
 		MatFormFieldModule,
 		MatRadioModule,
 		MatCardModule,
@@ -40,6 +42,7 @@ import { NewsletterComponent } from "./newsletter/newsletter.component";
 		MatSelectModule,
 		FlexLayoutModule
 	],
-	declarations: [ FooterComponent, NewsletterComponent ]
+	declarations: [ FooterComponent, NewsletterComponent, ReminderComponent, ReminderComponent ],
+	exports: [ ReminderComponent ]
 })
 export class OiCommonModule {}

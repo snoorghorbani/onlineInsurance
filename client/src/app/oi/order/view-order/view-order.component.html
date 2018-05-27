@@ -8,17 +8,17 @@
             <mat-grid-tile class="th">{{(SellerNationalId$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile class="th">{{(SellerRegistrationNo$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile class="th">{{(SellerEconomicNo$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerName$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerNationalId$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerRegistrationNo$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerEconomicNo$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerName$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerNationalId$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerRegistrationNo$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerEconomicNo$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="4">
               <b>{{(SellerAddress$ | async)?.Label}}: </b>
-              <span>{{(SellerAddress$ | async)?.Value}}, </span>
+              <span>{{(SellerAddress$ | async)?.DisplayValue}}, </span>
               <b>{{(SellerZipCode$ | async)?.Label}}: </b>
-              <span>{{(SellerZipCode$ | async)?.Value}}, </span>
+              <span>{{(SellerZipCode$ | async)?.DisplayValue}}, </span>
               <b>{{(SellerPhone$ | async)?.Label}}: </b>
-              <span>{{(SellerPhone$ | async)?.Value}}</span>
+              <span>{{(SellerPhone$ | async)?.DisplayValue}}</span>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-card>
@@ -33,16 +33,16 @@
             <mat-grid-tile class="th">{{(PolicyholderMobile$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile class="th">{{(PolicyholderPhone$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile class="th">{{(PolicyholderBirthDate$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyholderFirstName$ | async)?.Value}} {{(PolicyholderLastName$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyholderFatherName$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyholderNationalCode$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyholderMobile$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyholderPhone$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyholderBirthDate$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyholderFirstName$ | async)?.DisplayValue}} {{(PolicyholderLastName$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyholderFatherName$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyholderNationalCode$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyholderMobile$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyholderPhone$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyholderBirthDate$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile class="th">{{(PolicyAddress$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="5">{{(PolicyAddress$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile colspan="5">{{(PolicyAddress$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile class="th">{{(DeliveryAddress$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="5">{{(DeliveryAddress$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile colspan="5">{{(DeliveryAddress$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile class="th">شرکت بیمه</mat-grid-tile>
             <mat-grid-tile colspan="5">biemh</mat-grid-tile>
           </mat-grid-list>
@@ -58,22 +58,22 @@
             <mat-grid-tile class="th">{{(Discount$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile class="th"></mat-grid-tile>
             
-            <mat-grid-tile>{{(CarModel$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(CarUsage$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(PolicyTerm$ | async)?.Value}}</mat-grid-tile>
-            <mat-grid-tile>{{(Discount$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile>{{(CarModel$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(CarUsage$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(PolicyTerm$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(Discount$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile></mat-grid-tile>
   
             <mat-grid-tile colspan="3" class="th">{{(LastPolicyExpirationDate$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="3">{{(LastPolicyExpirationDate$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile colspan="3">{{(LastPolicyExpirationDate$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="3" class="th">{{(LastPolicyYearsWithoutIncident$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="3">{{(LastPolicyYearsWithoutIncident$ | async)?.Value}}</mat-grid-tile>
+            <mat-grid-tile colspan="3">{{(LastPolicyYearsWithoutIncident$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheMali$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{(PolicyPushesheMali$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{(PolicyPushesheMali$ | async)?.DisplayDisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheRanande$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{(PolicyPushesheRanande$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{(PolicyPushesheRanande$ | async)?.DisplayDisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheSarneshin$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{(PolicyPushesheSarneshin$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{(PolicyPushesheSarneshin$ | async)?.DisplayDisplayValue}}</mat-grid-tile>
           </mat-grid-list>
         </mat-card>
         
@@ -85,15 +85,15 @@
           <mat-card-content>
             <div fxLayout="row wrap">
               <div fxFlex="50">حق بیمه خالص</div>
-              <div fxFlex="50"><b>-</b></div>
+              <div fxFlex="50"><b>{{(orderForm$ | async)?.NetPremium.DisplayValue}}</b></div>
               <div fxFlex="50">مالیات و عوارض</div>
-              <div fxFlex="50"><b>-</b></div>
+              <div fxFlex="50"><b>{{(orderForm$ | async)?.TaxesAndDuties.DisplayValue}}</b></div>
               <div fxFlex="50">جمع کل حق بیمه</div>
-              <div fxFlex="50"><b>-</b></div>
-              <div fxFlex="50">تخفیف بیمه بازار</div>
-              <div fxFlex="50"><b>-</b></div>
+              <div fxFlex="50"><b>{{(orderForm$ | async)?.TotalPremium.DisplayValue}}</b></div>
+              <div fxFlex="50">تخفیف </div>
+              <div fxFlex="50"><b>{{(orderForm$ | async)?.Discount.DisplayValue}}</b></div>
               <div fxFlex="50">هزینه ارسال</div>
-              <div fxFlex="50"><b>-</b></div>
+              <div fxFlex="50"><b>{{(orderForm$ | async)?.ShippingCost.DisplayValue}}</b></div>
               <div fxFlex="100">
               <mat-accordion class="fit">
                 <mat-expansion-panel>
@@ -118,7 +118,7 @@
           <mat-card-footer fxLayout="row" fxLayoutAlign="center center">
             <div fxFlex="50">مبلغ قابل پرداخت</div>
             <h3 fxFlex="50">
-              1,350,000 تومان
+                {{(orderForm$ | async)?.AmountPayable.DisplayValue}}
             </h3>
             <order-redirect-to-bank [data]="InitiationPaymentResult$ | async"></order-redirect-to-bank>
           </mat-card-footer>

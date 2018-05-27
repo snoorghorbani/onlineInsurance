@@ -13,41 +13,37 @@ export class FooterComponent implements OnInit {
 	GuidesFooterItem = [
 		{
 			lable: "راهنمای مشتریان",
-			link: ""
+			link: "http://185.208.174.92:8080/blog/customer_guide"
 		},
 		{
 			lable: "بیمه شخص ثالث",
-			link: ""
+			link: "http://185.208.174.92:8080/blog/third_party_policy"
 		},
 		{
 			lable: "بیمه آتش سوزی",
-			link: ""
+			link: "http://185.208.174.92:8080/blog/fire_policy"
 		},
 		{
 			lable: "بیمه زلزله",
-			link: ""
+			link: "http://185.208.174.92:8080/blog/motto_policy"
 		},
 		{
 			lable: "بیمه عمر",
-			link: ""
+			link: "http://185.208.174.92:8080/blog/life_policy"
 		}
 	];
 	LinksFooterItem = [
 		{
 			lable: "شرایط و قوانین بیمه آنلاین",
-			link: ""
+			link: "/faq"
 		},
 		{
 			lable: "درباره بیمه آنلاین",
-			link: ""
-		},
-		{
-			lable: "بیمه تامین اجتماعی",
-			link: ""
+			link: "/static/about-us"
 		},
 		{
 			lable: "تماس با ما",
-			link: ""
+			link: "static/faq"
 		}
 	];
 }

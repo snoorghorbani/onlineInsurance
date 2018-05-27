@@ -6,7 +6,7 @@
           <h3 matSubheader>راهنما</h3>    
           <mat-divider [vertical]="true"></mat-divider>    
           <mat-list-item *ngFor="let item of GuidesFooterItem">
-            <a matLine mat-button [routerLink]="item.link" target="_blank"> {{item.lable}} </a>
+            <a matLine mat-button [href]="item.link" target="_blank"> {{item.lable}} </a>
           </mat-list-item>
         </mat-list>
       </mat-grid-tile>
