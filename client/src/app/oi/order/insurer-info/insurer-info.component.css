@@ -20,3 +20,9 @@ table {
 mat-panel-description {
 	justify-content: flex-end;
 }
+mat-icon.tooltip {
+	position: absolute;
+	left: 15px;
+	font-size: 18px;
+	color: #555;
+}

@@ -4,3 +4,9 @@ table {
 .fit {
 	width: 100%;
 }
+mat-icon.tooltip {
+	position: absolute;
+	left: 15px;
+	font-size: 18px;
+	color: #555;
+}

@@ -34,6 +34,7 @@
                   {{ item.DisplayValue }}
                 </mat-option>
               </mat-select>
+              <mat-icon class="tooltip md-18" *ngIf="(CarBrand$ | async)?.Description" [matTooltip]="(CarBrand$ | async)?.Description">help</mat-icon>
           </mat-form-field>
 
           <mat-form-field fxFlex="46">
@@ -42,6 +43,7 @@
                   {{ item.DisplayName }}
                 </mat-option>
               </mat-select>
+              <mat-icon class="tooltip md-18" *ngIf="(CarModel$ | async)?.Description" [matTooltip]="(CarModel$ | async)?.Description">help</mat-icon>
           </mat-form-field>
           
           <mat-form-field fxFlex="46">
@@ -50,6 +52,7 @@
                   {{ item.DisplayValue }}
                 </mat-option>
               </mat-select>
+              <mat-icon class="tooltip md-18" *ngIf="(CarProductionYear$ | async)?.Description" [matTooltip]="(CarProductionYear$ | async)?.Description">help</mat-icon>
           </mat-form-field>
           
           <mat-form-field fxFlex="46">
@@ -58,12 +61,14 @@
                   {{ item.DisplayValue }}
                 </mat-option>
               </mat-select>
+              <mat-icon class="tooltip md-18" *ngIf="(CarYearsWithoutIncident$ | async)?.Description" [matTooltip]="(CarYearsWithoutIncident$ | async)?.Description">help</mat-icon>
           </mat-form-field>
           
           <mat-form-field fxFlex="46">
               <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
               <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
               <mat-datepicker #LastPolicyExpirationDate></mat-datepicker>
+              <mat-icon class="tooltip md-18" *ngIf="(LastPolicyExpirationDate$ | async)?.Description" [matTooltip]="(LastPolicyExpirationDate$ | async)?.Description">help</mat-icon>
             </mat-form-field>
         </div>
         

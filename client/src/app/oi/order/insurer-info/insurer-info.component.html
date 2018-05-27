@@ -6,19 +6,23 @@
                   مشخصات بیمه گذار
             </mat-expansion-panel-header>
             <form [formGroup]="formGroup">
-              <div fxLayout="row" fxLayoutGap="25px">
-                <mat-form-field fxFlex>
+              <div fxLayout="row wrap" fxLayoutGap="25px">
+                <mat-form-field fxFlex="50">
                   <input matInput [placeholder]="(PolicyholderFirstName$ | async)?.Label" formControlName="PolicyholderFirstName">
+                  <mat-icon class="tooltip md-18" *ngIf="(PolicyholderFirstName$ | async)?.Description" [matTooltip]="(PolicyholderFirstName$ | async)?.Description">help</mat-icon>
                 </mat-form-field>
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex="1 1 auto">
                   <input matInput [placeholder]="(PolicyholderLastName$ | async)?.Label" formControlName="PolicyholderLastName">
+                  <mat-icon class="tooltip md-18" *ngIf="(PolicyholderLastName$ | async)?.Description" [matTooltip]="(PolicyholderLastName$ | async)?.Description">help</mat-icon>
                 </mat-form-field>
-                <mat-form-field class="fill">
+                <mat-form-field  fxFlex="50">
                     <input matInput [placeholder]="(PolicyholderMobile$ | async)?.Label" formControlName="PolicyholderMobile">
-                </mat-form-field>
-                <mat-form-field class="fill">
+                    <mat-icon class="tooltip md-18" *ngIf="(PolicyholderMobile$ | async)?.Description" [matTooltip]="(PolicyholderMobile$ | async)?.Description">help</mat-icon>
+                  </mat-form-field>
+                <mat-form-field  fxFlex>
                     <input matInput [placeholder]="(PolicyholderPhone$ | async)?.Label" formControlName="PolicyholderPhone">
-                </mat-form-field>
+                    <mat-icon class="tooltip md-18" *ngIf="(PolicyholderPhone$ | async)?.Description" [matTooltip]="(PolicyholderPhone$ | async)?.Description">help</mat-icon>
+                  </mat-form-field>
               </div>
                 <mat-accordion class="fit">
                   <mat-expansion-panel expanded="true"  #PolicyHolderExpansion disabled>
@@ -30,14 +34,17 @@
                     <div fxLayout="row" fxLayoutGap="25px">
                       <mat-form-field fxFlex>
                         <input matInput [placeholder]="(PolicyholderNationalCode$ | async)?.Label" formControlName="PolicyholderNationalCode">
+                        <mat-icon class="tooltip md-18" *ngIf="(PolicyholderNationalCode$ | async)?.Description" [matTooltip]="(PolicyholderNationalCode$ | async)?.Description">help</mat-icon>
                       </mat-form-field>
                       <mat-form-field class="fit">
                           <input matInput [matDatepicker]="PolicyholderBirthDate" [placeholder]="(PolicyholderBirthDate$ | async)?.Label" formControlName="PolicyholderBirthDate">
                           <mat-datepicker-toggle matSuffix [for]="PolicyholderBirthDate"></mat-datepicker-toggle>
                           <mat-datepicker #PolicyholderBirthDate></mat-datepicker>
-                      </mat-form-field>
+                          <mat-icon class="tooltip md-18" *ngIf="(PolicyholderBirthDate$ | async)?.Description" [matTooltip]="(PolicyholderBirthDate$ | async)?.Description">help</mat-icon>
+                        </mat-form-field>
                       <mat-form-field fxFlex>
                         <input matInput [placeholder]="(PolicyholderFatherName$ | async)?.Label" formControlName="PolicyholderFatherName">
+                        <mat-icon class="tooltip md-18" *ngIf="(PolicyholderFatherName$ | async)?.Description" [matTooltip]="(PolicyholderFatherName$ | async)?.Description">help</mat-icon>
                       </mat-form-field>
                     </div>
                   </mat-expansion-panel>
@@ -70,9 +77,11 @@
                           {{ item.DisplayValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-icon class="tooltip md-18" *ngIf="(PolicyAddressCityId$ | async)?.Description" [matTooltip]="(PolicyAddressCityId$ | async)?.Description">help</mat-icon>
                     </mat-form-field>
                     <mat-form-field class="fill"  fxFlex="80">
                       <input matInput [placeholder]="(PolicyAddress$ | async)?.Label" formControlName="PolicyAddress">
+                      <mat-icon class="tooltip md-18" *ngIf="(PolicyAddress$ | async)?.Description" [matTooltip]="(PolicyAddress$ | async)?.Description">help</mat-icon>
                     </mat-form-field>
                   </div>
                 </mat-expansion-panel>
@@ -118,9 +127,11 @@
                           {{ item.DisplayValue }}
                         </mat-option>
                       </mat-select>
+                      <mat-icon class="tooltip md-18" *ngIf="(DeliveryAddressCityId$ | async)?.Description" [matTooltip]="(DeliveryAddressCityId$ | async)?.Description">help</mat-icon>
                   </mat-form-field>
                   <mat-form-field class="fill" fxFlex="80">
                     <input matInput [placeholder]="(DeliveryAddress$ | async)?.Label" formControlName="DeliveryAddress">
+                    <mat-icon class="tooltip md-18" *ngIf="(DeliveryAddress$ | async)?.Description" [matTooltip]="(DeliveryAddress$ | async)?.Description">help</mat-icon>
                   </mat-form-field>
                 </form>
                 <h4>

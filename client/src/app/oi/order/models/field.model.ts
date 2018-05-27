@@ -1,6 +1,7 @@
 export interface FieldModel {
 	"Value": any;
 	"DisplayValue": string;
+	"Description": string;
 	"Label": string;
 	"Name": string;
 	"Options": FieldOptionModel[];

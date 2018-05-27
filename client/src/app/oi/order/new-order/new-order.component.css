@@ -24,3 +24,9 @@ mat-card {
 	padding-left: 25px !important;
 	padding-bottom: 25px !important;
 }
+mat-icon.tooltip {
+	position: absolute;
+	left: 15px;
+	font-size: 18px;
+	color: #555;
+}
