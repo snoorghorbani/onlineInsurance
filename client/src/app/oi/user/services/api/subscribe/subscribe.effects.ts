@@ -20,7 +20,7 @@ export class SubscribeApiEffects {
 		.ofType(SUBSCRIBE_ACTION_TYPES.START)
 		.pipe(
 			map(action => action.payload),
-			switchMap(payload => this.service.Subscribe()),
+			switchMap(payload => this.service.SubscribeToNewsletter(payload)),
 			map(res => new SubscribeSucceedAction(res)),
 			catchError(err => Observable.of(new SubscribeFailedAction(err)))
 		);

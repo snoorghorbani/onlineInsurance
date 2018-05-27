@@ -67,7 +67,21 @@ export class PoliciesCompareItemComponent implements OnInit {
 	ngOnInit() {}
 	initInsLogos() {
 		this.logos = {
-			"بیمه آسیا": "assets\\ins-logos\\asia.png"
+			"بیمه آسیا": "assets\\ins-logos\\asia.png",
+			"بیمه سرمد": "assets\\ins-logos\\sarmard.png",
+			"بیمه دی": "assets\\ins-logos\\day.png",
+			"بیمه البرز": "assets\\ins-logos\\alborz.png",
+			"بیمه دانا": "assets\\ins-logos\\dana.png",
+			"بیمه ایران": "assets\\ins-logos\\iran.png",
+			"بیمه کارآفرین": "assets\\ins-logos\\karafarin.png",
+			"بیمه ما": "assets\\ins-logos\\ma.png",
+			"بیمه ملت": "assets\\ins-logos\\melat.png",
+			"بیمه نوین": "assets\\ins-logos\\novin.png",
+			"بیمه پارسیان": "assets\\ins-logos\\parsian.png",
+			"بیمه پاسارگاد": "assets\\ins-logos\\pasargad.png",
+			"بیمه رازی": "assets\\ins-logos\\razi.png",
+			"بیمه سامان": "assets\\ins-logos\\saman.png",
+			"بیمه سینا": "assets\\ins-logos\\sina.png"
 		};
 	}
 	showDetail() {
