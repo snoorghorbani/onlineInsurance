@@ -883,6 +883,47 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes} checked by tsc
      */
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes} checked by tsc
+     */
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes} checked by tsc
+     */
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes} checked by tsc
+     */
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes} checked by tsc
+     */
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes} checked by tsc
+     */
+    var /** @type {?} */ routes = [
+        {
+            path: 'configs',
+            component: ConfigModuleContainerComponent,
+            children: [
+                {
+                    path: '',
+                    component: ConfigsComponent
+                },
+                {
+                    path: 'edit/:name',
+                    component: ConfigEditComponent
+                }
+            ]
+        }
+    ];
+    var /** @type {?} */ RoutingModule = router.RouterModule.forChild(routes);
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes} checked by tsc
+     */
     var NgsConfigModule = (function () {
         function NgsConfigModule() {
         }
@@ -923,7 +964,8 @@
                         material.MatToolbarModule,
                         material.MatDatepickerModule,
                         material.MatProgressBarModule,
-                        animations.BrowserAnimationsModule
+                        animations.BrowserAnimationsModule,
+                        RoutingModule
                     ],
                     declarations: [
                         ConfigsComponent,
@@ -971,17 +1013,21 @@
     exports.getSocketModuleConfig = getSocketModuleConfig$1;
     exports.NgsConfigModule = NgsConfigModule;
     exports.RootNgsConfigModule = RootNgsConfigModule;
-    exports.ɵf = ConfigAppConfigComponent;
-    exports.ɵj = AuthenticationModuleConfigComponent;
-    exports.ɵh = LayoutModuleConfigComponent;
-    exports.ɵg = UserModuleConfigComponent;
-    exports.ɵm = LoadConfigEffects;
-    exports.ɵl = ConfigReducers;
+    exports.ɵc = RoutingModule;
+    exports.ɵj = ConfigAppConfigComponent;
+    exports.ɵn = AuthenticationModuleConfigComponent;
+    exports.ɵl = LayoutModuleConfigComponent;
+    exports.ɵk = UserModuleConfigComponent;
+    exports.ɵq = LoadConfigEffects;
+    exports.ɵp = ConfigReducers;
     exports.ɵb = ConfigurationService;
-    exports.ɵe = ConfigEditComponent;
-    exports.ɵi = ConfigModuleContainerComponent;
-    exports.ɵc = ConfigsComponent;
-    exports.ɵk = DynamicConfigComponentSelectorComponent;
+    exports.ɵf = ConfigEditComponent;
+    exports.ɵd = ConfigModuleContainerComponent;
+    exports.ɵe = ConfigsComponent;
+    exports.ɵi = ConfigEditComponent;
+    exports.ɵm = ConfigModuleContainerComponent;
+    exports.ɵg = ConfigsComponent;
+    exports.ɵo = DynamicConfigComponentSelectorComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

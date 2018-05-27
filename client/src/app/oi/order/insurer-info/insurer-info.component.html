@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="66" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
+<div fxLayout="row" fxLayoutGap="25px">
+  <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
       <mat-accordion>
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
             <mat-expansion-panel-header>
@@ -70,7 +70,7 @@
                       </mat-radio-group>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div fxLayout="row">
+                  <div fxLayout="row" fxLayoutGap="25px">
                     <mat-form-field fxFlex="20">
                       <mat-select [placeholder]="(PolicyAddressCityId$ | async)?.Label" formControlName="PolicyAddressCityId">
                         <mat-option *ngFor="let item of (PolicyAddressCityId$ | async)?.Options" [value]="item.Value">
@@ -120,7 +120,7 @@
             <h4>
                 نشانی ارسال
               </h4>
-                <form [formGroup]="formGroup" fxLayout="row">
+                <form [formGroup]="formGroup" fxLayout="row" fxLayoutGap="25px">
                   <mat-form-field fxFlex="20">
                       <mat-select [placeholder]="(DeliveryAddressCityId$ | async)?.Label" formControlName="DeliveryAddressCityId">
                         <mat-option *ngFor="let item of (DeliveryAddressCityId$ | async)?.Options" [value]="item.Value">
@@ -137,6 +137,9 @@
                 <h4>
                     زمان ارسال
                 </h4>
+                <p>
+                  در صورت ثبت سفارش قبل از ساعت 5 بعد از ظهر، بیمه نامه در همان روز برای شما صادر می شود و زمان زیر تنها مشخص کننده زمان ارسال بیمه نامه می باشد.
+                </p>
                 <table mat-table [dataSource]="DelieryTimeTableDataSource$ | async">
                   <ng-container matColumnDef="Checkbox">
                     <td mat-cell *matCellDef="let row">
@@ -145,11 +148,14 @@
                       </mat-radio-group>
                     </td>
                   </ng-container>
+                  <ng-container matColumnDef="Day">
+                    <td mat-cell *matCellDef="let element"> {{element.Date | persianDate}} </td>
+                  </ng-container>
                   <ng-container matColumnDef="Date">
                     <td mat-cell *matCellDef="let element"> {{element.DayOfWeek}} </td>
                   </ng-container>
                   <ng-container matColumnDef="Time">
-                    <td mat-cell *matCellDef="let element"> {{element.TimeFrom.Hours}} - {{element.TimeTo.Hours}}  ساعت</td>
+                    <td mat-cell *matCellDef="let element"> {{element.TimeFrom.Hours}}:00 تا {{element.TimeTo.Hours}}:00 </td>
                   </ng-container>
                   
                   <tr mat-row *matRowDef="let row; columns: DelieryTimeTableDisplayColumns;" (click)="selectDeliveryTime(row)"></tr>
@@ -166,5 +172,62 @@
 
 
     <button mat-raised-button (click)="save()" color="primary">ثبت</button>
+  </div>
+  <div fxFlex>
+      <mat-card id="paymentInfo">
+        <mat-card-title>اطلاعات بیمه نامه</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              {{(orderForm$ | async)?.CarBrand.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.CarBrand.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item>
+              {{(orderForm$ | async)?.CarModel.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.CarModel.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item>
+              {{(orderForm$ | async)?.CarProductionYear.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.CarProductionYear.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item>
+              {{(orderForm$ | async)?.LastPolicyExpirationDate.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.LastPolicyExpirationDate.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item>
+              {{(orderForm$ | async)?.PolicyPushesheMali.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.PolicyPushesheMali.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item>
+              {{(orderForm$ | async)?.CarUsage.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.CarUsage.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item>
+              {{(orderForm$ | async)?.PolicyTerm.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.PolicyTerm.DisplayValue}}
+              </span>
+            </mat-list-item>
+            <mat-list-item class="totalPremium">
+              {{(orderForm$ | async)?.TotalPremium.Label}}
+              <span class="value">
+                {{(orderForm$ | async)?.TotalPremium.DisplayValue}}
+              </span>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
   </div>
 </div>

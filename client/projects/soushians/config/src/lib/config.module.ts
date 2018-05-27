@@ -39,7 +39,7 @@ import { AuthenticationModuleConfigComponent } from "./dumb-components/authentic
 import { DynamicConfigComponentSelectorComponent } from "./smart-components/dynamic-config-component-selector/dynamic-config-component-selector.component";
 import { LoadConfigEffects } from "./effects/load-config.effects";
 import { ConfigReducers } from "./reducers";
-// import { RoutingModule } from "./config.routing-module";
+import { RoutingModule } from "./config.routing-module";
 
 @NgModule({
 	imports: [
@@ -65,8 +65,8 @@ import { ConfigReducers } from "./reducers";
 		MatToolbarModule,
 		MatDatepickerModule,
 		MatProgressBarModule,
-		BrowserAnimationsModule
-		// RoutingModule
+		BrowserAnimationsModule,
+		RoutingModule
 	],
 	declarations: [
 		ConfigsComponent,

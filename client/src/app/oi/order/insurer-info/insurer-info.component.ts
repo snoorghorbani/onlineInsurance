@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, RequiredValidator } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel, DeliveryTimeModel } from "../models";
 import { Router } from "@angular/router";
@@ -57,7 +57,7 @@ export class InsurerInfoComponent implements OnInit {
 		private geoBoundaryService: GeoBoundaryService
 	) {
 		this.initFormGroup();
-		this.DelieryTimeTableDisplayColumns = [ "Checkbox", "Date", "Time" ];
+		this.DelieryTimeTableDisplayColumns = [ "Checkbox", "Day", "Date", "Time" ];
 		this.DelieryTimeTableDataSource$ = this.orderService.GetDeliveryTimeTable();
 		this.Cities$ = this.geoBoundaryService.GetCities();
 		// this.DelieryTimeTableDataSource$.subscribe(data => {
@@ -82,19 +82,21 @@ export class InsurerInfoComponent implements OnInit {
 		this.DeliveryTime$ = this.orderForm$.map(orderForm => orderForm.DeliveryTime);
 		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
 		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
+
+		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.CarModel);
 	}
 
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 
-		this.orderForm$.subscribe(orderForm => {
-			Object.keys(this.formGroup.controls).forEach(key => {
-				if (orderForm[key].Status == 1) {
-					this.formGroup.get(key).setValidators([ Validators.required ]);
-					this.formGroup.get(key).updateValueAndValidity();
-				}
-			});
-		});
+		// this.orderForm$.subscribe(orderForm => {
+		// 	Object.keys(this.formGroup.controls).forEach(key => {
+		// 		if (orderForm[key].Status == 1) {
+		// 			this.formGroup.get(key).setValidators([ Validators.required ]);
+		// 			this.formGroup.get(key).updateValueAndValidity();
+		// 		}
+		// 	});
+		// });
 
 		this.formGroup.get("PolicyAddressSource").valueChanges.subscribe(source => {
 			if (source != "3") this.formGroup.get("PolicyAddress").disable();
@@ -105,10 +107,10 @@ export class InsurerInfoComponent implements OnInit {
 	DeliverDateTime: string;
 	initFormGroup() {
 		this.formGroup = new FormGroup({
-			PolicyholderFirstName: new FormControl(""),
-			PolicyholderLastName: new FormControl(""),
-			PolicyholderMobile: new FormControl(""),
-			PolicyholderPhone: new FormControl(""),
+			PolicyholderFirstName: new FormControl("", [ Validators.required, Validators.pattern(/[a-zA-Z]/) ]),
+			PolicyholderLastName: new FormControl("", [ Validators.required, Validators.pattern(/[a-zA-Z]/) ]),
+			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
 			PolicyholderCarIdCardBack: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
 			PolicyholderCarIdCardFront: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
@@ -117,18 +119,18 @@ export class InsurerInfoComponent implements OnInit {
 			// LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
 			// LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
 
-			PolicyholderNationalCode: new FormControl(""),
-			PolicyholderBirthDate: new FormControl(""),
-			PolicyholderFatherName: new FormControl(""),
+			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderBirthDate: new FormControl("", [ Validators.required ]),
+			PolicyholderFatherName: new FormControl("", [ Validators.required, Validators.pattern(/[a-zA-Z]/) ]),
 
-			DeliveryAddressCityId: new FormControl(""),
-			DeliveryAddress: new FormControl(""),
+			DeliveryAddressCityId: new FormControl("", [ Validators.required ]),
+			DeliveryAddress: new FormControl("", [ Validators.required ]),
 
-			PolicyAddressSource: new FormControl(""),
-			PolicyAddressCityId: new FormControl(""),
-			PolicyAddress: new FormControl(""),
+			PolicyAddressSource: new FormControl("", [ Validators.required ]),
+			PolicyAddressCityId: new FormControl("", [ Validators.required ]),
+			PolicyAddress: new FormControl("", [ Validators.required ]),
 
-			DeliveryDate: new FormControl("")
+			DeliveryDate: new FormControl("", [ Validators.required ])
 			// DeliveryTime: new FormControl("")
 		});
 	}

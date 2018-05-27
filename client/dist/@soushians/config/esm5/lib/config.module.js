@@ -23,6 +23,7 @@ import { AuthenticationModuleConfigComponent } from "./dumb-components/authentic
 import { DynamicConfigComponentSelectorComponent } from "./smart-components/dynamic-config-component-selector/dynamic-config-component-selector.component";
 import { LoadConfigEffects } from "./effects/load-config.effects";
 import { ConfigReducers } from "./reducers";
+import { RoutingModule } from "./config.routing-module";
 var NgsConfigModule = /** @class */ (function () {
     function NgsConfigModule() {
     }
@@ -64,7 +65,8 @@ NgsConfigModule.decorators = [
                     MatToolbarModule,
                     MatDatepickerModule,
                     MatProgressBarModule,
-                    BrowserAnimationsModule
+                    BrowserAnimationsModule,
+                    RoutingModule
                 ],
                 declarations: [
                     ConfigsComponent,

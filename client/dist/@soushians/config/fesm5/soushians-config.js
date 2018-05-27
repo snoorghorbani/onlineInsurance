@@ -887,6 +887,53 @@ __decorate([
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var /** @type {?} */ routes = [
+    {
+        path: 'configs',
+        component: ConfigModuleContainerComponent,
+        children: [
+            {
+                path: '',
+                component: ConfigsComponent
+            },
+            {
+                path: 'edit/:name',
+                component: ConfigEditComponent
+            }
+        ]
+    }
+];
+var /** @type {?} */ RoutingModule = RouterModule.forChild(routes);
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NgsConfigModule = /** @class */ (function () {
     function NgsConfigModule() {
     }
@@ -927,7 +974,8 @@ NgsConfigModule.decorators = [
                     MatToolbarModule,
                     MatDatepickerModule,
                     MatProgressBarModule,
-                    BrowserAnimationsModule
+                    BrowserAnimationsModule,
+                    RoutingModule
                 ],
                 declarations: [
                     ConfigsComponent,
@@ -968,5 +1016,5 @@ RootNgsConfigModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { ConfigService, ConfigModel, GetConfigsApiModel, EditConfigApiModel, MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN, ConfigReducers, selectConfigState, getConfigListState, getConfigs$1 as getConfigs, getAppConfig$1 as getAppConfig, getAuthenticationModuleConfig$1 as getAuthenticationModuleConfig, getUserModuleConfig$1 as getUserModuleConfig, getlayoutModuleConfig$1 as getlayoutModuleConfig, getConfigModuleConfig$1 as getConfigModuleConfig, getFormModuleConfig$1 as getFormModuleConfig, getSocketModuleConfig$1 as getSocketModuleConfig, NgsConfigModule, RootNgsConfigModule, ConfigAppConfigComponent as ɵf, AuthenticationModuleConfigComponent as ɵj, LayoutModuleConfigComponent as ɵh, UserModuleConfigComponent as ɵg, LoadConfigEffects as ɵm, ConfigReducers as ɵl, ConfigurationService as ɵb, ConfigEditComponent as ɵe, ConfigModuleContainerComponent as ɵi, ConfigsComponent as ɵc, DynamicConfigComponentSelectorComponent as ɵk };
+export { ConfigService, ConfigModel, GetConfigsApiModel, EditConfigApiModel, MODULE_DEFAULT_CONFIG, MODULE_CONFIG_TOKEN, ConfigReducers, selectConfigState, getConfigListState, getConfigs$1 as getConfigs, getAppConfig$1 as getAppConfig, getAuthenticationModuleConfig$1 as getAuthenticationModuleConfig, getUserModuleConfig$1 as getUserModuleConfig, getlayoutModuleConfig$1 as getlayoutModuleConfig, getConfigModuleConfig$1 as getConfigModuleConfig, getFormModuleConfig$1 as getFormModuleConfig, getSocketModuleConfig$1 as getSocketModuleConfig, NgsConfigModule, RootNgsConfigModule, RoutingModule as ɵc, ConfigAppConfigComponent as ɵj, AuthenticationModuleConfigComponent as ɵn, LayoutModuleConfigComponent as ɵl, UserModuleConfigComponent as ɵk, LoadConfigEffects as ɵq, ConfigReducers as ɵp, ConfigurationService as ɵb, ConfigEditComponent as ɵf, ConfigModuleContainerComponent as ɵd, ConfigsComponent as ɵe, ConfigEditComponent as ɵi, ConfigModuleContainerComponent as ɵm, ConfigsComponent as ɵg, DynamicConfigComponentSelectorComponent as ɵo };
 //# sourceMappingURL=soushians-config.js.map

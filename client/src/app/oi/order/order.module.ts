@@ -19,18 +19,20 @@ import {
 	MatCheckboxModule,
 	MatStepperModule,
 	MatChipsModule,
-	MatRadioModule
+	MatRadioModule,
+	MatListModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { EffectsModule } from "@ngrx/effects";
 import { FileDropModule } from "ngx-file-drop";
+import { StoreModule } from "@ngrx/store";
 
 import { NgsFormModule } from "@soushians/form";
+import { SharedModule } from "@soushians/shared";
 
 import { TestComponent } from "./test/test.component";
 import { OrderRoutingModule } from "./order-routing.module";
-import { StoreModule } from "@ngrx/store";
 import { FeatureReducers } from "./order.reducers";
 import {
 	GetOrderTypesApiEffects,
@@ -68,11 +70,13 @@ import { DestroyableComponent } from "./destroyable/destroyable.component";
 		MatInputModule,
 		MatSlideToggleModule,
 		MatTabsModule,
+		MatListModule,
 		MatIconModule,
 		MatButtonModule,
 		MatTooltipModule,
 		MatChipsModule,
 		MatRadioModule,
+		SharedModule,
 		MatTableModule,
 		MatStepperModule,
 		MatSidenavModule,

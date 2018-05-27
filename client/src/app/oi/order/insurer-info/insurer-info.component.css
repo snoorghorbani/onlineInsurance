@@ -26,3 +26,8 @@ mat-icon.tooltip {
 	font-size: 18px;
 	color: #555;
 }
+.value {
+	font-weight: bold;
+	position: absolute;
+	left: 10px;
+}
