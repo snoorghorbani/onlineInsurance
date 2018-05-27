@@ -556,13 +556,13 @@ ToolbarMenuComponent.decorators = [
     <app-title fxFlex fxLayoutAlign="start center"></app-title>
     <app-search-box fxFlex fxLayoutAlign="end center"></app-search-box>
     
-    <button *ngIf="!user.Username" mat-button routerLink="auth/signin">
+    <button *ngIf="!user.DisplayName" mat-button routerLink="auth/signin">
       ورود
     </button>
-    <button *ngIf="user.Username" mat-button [matMenuTriggerFor]="toolbarMenu1">
+    <button *ngIf="user.DisplayName" mat-button [matMenuTriggerFor]="toolbarMenu1">
       <mat-icon>account_circle</mat-icon>
       <span>
-        {{user?.Username}}
+        {{user?.DisplayName}}
       </span>
     </button>
     <mat-menu #toolbarMenu1>
