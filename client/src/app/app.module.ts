@@ -26,7 +26,7 @@ import { NgsUserModule, NgsUserRoutingModule } from "@soushians/user";
 import { NgsConfigModule } from "@soushians/config";
 import * as FeatureReducer from "@soushians/config";
 import { SourceModule } from "@soushians/source";
-import { NgsDiagramModule } from "@soushians/diagram";
+// import { NgsDiagramModule } from "@soushians/diagram";
 import { NgsFormModule } from "@soushians/form";
 
 import { StaticPageModule } from "./static-page";
@@ -66,7 +66,7 @@ import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-a
 			dev_api_host: "http://localhost:3000",
 			prod_api_host: "http://185.208.174.92:3000"
 		}),
-		NgsDiagramModule.forRoot(),
+		// NgsDiagramModule.forRoot(),
 		NgsUserModule.forRoot(),
 		NgsUserRoutingModule,
 		// NgsBpmnModule.forRoot(),

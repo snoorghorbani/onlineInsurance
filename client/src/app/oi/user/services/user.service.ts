@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 export class UserService {
 	constructor(private http: HttpClient) {}
 	SubscribeToNewsletter(email: string): Observable<any> {
-		return this.http.post<SubscribeApiModel.Response>("http://185.208.174.92:2500/user/SubscribeToNewsletter", {
+		return this.http.post<SubscribeApiModel.Response>("http://185.208.174.92:2000/user/SubscribeToNewsletter", {
 			email
 		});
 		// .pipe(map(res => res.Result));
