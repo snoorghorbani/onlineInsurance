@@ -17,7 +17,7 @@ export class ResultInterceptor implements HttpInterceptor {
 			.handle(request)
 			.filter((event: HttpEvent<any>) => event instanceof HttpResponse)
 			.map((event: HttpResponse<any>) => {
-				if (!event.url.includes("http://185.208.174.92:2000")) return event;
+				if (!event.url.includes("http://185.208.174.92:2500")) return event;
 				if ("Result" in event.body) return event;
 				else return event.clone({ body: { Result: event.body } });
 			});

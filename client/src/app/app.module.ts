@@ -67,7 +67,10 @@ import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-a
 			prod_api_host: "http://185.208.174.92:3000"
 		}),
 		// NgsDiagramModule.forRoot(),
-		NgsUserModule.forRoot(),
+		NgsUserModule.forRoot({
+			responseToUserInfo: resp$ => resp$.map(resp => resp.Result),
+			mapUserDisplayName: user$ => user$.map(user => user.DisplayName)
+		}),
 		NgsUserRoutingModule,
 		// NgsBpmnModule.forRoot(),
 		SharedModule,

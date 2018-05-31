@@ -60,6 +60,7 @@ export class CartableComponent implements OnDestroy {
 		this.orders$ = this.service.GetMyCartable();
 	}
 	ngOnDestroy() {
+		debugger;
 		this.unsubscribe.next();
 		this.unsubscribe.complete();
 	}
@@ -72,9 +73,7 @@ export class CartableComponent implements OnDestroy {
 			this.activeOrderEditableField$
 		);
 		this.activeFormGroup$ = this.activeOrder$.pipe(delay(1000), map(() => this.viewFormComponent.formGroup.value));
-		this.activeOrder$
-			.pipe(takeUntil(this.unsubscribe), take(1))
-			.subscribe(item => (this.activeOrderId = item.Id.Value));
+		this.activeOrder$.pipe(take(1)).subscribe(item => (this.activeOrderId = item.Id.Value));
 		this.activeOrder$.pipe(
 			takeUntil(this.unsubscribe),
 			take(1),
