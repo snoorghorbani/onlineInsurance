@@ -39,23 +39,14 @@ export class OrderService {
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetMyCartable(): Observable<OrderSummaryModel[]> {
-		return this.http.get<GetMyCartableApiModel.Response>("http://185.208.174.92:2500/order/GetMyCartable").pipe(
-			// switchMap(() =>
-			// 	this.http.get<GetMyCartableApiModel.Response>("http://185.208.174.92:2500/order/GetMyCartable")
-			// ),
-			share(),
-			map(response => response.Result.Items)
-		);
+		return this.http
+			.get<GetMyCartableApiModel.Response>("http://185.208.174.92:2500/order/GetMyCartable")
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetOrder({ Id }: Partial<GetOrderApiModel.Request>): Observable<OrderFormModel> {
-		debugger;
-		return this.http.get<GetOrderApiModel.Response>(`http://185.208.174.92:2500/order/GetOrder/${Id}`).pipe(
-			map(response => {
-				debugger;
-				return response.Result;
-			}),
-			share()
-		);
+		return this.http
+			.get<GetOrderApiModel.Response>(`http://185.208.174.92:2500/order/GetOrder/${Id}`)
+			.pipe(map(response => response.Result), share());
 	}
 	PlaceOrder(orderForm: OrderFormModel): Observable<any> {
 		return this.http

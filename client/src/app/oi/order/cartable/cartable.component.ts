@@ -74,13 +74,18 @@ export class CartableComponent implements OnDestroy {
 		);
 		this.activeFormGroup$ = this.activeOrder$.pipe(delay(1000), map(() => this.viewFormComponent.formGroup.value));
 		this.activeOrder$.pipe(take(1)).subscribe(item => (this.activeOrderId = item.Id.Value));
-		this.activeOrder$.pipe(
-			takeUntil(this.unsubscribe),
-			take(1),
-			delay(1000),
-			filter(() => !this.sidebar.opened),
-			tap(() => this.sidebar.open())
-		);
+		this.activeOrder$
+			.pipe(
+				takeUntil(this.unsubscribe),
+				take(1),
+				delay(1000),
+				filter(() => {
+					debugger;
+					return !this.sidebar.opened;
+				}),
+				tap(() => this.sidebar.open())
+			)
+			.subscribe();
 		this.filledActiveOrder$ = this.activeFormGroup$.pipe(
 			takeUntil(this.unsubscribe),
 			combineLatest(this.activeOrder$),
