@@ -9,7 +9,7 @@ import {
 } from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { StoreModule, Store } from "@ngrx/store";
+import { StoreModule, Store, Action } from "@ngrx/store";
 import { StoreRouterConnectingModule, routerReducer } from "@ngrx/router-store";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
@@ -41,6 +41,17 @@ import { DashboardModule } from "./dashboard";
 import { OiModule } from "./oi/oi.module";
 import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-adapter";
 
+export function responseToUserInfo(resp$) {
+	return resp$.map(function(resp) {
+		return resp.Result;
+	});
+}
+export function mapUserDisplayName(user$) {
+	return user$.map(function(user) {
+		return user.DisplayName;
+	});
+}
+
 @NgModule({
 	imports: [
 		CoreModule,
@@ -58,6 +69,9 @@ import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-a
 		}),
 		EffectsModule.forRoot([]),
 		NgsLayoutModule.forRoot(),
+		// NgsLayoutModule.forRoot({
+		// 	signoutAction: SignoutAction as any
+		// }),
 		NgsAuthenticationModule.forRoot({
 			env: environment as any
 		}),
@@ -68,8 +82,8 @@ import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-a
 		}),
 		// NgsDiagramModule.forRoot(),
 		NgsUserModule.forRoot({
-			responseToUserInfo: resp$ => resp$.map(resp => resp.Result),
-			mapUserDisplayName: user$ => user$.map(user => user.DisplayName)
+			responseToUserInfo,
+			mapUserDisplayName
 		}),
 		NgsUserRoutingModule,
 		// NgsBpmnModule.forRoot(),

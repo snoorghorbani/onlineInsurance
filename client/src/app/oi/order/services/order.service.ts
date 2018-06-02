@@ -20,47 +20,47 @@ export class OrderService {
 
 	GetOrderTypes(): Observable<OrderType[]> {
 		return this.http
-			.get("http://185.208.174.92:2500/order/GetOrderTypes")
+			.get("http://185.208.174.92:2000/order/GetOrderTypes")
 			.map((response: any) => response.Result as OrderType[]);
 	}
 	GetDeliveryTimeTable(): Observable<DeliveryTimeModel[]> {
 		return this.http
-			.get<GetDeliveryTimeTableApiModel.Response>("http://185.208.174.92:2500/order/GetDeliveryTimeTable")
+			.get<GetDeliveryTimeTableApiModel.Response>("http://185.208.174.92:2000/order/GetDeliveryTimeTable")
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	SaveOrder(order: OrderFormModel): Observable<OrderFormModel> {
 		return this.http
-			.post<SaveOrderApiModel.Response>("http://185.208.174.92:2500/order/SaveOrder", order)
+			.post<SaveOrderApiModel.Response>("http://185.208.174.92:2000/order/SaveOrder", order)
 			.pipe(share(), map(response => response.Result));
 	}
 	GetMyOrders(): Observable<OrderSummaryModel[]> {
 		return this.http
-			.get<GetMyOrdersApiModel.Response>("http://185.208.174.92:2500/order/GetMyOrders")
+			.get<GetMyOrdersApiModel.Response>("http://185.208.174.92:2000/order/GetMyOrders")
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetMyCartable(): Observable<OrderSummaryModel[]> {
 		return this.http
-			.get<GetMyCartableApiModel.Response>("http://185.208.174.92:2500/order/GetMyCartable")
+			.get<GetMyCartableApiModel.Response>("http://185.208.174.92:2000/order/GetMyCartable")
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetOrder({ Id }: Partial<GetOrderApiModel.Request>): Observable<OrderFormModel> {
 		return this.http
-			.get<GetOrderApiModel.Response>(`http://185.208.174.92:2500/order/GetOrder/${Id}`)
+			.get<GetOrderApiModel.Response>(`http://185.208.174.92:2000/order/GetOrder/${Id}`)
 			.pipe(map(response => response.Result), share());
 	}
 	PlaceOrder(orderForm: OrderFormModel): Observable<any> {
 		return this.http
-			.post<PlaceOrderApiModel.Response>(`http://185.208.174.92:2500/order/PlaceOrder`, orderForm)
+			.post<PlaceOrderApiModel.Response>(`http://185.208.174.92:2000/order/PlaceOrder`, orderForm)
 			.pipe(map(response => response.Result));
-		// this.http.get("http://185.208.174.92:2500/user/login?Username=test_agent").subscribe(data => {
+		// this.http.get("http://185.208.174.92:2000/user/login?Username=test_agent").subscribe(data => {
 		// 	debugger;
 		// });
 		// return of({})
-		// return this.http.get("http://185.208.174.92:2500/user/login?Username=test_agent").pipe(
+		// return this.http.get("http://185.208.174.92:2000/user/login?Username=test_agent").pipe(
 		// 	map(() => {
 		// 		debugger;
 		// 		this.http
-		// 			.post<PlaceOrderApiModel.Response>(`http://185.208.174.92:2500/order/PlaceOrder`, orderForm)
+		// 			.post<PlaceOrderApiModel.Response>(`http://185.208.174.92:2000/order/PlaceOrder`, orderForm)
 		// 			.publish()
 		// 			.connect();
 		// 	}),

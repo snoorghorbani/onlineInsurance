@@ -1,12 +1,12 @@
 export interface FieldModel {
-	"Value": any;
-	"DisplayValue": string;
-	"Description": string;
-	"Label": string;
-	"Name": string;
-	"Options": FieldOptionModel[];
-	"SequenceIndex": number;
-	"Status": number;
+	Value: any;
+	DisplayValue: string;
+	Description: string;
+	Label: string;
+	Name: string;
+	Options: FieldOptionModel[];
+	SequenceIndex: number;
+	Status: number;
 	ExtensionData: any;
 }
 

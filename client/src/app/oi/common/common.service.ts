@@ -18,7 +18,7 @@ export class CommonService {
 		ExpireDay: string;
 		ExpireMonth: string;
 	}): Observable<any> {
-		return this.http.post("http://185.208.174.92:2500/customer/SetPolicyRenewationReminder", {
+		return this.http.post("http://185.208.174.92:2000/customer/SetPolicyRenewationReminder", {
 			Mobile,
 			ExpireDay,
 			ExpireMonth

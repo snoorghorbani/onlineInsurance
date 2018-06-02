@@ -58,9 +58,30 @@ export class CartableComponent implements OnDestroy {
 		private snackBar: MatSnackBar
 	) {
 		this.orders$ = this.service.GetMyCartable();
+
+		function random() {
+			return Math.floor(Math.random() * 100);
+		}
+
+		const source = Observable.concat(
+			Observable.defer(() => Observable.of(random())),
+			Observable.defer(() => Observable.of(random())).delay(1)
+		);
+
+		function observer(name: string) {
+			return {
+				next: (value: number) => console.log(`observer ${name}: ${value}`),
+				complete: () => console.log(`observer ${name}: complete`)
+			};
+		}
+
+		const p = source.publishBehavior(-1);
+		p.subscribe(observer("a"));
+		p.connect();
+		p.subscribe(observer("b"));
+		setTimeout(() => p.subscribe(observer("c")), 10);
 	}
 	ngOnDestroy() {
-		debugger;
 		this.unsubscribe.next();
 		this.unsubscribe.complete();
 	}

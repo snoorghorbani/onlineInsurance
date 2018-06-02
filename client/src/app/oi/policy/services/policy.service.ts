@@ -8,7 +8,7 @@ import { of } from "rxjs";
 import { GetCarModelsOfBrandApiModel, ComparePoliciesApiModel } from "./api";
 import { PolicyCompareModel } from "../models/policy-compare.model";
 
-const URI = "http://185.208.174.92:2500/policy/";
+const URI = "http://185.208.174.92:2000/policy/";
 
 @Injectable({
 	providedIn: "root"

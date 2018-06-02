@@ -39,7 +39,7 @@ export class FileService {
  
           **/
 			return this.http
-				.post("http://185.208.174.92:2500/order/AttachFileToOrder", formData, {
+				.post("http://185.208.174.92:2000/order/AttachFileToOrder", formData, {
 					reportProgress: true,
 					observe: "events"
 				})
