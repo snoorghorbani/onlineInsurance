@@ -22,6 +22,7 @@ import { RouterModule } from "@angular/router";
 import { NewsletterComponent } from "./newsletter/newsletter.component";
 import { ReminderComponent } from "./reminder/reminder.component";
 import { WeAreComponent } from "./we-are/we-are.component";
+import { HowToBuyPolicyComponent } from "./how-to-buy-policy/how-to-buy-policy.component";
 
 @NgModule({
 	imports: [
@@ -43,7 +44,21 @@ import { WeAreComponent } from "./we-are/we-are.component";
 		MatSelectModule,
 		FlexLayoutModule
 	],
-	declarations: [ FooterComponent, NewsletterComponent, ReminderComponent, ReminderComponent, WeAreComponent ],
-	exports: [ FooterComponent, NewsletterComponent, ReminderComponent, ReminderComponent, WeAreComponent ]
+	declarations: [
+		FooterComponent,
+		NewsletterComponent,
+		ReminderComponent,
+		ReminderComponent,
+		WeAreComponent,
+		HowToBuyPolicyComponent
+	],
+	exports: [
+		FooterComponent,
+		NewsletterComponent,
+		ReminderComponent,
+		ReminderComponent,
+		WeAreComponent,
+		HowToBuyPolicyComponent
+	]
 })
 export class OiCommonModule {}
