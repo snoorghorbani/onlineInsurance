@@ -81,9 +81,6 @@ export class InsurerInfoComponent implements OnInit {
 		this.DeliveryDate$ = this.orderForm$.map(orderForm => orderForm.DeliveryDate);
 		this.DeliveryTime$ = this.orderForm$.map(orderForm => orderForm.DeliveryTime);
 		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
-		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
-
-		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.CarModel);
 	}
 
 	ngOnInit() {

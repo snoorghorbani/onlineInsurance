@@ -1,5 +1,6 @@
 .row-3 {
 	height: 50vh;
-	background-image: url("/assets/images/car2.jpg");
+	/* background-image: url("/assets/images/car2.jpg"); */
 	background-size: cover;
+	background-color: #ddd;
 }

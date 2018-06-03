@@ -1,4 +1,4 @@
-<div id="bg" fxLayout="row" fxLayoutAlign="center center">
+<div id="bg" fxLayout="row">
 <!-- <mat-grid-list [cols]="4" gutterSize="25px"> -->
   <!-- <mat-grid-tile>
     <mat-card class="bimeh" fxLayout="row" fxLayoutAlign="center center">
@@ -22,63 +22,57 @@
     </mat-grid-tile>
 </mat-grid-list> -->
 
-  <mat-card>
-    <mat-tab-group>
-      <mat-tab label="بیمه شخص ثالث خودرو">
-        
-        <div class="padding" [formGroup]="formGroup" fxLayout="row wrap" fxLayoutGap="25px">
+<div class="padding" fxFlex="50" [formGroup]="formGroup" fxLayout="row wrap" fxLayoutGap="25px">
+  <div fxFlex="100">
+    <button mat-button>بیمه شخص ثالث خودرو</button>
+    <button mat-button>بیمه عمر</button>
+    <button mat-button>بیمه زلزله</button>
+    <button mat-button>بیمه آتش سوزی</button>
+  </div>
 
-          <mat-form-field fxFlex="46">
-              <mat-select [placeholder]="(CarBrand$ | async)?.Label" formControlName="CarBrand">
-                <mat-option *ngFor="let item of (CarBrand$ | async)?.Options" [value]="item.Value">
-                  {{ item.DisplayValue }}
-                </mat-option>
-              </mat-select>
-              <mat-icon class="tooltip md-18" *ngIf="(CarBrand$ | async)?.Description" [matTooltip]="(CarBrand$ | async)?.Description">help</mat-icon>
-          </mat-form-field>
+    <mat-form-field fxFlex="46">
+        <mat-select [placeholder]="(CarBrand$ | async)?.Label" formControlName="CarBrand">
+          <mat-option *ngFor="let item of (CarBrand$ | async)?.Options" [value]="item.Value">
+            {{ item.DisplayValue }}
+          </mat-option>
+        </mat-select>
+        <mat-icon class="tooltip md-18" *ngIf="(CarBrand$ | async)?.Description" [matTooltip]="(CarBrand$ | async)?.Description">help</mat-icon>
+    </mat-form-field>
 
-          <mat-form-field fxFlex="46">
-              <mat-select [placeholder]="(CarModel$ | async)?.Label"  formControlName="CarModel">
-                <mat-option *ngFor="let item of (CarModelOptions$ | async)" [value]="item.Value">
-                  {{ item.DisplayName }}
-                </mat-option>
-              </mat-select>
-              <mat-icon class="tooltip md-18" *ngIf="(CarModel$ | async)?.Description" [matTooltip]="(CarModel$ | async)?.Description">help</mat-icon>
-          </mat-form-field>
-          
-          <mat-form-field fxFlex="46">
-              <mat-select [placeholder]="(CarProductionYear$ | async)?.Label"  formControlName="CarProductionYear">
-                <mat-option *ngFor="let item of (CarProductionYear$ | async)?.Options" [value]="item.Value">
-                  {{ item.DisplayValue }}
-                </mat-option>
-              </mat-select>
-              <mat-icon class="tooltip md-18" *ngIf="(CarProductionYear$ | async)?.Description" [matTooltip]="(CarProductionYear$ | async)?.Description">help</mat-icon>
-          </mat-form-field>
-          
-          <mat-form-field fxFlex="46">
-              <mat-select [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"  formControlName="CarYearsWithoutIncident">
-                <mat-option *ngFor="let item of (CarYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
-                  {{ item.DisplayValue }}
-                </mat-option>
-              </mat-select>
-              <mat-icon class="tooltip md-18" *ngIf="(CarYearsWithoutIncident$ | async)?.Description" [matTooltip]="(CarYearsWithoutIncident$ | async)?.Description">help</mat-icon>
-          </mat-form-field>
-          
-          <mat-form-field fxFlex="46">
-              <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
-              <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
-              <mat-datepicker #LastPolicyExpirationDate></mat-datepicker>
-              <mat-icon class="tooltip md-18" *ngIf="(LastPolicyExpirationDate$ | async)?.Description" [matTooltip]="(LastPolicyExpirationDate$ | async)?.Description">help</mat-icon>
-            </mat-form-field>
-        </div>
-        
-      </mat-tab>
-      <mat-tab disabled="true" label="بیمه بدنه خودرو"></mat-tab>
-      <mat-tab disabled="true" label="بیمه آتش سوزی"></mat-tab>
-      <mat-tab disabled="true" label="بیمه عمر"></mat-tab>
-    </mat-tab-group>
-    <mat-card-actions class="padding-right">
-        <button mat-raised-button (click)="compare()" color="primary">مقایسه</button>
-    </mat-card-actions>
-  </mat-card>
+    <mat-form-field fxFlex="46">
+        <mat-select [placeholder]="(CarModel$ | async)?.Label"  formControlName="CarModel">
+          <mat-option *ngFor="let item of (CarModelOptions$ | async)" [value]="item.Value">
+            {{ item.DisplayName }}
+          </mat-option>
+        </mat-select>
+        <mat-icon class="tooltip md-18" *ngIf="(CarModel$ | async)?.Description" [matTooltip]="(CarModel$ | async)?.Description">help</mat-icon>
+    </mat-form-field>
+    
+    <mat-form-field fxFlex="46">
+        <mat-select [placeholder]="(CarProductionYear$ | async)?.Label"  formControlName="CarProductionYear">
+          <mat-option *ngFor="let item of (CarProductionYear$ | async)?.Options" [value]="item.Value">
+            {{ item.DisplayValue }}
+          </mat-option>
+        </mat-select>
+        <mat-icon class="tooltip md-18" *ngIf="(CarProductionYear$ | async)?.Description" [matTooltip]="(CarProductionYear$ | async)?.Description">help</mat-icon>
+    </mat-form-field>
+    
+    <mat-form-field fxFlex="46">
+        <mat-select [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"  formControlName="CarYearsWithoutIncident">
+          <mat-option *ngFor="let item of (CarYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
+            {{ item.DisplayValue }}
+          </mat-option>
+        </mat-select>
+        <mat-icon class="tooltip md-18" *ngIf="(CarYearsWithoutIncident$ | async)?.Description" [matTooltip]="(CarYearsWithoutIncident$ | async)?.Description">help</mat-icon>
+    </mat-form-field>
+    
+    <mat-form-field fxFlex="46">
+        <input matInput [matDatepicker]="LastPolicyExpirationDate" [placeholder]="(LastPolicyExpirationDate$ | async)?.Label" formControlName="LastPolicyExpirationDate">
+        <mat-datepicker-toggle matSuffix [for]="LastPolicyExpirationDate"></mat-datepicker-toggle>
+        <mat-datepicker #LastPolicyExpirationDate></mat-datepicker>
+        <mat-icon class="tooltip md-18" *ngIf="(LastPolicyExpirationDate$ | async)?.Description" [matTooltip]="(LastPolicyExpirationDate$ | async)?.Description">help</mat-icon>
+      </mat-form-field>
+      <button fxFlex="100" mat-raised-button (click)="compare()" color="primary">مقایسه</button>
+  </div>
+<div fxFlex class="slide"></div>
 </div>

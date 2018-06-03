@@ -1,20 +1,21 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <mat-card fxFlex="50">
-    <mat-card-title>
+<div fxLayout="row" fxLayoutAlign="center center" class="page-row">
+  <div fxFlex="50">
+    <h3 fxFlex="100">
       خبرنامه بیمه‌آنلاین رو از دست ندید!
-    </mat-card-title>
-    <mat-card-content>
-      <form (submit)="subscribe()" *ngIf="!subscribed">
-        <mat-form-field  appearance="fill">
-          <mat-label>ایمیل خود را وارد کنید</mat-label>
-            <input matInput [(ngModel)]="email" name="email">
-            <mat-icon matSuffix>email</mat-icon>
-            <!-- <mat-hint>Hint</mat-hint> -->
-          </mat-form-field>
-        </form>
-        <h3 *ngIf="subscribed">
-          عضویت شما با موفقیت انجام شد.
-        </h3>
-      </mat-card-content>
-    </mat-card>
+    </h3>
+    <div fxFlex="100" *ngIf="!subscribed" fxLayout="row" fxLayoutGap="25px">
+      <mat-form-field appearance="fill" fxFlex="1 1 auto">
+        <mat-label>ایمیل خود را وارد کنید</mat-label>
+        <input matInput [(ngModel)]="email" name="email">
+        <mat-icon matSuffix>email</mat-icon>
+        <!-- <mat-hint>Hint</mat-hint> -->
+      </mat-form-field>
+      <button fxFlex="0 0 auto" mat-fab (click)=" subscribe()" color="primary">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+      <h3 *ngIf="subscribed">
+        عضویت شما با موفقیت انجام شد.
+      </h3>
+  </div>
 </div>

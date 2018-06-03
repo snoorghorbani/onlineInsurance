@@ -30,3 +30,9 @@ mat-icon.tooltip {
 	font-size: 18px;
 	color: #555;
 }
+.slide {
+	height: 100%;
+	background-image: url(/assets/b1.png);
+	background-size: cover;
+	background-position: center;
+}

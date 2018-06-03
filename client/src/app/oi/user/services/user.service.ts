@@ -12,14 +12,14 @@ import { SubscribeApiModel, IsAuthenticatedApiModel } from "./api";
 export class UserService {
 	constructor(private http: HttpClient) {}
 	SubscribeToNewsletter(email: string): Observable<any> {
-		return this.http.post<SubscribeApiModel.Response>("http://185.208.174.92:2000/user/SubscribeToNewsletter", {
+		return this.http.post<SubscribeApiModel.Response>("http://185.208.174.92:2500/user/SubscribeToNewsletter", {
 			email
 		});
 		// .pipe(map(res => res.Result));
 	}
 	IsAuthenticated(): Observable<UserModel> {
 		return this.http
-			.get<IsAuthenticatedApiModel.Response>("http://185.208.174.92:2000/user/IsAuthenticated")
+			.get<IsAuthenticatedApiModel.Response>("http://185.208.174.92:2500/user/IsAuthenticated")
 			.pipe(map(res => res.Result));
 	}
 }

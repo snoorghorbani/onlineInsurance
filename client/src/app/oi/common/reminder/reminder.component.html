@@ -1,29 +1,34 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <mat-card fxFlex="50">
-    <mat-card-title>
+<div fxLayout="row" fxLayoutAlign="center center" class="page-row">
+  <div fxFlex="50">
+    <h3 fxFlex="100">
       یادآوری تمدید بیمه
-    </mat-card-title>
-    <mat-card-content>
+    </h3>
+    <div fxFlex="100">
       <form fxLayout="row" fxLayoutGap="25px">
-        <mat-form-field fxFlex>
-          <input matInput placeholder="شماره موبایل" [(ngModel)]="Mobile" name="Mobile">
+        <mat-form-field fxFlex appearance="fill">
+          <mat-label>شماره موبایل</mat-label>
+          <input matInput [(ngModel)]="Mobile" name="Mobile">
         </mat-form-field>
-        <mat-form-field fxFlex>
-          <mat-select placeholder="روز انقضا" [(ngModel)]="ExpireDay" name="ExpireDay">
+        <mat-form-field fxFlex appearance="fill">
+          <mat-label>روز انقضا</mat-label>
+          <mat-select [(ngModel)]="ExpireDay" name="ExpireDay">
             <mat-option *ngFor="let item of days" [value]="item">
               {{ item }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field  fxFlex>
-          <mat-select placeholder="ماه انقضا" [(ngModel)]="ExpireMonth" name="ExpireMonth">
+        <mat-form-field  fxFlex appearance="fill">
+          <mat-label>ماه انقضا</mat-label>
+          <mat-select [(ngModel)]="ExpireMonth" name="ExpireMonth">
             <mat-option *ngFor="let item of months" [value]="item">
               {{ item }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button fxFlex="60" mat-button (click)="SetPolicyRenewationReminder()" color="primary">ثبت</button>
+        <button mat-fab (click)="SetPolicyRenewationReminder()" color="primary">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
       </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

@@ -426,7 +426,7 @@ diagram-add dynamic-component-selector .mat-card {
 	/* height: 100vh !important; */
 }
 #layout-sidnav > mat-sidenav-content {
-	transition: all 400ms;
+	transition: all 800ms;
 }
 .comfortable #layout-sidnav > mat-sidenav-content {
 	padding-top: 33vh;
