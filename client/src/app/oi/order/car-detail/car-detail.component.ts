@@ -23,26 +23,7 @@ import { trigger, state, style, transition, animate, query, stagger } from "@ang
 @Component({
 	selector: "order-car-detail",
 	templateUrl: "./car-detail.component.html",
-	styleUrls: [ "./car-detail.component.css" ],
-	animations: [
-		trigger("filedAnimation", [
-			state("view", style({ top: "-50px" })),
-			state("edit", style({ top: "0" })),
-			transition("edit => view", [
-				animate("300ms ease-out")
-				// query(".mat-form-field-wrapper", style({ position: "relative" })),
-				// query(".mat-form-field-wrapper", animate("300ms ease-out", style({ top: "-50px" })))
-				// query(".mat-form-field-wrapper", style({ top: "-50px" }))
-			]),
-			transition(
-				"view => edit",
-				[
-					// query(".mat-form-field-wrapper", animate("300ms ease-out", style({ top: "0" })))
-					// query(".mat-form-field-wrapper", style({ top: "0" }))
-				]
-			)
-		])
-	]
+	styleUrls: [ "./car-detail.component.css" ]
 })
 export class CarDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();

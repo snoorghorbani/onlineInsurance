@@ -18,11 +18,20 @@ import { PolicyCompareModel, PriceModel } from "../../policy/models/policy-compa
 import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 import { takeUntil, map, combineLatest } from "rxjs/operators";
+import { trigger, state, transition, animate, style } from "@angular/animations";
 
 @Component({
 	selector: "order-select-product",
 	templateUrl: "./select-product.component.html",
-	styleUrls: [ "./select-product.component.css" ]
+	styleUrls: [ "./select-product.component.css" ],
+	animations: [
+		trigger("mode", [
+			state("view", style({ opacity: 0, top: "-50px" })),
+			state("edit", style({ opacity: 1, top: "0" })),
+			transition("edit => view", [ animate("300ms ease-out") ]),
+			transition("view => edit", [ animate("300ms ease-out") ])
+		])
+	]
 })
 export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy {
 	@Output() done = new EventEmitter();
@@ -39,6 +48,8 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 	orderForm$: Observable<OrderFormModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyTerm$: Observable<FieldModel>;
+	selectedPolicy: PolicyCompareModel;
+	selectedProduct: any;
 	SelectedPolicyTerm$: Observable<string>;
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
@@ -132,7 +143,10 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 			)
 			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
-	selectPolicy(ProductId: number) {
+	selectPolicy(policy: PolicyCompareModel) {
+		debugger;
+		this.selectedPolicy = policy;
+		let ProductId = policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).ProductId;
 		from([ ProductId ])
 			.pipe(
 				takeUntil(this.unsubscribe),
@@ -147,6 +161,7 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 			)
 			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)))
 			.unsubscribe();
+		this.fillSelectedProduct();
 		this.done.emit();
 	}
 	open(policy: PolicyCompareModel) {
@@ -203,5 +218,20 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 	getPrice(policy: PolicyCompareModel) {
 		if (!this.PolicyTermDisplayValue) return "";
 		return policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).Price.DisplayValue;
+	}
+	fillSelectedProduct() {
+		if (!this.selectedPolicy) return null;
+		let selectedPrice = this.selectedPolicy.Prices;
+		this.selectedProduct = {
+			Price: this.getPrice(this.selectedPolicy),
+			FinalPrice: this.getFinalPrice(this.selectedPolicy)
+		};
+	}
+	viewMode() {
+		this.mode = "view";
+	}
+	editMode() {
+		this.selectedProduct = null;
+		this.mode = "edit";
 	}
 }
