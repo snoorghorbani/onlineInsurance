@@ -1,6 +1,12 @@
 <button class="close" mat-mini-fab (click)="fullscreenToggle()">
   <mat-icon>fullscreen_exit</mat-icon>
 </button>
+<button class="help" mat-mini-fab>
+  <mat-icon>help_outline</mat-icon>
+</button>
+<button class="question" mat-mini-fab>
+  <mat-icon>question_answer</mat-icon>
+</button>
 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="25px">
   <div class="blk" fxFlex [@card]="state.car.animateState">
     <order-car-detail class="card-box" [mode]="state.car.mode" *ngIf="state.car.display" (done)="doneCar()"></order-car-detail>

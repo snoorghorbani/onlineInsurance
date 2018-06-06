@@ -1,30 +1,84 @@
 <div fxLayout="row">
   <div fxFlex="100" fxLayout="column" fxLayoutGap="25px">
-    <div fxFLex="row" fxLayoutGap="25px">
-        <button mat-raised-button>سوالات متداول</button>
-        <button mat-raised-button>راهنمای بمه ثالث</button>
-    </div>
+    <mat-card>
+      <h3>بیمه نامه خود را انتخاب نمایید.</h3>
+      <mat-card-content fxLayout="row" fxLayoutGap="25px">
+        <div fxFlex="50">
+          <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(PolicyPushesheMali$ | async)?.Label"
+          controlName="PolicyPushesheMali"
+          [description]="(PolicyPushesheMali$ | async)?.Description"
+          [hint]="(PolicyPushesheMali$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(PolicyPushesheMali$ | async)?.Description"
+          [options]="(PolicyPushesheMali$ | async)?.Options"
+          ></app-field-select>
+        </div>
+        <div fxFlex="50">
+          <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(PolicyTerm$ | async)?.Label"
+          controlName="PolicyTerm"
+          [description]="(PolicyTerm$ | async)?.Description"
+          [hint]="(PolicyTerm$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(PolicyTerm$ | async)?.Description"
+          [options]="(PolicyTerm$ | async)?.Options"
+          ></app-field-select>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let policy of policies$ | async" >
-      <mat-expansion-panel-header>
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let policy of policies$ | async" (opened)="open(policy)">
+      <mat-expansion-panel-header collapsedHeight="100px">
         <mat-panel-title>
-          Personal data
+            <img class="logo" [src]="logos[policy.InsuranceCompany]" >
+            <h4 class="card-title">{{getFinalPrice(policy)}}</h4>
         </mat-panel-title>
         <mat-panel-description>
-          Type your name and age
+          <button mat-raised-button color="primary" (click)="selectPolicy(policy)">سفارش</button>
+          <!-- <div class="price">
+            {{getPrice(policy)}}
+          </div> -->
+          <!-- <div class="finalPrice">
+            
+          </div> -->
         </mat-panel-description>
       </mat-expansion-panel-header>
-      
-      <order-policies-compare-item fxFlex="100"
-      [policy]="policy" 
-      [policyTerm]="SelectedPolicyTerm$ | async" 
-      (click)="showCompanyInfo(policy)"
-      (selected)="selectPolicy($event)">
-    </order-policies-compare-item>
-
-    </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+            <div fxLayout="row" fxLayoutGap="25px">
+              <div fxFlex="50">
+                <table mat-table [dataSource]="companyInfoDataSource" matSort>
+                  <ng-container matColumnDef="key">
+                    <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="value">
+                    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                  </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: companyInfoDisplayCol;"></tr>
+                </table>
+              </div>
+              <div fxFlex="50">
+                <table mat-table [dataSource]="policyInfoDataSource" matSort>
+                  <ng-container matColumnDef="key">
+                    <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="value">
+                    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+                  </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: companyInfoDisplayCol;"></tr>
+                </table>
+              </div>
+            </div>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>
 
 </div>
+
+
+<!-- [policy]="policy" 
+[policyTerm]="SelectedPolicyTerm$ | async" 
+(click)="showCompanyInfo(policy)"
+(selected)="selectPolicy($event)"> -->

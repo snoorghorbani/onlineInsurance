@@ -1,5 +1,5 @@
-<mat-card *ngIf="price" class="policy-compare-card">
-  <mat-card-content>
+<mat-expansion-panel *ngIf="price" class="policy-compare-card">
+  <div>
     <mat-expansion-panel #modeDetail>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -34,27 +34,27 @@
         </div>
     </mat-expansion-panel>
     <mat-grid-list cols="2" rowHeight="50px">
-        <mat-grid-tile>
-          <mat-chip-list>
-            <mat-chip color="primary">
-              {{price.DiscountPercent}}درصد تخفبف
-            </mat-chip>
-          </mat-chip-list>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <div class="price">
-            {{price.Price.DisplayValue}}
-          </div>
-          <div class="finalPrice">
-            {{price.FinalPrice.DisplayValue}}
-          </div>
-        </mat-grid-tile>
-        <mat-grid-tile>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-button color="primary" (click)="showDetail()">اطلاعات بیشتر</button>
-      <button mat-raised-button color="primary" (click)="select()">سفارش</button>
-    </mat-card-actions>
-</mat-card>
+      <mat-grid-tile>
+        <mat-chip-list>
+          <mat-chip color="primary">
+            {{price.DiscountPercent}}درصد تخفبف
+          </mat-chip>
+        </mat-chip-list>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="price">
+          {{price.Price.DisplayValue}}
+        </div>
+        <div class="finalPrice">
+          {{price.FinalPrice.DisplayValue}}
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div align="end">
+    <button mat-button color="primary" (click)="showDetail()">اطلاعات بیشتر</button>
+    <button mat-raised-button color="primary" (click)="select()">سفارش</button>
+  </div>
+</mat-expansion-panel>

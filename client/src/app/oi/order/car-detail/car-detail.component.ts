@@ -68,10 +68,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
-	animate() {
-		debugger;
-		this.mode = this.mode == "edit" ? "view" : "edit";
-	}
 	constructor(private store: Store<AppState>, private router: Router) {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
@@ -164,7 +160,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	}
 
 	complete() {
-		debugger;
 		if (this.formGroup.invalid) return;
 		from([ this.formGroup ])
 			.pipe(

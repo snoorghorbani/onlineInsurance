@@ -1,6 +1,3 @@
-table {
-	width: 100%;
-}
 .fit {
 	width: 100%;
 }
@@ -9,4 +6,60 @@ mat-icon.tooltip {
 	left: 15px;
 	font-size: 18px;
 	color: #555;
+}
+
+/* .policy-compare-sidenav {
+	height: 200px;
+	padding: 0px;
+} */
+/* .logo {
+	width: 32px;
+	height: 32px;
+	padding-top: 13.5px;
+	padding-left: 20px;
+} */
+mat-expansion-panel mat-expansion-panel {
+	box-shadow: none !important;
+}
+/* mat-panel-description button {
+	position: absolute;
+	left: 40px;
+	top: 6px;
+} */
+table {
+	width: 100%;
+}
+.price {
+	text-decoration: line-through;
+	font-weight: bolder;
+	color: #ff0000b3;
+}
+.finalPrice {
+	font-weight: bolder;
+	color: green;
+}
+h3.card-title {
+	margin-top: 18px;
+}
+.logo {
+	transition: width 100ms, height 100ms, paddint-top 100ms;
+	width: 80px;
+	height: 80px;
+	padding-left: 15px;
+	padding-top: 0px;
+}
+.mat-expanded .logo {
+	width: 40px;
+	height: 40px;
+	padding-left: 15px;
+	padding-top: 7px;
+}
+mat-panel-description {
+	position: relative;
+}
+mat-panel-description button {
+	position: absolute;
+	height: 36px;
+	top: 23px;
+	left: 0;
 }

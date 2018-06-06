@@ -1,5 +1,6 @@
 <div fxLayout="row">
   <mat-card fxFlex>
+      <h3>مشخصات خودرو را ثبت نمایید.</h3>
     <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
       <div [formGroup]="formGroup">
         <app-field-select
@@ -82,26 +83,6 @@
           [tooltip]="(CarUsage$ | async)?.Description"
           [options]="(CarUsage$ | async)?.Options"
         ></app-field-select>
-        <!-- <app-field-select
-          [formGroup]="formGroup"
-          [placeholder]="(PolicyPushesheMali$ | async)?.Label"
-          controlName="PolicyPushesheMali"
-          [description]="(PolicyPushesheMali$ | async)?.Description"
-          [hint]="(PolicyPushesheMali$ | async)?.Description"
-          [mode]="mode"
-          [tooltip]="(PolicyPushesheMali$ | async)?.Description"
-          [options]="(PolicyPushesheMali$ | async)?.Options"
-        ></app-field-select>
-        <app-field-select
-          [formGroup]="formGroup"
-          [placeholder]="(PolicyTerm$ | async)?.Label"
-          controlName="PolicyTerm"
-          [description]="(PolicyTerm$ | async)?.Description"
-          [hint]="(PolicyTerm$ | async)?.Description"
-          [mode]="mode"
-          [tooltip]="(PolicyTerm$ | async)?.Description"
-          [options]="(PolicyTerm$ | async)?.Options"
-        ></app-field-select> -->
         <app-field-datepicker
           [formGroup]="formGroup"
           [placeholder]="(LastPolicyExpirationDate$ | async)?.Label"

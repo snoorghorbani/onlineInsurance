@@ -8,13 +8,13 @@ import {
 	GetCarModelsOfBrandStartAction,
 	GetCarModelsOfBrandApiModel
 } from "../../policy/services/api";
-import { from, of, Subject } from "rxjs";
+import { from, of, Subject, BehaviorSubject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { FieldModel, FieldOptionModel } from "../models/field.model";
 import { OrderFormModel } from "../models";
 import { Router } from "@angular/router";
-import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
+import { PolicyCompareModel, PriceModel } from "../../policy/models/policy-compare.model";
 import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 import { takeUntil, map, combineLatest } from "rxjs/operators";
@@ -30,23 +30,16 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	@Input() mode: "view" | "edit" = "view";
-	policies$: Observable<PolicyCompareModel[]>;
+	policies$: BehaviorSubject<PolicyCompareModel[]> = new BehaviorSubject<PolicyCompareModel[]>([]);
 	formGroup: FormGroup;
+	activePolicy: PolicyCompareModel;
+	price: PriceModel;
+	PolicyTermDisplayValue: string;
+	logos: { [name: string]: string };
 	orderForm$: Observable<OrderFormModel>;
-	CarBrand$: Observable<FieldModel>;
-	CarModel$: Observable<FieldModel>;
-	CarModelOptions$: Observable<FieldOptionModel[]>;
-	CarProductionYear$: Observable<FieldModel>;
-	CarUsage$: Observable<FieldModel>;
-	CarYearsWithoutIncident$: Observable<FieldModel>;
-	LastPolicyExpirationDate$: Observable<FieldModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyTerm$: Observable<FieldModel>;
-	LastPolicyYearsWithoutIncident$: Observable<FieldModel>;
-	LastPolicyNumOfUsedPropertyCoupon$: Observable<FieldModel>;
-	LastPolicyNumOfUsedPersonCoupon$: Observable<FieldModel>;
 	SelectedPolicyTerm$: Observable<string>;
-	FocuseddPolicy: PolicyCompareModel;
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
@@ -55,42 +48,20 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.policyInfoDataSource = [];
 		this.companyInfoDisplayCol = [ "key", "value" ];
 		this.formGroup = new FormGroup({
-			CarBrand: new FormControl(""),
-			CarModel: new FormControl(""),
-			CarProductionYear: new FormControl(""),
-			CarUsage: new FormControl(""),
-			CarYearsWithoutIncident: new FormControl(""),
 			PolicyPushesheMali: new FormControl(""),
-			PolicyTerm: new FormControl(12),
-			LastPolicyExpirationDate: new FormControl(""),
-			LastPolicyYearsWithoutIncident: new FormControl("0"),
-			LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
-			LastPolicyNumOfUsedPersonCoupon: new FormControl("0")
+			PolicyTerm: new FormControl(12)
 		});
-		this.policies$ = this.store.select(state => state.order.carDetail.data);
+		this.initInsLogos();
+		this.store.select(state => state.order.carDetail.data).subscribe(policies => this.policies$.next(policies));
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
-		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
-		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
-		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
-		this.CarUsage$ = this.orderForm$.map(orderForm => orderForm.CarUsage);
-		this.CarYearsWithoutIncident$ = this.orderForm$.map(orderForm => orderForm.CarYearsWithoutIncident);
-		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
 		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
 		this.PolicyTerm$ = this.orderForm$.map(orderForm => orderForm.PolicyTerm);
-		this.LastPolicyYearsWithoutIncident$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyYearsWithoutIncident
-		);
-		this.LastPolicyNumOfUsedPropertyCoupon$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyNumOfUsedPropertyCoupon
-		);
-		this.LastPolicyNumOfUsedPersonCoupon$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyNumOfUsedPersonCoupon
-		);
 	}
 
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
 
+		// dynamically set validators on formgroup
 		this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => {
 			Object.keys(this.formGroup.controls).forEach(key => {
 				if (orderForm[key].Status == 1) {
@@ -101,23 +72,28 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 			this.formGroup.updateValueAndValidity();
 		});
 
+		// this.formGroup.get("PolicyTerm").valueChanges.subscribe(value => {
+		// 	debugger;
+		// });
+		// this.policies$.subscribe(policies => {
+		// 	debugger;
+		// 	var prices: { [insCo: string]: PriceModel } = {};
+		// 	const value = this.formGroup.get("PolicyTerm").value;
+		// 	this.policies$
+		// 		.getValue()
+		// 		.forEach(
+		// 			policy =>
+		// 				(prices[policy.InsuranceCompany] = policy.Prices.find(price => price.Price.Amount == value))
+		// 		);
+		// 	return prices;
+		// });
 		this.formGroup
-			.get("CarBrand")
-			.valueChanges.pipe(takeUntil(this.unsubscribe))
-			.subscribe(CarBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand: CarBrand })));
-		this.formGroup
-			.get("CarYearsWithoutIncident")
-			.valueChanges.pipe(takeUntil(this.unsubscribe))
-			.subscribe(years => this.checkAndContolIncidentFormControls(years));
-
-		this.SelectedPolicyTerm$ = this.formGroup
 			.get("PolicyTerm")
 			.valueChanges.combineLatest(this.PolicyTerm$)
-			.map(
-				([ policyTermValue, policyTermField ]) =>
-					policyTermField.Options.find(item => item.Value == policyTermValue).DisplayValue
-			);
-
+			.subscribe(([ value, PolicyTerm ]) => {
+				debugger;
+				this.PolicyTermDisplayValue = PolicyTerm.Options.find(i => i.Value == value).DisplayValue;
+			});
 		this.policies$.filter(data => data.length > 0).subscribe(data => (this.ready = true));
 		this.orderForm$
 			.pipe(
@@ -156,9 +132,6 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 			)
 			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
-	showCompanyInfo(policy: PolicyCompareModel) {
-		this.FocuseddPolicy = policy;
-	}
 	selectPolicy(ProductId: number) {
 		from([ ProductId ])
 			.pipe(
@@ -176,15 +149,59 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 			.unsubscribe();
 		this.done.emit();
 	}
-	checkAndContolIncidentFormControls(years) {
-		if (years > 1) {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
-		} else {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").enable();
-		}
+	open(policy: PolicyCompareModel) {
+		debugger;
+		this.activePolicy = policy;
+		const translate = {
+			MizaneShekayateMoshtariyan: "میزان شکایات مشتریان",
+			ModatZamanePasokhgoieBeShekayat: "مدت زمان پاسخگویی به شکایت",
+			RotbeyeRezayateMoshtary: "رتبه ی رضایت مشتری",
+			SahmAzBazar: "سهم از بازار",
+			SatheTavangariyeMali: "سصح توانگری مالی",
+			TedadeMarakezePardakhteKhesarat: "تعداد مراکز پرداخت خسارت"
+		};
+		this.companyInfoDataSource = Object.keys(this.activePolicy.InsuranceCompanyStatistics)
+			.filter(key => key != "ExtensionData")
+			.map(key => {
+				return { key: translate[key], value: this.activePolicy.InsuranceCompanyStatistics[key] };
+			});
+
+		this.policyInfoDataSource = [
+			{
+				key: "مبلغ پایه بیمه",
+				value: ""
+			},
+			{
+				key: "مبلغ تخفیف بیمه",
+				value: ""
+			}
+		];
+	}
+	initInsLogos() {
+		this.logos = {
+			"بیمه آسیا": "assets\\ins-logos\\asia.png",
+			"بیمه سرمد": "assets\\ins-logos\\sarmard.png",
+			"بیمه دی": "assets\\ins-logos\\day.png",
+			"بیمه البرز": "assets\\ins-logos\\alborz.png",
+			"بیمه دانا": "assets\\ins-logos\\dana.png",
+			"بیمه ایران": "assets\\ins-logos\\iran.png",
+			"بیمه کارآفرین": "assets\\ins-logos\\karafarin.png",
+			"بیمه ما": "assets\\ins-logos\\ma.png",
+			"بیمه ملت": "assets\\ins-logos\\melat.png",
+			"بیمه نوین": "assets\\ins-logos\\novin.png",
+			"بیمه پارسیان": "assets\\ins-logos\\parsian.png",
+			"بیمه پاسارگاد": "assets\\ins-logos\\pasargad.png",
+			"بیمه رازی": "assets\\ins-logos\\razi.png",
+			"بیمه سامان": "assets\\ins-logos\\saman.png",
+			"بیمه سینا": "assets\\ins-logos\\sina.png"
+		};
+	}
+	getFinalPrice(policy: PolicyCompareModel) {
+		if (!this.PolicyTermDisplayValue) return "";
+		return policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).FinalPrice.DisplayValue;
+	}
+	getPrice(policy: PolicyCompareModel) {
+		if (!this.PolicyTermDisplayValue) return "";
+		return policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).Price.DisplayValue;
 	}
 }

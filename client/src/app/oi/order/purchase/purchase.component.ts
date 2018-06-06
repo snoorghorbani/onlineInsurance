@@ -58,19 +58,16 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 		this.store.dispatch(new ExitFullscreenAction());
 	}
 	doneCar() {
-		debugger;
 		this.state.car.mode = "view";
 		this.state.product.display = true;
 		this.state.product.animateState = "in";
 	}
 	doneProduct() {
-		debugger;
 		this.state.product.mode = "view";
 		this.state.insurer.display = true;
 		this.state.insurer.animateState = "in";
 	}
 	doneInsurer() {
-		debugger;
 		this.state.insurer.mode = "view";
 	}
 	prev() {
