@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators, RequiredValidator } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel, DeliveryTimeModel } from "../models";
@@ -25,6 +25,7 @@ import { UploadEvent } from "ngx-file-drop";
 })
 export class InsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
+	@Input() mode: "view" | "edit" = "view";
 	formGroup: FormGroup;
 	orderForm$: Observable<OrderFormModel>;
 	PolicyholderFirstName$: Observable<FieldModel>;

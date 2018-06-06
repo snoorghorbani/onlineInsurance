@@ -1,3 +1,17 @@
-.mat-stepper-horizontal {
-	background-color: transparent;
+:host {
+	width: 100%;
+	padding: 50px;
+}
+.close {
+	position: fixed;
+	z-index: 2;
+	bottom: 25px;
+	right: 25px;
+}
+.card-box {
+	transform: translateX(0);
+}
+.blk {
+	height: calc(100vh - 100px);
+	overflow: auto;
 }

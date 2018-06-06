@@ -1,0 +1,119 @@
+<div fxLayout="row">
+  <mat-card fxFlex>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
+      <div [formGroup]="formGroup">
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(CarBrand$ | async)?.Label"
+          controlName="CarBrand"
+          [description]="(CarBrand$ | async)?.Description"
+          [hint]="(CarBrand$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(CarBrand$ | async)?.Description"
+          [options]="(CarBrand$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(CarModel$ | async)?.Label"
+          controlName="CarModel"
+          [description]="(CarModel$ | async)?.Description"
+          [hint]="(CarModel$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(CarModel$ | async)?.Description"
+          [options]="CarModelOptions$ | async"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(CarProductionYear$ | async)?.Label"
+          controlName="CarProductionYear"
+          [description]="(CarProductionYear$ | async)?.Description"
+          [hint]="(CarProductionYear$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(CarProductionYear$ | async)?.Description"
+          [options]="(CarProductionYear$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"
+          controlName="CarYearsWithoutIncident"
+          [description]="(CarYearsWithoutIncident$ | async)?.Description"
+          [hint]="(CarYearsWithoutIncident$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(CarYearsWithoutIncident$ | async)?.Description"
+          [options]="(CarYearsWithoutIncident$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(LastPolicyYearsWithoutIncident$ | async)?.Label"
+          controlName="LastPolicyYearsWithoutIncident"
+          [description]="(LastPolicyYearsWithoutIncident$ | async)?.Description"
+          [hint]="(LastPolicyYearsWithoutIncident$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(LastPolicyYearsWithoutIncident$ | async)?.Description"
+          [options]="(LastPolicyYearsWithoutIncident$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(LastPolicyNumOfUsedPropertyCoupon$ | async)?.Label"
+          controlName="LastPolicyNumOfUsedPropertyCoupon"
+          [description]="(LastPolicyNumOfUsedPropertyCoupon$ | async)?.Description"
+          [hint]="(LastPolicyNumOfUsedPropertyCoupon$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(LastPolicyNumOfUsedPropertyCoupon$ | async)?.Description"
+          [options]="(LastPolicyNumOfUsedPropertyCoupon$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(LastPolicyNumOfUsedPersonCoupon$ | async)?.Label"
+          controlName="LastPolicyNumOfUsedPersonCoupon"
+          [description]="(LastPolicyNumOfUsedPersonCoupon$ | async)?.Description"
+          [hint]="(LastPolicyNumOfUsedPersonCoupon$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(LastPolicyNumOfUsedPersonCoupon$ | async)?.Description"
+          [options]="(LastPolicyNumOfUsedPersonCoupon$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(CarUsage$ | async)?.Label"
+          controlName="CarUsage"
+          [description]="(CarUsage$ | async)?.Description"
+          [hint]="(CarUsage$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(CarUsage$ | async)?.Description"
+          [options]="(CarUsage$ | async)?.Options"
+        ></app-field-select>
+        <!-- <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(PolicyPushesheMali$ | async)?.Label"
+          controlName="PolicyPushesheMali"
+          [description]="(PolicyPushesheMali$ | async)?.Description"
+          [hint]="(PolicyPushesheMali$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(PolicyPushesheMali$ | async)?.Description"
+          [options]="(PolicyPushesheMali$ | async)?.Options"
+        ></app-field-select>
+        <app-field-select
+          [formGroup]="formGroup"
+          [placeholder]="(PolicyTerm$ | async)?.Label"
+          controlName="PolicyTerm"
+          [description]="(PolicyTerm$ | async)?.Description"
+          [hint]="(PolicyTerm$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(PolicyTerm$ | async)?.Description"
+          [options]="(PolicyTerm$ | async)?.Options"
+        ></app-field-select> -->
+        <app-field-datepicker
+          [formGroup]="formGroup"
+          [placeholder]="(LastPolicyExpirationDate$ | async)?.Label"
+          controlName="LastPolicyExpirationDate"
+          [description]="(LastPolicyExpirationDate$ | async)?.Description"
+          [hint]="(LastPolicyExpirationDate$ | async)?.Description"
+          [mode]="mode"
+          [tooltip]="(LastPolicyExpirationDate$ | async)?.Description"
+        ></app-field-datepicker>
+      </div>
+    </mat-card-content>
+      <button mat-raised-button color="primary" *ngIf="mode == 'edit'" (click)="complete()">ثبت</button>
+      <button mat-raised-button color="primary" *ngIf="mode == 'view'" (click)="editMode()">ویرایش</button>
+  </mat-card>
+</div>

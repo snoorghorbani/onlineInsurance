@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from "@angular/core";
+import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy, Input, AfterViewInit } from "@angular/core";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
@@ -20,15 +20,16 @@ import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 import { takeUntil, map, combineLatest } from "rxjs/operators";
 
 @Component({
-	selector: "order-compare",
-	templateUrl: "./compare.component.html",
-	styleUrls: [ "./compare.component.css" ]
+	selector: "order-select-product",
+	templateUrl: "./select-product.component.html",
+	styleUrls: [ "./select-product.component.css" ]
 })
-export class CompareComponent implements OnInit, OnDestroy {
+export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	unsubscribe = new Subject<void>();
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
+	@Input() mode: "view" | "edit" = "view";
 	policies$: Observable<PolicyCompareModel[]>;
 	formGroup: FormGroup;
 	orderForm$: Observable<OrderFormModel>;
@@ -49,7 +50,6 @@ export class CompareComponent implements OnInit, OnDestroy {
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
-	@ViewChild("policyDetailNav") policyDetailNav: MatSidenav;
 	constructor(private store: Store<AppState>, private router: Router) {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
@@ -67,7 +67,7 @@ export class CompareComponent implements OnInit, OnDestroy {
 			LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
 			LastPolicyNumOfUsedPersonCoupon: new FormControl("0")
 		});
-		this.policies$ = this.store.select(state => state.order.compare.data);
+		this.policies$ = this.store.select(state => state.order.carDetail.data);
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
 		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
@@ -134,7 +134,8 @@ export class CompareComponent implements OnInit, OnDestroy {
 			.subscribe(values => {
 				this.formGroup.patchValue(values);
 			});
-
+	}
+	ngAfterViewInit() {
 		this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => this.compare());
 	}
 	ngOnDestroy() {

@@ -61,7 +61,22 @@ import { State as toolbarState } from "../../reducers/toolbar.reducer";
 					right: "10px"
 				})
 			),
+			state(
+				"hide",
+				style({
+					width: "0",
+					height: "0",
+					top: "76px",
+					right: "10px"
+				})
+			),
 			transition("comfortable => compact", animate("800ms ease-out")),
+			transition("comfortable => hide", animate("800ms ease-in")),
+			transition("hide => comfortable", animate("800ms ease-in")),
+			transition("compact => hide", animate("800ms ease-in")),
+			transition("hide => compact", animate("800ms ease-in")),
+			transition("summary => hide", animate("800ms ease-in")),
+			transition("hide => summary", animate("800ms ease-in")),
 			// transition("comfortable => summary", animate("800ms ease-in")),
 			transition("summary => compact", animate("400ms ease-out")),
 			transition("summary => comfortable", animate("800ms ease-out")),
@@ -80,7 +95,7 @@ import { State as toolbarState } from "../../reducers/toolbar.reducer";
 				"compact",
 				style({
 					"padding-right": "25px",
-					bottom: "25px"
+					bottom: "13px"
 				})
 			),
 			state(
@@ -90,7 +105,20 @@ import { State as toolbarState } from "../../reducers/toolbar.reducer";
 					bottom: "14px"
 				})
 			),
+			state(
+				"hide",
+				style({
+					"padding-right": "25px",
+					bottom: "14px"
+				})
+			),
 			transition("comfortable => compact", animate("800ms ease-in")),
+			transition("comfortable => hide", animate("400ms ease-in")),
+			transition("hide => comfortable", animate("600ms ease-in")),
+			transition("compact => hide", animate("400ms ease-in")),
+			transition("hide => compact", animate("600ms ease-in")),
+			transition("summary => hide", animate("400ms ease-in")),
+			transition("hide => summary", animate("600ms ease-in")),
 			// transition("comfortable => summary", animate("800ms ease-in")),
 			transition("summary => compact", animate("400ms ease-out")),
 			transition("summary => comfortable", animate("800ms ease-out")),
@@ -137,7 +165,26 @@ import { State as toolbarState } from "../../reducers/toolbar.reducer";
 					padding: 0
 				})
 			),
+			state(
+				"hide",
+				style({
+					"margin-right": "0px",
+					"font-size": "1px",
+					"font-weight": "bolder",
+					transform: "translateX(0)",
+					right: "60px",
+					bottom: "79px",
+					position: "absolute",
+					padding: 0
+				})
+			),
 			transition("comfortable => compact", animate("850ms ease-out")),
+			transition("comfortable => hide", animate("800ms ease-in")),
+			transition("hide => comfortable", animate("800ms ease-in")),
+			transition("compact => hide", animate("800ms ease-in")),
+			transition("hide => compact", animate("800ms ease-in")),
+			transition("summary => hide", animate("800ms ease-in")),
+			transition("hide => summary", animate("800ms ease-in")),
 			// transition("comfortable => summary", animate("800ms ease-in")),
 			transition("summary => compact", animate("400ms ease-out")),
 			transition("summary => comfortable", animate("800ms ease-out")),
@@ -174,7 +221,22 @@ import { State as toolbarState } from "../../reducers/toolbar.reducer";
 					boxShadow: "1px 1px 3px rgba(0,0,0,0.5)"
 				})
 			),
+			state(
+				"hide",
+				style({
+					backgroundColor: "rgba(256,256,256,1)",
+					height: "128px",
+					top: "-128px",
+					boxShadow: "1px 1px 3px rgba(0,0,0,0.5)"
+				})
+			),
 			transition("comfortable => compact", animate("800ms ease-in")),
+			transition("comfortable => hide", animate("800ms ease-in")),
+			transition("hide => comfortable", animate("800ms ease-in")),
+			transition("compact => hide", animate("800ms ease-in")),
+			transition("hide => compact", animate("800ms ease-in")),
+			transition("summary => hide", animate("800ms ease-in")),
+			transition("hide => summary", animate("800ms ease-in")),
 			// transition("comfortable => summary", animate("800ms ease-in")),
 			transition("summary => compact", animate("400ms ease-out")),
 			transition("summary => comfortable", animate("800ms ease-out")),
@@ -190,10 +252,10 @@ export class ToolbarMenuComponent {
 	@Input() user: UserModel;
 	@Input() displayName: string;
 	showMainSidenav: Observable<boolean>;
-	toolbarAnimationState: "comfortable" | "compact" | "summary" = "compact";
-	menuAnimationState: "comfortable" | "compact" | "summary" = "compact";
-	logoAnimationState: "comfortable" | "compact" | "summary" = "compact";
-	titleAnimationState: "comfortable" | "compact" | "summary" = "compact";
+	toolbarAnimationState: "comfortable" | "compact" | "summary" | "hide" = "compact";
+	menuAnimationState: "comfortable" | "compact" | "summary" | "hide" = "compact";
+	logoAnimationState: "comfortable" | "compact" | "summary" | "hide" = "compact";
+	titleAnimationState: "comfortable" | "compact" | "summary" | "hide" = "compact";
 	menuItems$: Observable<any[]>;
 	lastScroll: number;
 	config: toolbarState;
@@ -211,14 +273,10 @@ export class ToolbarMenuComponent {
 		this.showSecondSidenav = this.store.select(getShowSecondSidebarStatus);
 		this.showMainSidenav = this.store.select(fromLayout.getShowMainSidenav);
 		this.store.select(fromLayout.getLayoutToolbarMode).subscribe(state => {
-			this.menuAnimationState = state;
-			this.logoAnimationState = state;
-			setTimeout(() => {
-				this.titleAnimationState = state;
-			}, 1);
-			setTimeout(() => {
-				this.toolbarAnimationState = state;
-			}, 1);
+			setTimeout(() => (this.menuAnimationState = state), 1);
+			setTimeout(() => (this.logoAnimationState = state), 1);
+			setTimeout(() => (this.titleAnimationState = state), 1);
+			setTimeout(() => (this.toolbarAnimationState = state), 1);
 		});
 		// setTimeout(() => {
 		// 	this.menuAnimationState = "compact";
@@ -230,6 +288,7 @@ export class ToolbarMenuComponent {
 				scrolledAmount - this.lastScroll < 0 && this.document.body.scrollHeight - scrolledAmount < 100;
 			// let scrollToTop = scrolledAmount - this.lastScroll < 0;
 			this.lastScroll = this.document.body.scrollTop;
+			if (!this.config.visibility) return;
 			if (scrolledAmount == 0) {
 				if (this.config.mode == "comfortable") return;
 				this.store.dispatch(new ChangeToolbatToComfortableModeAction());

@@ -12,7 +12,10 @@ export enum LayoutActionTypes {
 	CHANGE_MAIN_SIDENAVE_MODE = "[Layout] Change main sidenav mode",
 	OPEN_SECOND_SIDEBAR = "[Layout] Open Second Sidebar",
 	CLOSE_SECOND_SIDEBAR = "[Layout] Close Second Sidebar",
-	CHANGE_SECOND_SIDENAV_MODE = "[Layout] Change second sidenav mode"
+	CHANGE_SECOND_SIDENAV_MODE = "[Layout] Change second sidenav mode",
+	FULLSCREEN = "[Layout] FULLSCREEN",
+	EXIT_FULLSCREEN = "[Layout] EXIT_FULLSCREEN",
+	TOGGLE_FULLSCREEN = "[Layout] TOGGLE_FULLSCREEN"
 }
 
 export class UpdateLayoutConfigAction implements Action {
@@ -55,6 +58,15 @@ export class OpenSecondSidenavAction implements Action {
 export class CloseSecondSidenavAction implements Action {
 	readonly type = LayoutActionTypes.CLOSE_SECOND_SIDEBAR;
 }
+export class FullscreenAction implements Action {
+	readonly type = LayoutActionTypes.FULLSCREEN;
+}
+export class ExitFullscreenAction implements Action {
+	readonly type = LayoutActionTypes.EXIT_FULLSCREEN;
+}
+export class ToggleFullscreenAction implements Action {
+	readonly type = LayoutActionTypes.TOGGLE_FULLSCREEN;
+}
 export type Actions =
 	| UpdateLayoutConfigAction
 	| OpenSidenavAction
@@ -65,4 +77,7 @@ export type Actions =
 	| TitleChangedAction
 	| OpenSecondSidenavAction
 	| CloseSecondSidenavAction
-	| ChangeSecondSidenavMode;
+	| FullscreenAction
+	| ExitFullscreenAction
+	| ChangeSecondSidenavMode
+	| ToggleFullscreenAction;

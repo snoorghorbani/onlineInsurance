@@ -2,7 +2,24 @@ import * as layout from "../actions/layout";
 import { LayoutConfigModel } from "@soushians/config";
 import { Action } from "@ngrx/store";
 
-export interface State extends LayoutConfigModel {}
+export interface State {
+	showMainSidenav?: boolean;
+	showSecondSideNav?: boolean;
+	secondSideNavMode?: "over" | "push" | "side";
+	mainSideNavMode?: "over" | "push" | "side";
+	menuItems?: {
+		route: string;
+		icon: string;
+		roles: string[];
+		title: string;
+	}[];
+	showLeftNavBar?: boolean;
+	stickyLeftNavBar?: boolean;
+	layoutMode?: "with-margin" | "without-margin" | "default";
+	title?: string;
+	signoutAction: Action;
+	fullscreen: boolean;
+}
 
 const initialState: State = {
 	showMainSidenav: false,
@@ -14,7 +31,8 @@ const initialState: State = {
 	layoutMode: "default",
 	title: "",
 	menuItems: [],
-	signoutAction: {} as Action
+	signoutAction: {} as Action,
+	fullscreen: false
 };
 
 export function Reducer(state = initialState, action: layout.Actions): State {
@@ -69,6 +87,21 @@ export function Reducer(state = initialState, action: layout.Actions): State {
 				...state,
 				secondSideNavMode: action.mode
 			};
+		case layout.LayoutActionTypes.FULLSCREEN:
+			return {
+				...state,
+				fullscreen: true
+			};
+		case layout.LayoutActionTypes.EXIT_FULLSCREEN:
+			return {
+				...state,
+				fullscreen: false
+			};
+		// case layout.LayoutActionTypes.TOGGLE_FULLSCREEN:
+		// 	return {
+		// 		...state,
+		// 		fullscreen: state.fullscreen === true ? false : true
+		// 	};
 		default:
 			return state;
 	}
@@ -81,3 +114,4 @@ export const getMainSideNavMode = (state: State) => state.mainSideNavMode;
 export const getLayoutMode = (state: State) => state.layoutMode;
 export const getShowSecondSidebarStatus = (state: State) => state.showSecondSideNav;
 export const getSecondSidebarMode = (state: State) => state.secondSideNavMode;
+export const getFullscreenMode = (state: State) => state.fullscreen;

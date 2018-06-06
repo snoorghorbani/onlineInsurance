@@ -1,27 +1,21 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="66">
-    <mat-horizontal-stepper linear="true" #stepper>
-      <mat-step >
-        <form>
-          <ng-template matStepLabel>مقایسه</ng-template>
-          <order-compare (done)="next()"></order-compare>
-        </form>
-      </mat-step>
-      <mat-step>
-        <form>
-          <ng-template matStepLabel>ثبت مشخصات</ng-template>
-          <order-insurer-info (done)="next()"></order-insurer-info>
-        </form>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>تایید نهایی</ng-template>
-        <!-- <order-review-order (done)="next()"></order-review-order> -->
-        <order-view-order [orderForm]="orderForm$ | async" (done)="next()"></order-view-order>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>پرداخت</ng-template>
-        sdfsdfasdf
-      </mat-step>
-    </mat-horizontal-stepper>
+<button class="close" mat-mini-fab (click)="fullscreenToggle()">
+  <mat-icon>fullscreen_exit</mat-icon>
+</button>
+<div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="25px">
+  <div class="blk" fxFlex [@card]="state.car.animateState">
+    <order-car-detail class="card-box" [mode]="state.car.mode" *ngIf="state.car.display" (done)="doneCar()"></order-car-detail>
+  </div>
+  <div class="blk" fxFlex [@card]="state.product.animateState">
+    <order-select-product class="card-box" [mode]="state.product.mode" *ngIf="state.product.display" (done)="doneProduct()"></order-select-product>
+  </div>
+  <div class="blk" fxFlex [@card]="state.insurer.animateState">
+    <order-insurer-info class="card-box"  [mode]="state.insurer.mode" *ngIf="state.insurer.display" (done)="doneInsurer()"></order-insurer-info>
   </div>
 </div>
+
+
+
+
+    <!-- <div fxFlex="40">
+      <order-view-order [orderForm]="orderForm$ | async" (done)="next()"></order-view-order>
+    </div> -->

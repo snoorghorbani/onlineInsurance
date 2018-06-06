@@ -4,7 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { TestComponent } from "./test/test.component";
 import { NewOrderComponent } from "./new-order/new-order.component";
 import { OrderComponent } from "./order.component";
-import { CompareComponent } from "./compare/compare.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { PurchaseComponent } from "./purchase/purchase.component";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
@@ -24,10 +23,7 @@ const routes: Routes = [
 				path: "neworder",
 				component: NewOrderComponent
 			},
-			{
-				path: "compare",
-				component: CompareComponent
-			},
+
 			{
 				path: "insurer-info",
 				component: InsurerInfoComponent

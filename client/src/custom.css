@@ -30,3 +30,6 @@
 .drop-zone * {
 	color: #333 !important;
 }
+.no-padding .mat-horizontal-content-container {
+	padding: 0px !important;
+}

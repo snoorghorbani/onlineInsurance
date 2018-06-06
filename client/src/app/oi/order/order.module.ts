@@ -46,7 +46,6 @@ import {
 import { OrderComponent } from "./order.component";
 import { NewOrderComponent } from "./new-order/new-order.component";
 import { RouterModule } from "@angular/router";
-import { CompareComponent } from "./compare/compare.component";
 import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { SaveOrderApiEffects } from "./services/api/save-order";
@@ -59,6 +58,10 @@ import { CartableComponent } from "./cartable/cartable.component";
 import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
 import { DestroyableComponent } from "./destroyable/destroyable.component";
 import { OiCommonModule } from "../common/common.module";
+import { CarDetailComponent } from "./car-detail/car-detail.component";
+import { SelectProductComponent } from "./select-product/select-product.component";
+import { FieldSelectComponent } from "./field-select/field-select.component";
+import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.component";
 
 @NgModule({
 	imports: [
@@ -96,7 +99,8 @@ import { OiCommonModule } from "../common/common.module";
 		TestComponent,
 		OrderComponent,
 		NewOrderComponent,
-		CompareComponent,
+		CarDetailComponent,
+		SelectProductComponent,
 		PoliciesCompareItemComponent,
 		InsurerInfoComponent,
 		PurchaseComponent,
@@ -105,7 +109,9 @@ import { OiCommonModule } from "../common/common.module";
 		ViewOrderComponent,
 		CartableComponent,
 		RedirectToBankComponent,
-		DestroyableComponent
+		DestroyableComponent,
+		FieldSelectComponent,
+		FieldDatepickerComponent
 	],
 	exports: [ NewOrderComponent ]
 })

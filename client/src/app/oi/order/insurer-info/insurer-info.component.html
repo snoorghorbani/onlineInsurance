@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutGap="25px">
-  <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
+  <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
       <mat-accordion>
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
             <mat-expansion-panel-header>
@@ -31,7 +31,7 @@
                         <mat-slide-toggle checked="false" (change)="disbaleForm($event)">مشخصات بیمه گذار مطابق با تصویر کارت ماشین ثبت شود</mat-slide-toggle>
                       </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div fxLayout="row" fxLayoutGap="25px">
+                    <div fxLayout="row wrap" fxLayoutGap="25px">
                       <mat-form-field fxFlex>
                         <input matInput [placeholder]="(PolicyholderNationalCode$ | async)?.Label" formControlName="PolicyholderNationalCode">
                         <mat-icon class="tooltip md-18" *ngIf="(PolicyholderNationalCode$ | async)?.Description" [matTooltip]="(PolicyholderNationalCode$ | async)?.Description">help</mat-icon>
@@ -70,7 +70,7 @@
                       </mat-radio-group>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <div fxLayout="row" fxLayoutGap="25px">
+                  <div fxLayout="row wrap" fxLayoutGap="25px">
                     <mat-form-field fxFlex="20">
                       <mat-select [placeholder]="(PolicyAddressCityId$ | async)?.Label" formControlName="PolicyAddressCityId">
                         <mat-option *ngFor="let item of (PolicyAddressCityId$ | async)?.Options" [value]="item.Value">
@@ -86,7 +86,7 @@
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
-              <div fxLayout="row" fxLayoutGap="25px">
+              <div fxLayout="row wrap" fxLayoutGap="25px">
                   <file-drop fxFlex 
                     [headertext]="(PolicyholderCarIdCardBack$ | async)?.Label" 
                     (onFileDrop)="LastPolicyImageDropped($event)" 
@@ -120,7 +120,7 @@
             <h4>
                 نشانی ارسال
               </h4>
-                <form [formGroup]="formGroup" fxLayout="row" fxLayoutGap="25px">
+                <form [formGroup]="formGroup" fxLayout="row wrap" fxLayoutGap="25px">
                   <mat-form-field fxFlex="20">
                       <mat-select [placeholder]="(DeliveryAddressCityId$ | async)?.Label" formControlName="DeliveryAddressCityId">
                         <mat-option *ngFor="let item of (DeliveryAddressCityId$ | async)?.Options" [value]="item.Value">
@@ -170,61 +170,64 @@
 
     <button mat-raised-button (click)="save()" color="primary">ثبت سفارش</button>
   </div>
-  <div fxFlex>
-      <mat-card id="paymentInfo">
-        <mat-card-title>اطلاعات بیمه نامه</mat-card-title>
-        <mat-card-content>
-          <mat-list>
-            <mat-list-item>
-              {{(orderForm$ | async)?.CarBrand.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.CarBrand.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item>
-              {{(orderForm$ | async)?.CarModel.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.CarModel.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item>
-              {{(orderForm$ | async)?.CarProductionYear.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.CarProductionYear.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item>
-              {{(orderForm$ | async)?.LastPolicyExpirationDate.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.LastPolicyExpirationDate.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item>
-              {{(orderForm$ | async)?.PolicyPushesheMali.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.PolicyPushesheMali.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item>
-              {{(orderForm$ | async)?.CarUsage.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.CarUsage.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item>
-              {{(orderForm$ | async)?.PolicyTerm.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.PolicyTerm.DisplayValue}}
-              </span>
-            </mat-list-item>
-            <mat-list-item class="totalPremium">
-              {{(orderForm$ | async)?.TotalPremium.Label}}
-              <span class="value">
-                {{(orderForm$ | async)?.TotalPremium.DisplayValue}}
-              </span>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
-      </mat-card>
-  </div>
 </div>
+
+<!-- 
+
+<div fxFlex>
+    <mat-card id="paymentInfo">
+      <mat-card-title>اطلاعات بیمه نامه</mat-card-title>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            {{(orderForm$ | async)?.CarBrand.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.CarBrand.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            {{(orderForm$ | async)?.CarModel.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.CarModel.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            {{(orderForm$ | async)?.CarProductionYear.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.CarProductionYear.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            {{(orderForm$ | async)?.LastPolicyExpirationDate.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.LastPolicyExpirationDate.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            {{(orderForm$ | async)?.PolicyPushesheMali.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.PolicyPushesheMali.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            {{(orderForm$ | async)?.CarUsage.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.CarUsage.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            {{(orderForm$ | async)?.PolicyTerm.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.PolicyTerm.DisplayValue}}
+            </span>
+          </mat-list-item>
+          <mat-list-item class="totalPremium">
+            {{(orderForm$ | async)?.TotalPremium.Label}}
+            <span class="value">
+              {{(orderForm$ | async)?.TotalPremium.DisplayValue}}
+            </span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+</div> -->

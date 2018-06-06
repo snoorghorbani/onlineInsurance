@@ -17,7 +17,8 @@ import {
 	getShowSecondSidebarStatus,
 	getSecondSidebarMode,
 	getLayoutMode,
-	getLayoutToolbarMode
+	getLayoutToolbarMode,
+	getFullscreenMode
 } from "../../reducers";
 
 import {
@@ -32,22 +33,33 @@ import {
 } from "../../actions";
 import { LayoutConfigurationService } from "../../services/layout-configuration.service";
 import { UserFacadeService } from "@soushians/user";
+import { trigger, state, transition, animate, style } from "@angular/animations";
 
 @Component({
 	selector: "layout-main",
 	templateUrl: "./main.component.html",
-	styleUrls: [ "./main.component.scss" ]
+	styleUrls: [ "./main.component.scss" ],
+	animations: [
+		trigger("mode", [
+			state("visible", style({ transform: "scaleY(1) translateY(0)" })),
+			state("invisible", style({ height: "0", transform: "scaleY(0) translateY(100%)" })),
+			transition("visible => invisible", [ animate("1000ms") ]),
+			transition("invisible => visible", [ animate("1000ms") ])
+		])
+	]
 })
 export class MainComponent {
+	@Input("app-config") app_config: ConfigModel<any>;
+	mode$: Observable<"visible" | "invisible">;
 	user$: Observable<UserModel>;
 	displayName$: Observable<string>;
+	isFullscreen$: Observable<boolean>;
 	progressStatus$: Observable<boolean>;
 	showSidebarMenu = new BehaviorSubject(true);
 	//user$: Observable<UserModel>;
 	showMainSidenav: Observable<boolean>;
 	mainSidenavMode: Observable<"side" | "over" | "push">;
 	layoutMode: Observable<"with-margin" | "without-margin" | "default">;
-	@Input("app-config") app_config: ConfigModel<any>;
 	width = 100;
 	showSecondSidenav: Observable<boolean>;
 	secondSidenavMode: Observable<"side" | "over" | "push">;
@@ -66,6 +78,9 @@ export class MainComponent {
 		this.showMainSidenav = this.store.select(getShowMainSidenav);
 		this.mainSidenavMode = this.store.select(getMainSideNavMode);
 		this.toolbarAnimationState = this.store.select(getLayoutToolbarMode);
+
+		this.isFullscreen$ = this.store.select(getFullscreenMode);
+		this.mode$ = this.isFullscreen$.map(mode => (mode ? "invisible" : "visible"));
 
 		//#region manage second sidebar
 		this.store.dispatch(new ChangeSecondSidenavMode("push"));

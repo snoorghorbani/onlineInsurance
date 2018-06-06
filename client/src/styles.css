@@ -185,9 +185,10 @@ app-search-box {
     margin-right: 20px !important;
 }*/
 
-mat-sidenav-container mat-sidenav-content {
+mat-sidenav-container mat-sidenav-content.mat-drawer-content {
 	min-height: calc(100vh - 106px);
 	padding-bottom: 50px;
+	overflow-x: hidden;
 }
 
 mat-sidenav {
@@ -349,14 +350,6 @@ mat-toolbar.mat-toolbar {
 	/* padding-bottom: 0 !important; */
 }
 
-mat-sidenav-content {
-	padding-top: 64px;
-}
-
-mat-sidenav-content mat-sidenav-content {
-	padding: 25px;
-}
-
 .left-align {
 	text-align: left !important;
 }
@@ -425,8 +418,21 @@ diagram-add dynamic-component-selector .mat-card {
 	box-sizing: border-box;
 	/* height: 100vh !important; */
 }
+
+/* mat-sidenav-content {
+	padding-top: 64px;
+}
+
+mat-sidenav-content mat-sidenav-content {
+	padding: 25px;
+} */
+
 #layout-sidnav > mat-sidenav-content {
 	transition: all 800ms;
+}
+
+.fullscreen #layout-sidnav > mat-sidenav-content {
+	padding: 0;
 }
 .comfortable #layout-sidnav > mat-sidenav-content {
 	padding-top: 33vh;
@@ -437,3 +443,16 @@ diagram-add dynamic-component-selector .mat-card {
 .summary #layout-sidnav > mat-sidenav-content {
 	padding-top: 64px;
 }
+.hide #layout-sidnav > mat-sidenav-content {
+	padding-top: 1px;
+}
+.mat-form-field-wrapper {
+	transition: top 500ms;
+	top: 0px;
+}
+/* mat-form-field.view .mat-form-field-wrapper {
+	top: -60px;
+}
+mat-form-field.edit .mat-form-field-wrapper {
+	top: 1px;
+} */
