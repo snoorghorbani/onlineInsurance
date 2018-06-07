@@ -20,16 +20,17 @@ export function reducer(
 ): State {
 	switch (action.type) {
 		case GET_NEW_ORDER_FORM_ACTION_TYPES.SUCCEED: {
+			var order = setDisplayValue(action.payload);
 			return {
 				...state,
-				data: action.payload
+				data: { ...order }
 			};
 		}
 		case NEW_ORDER_FORM_ACTION_TYPES.UPDATE: {
 			var order = setDisplayValue(action.payload);
 			return {
 				...state,
-				data: order
+				data: { ...order }
 			};
 		}
 		case GET_CAR_MODELS_OF_BRAND_ACTION_TYPES.SUCCEED: {

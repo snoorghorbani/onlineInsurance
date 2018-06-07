@@ -129,17 +129,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 
 	complete() {
 		if (this.formGroup.invalid) return;
-		from([ this.formGroup ])
-			.pipe(
-				takeUntil(this.unsubscribe),
-				combineLatest(this.orderForm$),
-				map(([ formGroup, orderForm ]) => {
-					Object.keys(formGroup.value).forEach(key => (orderForm[key].Value = formGroup.value[key]));
-					return orderForm;
-				}),
-				tap(() => this.done.emit())
-			)
-			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
+		this.done.emit();
 	}
 	checkAndContolIncidentFormControls(years) {
 		if (years > 1) {

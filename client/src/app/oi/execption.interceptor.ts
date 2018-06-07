@@ -21,7 +21,6 @@ export class ExceptionInterceptor implements HttpInterceptor {
 				if (event instanceof HttpResponse) return event;
 			})
 			.catch(err => {
-				debugger;
 				this.snackBar.open(err.error.errorMessage, "", {
 					duration: 2000
 				});
