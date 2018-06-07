@@ -40,11 +40,9 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	CarYearsWithoutIncident$: Observable<FieldModel>;
 	LastPolicyExpirationDate$: Observable<FieldModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
-	PolicyTerm$: Observable<FieldModel>;
 	LastPolicyYearsWithoutIncident$: Observable<FieldModel>;
 	LastPolicyNumOfUsedPropertyCoupon$: Observable<FieldModel>;
 	LastPolicyNumOfUsedPersonCoupon$: Observable<FieldModel>;
-	SelectedPolicyTerm$: Observable<string>;
 	FocuseddPolicy: PolicyCompareModel;
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
@@ -59,12 +57,10 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			CarProductionYear: new FormControl(""),
 			CarUsage: new FormControl(""),
 			CarYearsWithoutIncident: new FormControl(""),
-			PolicyPushesheMali: new FormControl(""),
-			PolicyTerm: new FormControl(12),
 			LastPolicyExpirationDate: new FormControl(""),
-			LastPolicyYearsWithoutIncident: new FormControl("0"),
-			LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
-			LastPolicyNumOfUsedPersonCoupon: new FormControl("0")
+			LastPolicyYearsWithoutIncident: new FormControl(),
+			LastPolicyNumOfUsedPropertyCoupon: new FormControl(),
+			LastPolicyNumOfUsedPersonCoupon: new FormControl()
 		});
 
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
@@ -75,7 +71,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 		this.CarYearsWithoutIncident$ = this.orderForm$.map(orderForm => orderForm.CarYearsWithoutIncident);
 		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
 		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
-		this.PolicyTerm$ = this.orderForm$.map(orderForm => orderForm.PolicyTerm);
 		this.LastPolicyYearsWithoutIncident$ = this.orderForm$.map(
 			orderForm => orderForm.LastPolicyYearsWithoutIncident
 		);
@@ -108,14 +103,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			.get("CarYearsWithoutIncident")
 			.valueChanges.pipe(takeUntil(this.unsubscribe))
 			.subscribe(years => this.checkAndContolIncidentFormControls(years));
-
-		this.SelectedPolicyTerm$ = this.formGroup
-			.get("PolicyTerm")
-			.valueChanges.combineLatest(this.PolicyTerm$)
-			.map(
-				([ policyTermValue, policyTermField ]) =>
-					policyTermField.Options.find(item => item.Value == policyTermValue).DisplayValue
-			);
 
 		this.orderForm$
 			.pipe(

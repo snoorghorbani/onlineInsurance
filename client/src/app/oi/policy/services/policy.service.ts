@@ -7,6 +7,7 @@ import { GetCarModelsOfBrand } from "./mock";
 import { of } from "rxjs";
 import { GetCarModelsOfBrandApiModel, ComparePoliciesApiModel } from "./api";
 import { PolicyCompareModel } from "../models/policy-compare.model";
+import { map, share } from "rxjs/operators";
 
 const URI = "http://185.208.174.92:2500/policy/";
 
@@ -28,6 +29,6 @@ export class PolicyService {
 		const model = new ComparePoliciesApiModel.Request(data);
 		return this.http
 			.post<ComparePoliciesApiModel.Response>(`${URI}ComparePolicies`, model.getRequestBody())
-			.map(response => response.Result.Items);
+			.pipe(map(response => response.Result.Items), share());
 	}
 }

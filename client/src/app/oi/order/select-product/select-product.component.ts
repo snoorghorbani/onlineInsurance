@@ -17,7 +17,7 @@ import { Router } from "@angular/router";
 import { PolicyCompareModel, PriceModel } from "../../policy/models/policy-compare.model";
 import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
-import { takeUntil, map, combineLatest } from "rxjs/operators";
+import { takeUntil, map, combineLatest, take } from "rxjs/operators";
 import { trigger, state, transition, animate, style } from "@angular/animations";
 
 @Component({
@@ -59,8 +59,8 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.policyInfoDataSource = [];
 		this.companyInfoDisplayCol = [ "key", "value" ];
 		this.formGroup = new FormGroup({
-			PolicyPushesheMali: new FormControl(""),
-			PolicyTerm: new FormControl(12)
+			PolicyPushesheMali: new FormControl(),
+			PolicyTerm: new FormControl()
 		});
 		this.initInsLogos();
 		this.store.select(state => state.order.carDetail.data).subscribe(policies => this.policies$.next(policies));
@@ -124,6 +124,14 @@ export class SelectProductComponent implements OnInit, AfterViewInit, OnDestroy 
 	}
 	ngAfterViewInit() {
 		this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => this.compare());
+		this.PolicyPushesheMali$
+			.pipe(take(1))
+			.subscribe(PolicyPushesheMali =>
+				this.formGroup.patchValue({ PolicyPushesheMali: PolicyPushesheMali.Options[0].Value })
+			);
+		this.PolicyTerm$
+			.pipe(take(1))
+			.subscribe(PolicyTerm => this.formGroup.patchValue({ PolicyTerm: PolicyTerm.Options[0].Value }));
 	}
 	ngOnDestroy() {
 		this.unsubscribe.next();

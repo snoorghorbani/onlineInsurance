@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { of } from "rxjs";
-import { share, map, switchMap, withLatestFrom, publishLast, refCount } from "rxjs/operators";
+import { of, throwError } from "rxjs";
+import { share, map, switchMap, withLatestFrom, publishLast, refCount, catchError } from "rxjs/operators";
 
 import { OrderType } from "../models/order-type.model";
 import { OrderFormModel, DeliveryTimeModel, OrderSummaryModel } from "../models";
@@ -28,9 +28,10 @@ export class OrderService {
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	SaveOrder(order: OrderFormModel): Observable<OrderFormModel> {
+		debugger;
 		return this.http
 			.post<SaveOrderApiModel.Response>("http://185.208.174.92:2500/order/SaveOrder", order)
-			.pipe(share(), map(response => response.Result));
+			.pipe(map(response => response.Result), share());
 	}
 	GetMyOrders(): Observable<OrderSummaryModel[]> {
 		return this.http

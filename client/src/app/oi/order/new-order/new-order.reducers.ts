@@ -46,7 +46,6 @@ export function reducer(
 }
 
 const setDisplayValue = function(order: OrderFormModel): OrderFormModel {
-	debugger;
 	for (const key in order) {
 		if (order.hasOwnProperty(key)) {
 			const field: FieldModel = order[key];

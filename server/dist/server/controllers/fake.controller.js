@@ -5,7 +5,7 @@ const utility_1 = require("../utility");
 const router = express.Router();
 exports.router = router;
 router.post("/ComparePolicies", function (req, res) {
-    utility_1.httpPost("http://185.208.174.92:2000/Policy/ComparePolicies", req.body).subscribe(Result => {
+    utility_1.httpPost("http://185.208.174.92:2500/Policy/ComparePolicies", req.body).subscribe(Result => {
         res.json({ Result });
     }, err => {
         debugger;
@@ -13,7 +13,7 @@ router.post("/ComparePolicies", function (req, res) {
     });
 });
 router.post("/SaveOrder", function (req, res) {
-    utility_1.httpPost("http://185.208.174.92:2000/Order/SaveOrder", req.body).subscribe(Result => {
+    utility_1.httpPost("http://185.208.174.92:2500/Order/SaveOrder", req.body).subscribe(Result => {
         res.json({ Result });
     });
 });

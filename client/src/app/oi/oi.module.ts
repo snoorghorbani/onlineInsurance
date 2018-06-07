@@ -8,6 +8,7 @@ import { ResultInterceptor } from "./result.interceptor";
 import { GeoBoundaryModule } from "./geo-boundary";
 import { OiCommonModule } from "./common/common.module";
 import { RoutingModule } from "./oi-routing.module";
+import { ExceptionInterceptor } from "./execption.interceptor";
 
 @NgModule({
 	imports: [
@@ -18,7 +19,10 @@ import { RoutingModule } from "./oi-routing.module";
 		OiCommonModule,
 		RoutingModule
 	],
-	providers: [ { provide: HTTP_INTERCEPTORS, useClass: ResultInterceptor, multi: true } ],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: ResultInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: ExceptionInterceptor, multi: true }
+	],
 	declarations: []
 })
 export class OiModule {}
