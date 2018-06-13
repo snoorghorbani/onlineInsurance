@@ -166,6 +166,10 @@ export class InsurerInfoComponent implements OnInit {
 	}
 
 	save() {
+		if (this.formGroup.invalid) {
+			this._validate_all_form_fields(this.formGroup);
+			return;
+		}
 		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
 		this.store.dispatch(new NewOrderFormUpdateAction(this.orderForm));
 		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
@@ -187,5 +191,15 @@ export class InsurerInfoComponent implements OnInit {
 	}
 	editMode() {
 		this.mode = "edit";
+	}
+	_validate_all_form_fields(formGroup: FormGroup) {
+		Object.keys(formGroup.controls).forEach(field => {
+			const control = formGroup.get(field);
+			if (control instanceof FormControl) {
+				control.markAsTouched({ onlySelf: true });
+			} else if (control instanceof FormGroup) {
+				this._validate_all_form_fields(control);
+			}
+		});
 	}
 }

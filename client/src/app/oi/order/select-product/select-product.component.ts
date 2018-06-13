@@ -32,6 +32,7 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	@Input() mode: "view" | "edit" = "view";
+	@Input() boxMode: "disable" | "loading" = "loading";
 	policies$: BehaviorSubject<PolicyCompareModel[]> = new BehaviorSubject<PolicyCompareModel[]>([]);
 	formGroup: FormGroup;
 	activePolicy: PolicyCompareModel;
