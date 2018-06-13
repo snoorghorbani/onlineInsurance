@@ -1,24 +1,16 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
-import {
-	ComparePoliciesStartAction,
-	ComparePoliciesApiModel,
-	GetCarModelsOfBrandStartAction,
-	GetCarModelsOfBrandApiModel
-} from "../../policy/services/api";
-import { from, of, Subject } from "rxjs";
+import { GetCarModelsOfBrandStartAction } from "../../policy/services/api";
+import { Subject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { FieldModel, FieldOptionModel } from "../models/field.model";
 import { OrderFormModel } from "../models";
-import { Router } from "@angular/router";
 import { PolicyCompareModel } from "../../policy/models/policy-compare.model";
-import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
-import { takeUntil, map, combineLatest, tap } from "rxjs/operators";
-import { trigger, state, style, transition, animate, query, stagger } from "@angular/animations";
+import { takeUntil, map, distinctUntilChanged, filter, take } from "rxjs/operators";
 
 @Component({
 	selector: "order-car-detail",
@@ -27,10 +19,11 @@ import { trigger, state, style, transition, animate, query, stagger } from "@ang
 })
 export class CarDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
-	unsubscribe = new Subject<void>();
 	@Input() mode: "view" | "edit" = "edit";
+	unsubscribe = new Subject<void>();
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	formGroup: FormGroup;
+	orderForm: OrderFormModel;
 	orderForm$: Observable<OrderFormModel>;
 	CarBrand$: Observable<FieldModel>;
 	CarModel$: Observable<FieldModel>;
@@ -47,10 +40,72 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
-	constructor(private store: Store<AppState>, private router: Router) {
+	constructor(private store: Store<AppState>) {
+		this._init_properties();
+		this._select_orderForm();
+		this._create_formGroup();
+		this._set_formGroup_validation();
+		this._patchValue_formGroup_on_orderForm_change();
+		this._subscribe_on_orderForm();
+		this._map_orderForm_to_fields();
+	}
+
+	ngOnInit() {
+		this.store.dispatch(new GetNewOrderFormStartAction(1));
+		this._set_formGroup_relation_logic();
+	}
+	ngOnDestroy() {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
+	complete() {
+		debugger;
+		if (this.formGroup.invalid) {
+			this._validate_all_form_fields(this.formGroup);
+			return;
+		}
+		const formValue = this.formGroup.value;
+		Object.keys(formValue || {}).forEach(key => (this.orderForm[key].Value = formValue[key]));
+		this.store.dispatch(new NewOrderFormUpdateAction(this.orderForm));
+		this.done.emit();
+	}
+
+	viewMode() {
+		this.mode = "view";
+	}
+	editMode() {
+		this.mode = "edit";
+	}
+
+	/**
+	 * Private methods
+	 */
+	_subscribe_on_orderForm() {
+		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
+	}
+	_select_orderForm() {
+		this.orderForm$ = this.store
+			.select(state => state.order.newOrder.data)
+			.pipe(takeUntil(this.unsubscribe), filter(orderForm => orderForm != null), distinctUntilChanged());
+	}
+	_init_properties() {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
 		this.companyInfoDisplayCol = [ "key", "value" ];
+	}
+	_check_and_contol_incident_formControls(years) {
+		if (years > 1) {
+			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
+			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
+			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
+		} else {
+			this.formGroup.get("LastPolicyYearsWithoutIncident").enable();
+			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").enable();
+			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").enable();
+		}
+	}
+	_create_formGroup() {
 		this.formGroup = new FormGroup({
 			CarBrand: new FormControl(""),
 			CarModel: new FormControl(""),
@@ -62,8 +117,51 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			LastPolicyNumOfUsedPropertyCoupon: new FormControl(),
 			LastPolicyNumOfUsedPersonCoupon: new FormControl()
 		});
-
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+	}
+	_set_formGroup_validation() {
+		this.orderForm$.pipe(take(1)).subscribe(orderForm => {
+			Object.keys(this.formGroup.controls).forEach(key => {
+				if (orderForm[key].Status == 4) {
+					this.formGroup.get(key).setValidators([ Validators.required ]);
+					this.formGroup.get(key).updateValueAndValidity();
+				}
+			});
+			this.formGroup.updateValueAndValidity();
+		});
+	}
+	_patchValue_formGroup_on_orderForm_change() {
+		this.orderForm$
+			.pipe(
+				map(orderForm => {
+					var values = {};
+					Object.keys(orderForm)
+						.filter(key => key in this.formGroup.controls)
+						.filter(key => orderForm[key].Value)
+						.map(key => (values[key] = orderForm[key].Value));
+					return values;
+				})
+			)
+			.subscribe(values => {
+				this.formGroup.patchValue(values);
+			});
+	}
+	_set_formGroup_relation_logic() {
+		this.formGroup
+			.get("CarBrand")
+			.valueChanges.pipe(
+				takeUntil(this.unsubscribe),
+				filter(carBrand => {
+					debugger;
+					return carBrand != "";
+				})
+			)
+			.subscribe(carBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand })));
+		this.formGroup
+			.get("CarYearsWithoutIncident")
+			.valueChanges.pipe(takeUntil(this.unsubscribe))
+			.subscribe(years => this._check_and_contol_incident_formControls(years));
+	}
+	_map_orderForm_to_fields() {
 		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
 		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
@@ -81,71 +179,14 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			orderForm => orderForm.LastPolicyNumOfUsedPersonCoupon
 		);
 	}
-
-	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
-
-		this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => {
-			Object.keys(this.formGroup.controls).forEach(key => {
-				if (orderForm[key].Status == 1) {
-					this.formGroup.get(key).setValidators([ Validators.required ]);
-					this.formGroup.get(key).updateValueAndValidity();
-				}
-			});
-			this.formGroup.updateValueAndValidity();
+	_validate_all_form_fields(formGroup: FormGroup) {
+		Object.keys(formGroup.controls).forEach(field => {
+			const control = formGroup.get(field);
+			if (control instanceof FormControl) {
+				control.markAsTouched({ onlySelf: true });
+			} else if (control instanceof FormGroup) {
+				this._validate_all_form_fields(control);
+			}
 		});
-
-		this.formGroup
-			.get("CarBrand")
-			.valueChanges.pipe(takeUntil(this.unsubscribe))
-			.subscribe(CarBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand: CarBrand })));
-		this.formGroup
-			.get("CarYearsWithoutIncident")
-			.valueChanges.pipe(takeUntil(this.unsubscribe))
-			.subscribe(years => this.checkAndContolIncidentFormControls(years));
-
-		this.orderForm$
-			.pipe(
-				takeUntil(this.unsubscribe),
-				map(orderForm => {
-					var values = {};
-					Object.keys(orderForm)
-						.filter(key => key in this.formGroup.controls)
-						.filter(key => orderForm[key].Value)
-						.map(key => (values[key] = orderForm[key].Value));
-					return values;
-				})
-			)
-			.subscribe(values => {
-				this.formGroup.patchValue(values);
-			});
-
-		// this.orderForm$.pipe(takeUntil(this.unsubscribe)).subscribe(orderForm => this.compare());
-	}
-	ngOnDestroy() {
-		this.unsubscribe.next();
-		this.unsubscribe.complete();
-	}
-
-	complete() {
-		if (this.formGroup.invalid) return;
-		this.done.emit();
-	}
-	checkAndContolIncidentFormControls(years) {
-		if (years > 1) {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
-		} else {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").enable();
-		}
-	}
-	viewMode() {
-		this.mode = "view";
-	}
-	editMode() {
-		this.mode = "edit";
 	}
 }

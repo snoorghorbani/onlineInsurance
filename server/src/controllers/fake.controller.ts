@@ -7,24 +7,6 @@ import { httpPost } from "../utility";
 
 const router = express.Router();
 
-router.post("/ComparePolicies", function(req, res) {
-	httpPost("http://185.208.174.92:2500/Policy/ComparePolicies", req.body).subscribe(
-		Result => {
-			res.json({ Result });
-		},
-		err => {
-			debugger;
-			res.sendStatus(500).json(err);
-		}
-	);
-});
-
-router.post("/SaveOrder", function(req, res) {
-	httpPost("http://185.208.174.92:2500/Order/SaveOrder", req.body).subscribe(Result => {
-		res.json({ Result });
-	});
-});
-
 router.get("/", function(req, res) {
 	try {
 		res.json({

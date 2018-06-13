@@ -1,25 +1,17 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy, Input, AfterViewInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
-import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from "../services/api";
-import {
-	ComparePoliciesStartAction,
-	ComparePoliciesApiModel,
-	GetCarModelsOfBrandStartAction,
-	GetCarModelsOfBrandApiModel
-} from "../../policy/services/api";
-import { from, of, Subject, BehaviorSubject } from "rxjs";
+import { ComparePoliciesStartAction } from "../../policy/services/api";
+import { Subject, BehaviorSubject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
-import { FieldModel, FieldOptionModel } from "../models/field.model";
+import { FieldModel } from "../models/field.model";
 import { OrderFormModel } from "../models";
 import { Router } from "@angular/router";
 import { PolicyCompareModel, PriceModel } from "../../policy/models/policy-compare.model";
-import { MatSidenav } from "@angular/material";
 import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
-import { takeUntil, map, combineLatest, take, switchMap, filter, share, distinctUntilChanged } from "rxjs/operators";
+import { takeUntil, map, take, filter, distinctUntilChanged } from "rxjs/operators";
 import { trigger, state, transition, animate, style } from "@angular/animations";
-import { takeWhile } from "rxjs-compat/operator/takeWhile";
 
 @Component({
 	selector: "order-select-product",
@@ -56,7 +48,7 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
-	constructor(private store: Store<AppState>, private router: Router) {
+	constructor(private store: Store<AppState>) {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
 		this.companyInfoDisplayCol = [ "key", "value" ];
@@ -76,9 +68,6 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this._setFormGroupValidation();
-		this._setFormGroupDefaultValue();
-		this._syncStoreAndFormGroup();
 		this.formGroup
 			.get("PolicyTerm")
 			.valueChanges.combineLatest(this.PolicyTerm$)
@@ -86,6 +75,9 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 				([ value, PolicyTerm ]) =>
 					(this.PolicyTermDisplayValue = PolicyTerm.Options.find(i => i.Value == value).DisplayValue)
 			);
+		this._setFormGroupValidation();
+		this._setFormGroupDefaultValue();
+		this._syncStoreAndFormGroup();
 		this._ObserveOnOrderFormAndGetProducts();
 	}
 	ngOnDestroy() {
@@ -137,9 +129,11 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 		return policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).Price.DisplayValue;
 	}
 	viewMode() {
+		if (this.mode == "view") return;
 		this.mode = "view";
 	}
 	editMode() {
+		if (this.mode == "edit") return;
 		this.selectedProduct = null;
 		this.mode = "edit";
 	}
@@ -165,7 +159,6 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 	}
 	_fillSelectedProduct() {
 		if (!this.selectedPolicy) return null;
-		let selectedPrice = this.selectedPolicy.Prices;
 		this.selectedProduct = {
 			Price: this.getPrice(this.selectedPolicy),
 			FinalPrice: this.getFinalPrice(this.selectedPolicy)
@@ -197,18 +190,18 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 				this.formGroup.patchValue(values);
 			});
 	}
+	_ObserveOnOrderFormAndGetProducts() {
+		this.orderForm$
+			// .pipe(takeUntil(this.unsubscribe), filter(() => this.formGroup.valid))
+			.pipe(takeUntil(this.unsubscribe))
+			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
+	}
 	_createFormGroup() {
 		this.formGroup = new FormGroup({
 			PolicyPushesheMali: new FormControl(""),
 			PolicyTerm: new FormControl(""),
 			ProductId: new FormControl("")
 		});
-	}
-	_ObserveOnOrderFormAndGetProducts() {
-		this.orderForm$
-			// .pipe(takeUntil(this.unsubscribe), filter(() => this.formGroup.valid))
-			.pipe(takeUntil(this.unsubscribe))
-			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
 	}
 	_setFormGroupValidation() {
 		this.orderForm$.pipe(take(1)).subscribe(orderForm => {

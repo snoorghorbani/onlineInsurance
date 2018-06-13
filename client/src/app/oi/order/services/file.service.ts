@@ -3,16 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs";
 
-import { OrderType } from "../models/order-type.model";
-import { OrderFormModel } from "../models";
-import { GetOrderTypes } from "./mock";
 import { UploadFile, FileSystemFileEntry } from "ngx-file-drop";
+import { OrderConfigurationService } from "./order-configuration.service";
 
 @Injectable({
 	providedIn: "root"
 })
 export class FileService {
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private configurationService: OrderConfigurationService) {}
 
 	AttachFileToOrder(droppedFile: UploadFile): Observable<any> {
 		const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -39,7 +37,7 @@ export class FileService {
  
           **/
 			return this.http
-				.post("http://185.208.174.92:2500/order/AttachFileToOrder", formData, {
+				.post(`${this.configurationService.config.env.server}/order/AttachFileToOrder`, formData, {
 					reportProgress: true,
 					observe: "events"
 				})

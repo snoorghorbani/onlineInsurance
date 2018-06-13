@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { environment } from "../../../../environments/environment";
 
 import { UserModel } from "../models";
 import { SubscribeApiModel, IsAuthenticatedApiModel } from "./api";
@@ -12,14 +13,14 @@ import { SubscribeApiModel, IsAuthenticatedApiModel } from "./api";
 export class UserService {
 	constructor(private http: HttpClient) {}
 	SubscribeToNewsletter(email: string): Observable<any> {
-		return this.http.post<SubscribeApiModel.Response>("http://185.208.174.92:2500/user/SubscribeToNewsletter", {
+		return this.http.post<SubscribeApiModel.Response>(`${environment.server}/user/SubscribeToNewsletter`, {
 			email
 		});
 		// .pipe(map(res => res.Result));
 	}
 	IsAuthenticated(): Observable<UserModel> {
 		return this.http
-			.get<IsAuthenticatedApiModel.Response>("http://185.208.174.92:2500/user/IsAuthenticated")
+			.get<IsAuthenticatedApiModel.Response>(`${environment.server}/user/IsAuthenticated`)
 			.pipe(map(res => res.Result));
 	}
 }

@@ -9,12 +9,17 @@ import { GeoBoundaryModule } from "./geo-boundary";
 import { OiCommonModule } from "./common/common.module";
 import { RoutingModule } from "./oi-routing.module";
 import { ExceptionInterceptor } from "./execption.interceptor";
+import { environment } from "../../environments/environment";
 
 @NgModule({
 	imports: [
 		CommonModule,
-		OrderModule.forRoot(),
-		PolicyModule,
+		OrderModule.forRoot({
+			env: environment
+		}),
+		PolicyModule.forRoot({
+			env: environment
+		}),
 		GeoBoundaryModule.forRoot(),
 		OiCommonModule,
 		RoutingModule

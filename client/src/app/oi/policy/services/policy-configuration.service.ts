@@ -1,6 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 // import { getPolicyModuleConfig } from "@soushians/config";

@@ -11,7 +11,7 @@ export const enum GET_NEW_ORDER_FORM_ACTION_TYPES {
 
 export class GetNewOrderFormStartAction implements Action {
 	readonly type = GET_NEW_ORDER_FORM_ACTION_TYPES.START;
-	constructor(public payload: GetNewOrderFormApiModel.Request) {}
+	constructor(public payload: number) {}
 }
 export class GetNewOrderFormSucceedAction implements Action {
 	readonly type = GET_NEW_ORDER_FORM_ACTION_TYPES.SUCCEED;
@@ -22,4 +22,7 @@ export class GetNewOrderFormFailedAction implements Action {
 	constructor(public payload: any) {}
 }
 
-export type GetNewOrderFormActions = GetNewOrderFormStartAction | GetNewOrderFormSucceedAction | GetNewOrderFormFailedAction;
+export type GetNewOrderFormActions =
+	| GetNewOrderFormStartAction
+	| GetNewOrderFormSucceedAction
+	| GetNewOrderFormFailedAction;

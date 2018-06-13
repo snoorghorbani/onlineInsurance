@@ -20,7 +20,7 @@ export class GetNewOrderFormApiEffects {
 		.ofType(GET_NEW_ORDER_FORM_ACTION_TYPES.START)
 		.pipe(
 			map(action => action.payload),
-			switchMap(payload => this.service.GetNewOrderForm()),
+			switchMap(type => this.service.GetNewOrderForm(type)),
 			map(res => new GetNewOrderFormSucceedAction(res)),
 			catchError(err => Observable.of(new GetNewOrderFormFailedAction(err)))
 		);

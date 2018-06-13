@@ -1,34 +1,40 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
+import { map, share } from "rxjs/operators";
+import { of } from "rxjs";
 
 import { PolicyModel } from "../models";
 import { GetCarModelsOfBrand } from "./mock";
-import { of } from "rxjs";
 import { GetCarModelsOfBrandApiModel, ComparePoliciesApiModel } from "./api";
 import { PolicyCompareModel } from "../models/policy-compare.model";
-import { map, share } from "rxjs/operators";
-
-const URI = "http://185.208.174.92:2500/policy/";
+import { PolicyConfigurationService } from "./policy-configuration.service";
 
 @Injectable({
 	providedIn: "root"
 })
 export class PolicyService {
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private configurationService: PolicyConfigurationService) {}
 
 	GetCarModelsOfBrand(data: GetCarModelsOfBrandApiModel.Request): Observable<PolicyModel[]> {
+		debugger;
 		const model = new GetCarModelsOfBrandApiModel.Request(data);
 		return this.http
-			.get<GetCarModelsOfBrandApiModel.Response>(`${URI}GetCarModelsOfBrand`, {
-				params: model.getRequestQueryParams()
-			})
+			.get<GetCarModelsOfBrandApiModel.Response>(
+				`${this.configurationService.config.env.server}/policy/GetCarModelsOfBrand`,
+				{
+					params: model.getRequestQueryParams()
+				}
+			)
 			.map(response => response.Result);
 	}
 	ComparePolicies(data: ComparePoliciesApiModel.Request): Observable<PolicyCompareModel[]> {
 		const model = new ComparePoliciesApiModel.Request(data);
 		return this.http
-			.post<ComparePoliciesApiModel.Response>(`${URI}ComparePolicies`, model.getRequestBody())
+			.post<ComparePoliciesApiModel.Response>(
+				`${this.configurationService.config.env.server}/policy/ComparePolicies`,
+				model.getRequestBody()
+			)
 			.pipe(map(response => response.Result.Items), share());
 	}
 }

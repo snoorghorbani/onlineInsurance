@@ -7,7 +7,8 @@ import { Observable } from "rxjs/Observable";
 import { HttpEvent } from "@angular/common/http";
 import { HttpResponse } from "@angular/common/http";
 import { filter, map } from "rxjs/operators";
-// import { environment } from "../../../environments/environment";
+
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class ResultInterceptor implements HttpInterceptor {
@@ -17,7 +18,7 @@ export class ResultInterceptor implements HttpInterceptor {
 		return next.handle(request).pipe(
 			filter((event: HttpEvent<any>) => event instanceof HttpResponse),
 			map((event: HttpResponse<any>) => {
-				if (!event.url.includes("http://185.208.174.92:2500")) return event;
+				if (!event.url.includes(environment.server)) return event;
 				if ("Result" in event.body) return event;
 				else return event.clone({ body: { Result: event.body } });
 			})

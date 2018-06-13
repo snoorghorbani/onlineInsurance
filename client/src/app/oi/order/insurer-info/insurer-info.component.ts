@@ -17,6 +17,7 @@ import { NewOrderFormUpdateAction } from "../new-order/new-order.actions";
 import { from } from "rxjs";
 import { SaveOrderStartAction } from "../services/api/save-order";
 import { UploadEvent } from "ngx-file-drop";
+import { filter, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
 	selector: "order-insurer-info",
@@ -27,6 +28,7 @@ export class InsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	@Input() mode: "view" | "edit" = "view";
 	formGroup: FormGroup;
+	orderForm: OrderFormModel;
 	orderForm$: Observable<OrderFormModel>;
 	PolicyholderFirstName$: Observable<FieldModel>;
 	PolicyholderLastName$: Observable<FieldModel>;
@@ -64,7 +66,10 @@ export class InsurerInfoComponent implements OnInit {
 		// this.DelieryTimeTableDataSource$.subscribe(data => {
 		// 	debugger;
 		// });
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+		this.orderForm$ = this.store
+			.select(state => state.order.newOrder.data)
+			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
+		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 		this.PolicyholderFirstName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFirstName);
 		this.PolicyholderLastName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderLastName);
 		this.LastPolicyImage$ = this.orderForm$.map(orderForm => orderForm.LastPolicyImage);
@@ -161,19 +166,10 @@ export class InsurerInfoComponent implements OnInit {
 	}
 
 	save() {
-		// if (this.formGroup.invalid) return;
-		from([ this.formGroup.value ])
-			.combineLatest(this.orderForm$)
-			.map(([ formValues, orderForm ]) => {
-				Object.keys(formValues).forEach(key => (orderForm[key].Value = formValues[key]));
-				return orderForm;
-			})
-			.subscribe(orderForm => {
-				this.store.dispatch(new NewOrderFormUpdateAction(orderForm));
-				this.store.dispatch(new SaveOrderStartAction(orderForm));
-				this.done.emit();
-			})
-			.unsubscribe();
+		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
+		this.store.dispatch(new NewOrderFormUpdateAction(this.orderForm));
+		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
+		this.done.emit();
 	}
 
 	step = 0;
@@ -185,5 +181,11 @@ export class InsurerInfoComponent implements OnInit {
 	}
 	prevStep() {
 		this.step--;
+	}
+	viewMode() {
+		this.mode = "view";
+	}
+	editMode() {
+		this.mode = "edit";
 	}
 }

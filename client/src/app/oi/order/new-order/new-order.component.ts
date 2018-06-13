@@ -14,7 +14,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { from, Subscription, Subject } from "rxjs";
 import { Router } from "@angular/router";
 import { NewOrderFormUpdateAction } from "./new-order.actions";
-import { takeUntil, combineLatest, map } from "rxjs/operators";
+import { takeUntil, combineLatest, map, filter, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
 	selector: "order-new-order",
@@ -24,6 +24,7 @@ import { takeUntil, combineLatest, map } from "rxjs/operators";
 export class NewOrderComponent implements OnInit, OnDestroy {
 	unsubscribe = new Subject<void>();
 	formGroup: FormGroup;
+	orderForm: OrderFormModel;
 	orderForm$: Observable<OrderFormModel>;
 	CarBrand$: Observable<FieldModel>;
 	CarModel$: Observable<FieldModel>;
@@ -40,7 +41,11 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 			CarYearsWithoutIncident: new FormControl(""),
 			LastPolicyExpirationDate: new FormControl("")
 		});
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+
+		this.orderForm$ = this.store
+			.select(state => state.order.newOrder.data)
+			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
+		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
 		this.formGroup
 			.get("CarBrand")
@@ -60,16 +65,8 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 		this.unsubscribe.complete();
 	}
 	compare() {
-		from([ this.formGroup ])
-			.pipe(
-				takeUntil(this.unsubscribe),
-				combineLatest(this.orderForm$),
-				map(([ formGroup, orderForm ]) => {
-					Object.keys(formGroup.value).forEach(key => (orderForm[key].Value = formGroup.value[key]));
-					return orderForm;
-				})
-			)
-			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)));
+		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
+		this.store.dispatch(new NewOrderFormUpdateAction(this.orderForm));
 
 		this.router.navigate([ "order/purchase" ]);
 	}

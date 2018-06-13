@@ -5,14 +5,11 @@ import { OrderFormModel } from "../models";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 
-import {
-	InvisibleToolbarAction,
-	VisibleToolbarAction,
-	ExitFullscreenAction,
-	FullscreenAction,
-	ToggleFullscreenAction
-} from "@soushians/layout";
+import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
 import { trigger, transition, animate, style, state } from "@angular/animations";
+import { CarDetailComponent } from "../car-detail/car-detail.component";
+import { SelectProductComponent } from "../select-product/select-product.component";
+import { InsurerInfoComponent } from "../insurer-info/insurer-info.component";
 
 @Component({
 	selector: "order-purchase",
@@ -29,23 +26,20 @@ import { trigger, transition, animate, style, state } from "@angular/animations"
 })
 export class PurchaseComponent implements OnInit, OnDestroy {
 	@ViewChild("stepper") stepper: MatStepper;
+	@ViewChild(CarDetailComponent) carDetailComponent: CarDetailComponent;
+	@ViewChild(SelectProductComponent) selectProductComponent: SelectProductComponent;
+	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
 	orderForm$: Observable<OrderFormModel>;
-	state: { [name: string]: { mode: string; display: boolean; animateState: string } };
+	state: { [name: string]: { animateState: string } };
 	constructor(private store: Store<AppState>) {
 		this.state = {
 			car: {
-				mode: "edit",
-				display: true,
 				animateState: "in"
 			},
 			product: {
-				mode: "edit",
-				display: false,
 				animateState: "out"
 			},
 			insurer: {
-				mode: "edit",
-				display: false,
 				animateState: "out"
 			}
 		};
@@ -58,18 +52,16 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 		this.store.dispatch(new ExitFullscreenAction());
 	}
 	doneCar() {
-		this.state.car.mode = "view";
-		this.state.product.display = true;
+		this.carDetailComponent.viewMode();
+		this.selectProductComponent.editMode();
 		this.state.product.animateState = "in";
 	}
 	doneProduct() {
-		this.state.product.mode = "view";
-		this.state.insurer.display = true;
+		this.selectProductComponent.viewMode();
+		this.insurerInfoComponent.editMode();
 		this.state.insurer.animateState = "in";
 	}
-	doneInsurer() {
-		this.state.insurer.mode = "view";
-	}
+	doneInsurer() {}
 	prev() {
 		this.stepper.previous();
 	}

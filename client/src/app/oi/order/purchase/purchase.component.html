@@ -9,13 +9,13 @@
 </button>
 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="25px">
   <div class="blk" fxFlex [@card]="state.car.animateState">
-    <order-car-detail class="card-box" [mode]="state.car.mode" *ngIf="state.car.display" (done)="doneCar()"></order-car-detail>
+    <order-car-detail class="card-box" (done)="doneCar()"></order-car-detail>
   </div>
   <div class="blk" fxFlex [@card]="state.product.animateState">
-    <order-select-product class="card-box" [mode]="state.product.mode" *ngIf="state.product.display" (done)="doneProduct()"></order-select-product>
+    <order-select-product class="card-box"   (done)="doneProduct()"></order-select-product>
   </div>
   <div class="blk" fxFlex [@card]="state.insurer.animateState">
-    <order-insurer-info class="card-box"  [mode]="state.insurer.mode" *ngIf="state.insurer.display" (done)="doneInsurer()"></order-insurer-info>
+    <order-insurer-info class="card-box" [mode]="state.insurer.mode" (done)="doneInsurer()"></order-insurer-info>
   </div>
 </div>
 
