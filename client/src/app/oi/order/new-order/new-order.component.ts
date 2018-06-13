@@ -58,7 +58,7 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
+		this.store.dispatch(new GetNewOrderFormStartAction(1));
 	}
 	ngOnDestroy() {
 		this.unsubscribe.next();

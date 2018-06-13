@@ -89,9 +89,8 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 		this.selectedPolicy = policy;
 		let ProductId = policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).ProductId;
 		this._fillSelectedProduct();
-
 		this.formGroup.patchValue({ ProductId });
-		this.done.emit();
+		this.done.emit(this.orderForm);
 	}
 	open(policy: PolicyCompareModel) {
 		this.activePolicy = policy;

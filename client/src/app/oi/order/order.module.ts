@@ -62,6 +62,7 @@ import { CarDetailComponent } from "./car-detail/car-detail.component";
 import { SelectProductComponent } from "./select-product/select-product.component";
 import { FieldSelectComponent } from "./field-select/field-select.component";
 import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.component";
+import { RootEffects } from "./root/root.effects";
 
 @NgModule({
 	imports: [
@@ -129,6 +130,7 @@ export class OrderModule {
 		OrderModule,
 		StoreModule.forFeature("order", FeatureReducers),
 		EffectsModule.forFeature([
+			RootEffects,
 			GetOrderTypesApiEffects,
 			SaveOrderFormApiEffects,
 			GetNewOrderFormApiEffects,

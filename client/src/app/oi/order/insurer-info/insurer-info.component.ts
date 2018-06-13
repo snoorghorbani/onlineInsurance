@@ -90,7 +90,7 @@ export class InsurerInfoComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction({ type: 1 } as GetNewOrderFormApiModel.Request));
+		this.store.dispatch(new GetNewOrderFormStartAction(1));
 
 		// this.orderForm$.subscribe(orderForm => {
 		// 	Object.keys(this.formGroup.controls).forEach(key => {

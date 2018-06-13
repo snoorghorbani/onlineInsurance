@@ -10,6 +10,7 @@ import { trigger, transition, animate, style, state } from "@angular/animations"
 import { CarDetailComponent } from "../car-detail/car-detail.component";
 import { SelectProductComponent } from "../select-product/select-product.component";
 import { InsurerInfoComponent } from "../insurer-info/insurer-info.component";
+import { SaveOrderStartAction } from "../services/api";
 
 @Component({
 	selector: "order-purchase",
@@ -30,7 +31,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	@ViewChild(SelectProductComponent) selectProductComponent: SelectProductComponent;
 	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
 	orderForm$: Observable<OrderFormModel>;
-	state: { [name: string]: { animateState: string } };
+	state: any;
 	constructor(private store: Store<AppState>) {
 		this.state = {
 			car: {
@@ -56,10 +57,11 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 		this.selectProductComponent.editMode();
 		this.state.product.animateState = "in";
 	}
-	doneProduct() {
+	doneProduct(orderForm) {
 		this.selectProductComponent.viewMode();
 		this.insurerInfoComponent.editMode();
 		this.state.insurer.animateState = "in";
+		this.store.dispatch(new SaveOrderStartAction(orderForm));
 	}
 	doneInsurer() {}
 	prev() {

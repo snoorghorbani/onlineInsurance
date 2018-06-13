@@ -12,7 +12,7 @@
     <order-car-detail class="card-box" (done)="doneCar()"></order-car-detail>
   </div>
   <div class="blk" fxFlex [@card]="state.product.animateState">
-    <order-select-product class="card-box"   (done)="doneProduct()"></order-select-product>
+    <order-select-product class="card-box" (done)="doneProduct($event)"></order-select-product>
   </div>
   <div class="blk" fxFlex [@card]="state.insurer.animateState">
     <order-insurer-info class="card-box" [mode]="state.insurer.mode" (done)="doneInsurer()"></order-insurer-info>
