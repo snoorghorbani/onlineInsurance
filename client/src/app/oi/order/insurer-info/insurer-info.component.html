@@ -168,7 +168,7 @@
         
         </mat-accordion>
 
-    <button mat-raised-button (click)="save()" color="primary">ثبت سفارش</button>
+    <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid">نمایش فاکتور و پرداخت</button>
   </div>
 </div>
 

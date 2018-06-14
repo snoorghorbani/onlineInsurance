@@ -1,3 +1,7 @@
+:host {
+	padding-top: 25px;
+	width: 100%;
+}
 mat-grid-tile.th.mat-grid-tile {
 	font-weight: bold;
 }
@@ -14,4 +18,10 @@ mat-grid-tile.th.mat-grid-tile {
 }
 .fit {
 	width: 100%;
+}
+mat-grid-tile {
+	border: 1px solid #aaa;
+}
+mat-grid-tile.th.mat-grid-tile {
+	background-color: #ddd;
 }

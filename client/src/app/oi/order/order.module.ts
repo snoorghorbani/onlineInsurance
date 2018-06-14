@@ -20,7 +20,8 @@ import {
 	MatStepperModule,
 	MatChipsModule,
 	MatRadioModule,
-	MatListModule
+	MatListModule,
+	MatBottomSheetModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -81,6 +82,7 @@ import { RootEffects } from "./root/root.effects";
 		MatTooltipModule,
 		MatChipsModule,
 		MatRadioModule,
+		MatBottomSheetModule,
 		SharedModule,
 		MatTableModule,
 		MatStepperModule,

@@ -187,7 +187,7 @@ app-search-box {
 
 mat-sidenav-container mat-sidenav-content.mat-drawer-content {
 	min-height: calc(100vh - 106px);
-	padding-bottom: 50px;
+	/* padding-bottom: 50px; */
 	overflow-x: hidden;
 }
 
@@ -429,6 +429,7 @@ mat-sidenav-content mat-sidenav-content {
 
 #layout-sidnav > mat-sidenav-content {
 	transition: all 800ms;
+	overflow: visible;
 }
 
 .fullscreen #layout-sidnav > mat-sidenav-content {

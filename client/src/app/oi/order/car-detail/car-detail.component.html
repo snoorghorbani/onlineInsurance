@@ -94,7 +94,9 @@
         ></app-field-datepicker>
       </div>
     </mat-card-content>
-      <button mat-raised-button color="primary" *ngIf="mode == 'edit'" (click)="complete()">ثبت</button>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" *ngIf="mode == 'edit'" (click)="complete()"  [disabled]="formGroup.invalid">ثبت</button>
       <button mat-raised-button color="primary" *ngIf="mode == 'view'" (click)="editMode()">ویرایش</button>
+    </mat-card-actions>
   </mat-card>
 </div>

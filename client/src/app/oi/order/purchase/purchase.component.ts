@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
-import { MatStepper } from "@angular/material";
+import { MatStepper, MatBottomSheet } from "@angular/material";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel } from "../models";
 import { AppState } from "../order.reducers";
@@ -11,6 +11,8 @@ import { CarDetailComponent } from "../car-detail/car-detail.component";
 import { SelectProductComponent } from "../select-product/select-product.component";
 import { InsurerInfoComponent } from "../insurer-info/insurer-info.component";
 import { SaveOrderStartAction } from "../services/api";
+import { ViewOrderComponent } from "../view-order/view-order.component";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "order-purchase",
@@ -32,7 +34,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
 	orderForm$: Observable<OrderFormModel>;
 	state: any;
-	constructor(private store: Store<AppState>) {
+	constructor(private store: Store<AppState>, private bottomSheet: MatBottomSheet, private router: Router) {
 		this.state = {
 			car: {
 				animateState: "in"
@@ -52,18 +54,20 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.store.dispatch(new ExitFullscreenAction());
 	}
-	doneCar() {
+	doneCar(orderForm: OrderFormModel) {
 		this.carDetailComponent.viewMode();
 		this.selectProductComponent.editMode();
 		this.state.product.animateState = "in";
 	}
-	doneProduct(orderForm) {
+	doneProduct(orderForm: OrderFormModel) {
 		this.selectProductComponent.viewMode();
 		this.insurerInfoComponent.editMode();
 		this.state.insurer.animateState = "in";
 		this.store.dispatch(new SaveOrderStartAction(orderForm));
 	}
-	doneInsurer() {}
+	doneInsurer(orderForm: OrderFormModel) {
+		this.router.navigate([ "order/view", orderForm.Id.Value ]);
+	}
 	prev() {
 		this.stepper.previous();
 	}

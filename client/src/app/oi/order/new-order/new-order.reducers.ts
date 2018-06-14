@@ -41,7 +41,7 @@ const setDisplayValue = function(order: OrderFormModel): OrderFormModel {
 				const selectedOption = field.Options.find(option => option.Value == field.Value);
 				if (selectedOption) field.DisplayValue = selectedOption.DisplayValue || selectedOption.DisplayName;
 			} else {
-				order[key].DisplayValue = order[key].DisplayValue || order[key].Valueu;
+				order[key].DisplayValue = order[key].DisplayValue || order[key].Value;
 			}
 		}
 	}

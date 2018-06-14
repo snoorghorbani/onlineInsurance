@@ -173,7 +173,7 @@ export class InsurerInfoComponent implements OnInit {
 		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
 		this.store.dispatch(new NewOrderFormUpdateAction(this.orderForm));
 		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
-		this.done.emit();
+		this.done.emit(this.orderForm);
 	}
 
 	step = 0;

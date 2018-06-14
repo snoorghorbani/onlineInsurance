@@ -60,7 +60,6 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	}
 
 	complete() {
-		debugger;
 		if (this.formGroup.invalid) {
 			this._validate_all_form_fields(this.formGroup);
 			return;
@@ -150,10 +149,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			.get("CarBrand")
 			.valueChanges.pipe(
 				takeUntil(this.unsubscribe),
-				filter(carBrand => {
-					debugger;
-					return carBrand != "";
-				})
+				filter(carBrand => carBrand != "")
 			)
 			.subscribe(carBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand })));
 		this.formGroup

@@ -3,6 +3,7 @@ import { FieldModel } from "./field.model";
 export class OrderFormModel {
 	Agent: FieldModel;
 	AmountPayable: FieldModel;
+	AgreementTerms: FieldModel;
 	CarBrand: FieldModel;
 	CarModel: FieldModel;
 	CarProductionYear: FieldModel;

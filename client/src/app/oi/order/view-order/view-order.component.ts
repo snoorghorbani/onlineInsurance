@@ -4,7 +4,7 @@ import { OrderService } from "../services";
 import { OrderFormModel } from "../models";
 import { Observable } from "rxjs/internal/Observable";
 import { switchMap, map, filter, takeUntil, combineLatest } from "rxjs/operators";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { FieldModel } from "../models/field.model";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
@@ -25,6 +25,8 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 		if (!orderForm) return;
 		this.orderForm$.next(orderForm);
 	}
+	approvedByUser: boolean;
+	isPayed: boolean;
 	InitiationPaymentResult$: Observable<any>;
 	orderForm$: BehaviorSubject<OrderFormModel>;
 	SellerAddress$: Observable<FieldModel>;
@@ -52,6 +54,12 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyPushesheRanande$: Observable<FieldModel>;
 	PolicyPushesheSarneshin$: Observable<FieldModel>;
+	NetPremium$: Observable<FieldModel>;
+	TaxesAndDuties$: Observable<FieldModel>;
+	TotalPremium$: Observable<FieldModel>;
+	ShippingCost$: Observable<FieldModel>;
+	AmountPayable$: Observable<FieldModel>;
+	AgreementTerms$: Observable<FieldModel>;
 
 	constructor(
 		private store: Store<AppState>,
@@ -59,6 +67,8 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 		private service: OrderService,
 		private activeRoute: ActivatedRoute
 	) {
+		this.approvedByUser = false;
+		this.isPayed = true;
 		this.orderForm$ = new BehaviorSubject(new OrderFormModel());
 		this.initFormGroup();
 		this.activeRoute.params
@@ -66,9 +76,13 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 				takeUntil(this.unsubscribe),
 				map(params => params.Id),
 				filter(Id => Id != null),
-				switchMap(Id => this.service.GetOrder({ Id }))
+				switchMap(Id => this.service.GetOrder({ Id })),
+				map(orderForm => this._set_displayValue(orderForm))
 			)
-			.subscribe(orderForm => this.orderForm$.next(orderForm));
+			.subscribe(orderForm => {
+				debugger;
+				return this.orderForm$.next(orderForm);
+			});
 		this.SellerAddress$ = this.orderForm$.map(orderForm => orderForm.SellerAddress);
 		this.SellerEconomicNo$ = this.orderForm$.map(orderForm => orderForm.SellerEconomicNo);
 		this.SellerName$ = this.orderForm$.map(orderForm => orderForm.SellerName);
@@ -96,6 +110,18 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
 		this.PolicyPushesheRanande$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheRanande);
 		this.PolicyPushesheSarneshin$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheSarneshin);
+		this.NetPremium$ = this.orderForm$.map(orderForm => orderForm.NetPremium);
+		this.TaxesAndDuties$ = this.orderForm$.map(orderForm => orderForm.TaxesAndDuties);
+		this.TotalPremium$ = this.orderForm$.map(orderForm => orderForm.TotalPremium);
+		this.Discount$ = this.orderForm$.map(orderForm => orderForm.Discount);
+		this.ShippingCost$ = this.orderForm$.map(orderForm => orderForm.ShippingCost);
+		this.AmountPayable$ = this.orderForm$.map(orderForm => orderForm.AmountPayable);
+		this.AgreementTerms$ = this.orderForm$.map(orderForm => orderForm.AgreementTerms);
+
+		this.orderForm$
+			.map(orderForm => orderForm.PaymentId)
+			.pipe(filter(p => p != null))
+			.subscribe(PaymentId => (this.isPayed = PaymentId.Value ? true : false));
 	}
 
 	ngOnInit() {}
@@ -104,14 +130,44 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 		this.unsubscribe.next();
 		this.unsubscribe.complete();
 	}
-	initFormGroup() {}
+	initFormGroup() {
+		this.formGroup = new FormGroup({
+			AgreementTerms: new FormControl(false, [ Validators.requiredTrue ])
+		});
+	}
 	pay() {
-		from([ 1 ])
-			.pipe(
-				takeUntil(this.unsubscribe),
-				combineLatest(this.orderForm$),
-				map(([ formGroup, orderForm ]) => orderForm)
-			)
-			.subscribe(orderForm => (this.InitiationPaymentResult$ = this.service.PlaceOrder(orderForm)));
+		if (this.formGroup.invalid) {
+			this._validate_all_form_fields(this.formGroup);
+			return;
+		}
+		const formValue = this.formGroup.value;
+		const orderForm = this.orderForm$.getValue();
+		Object.keys(formValue || {}).forEach(key => (orderForm[key].Value = formValue[key]));
+
+		this.InitiationPaymentResult$ = this.service.PlaceOrder(orderForm);
+	}
+	_set_displayValue(order: OrderFormModel): OrderFormModel {
+		for (const key in order) {
+			if (order.hasOwnProperty(key)) {
+				const field: FieldModel = order[key];
+				if (field.Options) {
+					const selectedOption = field.Options.find(option => option.Value == field.Value);
+					if (selectedOption) field.DisplayValue = selectedOption.DisplayValue || selectedOption.DisplayName;
+				} else {
+					order[key].DisplayValue = order[key].DisplayValue || order[key].Value;
+				}
+			}
+		}
+		return order;
+	}
+	_validate_all_form_fields(formGroup: FormGroup) {
+		Object.keys(formGroup.controls).forEach(field => {
+			const control = formGroup.get(field);
+			if (control instanceof FormControl) {
+				control.markAsTouched({ onlySelf: true });
+			} else if (control instanceof FormGroup) {
+				this._validate_all_form_fields(control);
+			}
+		});
 	}
 }

@@ -17,7 +17,6 @@ export class PolicyService {
 	constructor(private http: HttpClient, private configurationService: PolicyConfigurationService) {}
 
 	GetCarModelsOfBrand(data: GetCarModelsOfBrandApiModel.Request): Observable<PolicyModel[]> {
-		debugger;
 		const model = new GetCarModelsOfBrandApiModel.Request(data);
 		return this.http
 			.get<GetCarModelsOfBrandApiModel.Response>(
