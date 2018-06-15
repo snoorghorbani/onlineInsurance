@@ -457,3 +457,9 @@ mat-sidenav-content mat-sidenav-content {
 mat-form-field.edit .mat-form-field-wrapper {
 	top: 1px;
 } */
+
+.clear-mat-card-box mat-card {
+	box-shadow: 0 0 0 0 transparent !important;
+	padding-left: 0;
+	padding-right: 0;
+}

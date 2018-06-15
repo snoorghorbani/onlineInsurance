@@ -163,12 +163,12 @@
         
             <mat-action-row>
               <button mat-button color="warn" (click)="prevStep()">بازگشت</button>
+              <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid">نمایش فاکتور و پرداخت</button>
             </mat-action-row>
           </mat-expansion-panel>
         
         </mat-accordion>
 
-    <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid">نمایش فاکتور و پرداخت</button>
   </div>
 </div>
 

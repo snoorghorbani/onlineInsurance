@@ -34,10 +34,12 @@
         "dist/@soushians/shared"
       ],
       "@soushians/authentication": [
-        "dist/@soushians/authentication"
+        "projects/soushians/authentication/src/public_api"
+        // "dist/@soushians/authentication"
       ],
       "@soushians/form": [
-        "dist/@soushians/form"
+        // "dist/@soushians/form"
+        "projects/soushians/form/src/public_api"
       ],
       "@soushians/diagram": [
         "dist/@soushians/diagram"

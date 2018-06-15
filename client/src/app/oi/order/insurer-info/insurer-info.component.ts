@@ -110,8 +110,11 @@ export class InsurerInfoComponent implements OnInit {
 	DeliverDateTime: string;
 	initFormGroup() {
 		this.formGroup = new FormGroup({
-			PolicyholderFirstName: new FormControl("", [ Validators.required, Validators.pattern(/[a-zA-Z]/) ]),
-			PolicyholderLastName: new FormControl("", [ Validators.required, Validators.pattern(/[a-zA-Z]/) ]),
+			PolicyholderFirstName: new FormControl("", [
+				Validators.required,
+				Validators.pattern(/[\u0600-\u06FF\s]/)
+			]),
+			PolicyholderLastName: new FormControl("", [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
 			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
@@ -124,7 +127,10 @@ export class InsurerInfoComponent implements OnInit {
 
 			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderBirthDate: new FormControl("", [ Validators.required ]),
-			PolicyholderFatherName: new FormControl("", [ Validators.required, Validators.pattern(/[a-zA-Z]/) ]),
+			PolicyholderFatherName: new FormControl("", [
+				Validators.required,
+				Validators.pattern(/[\u0600-\u06FF\s]/)
+			]),
 
 			DeliveryAddressCityId: new FormControl("", [ Validators.required ]),
 			DeliveryAddress: new FormControl("", [ Validators.required ]),

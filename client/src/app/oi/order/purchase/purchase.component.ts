@@ -11,8 +11,8 @@ import { CarDetailComponent } from "../car-detail/car-detail.component";
 import { SelectProductComponent } from "../select-product/select-product.component";
 import { InsurerInfoComponent } from "../insurer-info/insurer-info.component";
 import { SaveOrderStartAction } from "../services/api";
-import { ViewOrderComponent } from "../view-order/view-order.component";
 import { Router } from "@angular/router";
+import { SigninRequiredAction } from "@soushians/authentication";
 
 @Component({
 	selector: "order-purchase",
@@ -34,7 +34,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
 	orderForm$: Observable<OrderFormModel>;
 	state: any;
-	constructor(private store: Store<AppState>, private bottomSheet: MatBottomSheet, private router: Router) {
+	constructor(private store: Store<AppState>, private router: Router) {
 		this.state = {
 			car: {
 				animateState: "in"
@@ -46,6 +46,9 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 				animateState: "out"
 			}
 		};
+		setTimeout(() => {
+			this.store.dispatch(new SigninRequiredAction());
+		}, 2222);
 	}
 	ngOnInit() {
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
@@ -54,7 +57,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.store.dispatch(new ExitFullscreenAction());
 	}
-	doneCar(orderForm: OrderFormModel) {
+	doneCar() {
 		this.carDetailComponent.viewMode();
 		this.selectProductComponent.editMode();
 		this.state.product.animateState = "in";
