@@ -19,6 +19,10 @@ export class ResultInterceptor implements HttpInterceptor {
 			filter((event: HttpEvent<any>) => event instanceof HttpResponse),
 			map((event: HttpResponse<any>) => {
 				if (!event.url.includes(environment.server)) return event;
+				if (event.body == undefined) {
+					console.log(`${event.url} don't return any response`);
+					return event;
+				}
 				if ("Result" in event.body) return event;
 				else return event.clone({ body: { Result: event.body } });
 			})

@@ -94,7 +94,8 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 		this.companyInfoDisplayCol = [ "key", "value" ];
 	}
 	_check_and_contol_incident_formControls(years) {
-		if (years > 1) {
+		debugger;
+		if (years > 0) {
 			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
 			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
 			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
@@ -147,10 +148,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	_set_formGroup_relation_logic() {
 		this.formGroup
 			.get("CarBrand")
-			.valueChanges.pipe(
-				takeUntil(this.unsubscribe),
-				filter(carBrand => carBrand != "")
-			)
+			.valueChanges.pipe(takeUntil(this.unsubscribe), filter(carBrand => carBrand != ""))
 			.subscribe(carBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand })));
 		this.formGroup
 			.get("CarYearsWithoutIncident")
@@ -159,6 +157,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	}
 	_map_orderForm_to_fields() {
 		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
+		this.CarModel$ = this.orderForm$.map(orderForm => orderForm.CarModel);
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
 		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
 		this.CarUsage$ = this.orderForm$.map(orderForm => orderForm.CarUsage);

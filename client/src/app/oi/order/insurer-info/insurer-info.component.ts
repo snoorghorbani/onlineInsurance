@@ -26,7 +26,9 @@ import { filter, distinctUntilChanged } from "rxjs/operators";
 })
 export class InsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
+	@Output("signInRequest") signInRequest$ = new EventEmitter();
 	@Input() mode: "view" | "edit" = "view";
+	@Input() signedIn: boolean;
 	formGroup: FormGroup;
 	orderForm: OrderFormModel;
 	orderForm$: Observable<OrderFormModel>;
@@ -197,6 +199,9 @@ export class InsurerInfoComponent implements OnInit {
 	}
 	editMode() {
 		this.mode = "edit";
+	}
+	signInRequest() {
+		this.signInRequest$.emit();
 	}
 	_validate_all_form_fields(formGroup: FormGroup) {
 		Object.keys(formGroup.controls).forEach(field => {

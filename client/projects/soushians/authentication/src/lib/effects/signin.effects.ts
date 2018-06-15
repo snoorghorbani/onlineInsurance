@@ -1,5 +1,5 @@
 ﻿import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
@@ -16,9 +16,8 @@ import {
 } from "../actions/signin.actions";
 import { SigninService } from "../services/signin.service";
 import { NewCaptcha } from "../actions";
-import { Signin_ApiModel } from "../models";
-import { MatBottomSheet } from "@angular/material";
 import { SigninContainerComponent } from "../smart-components/signin-container";
+import { MatBottomSheet } from "@angular/material";
 
 @Injectable()
 export class SigninEffects {
@@ -50,11 +49,13 @@ export class SigninEffects {
 	@Effect({ dispatch: false })
 	SignInRequired$ = this.actions$.ofType(SignInActionTypes.SIGNIN_REQUIRED).pipe(
 		tap((data: any) => {
-			debugger;
-			return this.bottomSheet.open(SigninContainerComponent, {
-				disableClose: true,
+			const signinBottomSheetRef = this.bottomSheet.open(SigninContainerComponent, {
 				panelClass: "clear-mat-card-box"
 			});
+			signinBottomSheetRef.instance.signedIn$.subscribe(() => {
+				signinBottomSheetRef.dismiss();
+			});
+			return signinBottomSheetRef;
 		})
 	);
 
@@ -62,7 +63,7 @@ export class SigninEffects {
 	SigninSucceed$ = this.actions$.ofType(SignInActionTypes.SIGNIN_SUCCEED).pipe(
 		tap((data: any) => {
 			debugger;
-			return this.router.navigate([ "/" ]);
+			if (location.pathname.indexOf("signin") > -1) this.router.navigate([ "/" ]);
 		})
 	);
 

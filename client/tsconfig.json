@@ -25,7 +25,8 @@
         "dist/@soushians/config"
       ],
       "@soushians/user": [
-        "dist/@soushians/user"
+        // "dist/@soushians/user"
+        "projects/soushians/user/src/public_api"
       ],
       "@soushians/infra": [
         "dist/@soushians/infra"
@@ -49,6 +50,10 @@
       ],
       "@soushians/socket": [
         "dist/@soushians/socket"
+      ],
+      "@soushians/dashboard": [
+        // "dist/@soushians/dashboard"
+        "projects/soushians/dashboard/src/public_api"
       ],
       "@soushians/test": [
         "dist/soushians/test"

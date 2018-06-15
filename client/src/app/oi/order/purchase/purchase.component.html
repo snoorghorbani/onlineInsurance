@@ -15,7 +15,7 @@
     <order-select-product class="card-box" (done)="doneProduct($event)"></order-select-product>
   </div>
   <div class="blk" fxFlex [@card]="state.insurer.animateState">
-    <order-insurer-info class="card-box" [mode]="state.insurer.mode" (done)="doneInsurer($event)"></order-insurer-info>
+    <order-insurer-info class="card-box" [mode]="state.insurer.mode" [signedIn]="signedIn$ | async" (done)="doneInsurer($event)" (signInRequest)="signInRequest()"></order-insurer-info>
   </div>
 </div>
 

@@ -18,7 +18,8 @@ import {
 	MatInputModule,
 	MatToolbarModule,
 	MatDatepickerModule,
-	MatProgressBarModule
+	MatProgressBarModule,
+	MatBottomSheetModule
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -56,6 +57,7 @@ import { SigninService } from "./services/signin.service";
 		MatSidenavModule,
 		MatExpansionModule,
 		MatSelectModule,
+		MatBottomSheetModule,
 		MatFormFieldModule,
 		MatListModule,
 		MatMenuModule,

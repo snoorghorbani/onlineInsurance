@@ -1,5 +1,8 @@
 <div fxLayout="row" fxLayoutGap="25px">
-  <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px">
+  <div *ngIf="!signedIn" class="signinWrapper" fxLayout="row" fxLayoutAlign="center center">
+    <button fxFlex="nogrow" mat-raised-button color="primary" (click)="signInRequest()">ورود به حساب کاریری</button>
+  </div>
+  <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="25px" [class.fade]="!signedIn">
       <mat-accordion>
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
             <mat-expansion-panel-header>

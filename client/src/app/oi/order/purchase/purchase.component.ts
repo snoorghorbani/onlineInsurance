@@ -1,18 +1,20 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
-import { MatStepper, MatBottomSheet } from "@angular/material";
+import { MatStepper, MatBottomSheetRef } from "@angular/material";
 import { Observable } from "rxjs/internal/Observable";
 import { OrderFormModel } from "../models";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
+import { trigger, transition, animate, style, state } from "@angular/animations";
+import { Router } from "@angular/router";
 
 import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
-import { trigger, transition, animate, style, state } from "@angular/animations";
+import { getAccountInfo } from "@soushians/user";
+import { SigninRequiredAction, SigninContainerComponent } from "@soushians/authentication";
 import { CarDetailComponent } from "../car-detail/car-detail.component";
 import { SelectProductComponent } from "../select-product/select-product.component";
 import { InsurerInfoComponent } from "../insurer-info/insurer-info.component";
 import { SaveOrderStartAction } from "../services/api";
-import { Router } from "@angular/router";
-import { SigninRequiredAction } from "@soushians/authentication";
+import { map } from "rxjs/operators";
 
 @Component({
 	selector: "order-purchase",
@@ -33,8 +35,12 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	@ViewChild(SelectProductComponent) selectProductComponent: SelectProductComponent;
 	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
 	orderForm$: Observable<OrderFormModel>;
+	signedIn$: Observable<boolean>;
 	state: any;
-	constructor(private store: Store<AppState>, private router: Router) {
+	constructor(
+		private store: Store<AppState>,
+		private router: Router // private signinBottomSheetRef: MatBottomSheetRef<SigninContainerComponent>
+	) {
 		this.state = {
 			car: {
 				animateState: "in"
@@ -46,9 +52,12 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 				animateState: "out"
 			}
 		};
-		setTimeout(() => {
-			this.store.dispatch(new SigninRequiredAction());
-		}, 2222);
+		this.signedIn$ = this.store.select(getAccountInfo).pipe(
+			map(user => {
+				debugger;
+				return user.DisplayName == null ? false : true;
+			})
+		);
 	}
 	ngOnInit() {
 		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
@@ -76,5 +85,8 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	}
 	fullscreenToggle() {
 		this.store.dispatch(new ToggleFullscreenAction());
+	}
+	signInRequest() {
+		this.store.dispatch(new SigninRequiredAction());
 	}
 }
