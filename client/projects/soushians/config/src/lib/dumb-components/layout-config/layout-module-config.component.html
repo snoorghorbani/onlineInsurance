@@ -30,7 +30,7 @@
                 <mat-icon aria-label="icon-button icon">add</mat-icon>
             </button>
         </h2>
-        <div fxFlex="nogrow" *ngFor="let item of formGroup.get('menuItems').controls">
+        <div fxFlex="nogrow" *ngFor="let item of $any(formGroup).get('menuItems').controls">
             <div [formGroup]="item" fxLayout="row" fxLayoutGap="25px">
                 <button mat-icon-button>
                     <mat-icon>delete</mat-icon>

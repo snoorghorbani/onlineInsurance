@@ -48,7 +48,8 @@
         "projects/soushians/source/src/public_api"
       ],
       "@soushians/socket": [
-        "dist/@soushians/socket"
+        // "dist/@soushians/socket"
+        "projects/soushians/socket/src/public_api"
       ],
       "@soushians/dashboard": [
         // "dist/@soushians/dashboard"
@@ -56,7 +57,8 @@
       ],
       "@soushians/test": [
         "dist/soushians/test"
-      ]
+      ],
+      "socket.io-client": ["./node_modules/socket.io-client/dist/socket.io.slim.js"]
     }
   }
 }

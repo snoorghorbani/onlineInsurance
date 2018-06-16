@@ -82,7 +82,7 @@ import { map, combineLatest } from "rxjs/operators";
 			transition("summary => compact", animate("400ms ease-out")),
 			transition("summary => comfortable", animate("800ms ease-out")),
 			transition("compact => comfortable", animate("800ms ease-out")),
-			transition("compact => summary", animate("800ms ease-out"))
+			transition("compact => summary", animate("400ms ease-out"))
 		]),
 		trigger("menuAnimation", [
 			state(
@@ -96,7 +96,7 @@ import { map, combineLatest } from "rxjs/operators";
 			state(
 				"compact",
 				style({
-					right: "25px",
+					right: "45px",
 					transform: "translateX(0)",
 					bottom: "13px"
 				})
@@ -104,7 +104,7 @@ import { map, combineLatest } from "rxjs/operators";
 			state(
 				"summary",
 				style({
-					right: "25px",
+					right: "75px",
 					transform: "translateX(0)",
 					bottom: "14px"
 				})
@@ -112,7 +112,7 @@ import { map, combineLatest } from "rxjs/operators";
 			state(
 				"hide",
 				style({
-					right: "25px",
+					right: "75px",
 					transform: "translateX(0)",
 					bottom: "14px"
 				})

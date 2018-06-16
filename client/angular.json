@@ -404,6 +404,44 @@
 				}
 			}
 		},
+		"@soushians/socket": {
+			"root": "projects/soushians/socket",
+			"sourceRoot": "projects/soushians/socket/src",
+			"projectType": "library",
+			"prefix": "lib",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "projects/soushians/socket/tsconfig.lib.json",
+						"project": "projects/soushians/socket/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"project": "projects/soushians/socket/ng-package.prod.json"
+						}
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/soushians/socket/src/test.ts",
+						"tsConfig": "projects/soushians/socket/tsconfig.spec.json",
+						"karmaConfig": "projects/soushians/socket/karma.conf.js"
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"projects/soushians/socket/tsconfig.lib.json",
+							"projects/soushians/socket/tsconfig.spec.json"
+						],
+						"exclude": [ "**/node_modules/**" ]
+					}
+				}
+			}
+		},
 		"@soushians/test": {
 			"root": "projects/soushians/test",
 			"sourceRoot": "projects/soushians/test/src",
