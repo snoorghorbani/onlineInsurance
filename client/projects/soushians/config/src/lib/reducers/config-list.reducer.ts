@@ -1,5 +1,4 @@
 ﻿import * as config from "../actions/config.action";
-import { ConfigModel, LayoutConfigModel } from "../models";
 
 export interface State {
 	data: any[];

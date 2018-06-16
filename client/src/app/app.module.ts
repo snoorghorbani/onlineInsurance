@@ -70,7 +70,8 @@ export function mapUserDisplayName(user$) {
 		// 	signoutAction: SignoutAction as any
 		// }),
 		NgsAuthenticationModule.forRoot({
-			env: environment as any
+			env: environment as any,
+			afterSignoutRedirectTo: "/"
 		}),
 		NgsConfigModule.forRoot({
 			env: environment as any,
@@ -83,7 +84,11 @@ export function mapUserDisplayName(user$) {
 			mapUserDisplayName
 		}),
 		NgsUserRoutingModule,
-		NgsSocketModule.forRoot(),
+		NgsSocketModule.forRoot({
+			development_uri: "http://localhost:3000",
+			production_uri: "http://185.208.174.92:3000",
+			env: environment as any
+		}),
 		// NgsBpmnModule.forRoot(),
 		SharedModule,
 		SourceModule,

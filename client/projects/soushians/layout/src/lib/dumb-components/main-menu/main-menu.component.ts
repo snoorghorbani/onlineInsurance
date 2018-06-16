@@ -1,8 +1,6 @@
-import { Component, Output, EventEmitter, Input, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
-import { Routes } from "@angular/router";
 import { trigger, state, style, transition, animate } from "@angular/animations";
 
 import { responseStatusTypes } from "@soushians/shared";
@@ -10,7 +8,6 @@ import { SigninService } from "@soushians/authentication";
 
 import { FeatureState } from "../../reducers";
 import { LayoutConfigurationService } from "../../services/layout-configuration.service";
-import { LayoutModuleConfig } from "../../layout.config";
 import { map, combineLatest } from "rxjs/operators";
 import { getAccountInfo, UserModel } from "@soushians/user";
 

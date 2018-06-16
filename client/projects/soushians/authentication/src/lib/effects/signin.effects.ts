@@ -18,6 +18,7 @@ import { SigninService } from "../services/signin.service";
 import { NewCaptcha } from "../actions";
 import { SigninContainerComponent } from "../smart-components/signin-container";
 import { MatBottomSheet } from "@angular/material";
+import { AuthenticationConfigurationService } from "../services/authentication-configuration.service";
 
 @Injectable()
 export class SigninEffects {
@@ -25,6 +26,7 @@ export class SigninEffects {
 		private actions$: Actions,
 		private router: Router,
 		public signinService: SigninService,
+		public configurationService: AuthenticationConfigurationService,
 		private bottomSheet: MatBottomSheet
 	) {}
 
@@ -80,6 +82,13 @@ export class SigninEffects {
 
 	@Effect({ dispatch: false })
 	redirectToLoginPage$ = this.actions$
-		.ofType(SignInActionTypes.SIGNIN_REDIRECT, SignInActionTypes.SIGNOUT)
+		.ofType(SignInActionTypes.SIGNIN_REDIRECT)
 		.pipe(tap(authed => this.router.navigate([ "auth/signin" ])));
+
+	@Effect({ dispatch: false })
+	redirectAfterSignout$ = this.actions$
+		.ofType(SignInActionTypes.SIGNOUT)
+		.pipe(
+			tap(authed => this.router.navigate([ this.configurationService.config$.getValue().afterSignoutRedirectTo ]))
+		);
 }

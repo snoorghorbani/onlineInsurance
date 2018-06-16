@@ -10,7 +10,6 @@ import { of } from "rxjs/observable/of";
 import { trigger, state, transition, style, animate } from "@angular/animations";
 
 import { UserModel, getAccountInfo } from "@soushians/user";
-import { LayoutConfigModel } from "@soushians/config";
 
 import * as fromLayout from "../../reducers";
 import {
