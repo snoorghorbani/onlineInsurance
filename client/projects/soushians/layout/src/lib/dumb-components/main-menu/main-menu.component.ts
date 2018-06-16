@@ -11,6 +11,8 @@ import { SigninService } from "@soushians/authentication";
 import { FeatureState } from "../../reducers";
 import { LayoutConfigurationService } from "../../services/layout-configuration.service";
 import { LayoutModuleConfig } from "../../layout.config";
+import { map, combineLatest } from "rxjs/operators";
+import { getAccountInfo, UserModel } from "@soushians/user";
 
 @Component({
 	selector: "ngs-layout-main-menu",
@@ -57,16 +59,32 @@ import { LayoutModuleConfig } from "../../layout.config";
 })
 export class MainMenuComponent {
 	@Output() closeSidebar = new EventEmitter();
-
 	@Input() authenticated: Observable<boolean>;
-
+	user$: Observable<UserModel>;
 	customerStatus$: Observable<responseStatusTypes>;
-	routes: any = this.configurationService.config$.map(config => config.menuItems);
+	routes$: Observable<any>;
 
 	@ViewChild("customerMobileInput") customerMobileInput: ElementRef;
 	constructor(
 		private store: Store<FeatureState>,
 		public signinService: SigninService,
 		public configurationService: LayoutConfigurationService
-	) {}
+	) {
+		this.user$ = this.store.select(getAccountInfo);
+		this._observe_on_layout_config_and_filter_routes();
+	}
+	_observe_on_layout_config_and_filter_routes() {
+		this.routes$ = this.configurationService.config$.pipe(
+			map(config => config.menuItems),
+			combineLatest(this.user$),
+			map(([ routes, user ]) => {
+				if (!user.Roles) return [];
+				if (user.Roles.length == 0) {
+					return [];
+				} else {
+					return routes.filter(route => user.Roles.some(userRole => route.roles.includes(userRole)));
+				}
+			})
+		);
+	}
 }

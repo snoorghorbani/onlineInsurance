@@ -31,10 +31,15 @@ export class UserService {
 			.filter(config => config.endpoints.profileInformation != "")
 			.take(1)
 			.switchMap(config =>
-				this.http
-					.get<any>(config.endpoints.profileInformation)
-					.let(config.responseToUserInfo)
-					.pipe(map((response: UserModel) => response))
+				this.http.get<any>(config.endpoints.profileInformation).let(config.responseToUserInfo).pipe(
+					map((response: UserModel) => {
+						const user: any = Object.assign({}, response);
+						if (user.Role) {
+							user.Roles = [ user.Role ];
+						}
+						return user;
+					})
+				)
 			);
 	}
 	editProfile(data: EditProfile_ApiModel.Request): Observable<UserModel> {

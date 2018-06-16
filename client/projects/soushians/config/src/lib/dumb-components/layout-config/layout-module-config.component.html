@@ -30,8 +30,11 @@
                 <mat-icon aria-label="icon-button icon">add</mat-icon>
             </button>
         </h2>
-        <div fxFlex *ngFor="let item of formGroup.get('menuItems').controls">
-            <div [formGroup]="item">
+        <div fxFlex="nogrow" *ngFor="let item of formGroup.get('menuItems').controls">
+            <div [formGroup]="item" fxLayout="row" fxLayoutGap="25px">
+                <button mat-icon-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
                 <mat-form-field>
                     <input type="text" matInput placeholder="route" formControlName="route">
                 </mat-form-field>
@@ -43,7 +46,7 @@
                 </mat-form-field>
                 <mat-form-field> 
                     <mat-select placeholder="roles" formControlName="roles" multiple>
-                        <mat-option *ngFor="let role of roleItems" [value]="role">{{role}}</mat-option>
+                        <mat-option *ngFor="let role of roleItems$ | async" [value]="role">{{role}}</mat-option>
                     </mat-select> 
                 </mat-form-field>
             </div>

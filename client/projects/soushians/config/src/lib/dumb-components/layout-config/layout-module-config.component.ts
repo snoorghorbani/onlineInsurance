@@ -1,5 +1,10 @@
 import { Component, Output, EventEmitter, Input, Injector } from "@angular/core";
 import { FormGroup, Validators, FormControl, FormArray } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map, filter } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+
+import { FeatureState, getAppConfig } from "../../reducers";
 
 @Component({
 	templateUrl: "./layout-module-config.component.html"
@@ -41,12 +46,15 @@ export class LayoutModuleConfigComponent {
 		secondSideNavMode: new FormControl("", [ Validators.required ]),
 		menuItems: new FormArray([])
 	});
-	roleItems: string[] = [ "Admin", "User" ];
+	roleItems$: Observable<string[]>;
 
-	constructor(private injector: Injector) {
+	constructor(private injector: Injector, private store: Store<FeatureState>) {
 		this.sideNavModes = [ "over", "push", "side" ];
 		this.layoutModes = [ "with-margin", "without-margin", "default" ];
 		this.configFormGroup = this.injector.get("configFormGroup");
+		this.roleItems$ = this.store
+			.select(getAppConfig)
+			.pipe(filter(config => config != null), map(appconfig => appconfig.Config.Roles));
 		// this.configChanged.
 		// this.formGroup.valueChanges.subscribe(value => {
 		// 	debugger;

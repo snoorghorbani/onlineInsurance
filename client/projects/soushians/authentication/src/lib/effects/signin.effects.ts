@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
 import { RouterAction } from "@ngrx/router-store";
-import { switchMap, map, catchError, tap } from "rxjs/operators";
+import { switchMap, map, catchError, tap, pluck } from "rxjs/operators";
 
 import {
 	SignoutAction,
@@ -41,7 +41,8 @@ export class SigninEffects {
 	Signin$ = this.actions$
 		.ofType(SignInActionTypes.SIGNIN)
 		.pipe(
-			switchMap((action: Signin) => this.signinService.signin(action.payload)),
+			pluck("payload"),
+			switchMap(payload => this.signinService.signin(payload)),
 			map(user => new SigninSecceed(user)),
 			catchError(error => Observable.of(new SigninFailed(error)))
 		);
