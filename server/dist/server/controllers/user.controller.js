@@ -4,10 +4,10 @@ const express = require("express");
 const async = require("async");
 const crypto = require("crypto");
 const passport = require("passport");
-const user_model_1 = require("../models/user.model");
+const mongoose = require("mongoose");
 // const LocalStrategyInfo = require("passport-local").LocalStrategyInfo;
-const request = require("express-validator");
 const passportConfig = require("../config/passport");
+const User = mongoose.model("User");
 const router = express.Router();
 exports.router = router;
 router.get("/account/profile", passportConfig.isAuthenticated, (req, res) => {
@@ -15,13 +15,13 @@ router.get("/account/profile", passportConfig.isAuthenticated, (req, res) => {
 });
 router.get("/:email", (req, res) => {
     debugger;
-    user_model_1.default.findOne({ Email: req.params.email }, (err, user) => {
+    User.findOne({ Email: req.params.email }, (err, user) => {
         res.json(user);
     });
 });
 router.put("/:email", (req, res) => {
     debugger;
-    user_model_1.default.findOneAndUpdate({ Email: req.params.email }, req.body, (err, User) => {
+    User.findOneAndUpdate({ Email: req.params.email }, req.body, (err, User) => {
         res.json({ Result: { User } });
     });
 });
@@ -80,12 +80,12 @@ router.post("/", (req, res, next) => {
         debugger;
         return res.redirect("/signup");
     }
-    const user = new user_model_1.default({
+    const user = new User({
         Email: req.body.Email,
         Password: req.body.Password,
         Roles: req.body.Roles
     });
-    user_model_1.default.findOne({ email: req.body.Email }, (err, existingUser) => {
+    User.findOne({ email: req.body.Email }, (err, existingUser) => {
         if (err) {
             return next(err);
         }
@@ -119,7 +119,7 @@ exports.postUpdateProfile = (req, res, next) => {
         // req.flash("errors", errors);
         return res.redirect("/account");
     }
-    user_model_1.default.findById(req.user.id, (err, user) => {
+    User.findById(req.user.id, (err, user) => {
         if (err) {
             return next(err);
         }
@@ -152,7 +152,7 @@ exports.postUpdatePassword = (req, res, next) => {
         // req.flash("errors", errors);
         return res.redirect("/account");
     }
-    user_model_1.default.findById(req.user.id, (err, user) => {
+    User.findById(req.user.id, (err, user) => {
         if (err) {
             return next(err);
         }
@@ -171,7 +171,7 @@ exports.postUpdatePassword = (req, res, next) => {
  * Delete user account.
  */
 exports.postDeleteAccount = (req, res, next) => {
-    user_model_1.default.remove({ _id: req.user.id }, err => {
+    User.remove({ _id: req.user.id }, err => {
         if (err) {
             return next(err);
         }
@@ -186,7 +186,7 @@ exports.postDeleteAccount = (req, res, next) => {
  */
 exports.getOauthUnlink = (req, res, next) => {
     const provider = req.params.provider;
-    user_model_1.default.findById(req.user.id, (err, user) => {
+    User.findById(req.user.id, (err, user) => {
         if (err) {
             return next(err);
         }
@@ -209,7 +209,7 @@ exports.getReset = (req, res, next) => {
     if (req.isAuthenticated()) {
         return res.redirect("/");
     }
-    user_model_1.default.findOne({ passwordResetToken: req.params.token })
+    User.findOne({ passwordResetToken: req.params.token })
         .where("passwordResetExpires")
         .gt(Date.now())
         .exec((err, user) => {
@@ -239,7 +239,7 @@ exports.postReset = (req, res, next) => {
     }
     async.waterfall([
         function resetPassword(done) {
-            user_model_1.default.findOne({ passwordResetToken: req.params.token })
+            User.findOne({ passwordResetToken: req.params.token })
                 .where("passwordResetExpires")
                 .gt(Date.now())
                 .exec((err, user) => {
@@ -309,7 +309,7 @@ exports.postForgot = (req, res, next) => {
             });
         },
         function setRandomToken(token, done) {
-            user_model_1.default.findOne({ email: req.body.Email }, (err, user) => {
+            User.findOne({ email: req.body.Email }, (err, user) => {
                 if (err) {
                     return done(err);
                 }

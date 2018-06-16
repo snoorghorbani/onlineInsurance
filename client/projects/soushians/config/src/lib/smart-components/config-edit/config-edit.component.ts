@@ -53,7 +53,6 @@ export class ConfigEditComponent implements OnInit {
 		console.log("-");
 	}
 	edit() {
-		debugger;
 		this.formGroup.controls.Config.patchValue(this.dynConfig.config);
 		if (!this.formGroup.valid) return;
 		this.configService.editConfig(this.formGroup.value).subscribe(config => {});

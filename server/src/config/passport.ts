@@ -22,7 +22,6 @@ passport.deserializeUser((id, done) => {
 		done(err, user);
 	});
 });
-
 /**
  * Sign in using Username and Password.
  */

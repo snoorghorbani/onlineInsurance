@@ -41,7 +41,6 @@ export class DynamicConfigComponentSelectorComponent implements AfterViewInit {
 	dynamicComponentContainer: ViewContainerRef;
 	@Output() configChanged = new EventEmitter();
 	get config() {
-		debugger;
 		if (!this.currentComponent) return {};
 		return this.currentComponent.instance.formGroup.value;
 	}
