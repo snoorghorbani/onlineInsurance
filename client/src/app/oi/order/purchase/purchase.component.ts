@@ -66,7 +66,7 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.store.dispatch(new ExitFullscreenAction());
 	}
-	doneCar() {
+	doneCar(orderForm: OrderFormModel) {
 		this.carDetailComponent.viewMode();
 		this.selectProductComponent.editMode();
 		this.state.product.animateState = "in";

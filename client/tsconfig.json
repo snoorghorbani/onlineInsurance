@@ -22,14 +22,12 @@
         "projects/soushians/layout/src/public_api"
       ],
       "@soushians/config": [
-        "dist/@soushians/config"
+        // "dist/@soushians/config"
+        "projects/soushians/config/src/public_api"
       ],
       "@soushians/user": [
         // "dist/@soushians/user"
         "projects/soushians/user/src/public_api"
-      ],
-      "@soushians/infra": [
-        "dist/@soushians/infra"
       ],
       "@soushians/shared": [
         "dist/@soushians/shared"
@@ -46,7 +44,8 @@
         "dist/@soushians/diagram"
       ],
       "@soushians/source": [
-        "dist/@soushians/source"
+        // "dist/@soushians/source"
+        "projects/soushians/source/src/public_api"
       ],
       "@soushians/socket": [
         "dist/@soushians/socket"

@@ -21,6 +21,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	@Input() mode: "view" | "edit" = "edit";
 	unsubscribe = new Subject<void>();
+	pauser = new Subject();
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	formGroup: FormGroup;
 	orderForm: OrderFormModel;
