@@ -9,7 +9,8 @@ import { fromEvent } from "rxjs/observable/fromEvent";
 import { of } from "rxjs/observable/of";
 import { trigger, state, transition, style, animate } from "@angular/animations";
 
-import { UserModel, getAccountInfo } from "@soushians/user";
+import { UserModel } from "@soushians/user";
+import { LayoutConfigModel } from "@soushians/config";
 
 import * as fromLayout from "../../reducers";
 import {
@@ -26,7 +27,6 @@ import { FeatureState, getShowSecondSidebarStatus, getLayoutToolbar } from "../.
 
 import { LayoutConfigurationService } from "../../services/layout-configuration.service";
 import { State as toolbarState } from "../../reducers/toolbar.reducer";
-import { map, combineLatest } from "rxjs/operators";
 
 @Component({
 	selector: "layout-toolbar",
@@ -81,38 +81,34 @@ import { map, combineLatest } from "rxjs/operators";
 			transition("summary => compact", animate("400ms ease-out")),
 			transition("summary => comfortable", animate("800ms ease-out")),
 			transition("compact => comfortable", animate("800ms ease-out")),
-			transition("compact => summary", animate("400ms ease-out"))
+			transition("compact => summary", animate("800ms ease-out"))
 		]),
 		trigger("menuAnimation", [
 			state(
 				"comfortable",
 				style({
-					right: "50%",
-					transform: "translateX(50%)",
+					"padding-right": "calc(50% - 195px)",
 					bottom: "25px"
 				})
 			),
 			state(
 				"compact",
 				style({
-					right: "45px",
-					transform: "translateX(0)",
+					"padding-right": "25px",
 					bottom: "13px"
 				})
 			),
 			state(
 				"summary",
 				style({
-					right: "75px",
-					transform: "translateX(0)",
+					"padding-right": "25px",
 					bottom: "14px"
 				})
 			),
 			state(
 				"hide",
 				style({
-					right: "75px",
-					transform: "translateX(0)",
+					"padding-right": "25px",
 					bottom: "14px"
 				})
 			),
@@ -255,7 +251,6 @@ export class ToolbarMenuComponent {
 	@Input("app-config") app_config;
 	@Input() user: UserModel;
 	@Input() displayName: string;
-	user$: Observable<UserModel>;
 	showMainSidenav: Observable<boolean>;
 	toolbarAnimationState: "comfortable" | "compact" | "summary" | "hide" = "compact";
 	menuAnimationState: "comfortable" | "compact" | "summary" | "hide" = "compact";
@@ -271,7 +266,6 @@ export class ToolbarMenuComponent {
 		private store: Store<FeatureState>,
 		public configurationService: LayoutConfigurationService
 	) {
-		this.user$ = this.store.select(getAccountInfo);
 		this.store.dispatch(new ChangeToolbatToComfortableModeAction());
 		this.config$ = this.store.select(getLayoutToolbar);
 		this.config$.subscribe(config => (this.config = config));
@@ -284,7 +278,10 @@ export class ToolbarMenuComponent {
 			setTimeout(() => (this.titleAnimationState = state), 1);
 			setTimeout(() => (this.toolbarAnimationState = state), 1);
 		});
-		this._observe_on_layout_config_and_filter_routes();
+		// setTimeout(() => {
+		// 	this.menuAnimationState = "compact";
+		// }, 4000);
+		this.menuItems$ = this.configurationService.config$.map(config => config.menuItems);
 		fromEvent(this.document.body, "scroll").subscribe(() => {
 			let scrolledAmount = this.document.body.scrollTop;
 			let scrollToTop =
@@ -328,19 +325,5 @@ export class ToolbarMenuComponent {
 			action = state ? new CloseSidenavAction() : new OpenSidenavAction();
 		});
 		this.store.dispatch(action);
-	}
-	_observe_on_layout_config_and_filter_routes() {
-		this.menuItems$ = this.configurationService.config$.pipe(
-			map(config => config.menuItems),
-			combineLatest(this.user$),
-			map(([ routes, user ]) => {
-				if (!user.Roles) return [];
-				if (user.Roles.length == 0) {
-					return [];
-				} else {
-					return routes.filter(route => user.Roles.some(userRole => route.roles.includes(userRole)));
-				}
-			})
-		);
 	}
 }

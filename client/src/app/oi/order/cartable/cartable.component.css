@@ -2,7 +2,6 @@
 
 :host {
 	width: 100%;
-	padding-top: 25px;
 }
 mat-card-content > .list-item {
 	margin-right: -16px;
@@ -33,4 +32,7 @@ mat-panel-description {
 }
 .mat-sidenav {
 	width: 25vw;
+}
+#list {
+	padding: 25px;
 }

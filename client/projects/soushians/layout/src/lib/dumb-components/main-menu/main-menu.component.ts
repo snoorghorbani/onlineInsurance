@@ -1,6 +1,8 @@
-import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from "@angular/core";
+import { Component, Output, EventEmitter, Input, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
+import { Routes } from "@angular/router";
 import { trigger, state, style, transition, animate } from "@angular/animations";
 
 import { responseStatusTypes } from "@soushians/shared";
@@ -8,8 +10,7 @@ import { SigninService } from "@soushians/authentication";
 
 import { FeatureState } from "../../reducers";
 import { LayoutConfigurationService } from "../../services/layout-configuration.service";
-import { map, combineLatest } from "rxjs/operators";
-import { getAccountInfo, UserModel } from "@soushians/user";
+import { LayoutModuleConfig } from "../../layout.config";
 
 @Component({
 	selector: "ngs-layout-main-menu",
@@ -56,32 +57,16 @@ import { getAccountInfo, UserModel } from "@soushians/user";
 })
 export class MainMenuComponent {
 	@Output() closeSidebar = new EventEmitter();
+
 	@Input() authenticated: Observable<boolean>;
-	user$: Observable<UserModel>;
+
 	customerStatus$: Observable<responseStatusTypes>;
-	routes$: Observable<any>;
+	routes: any = this.configurationService.config$.map(config => config.menuItems);
 
 	@ViewChild("customerMobileInput") customerMobileInput: ElementRef;
 	constructor(
 		private store: Store<FeatureState>,
 		public signinService: SigninService,
 		public configurationService: LayoutConfigurationService
-	) {
-		this.user$ = this.store.select(getAccountInfo);
-		this._observe_on_layout_config_and_filter_routes();
-	}
-	_observe_on_layout_config_and_filter_routes() {
-		this.routes$ = this.configurationService.config$.pipe(
-			map(config => config.menuItems),
-			combineLatest(this.user$),
-			map(([ routes, user ]) => {
-				if (!user.Roles) return [];
-				if (user.Roles.length == 0) {
-					return [];
-				} else {
-					return routes.filter(route => user.Roles.some(userRole => route.roles.includes(userRole)));
-				}
-			})
-		);
-	}
+	) {}
 }

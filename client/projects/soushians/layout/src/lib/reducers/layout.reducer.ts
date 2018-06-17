@@ -1,4 +1,5 @@
 import * as layout from "../actions/layout";
+import { LayoutConfigModel } from "@soushians/config";
 import { Action } from "@ngrx/store";
 
 export interface State {
