@@ -11,6 +11,7 @@ router.get("/", function (req, res) {
     }));
 });
 router.get("/:name", function (req, res) {
+    socket_controller_1.SocketMiddleware.server.dispatchActionToClients("[Layout] TOGGLE_FULLSCREEN", {});
     ConfigModel.Config.findOne({ Name: req.params.name }).then(Result => res.json({ Result }));
 });
 router.put("/:name", function (req, res) {
