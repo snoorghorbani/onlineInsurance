@@ -46,6 +46,7 @@ export class FormViewComponent implements OnDestroy {
 	@Output() accept = new EventEmitter<FormGroup>();
 	@Output() cancel = new EventEmitter<FormGroup>();
 	@Input() local;
+	@Input() card = false;
 	@Input()
 	set id(id: string) {
 		if (!this.local) this.store.dispatch(new GetFormSchemaAction(id));

@@ -1,17 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const http = require("http");
-const request_1 = require("request");
-const rxjs_1 = require("rxjs");
+const Observable_1 = require("rxjs/Observable");
 const comparator_enum_1 = require("./models/comparator.enum");
-// import { request } from "https";
 exports.httpGet = (endpoint) => {
-    return rxjs_1.Observable.create((observer) => {
-        http
-            .get(endpoint, (result) => {
+    return Observable_1.Observable.create((observer) => {
+        http.get(endpoint, (result) => {
             result.setEncoding("utf8");
             let rawData = "";
-            result.on("data", (chunk) => (rawData += chunk));
+            result.on("data", (chunk) => rawData += chunk);
             result.on("end", () => {
                 const parsedData = JSON.parse(rawData);
                 observer.next(parsedData);
@@ -20,23 +17,6 @@ exports.httpGet = (endpoint) => {
             .on("error", function (e) {
             debugger;
             observer.error(e);
-        });
-    });
-};
-exports.httpPost = (endpoint, body) => {
-    return rxjs_1.Observable.create((observer) => {
-        request_1.post({ url: endpoint, form: body }, function (err, httpResponse, body) {
-            debugger;
-            if (err)
-                return rxjs_1.throwError(err);
-            if (httpResponse.statusCode != 200)
-                return rxjs_1.throwError({});
-            try {
-                observer.next(JSON.parse(body));
-            }
-            catch (err) {
-                rxjs_1.throwError(err);
-            }
         });
     });
 };
@@ -67,14 +47,14 @@ exports.getValue = function (objOrArr, pathOrIndex) {
     else {
         tempobjOrArr = objOrArr;
         const routes = pathOrIndex.split(".");
-        for (let i = 0, route; (route = routes[i]); i++) {
+        for (let i = 0, route; route = routes[i]; i++) {
             if (tempobjOrArr[route] === undefined || tempobjOrArr[route] === null) {
                 return;
             }
             if (this.is.array(tempobjOrArr[route])) {
                 const res = [];
                 const partialRoutes = routes.splice(i + 1);
-                for (let j = 0, item; (item = tempobjOrArr[route][j]); j++)
+                for (let j = 0, item; item = tempobjOrArr[route][j]; j++)
                     res[j] = this.getValue(item, partialRoutes.join("."));
                 return res;
             }
@@ -89,7 +69,7 @@ exports.is = (function (_) {
         if (node.matches)
             return node.matches(selector);
         const nodes = this.argToArray(node.parentNode.querySelectorAll(selector));
-        return nodes.indexOf(node) > -1 ? true : false;
+        return (nodes.indexOf(node) > -1) ? true : false;
     };
     is.object = function (_var) {
         return Object.prototype.toString.call(_var) === "[object Object]";
@@ -98,9 +78,8 @@ exports.is = (function (_) {
         if (_.is.not.ie())
             return Object.prototype.toString.call(obj) === "[object NodeList]";
         else
-            return (obj.length !== undefined &&
-                obj.push === undefined &&
-                (obj.length > 0 ? obj[0].tagName !== undefined : true));
+            return (obj.length !== undefined
+                && obj.push === undefined && (obj.length > 0 ? obj[0].tagName !== undefined : true));
     };
     is.element = function (obj) {
         return Object.prototype.toString.call(obj).search("Element") > -1;
@@ -118,7 +97,7 @@ exports.is = (function (_) {
         return Object.prototype.toString.call(_var) === "[object Function]";
     };
     is.string = function (_var) {
-        return Object.prototype.toString.call(_var) === "[object String]";
+        return (Object.prototype.toString.call(_var) === "[object String]");
     };
     is.undefined = function (_var) {
         return Object.prototype.toString.call(_var) === "[object Undefined]";
@@ -136,7 +115,7 @@ exports.is = (function (_) {
     };
     is.endWith = function (str) { };
     is.value = function (_var) {
-        return _var ? true : false;
+        return (_var) ? true : false;
     };
     is.empty = function (o) {
         if (_.is.object(0))
@@ -152,32 +131,33 @@ exports.is = (function (_) {
         return is.defined(_var) && is.not.array(_var) && is.not.object(_var) && is.not["function"](_var);
     };
     is.prototypeProp = function (obj, prop) {
-        return obj[prop] && !obj.hasOwnProperty(prop);
+        return (obj[prop] && !obj.hasOwnProperty(prop));
     };
     is.equal = function (fv, sv) {
-        return JSON.stringify(fv) == JSON.stringify(sv) ? true : false;
+        return (JSON.stringify(fv) == JSON.stringify(sv)) ? true : false;
     };
     is.equalText = function (fv, sv) {
-        return fv.toLowerCase(fv) === sv.toLowerCase(sv) ? true : false;
+        return (fv.toLowerCase(fv) === sv.toLowerCase(sv)) ? true : false;
     };
     is.closet = function (fo, so) {
         return _.is.equal(_.partial(fo, _.report.skeleton(so)), so);
     };
     is.contain = function (str, searchStr) {
-        const reg = _.is.regex(searchStr) ? searchStr : new RegExp(searchStr, "g");
+        const reg = (_.is.regex(searchStr)) ? searchStr : new RegExp(searchStr, "g");
         return str.match(reg) && str.match(reg).length > 0;
     };
     is.regex = function (r) {
         return r.constructor.name === "RegExp";
     };
     is.same = function (fv, sv) {
-        return fv.isEqualNode ? fv.isEqualNode(sv) : fv === sv;
+        return (fv.isEqualNode) ? fv.isEqualNode(sv) : fv === sv;
     };
     is.persianLeapYear = function (year) {
-        return (((year - (year > 0 ? 474 : 473)) % 2820 + 474 + 38) * 682) % 2816 < 682;
+        return ((((((year - ((year > 0) ? 474 : 473)) % 2820) + 474) + 38) * 682) % 2816) < 682;
     };
     is.georgianLeapYear = function (year) {
-        return year % 4 == 0 && !(year % 100 == 0 && year % 400 != 0);
+        return ((year % 4) == 0) &&
+            (!(((year % 100) == 0) && ((year % 400) != 0)));
     };
     const not = {};
     let i;
@@ -193,14 +173,16 @@ exports.is = (function (_) {
     for (i in is)
         (function (i) {
             if (is.hasOwnProperty(i))
-                all[i] = function (o) { };
+                all[i] = function (o) {
+                };
         })(i);
     is.all = all;
     const any = {};
     for (const j in is)
         (function (j) {
             if (is.hasOwnProperty(j))
-                any[j] = function (o) { };
+                any[j] = function (o) {
+                };
         })(j);
     is.any = any;
     return is;

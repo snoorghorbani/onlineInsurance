@@ -22,7 +22,12 @@ export function UserReducer(state = initialState, action: SigninAction): State {
 		}
 
 		case SignInActionTypes.SIGNOUT: {
-			return initialState;
+			debugger;
+			return {
+				...state,
+				loggedIn: false,
+				user: new UserModel()
+			};
 		}
 
 		default: {

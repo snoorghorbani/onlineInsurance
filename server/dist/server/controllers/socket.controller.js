@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = require("socket.io");
 const passportSocketIo = require("passport.socketio");
+// const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 let io;
 const sockets = new Set();
 exports.usernames = {};
@@ -14,29 +16,29 @@ exports.SocketMiddleware = {
     // TODO: export const init = function(server: Server, sessionStore: MongoStore, passport: PassportStatic) {
     init: function (server, sessionStore, passport) {
         io = socket_io_1.listen(server);
-        // io.use(
-        // 	passportSocketIo.authorize({
-        // 		key: "connect.sid",
-        // 		secret: process.env.SESSION_SECRET,
-        // 		store: sessionStore,
-        // 		passport: passport,
-        // 		cookieParser: cookieParser,
-        // 		// success: onAuthorizeSuccess,
-        // 		fail: onAuthorizeFail
-        // 	})
-        // );
-        // function onAuthorizeFail(data: any, message: any, error: any, accept: any) {
-        // 	if (error) throw new Error(message);
-        // 	console.log("failed connection to socket.io:", message);
-        // 	accept(undefined, false);
-        // 	if (error) accept(new Error(message));
-        // }
+        io.use(passportSocketIo.authorize({
+            key: "connect.sid",
+            secret: process.env.SESSION_SECRET,
+            store: sessionStore,
+            passport: passport,
+            cookieParser: cookieParser,
+            // success: onAuthorizeSuccess,
+            fail: onAuthorizeFail
+        }));
+        function onAuthorizeFail(data, message, error, accept) {
+            if (error)
+                throw new Error(message);
+            console.log("failed connection to socket.io:", message);
+            accept(undefined, false);
+            if (error)
+                accept(new Error(message));
+        }
         io.on("connection", (socket) => {
-            // usernames[socket.request.user.Username] = usernames[socket.request.user.Username] || new Set();
-            // if (!usernames[socket.request.user.Username].has(socket.id))
-            // 	usernames[socket.request.user.Username].add(socket.id);
-            // if (socket.request.user && socket.request.user.logged_in) {
-            // }
+            exports.usernames[socket.request.user.Username] = exports.usernames[socket.request.user.Username] || new Set();
+            if (!exports.usernames[socket.request.user.Username].has(socket.id))
+                exports.usernames[socket.request.user.Username].add(socket.id);
+            if (socket.request.user && socket.request.user.logged_in) {
+            }
             sockets.add(socket);
             Object.keys(dynamicSocketMessages).forEach(message => {
                 socket.on(message, (data) => dynamicSocketMessages[message](socket, io, data));

@@ -64,6 +64,7 @@ import { SelectProductComponent } from "./select-product/select-product.componen
 import { FieldSelectComponent } from "./field-select/field-select.component";
 import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.component";
 import { RootEffects } from "./root/root.effects";
+import { OrderPanelComponent } from "./order-panel/order-panel.component";
 
 @NgModule({
 	imports: [
@@ -114,7 +115,8 @@ import { RootEffects } from "./root/root.effects";
 		RedirectToBankComponent,
 		DestroyableComponent,
 		FieldSelectComponent,
-		FieldDatepickerComponent
+		FieldDatepickerComponent,
+		OrderPanelComponent
 	],
 	exports: [ NewOrderComponent ]
 })

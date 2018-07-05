@@ -9,6 +9,7 @@ import { PurchaseComponent } from "./purchase/purchase.component";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { ViewOrderComponent } from "./view-order/view-order.component";
 import { CartableComponent } from "./cartable/cartable.component";
+import { OrderPanelComponent } from "./order-panel/order-panel.component";
 
 const routes: Routes = [
 	{
@@ -43,6 +44,10 @@ const routes: Routes = [
 			{
 				path: "cartable",
 				component: CartableComponent
+			},
+			{
+				path: "panel/:id",
+				component: OrderPanelComponent
 			}
 		]
 	}

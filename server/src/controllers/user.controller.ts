@@ -2,13 +2,12 @@ import * as express from "express";
 import * as async from "async";
 import * as crypto from "crypto";
 import * as passport from "passport";
-import { AuthToken, UserModel } from "../models/user.model";
+import { default as User, UserModel, AuthToken } from "../models/user.model";
 import { Request as OriginalRequest, Response, NextFunction } from "express";
 import { WriteError } from "mongodb";
-import * as mongoose from "mongoose";
 // const LocalStrategyInfo = require("passport-local").LocalStrategyInfo;
+const request = require("express-validator");
 import * as passportConfig from "../config/passport";
-const User = mongoose.model("User");
 
 export interface Request extends OriginalRequest {
 	assert: any;

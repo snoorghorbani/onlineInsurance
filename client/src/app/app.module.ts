@@ -37,6 +37,9 @@ import { reducers } from "./app.reducers";
 import { DashboardModule } from "./dashboard";
 import { OiModule } from "./oi/oi.module";
 import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-adapter";
+import { RuleModule } from "@soushians/rule";
+import { GwtStepsModule } from "./gwt-steps/gwt-steps.module";
+import { ruleModuleConfig } from "./gwt-steps";
 
 export function responseToUserInfo(resp$) {
 	return resp$.map(function(resp) {
@@ -94,6 +97,11 @@ export function mapUserDisplayName(user$) {
 		SourceModule,
 		StaticPageModule,
 		NgsFormModule.forRoot(),
+		RuleModule.forRoot({
+			stepClasses: ruleModuleConfig.stepClasses,
+			env: environment
+		}),
+		GwtStepsModule,
 		AppRoutingModule,
 		MatFormFieldModule,
 		DashboardModule,

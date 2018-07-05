@@ -1,0 +1,28 @@
+<div fxLayout="row wrap" fxLayoutGap="25px" fxLayoutAlign="center start">
+    <mat-card fxFlex="60" *ngIf="(order$ | async)?.WorkflowState">
+        <div class="card-stickey-header" fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex>
+                <h3>{{(order$ | async)?.WorkflowState.Value}}</h3>
+            </div>
+            <div class="actions" fxFlex="nogrow">
+                <button mat-raised-button color="primary" (click)="rejectOrder(formRef.formGroup.value)">
+                    رد
+                </button>
+                <button mat-raised-button color="primary" (click)="approveOrder(formRef.formGroup.value)">
+                    تایید
+                </button>
+            </div>
+            </div>
+        <ngs-form-view #formRef fxFlex="45" [schema]="orderEditableFieldSchema" [card]="false"></ngs-form-view>
+    </mat-card>
+    <mat-card fxFlex>
+        <div fxLayout='column' class='list-items'>
+            <div class='list-item' *ngFor="let item of readonlyFields" fxLayout='row' fxLayoutAlign='center center'>
+                <mat-icon fxFlex='nogrow'>laptop</mat-icon>
+                <div fxFlex='15px'></div>
+                <p fxFlex='40'>{{item.Label}}</p>
+                <p fxFlex='60' fxLayoutAlign="end">{{item.DisplayValue}}</p>
+            </div>
+        </div>
+    </mat-card>
+</div>

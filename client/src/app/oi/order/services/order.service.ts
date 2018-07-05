@@ -46,6 +46,7 @@ export class OrderService {
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetOrder({ Id }: Partial<GetOrderApiModel.Request>): Observable<OrderFormModel> {
+		debugger;
 		return this.http
 			.get<GetOrderApiModel.Response>(`${this.configurationService.config.env.server}/order/GetOrder/${Id}`)
 			.pipe(map(response => response.Result), share());

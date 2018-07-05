@@ -10,6 +10,7 @@ import { OiCommonModule } from "./common/common.module";
 import { RoutingModule } from "./oi-routing.module";
 import { ExceptionInterceptor } from "./execption.interceptor";
 import { environment } from "../../environments/environment";
+import { ReportModule } from "./report/report.module";
 
 @NgModule({
 	imports: [
@@ -21,6 +22,7 @@ import { environment } from "../../environments/environment";
 			env: environment
 		}),
 		GeoBoundaryModule.forRoot(),
+		ReportModule,
 		OiCommonModule,
 		RoutingModule
 	],

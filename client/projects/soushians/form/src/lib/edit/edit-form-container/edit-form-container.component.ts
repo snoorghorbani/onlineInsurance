@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
 
 import { MainContainerState } from "../../main-container/main-container.reducers";
 import { EditFormApiModel } from "../../models";
@@ -27,15 +26,15 @@ export class EditFormContainerComponent extends AddFormContainerComponent {
 
 	ngOnInit() {
 		this.route.params
-			.map(params => params["_id"])
-			.subscribe(id => this.store.dispatch(new GetFormSchemaAction(id)));
+			.map((params) => params["_id"])
+			.subscribe((id) => this.store.dispatch(new GetFormSchemaAction(id)));
 
 		this.route.params
-			.map(params => params["_id"])
-			.switchMap(id => this.service.selectFormById(id))
-			.filter(data => data != null)
+			.map((params) => params["_id"])
+			.switchMap((id) => this.service.selectFormById(id))
+			.filter((data) => data != null)
 			.take(1)
-			.subscribe(formSchema => {
+			.subscribe((formSchema) => {
 				this.schema = formSchema;
 				this.formGroup.patchValue(formSchema);
 			});

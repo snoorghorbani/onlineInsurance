@@ -23,31 +23,31 @@ export const SocketMiddleware = {
 	// TODO: export const init = function(server: Server, sessionStore: MongoStore, passport: PassportStatic) {
 	init: function(server: Server, sessionStore: any, passport: PassportStatic) {
 		io = listen(server);
-		// io.use(
-		// 	passportSocketIo.authorize({
-		// 		key: "connect.sid",
-		// 		secret: process.env.SESSION_SECRET,
-		// 		store: sessionStore,
-		// 		passport: passport,
-		// 		cookieParser: cookieParser,
-		// 		// success: onAuthorizeSuccess,
-		// 		fail: onAuthorizeFail
-		// 	})
-		// );
+		io.use(
+			passportSocketIo.authorize({
+				key: "connect.sid",
+				secret: process.env.SESSION_SECRET,
+				store: sessionStore,
+				passport: passport,
+				cookieParser: cookieParser,
+				// success: onAuthorizeSuccess,
+				fail: onAuthorizeFail
+			})
+		);
 
-		// function onAuthorizeFail(data: any, message: any, error: any, accept: any) {
-		// 	if (error) throw new Error(message);
-		// 	console.log("failed connection to socket.io:", message);
-		// 	accept(undefined, false);
-		// 	if (error) accept(new Error(message));
-		// }
+		function onAuthorizeFail(data: any, message: any, error: any, accept: any) {
+			if (error) throw new Error(message);
+			console.log("failed connection to socket.io:", message);
+			accept(undefined, false);
+			if (error) accept(new Error(message));
+		}
 
 		io.on("connection", (socket: any) => {
-			// usernames[socket.request.user.Username] = usernames[socket.request.user.Username] || new Set();
-			// if (!usernames[socket.request.user.Username].has(socket.id))
-			// 	usernames[socket.request.user.Username].add(socket.id);
-			// if (socket.request.user && socket.request.user.logged_in) {
-			// }
+			usernames[socket.request.user.Username] = usernames[socket.request.user.Username] || new Set();
+			if (!usernames[socket.request.user.Username].has(socket.id))
+				usernames[socket.request.user.Username].add(socket.id);
+			if (socket.request.user && socket.request.user.logged_in) {
+			}
 			sockets.add(socket);
 
 			Object.keys(dynamicSocketMessages).forEach(message => {

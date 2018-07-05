@@ -51,9 +51,9 @@
         // "dist/@soushians/socket"
         "projects/soushians/socket/src/public_api"
       ],
-      "@soushians/dashboard": [
-        // "dist/@soushians/dashboard"
-        "projects/soushians/dashboard/src/public_api"
+      "@soushians/rule": [
+        // "dist/@soushians/rule"
+        "projects/soushians/rule/src/public_api"
       ],
       "@soushians/test": [
         "dist/soushians/test"
