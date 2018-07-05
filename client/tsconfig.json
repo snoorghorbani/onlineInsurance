@@ -55,6 +55,10 @@
         // "dist/@soushians/rule"
         "projects/soushians/rule/src/public_api"
       ],
+      "@soushians/frontend-authentication": [
+        // "dist/@soushians/frontend-authentication"
+        "projects/soushians/frontend-authentication/src/public_api"
+      ],
       "@soushians/test": [
         "dist/soushians/test"
       ],

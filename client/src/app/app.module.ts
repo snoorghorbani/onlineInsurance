@@ -18,6 +18,7 @@ import { environment } from "../environments/environment";
 
 import { SharedModule } from "@soushians/shared";
 import { NgsAuthenticationModule } from "@soushians/authentication";
+import { NgsFrontendAuthenticationModule } from "@soushians/frontend-authentication";
 import { NgsLayoutModule } from "@soushians/layout";
 import { NgsUserModule, NgsUserRoutingModule } from "@soushians/user";
 import { NgsConfigModule } from "@soushians/config";
@@ -75,6 +76,18 @@ export function mapUserDisplayName(user$) {
 		NgsAuthenticationModule.forRoot({
 			env: environment as any,
 			afterSignoutRedirectTo: "/"
+		}),
+		NgsFrontendAuthenticationModule.forRoot({
+			env: environment as any,
+			afterSignoutRedirectTo: "/",
+			endpoints: {
+				signIn: "http://localhost:3000/api/user/signin",
+				signOut: "http://localhost:3000/api/user/signout",
+				whoAmI: "http://localhost:3000/api/user/account/profile"
+			},
+			forms: {
+				signIn: "5a951cfbfd791632a09b3bc6"
+			}
 		}),
 		NgsConfigModule.forRoot({
 			env: environment as any,
