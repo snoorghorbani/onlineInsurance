@@ -2,27 +2,6 @@
 
     <div fxLayout="row" fxFlex="65" fxLayoutGap="25px">
       <div fxFlex="70">
-        <h3>مشخصات کارگزار</h3>
-        <mat-card>
-          <mat-grid-list class="mat-table mat-row" cols="4" rowHeight="40px">
-            <mat-grid-tile class="th">{{(SellerName$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile class="th">{{(SellerNationalId$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile class="th">{{(SellerRegistrationNo$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile class="th">{{(SellerEconomicNo$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerName$ | async)?.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerNationalId$ | async)?.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerRegistrationNo$ | async)?.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile>{{(SellerEconomicNo$ | async)?.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="4">
-              <!-- <b>{{(SellerAddress$ | async)?.Label}}: </b> -->
-              <span>{{(SellerAddress$ | async)?.DisplayValue}}, </span>
-              <b> {{(SellerZipCode$ | async)?.Label}}: </b>
-              <span>{{(SellerZipCode$ | async)?.DisplayValue}}, </span>
-              <b> {{(SellerPhone$ | async)?.Label}}: </b>
-              <span> {{(SellerPhone$ | async)?.DisplayValue}}</span>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </mat-card>
         <h3>مشخصات بیمه گذار</h3>
         <mat-card>
             <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
@@ -67,6 +46,27 @@
             <mat-grid-tile colspan="1">{{(LastPolicyExpirationDate$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="2" class="th">{{(LastPolicyYearsWithoutIncident$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile colspan="1">{{(LastPolicyYearsWithoutIncident$ | async)?.DisplayValue}}</mat-grid-tile>
+          </mat-grid-list>
+        </mat-card>
+        <h3>مشخصات کارگزار</h3>
+        <mat-card>
+          <mat-grid-list class="mat-table mat-row" cols="4" rowHeight="40px">
+            <mat-grid-tile class="th">{{(SellerName$ | async)?.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{(SellerNationalId$ | async)?.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{(SellerRegistrationNo$ | async)?.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{(SellerEconomicNo$ | async)?.Label}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerName$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerNationalId$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerRegistrationNo$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{(SellerEconomicNo$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="4">
+              <!-- <b>{{(SellerAddress$ | async)?.Label}}: </b> -->
+              <span>{{(SellerAddress$ | async)?.DisplayValue}}, </span>
+              <b> {{(SellerZipCode$ | async)?.Label}}: </b>
+              <span>{{(SellerZipCode$ | async)?.DisplayValue}}, </span>
+              <b> {{(SellerPhone$ | async)?.Label}}: </b>
+              <span> {{(SellerPhone$ | async)?.DisplayValue}}</span>
+            </mat-grid-tile>
           </mat-grid-list>
         </mat-card>
         
