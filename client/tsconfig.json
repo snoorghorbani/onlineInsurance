@@ -55,6 +55,18 @@
         // "dist/@soushians/rule"
         "projects/soushians/rule/src/public_api"
       ],
+      "@soushians/grid": [
+        // "dist/@soushians/rule"
+        "projects/soushians/grid/src/public_api"
+      ],
+      "@soushians/widget": [
+        // "dist/@soushians/rule"
+        "projects/soushians/widget/src/public_api"
+      ],
+      "@soushians/widget-types": [
+        // "dist/@soushians/rule"
+        "projects/soushians/widget-types/src/public_api"
+      ],
       "@soushians/frontend-authentication": [
         // "dist/@soushians/frontend-authentication"
         "projects/soushians/frontend-authentication/src/public_api"

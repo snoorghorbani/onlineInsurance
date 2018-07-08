@@ -14,8 +14,9 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { environment } from "../environments/environment";
-
+/**
+ *  ngs module
+ * */
 import { SharedModule } from "@soushians/shared";
 import { NgsAuthenticationModule } from "@soushians/authentication";
 import { NgsFrontendAuthenticationModule } from "@soushians/frontend-authentication";
@@ -23,9 +24,27 @@ import { NgsLayoutModule } from "@soushians/layout";
 import { NgsUserModule, NgsUserRoutingModule } from "@soushians/user";
 import { NgsConfigModule } from "@soushians/config";
 import { SourceModule } from "@soushians/source";
-import { NgsFormModule } from "@soushians/form";
 import { NgsSocketModule } from "@soushians/socket";
-// import { NgsDiagramModule } from "@soushians/diagram";
+import { NgsDiagramModule } from "@soushians/diagram";
+import { NgsFormModule } from "@soushians/form";
+import { NgsGridModule } from "@soushians/grid";
+import { CommonModule } from "@angular/common";
+import { RuleModule } from "@soushians/rule";
+import { NgsWidgetModule } from "@soushians/widget";
+import { NgsWidgetTypesModule } from "@soushians/widget-types";
+
+/**
+ *  module configs
+ * */
+import { ngsAuthenticationModuleConfig } from "./module-configs/ngs-authentication.module-config";
+import { ngsFrontendAuthenticationModuleConfig } from "./module-configs/ngs-frontend-authentication.module-config";
+import { ngsConfigModuleConfig } from "./module-configs/ngs-config.module-config";
+import { ngsGridModuleConfig } from "./module-configs/ngs-grid.module-config";
+import { ngsSocketModuleConfig } from "./module-configs/ngs-socket.module-config";
+import { ngsRuleModuleConfig } from "./module-configs/ngs-rule.module-config";
+import { NgsWidgetModuleConfig } from "./module-configs/ngs-widget.module-config";
+import { NgsUserModuleConfig } from "./module-configs/ngs-user.module-config";
+import { NgsLayoutModuleConfig } from "./module-configs/ngs-layout.module-config";
 
 import { StaticPageModule } from "./static-page";
 
@@ -38,86 +57,41 @@ import { reducers } from "./app.reducers";
 import { DashboardModule } from "./dashboard";
 import { OiModule } from "./oi/oi.module";
 import { JalaliMomentDateAdapter, JALALI_MOMENT_FORMATS } from "./persian-data-adapter";
-import { RuleModule } from "@soushians/rule";
 import { GwtStepsModule } from "./gwt-steps/gwt-steps.module";
-import { ruleModuleConfig } from "./gwt-steps";
-
-export function responseToUserInfo(resp$) {
-	return resp$.map(function(resp) {
-		return resp.Result;
-	});
-}
-export function mapUserDisplayName(user$) {
-	return user$.map(function(user) {
-		return user.DisplayName;
-	});
-}
 
 @NgModule({
 	imports: [
 		CoreModule,
+		CommonModule,
 		// ServiceWorkerModule.register("/ngsw-worker.js", { enabled: environment.production }),
 		// ServiceWorkerModule.register('/ngsw-worker.js', {enabled: true}),
-		MatSidenavModule,
-		MatToolbarModule,
-		FormsModule,
-		BrowserAnimationsModule,
-		BrowserModule,
-		ReactiveFormsModule,
 		StoreModule.forRoot(reducers),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25
 		}),
 		EffectsModule.forRoot([]),
-		NgsLayoutModule.forRoot(),
-		// NgsLayoutModule.forRoot({
-		// 	signoutAction: SignoutAction as any
-		// }),
-		NgsAuthenticationModule.forRoot({
-			env: environment as any,
-			afterSignoutRedirectTo: "/"
-		}),
-		NgsFrontendAuthenticationModule.forRoot({
-			env: environment as any,
-			afterSignoutRedirectTo: "/",
-			endpoints: {
-				signIn: "http://localhost:3000/api/user/signin",
-				signOut: "http://localhost:3000/api/user/signout",
-				whoAmI: "http://localhost:3000/api/user/account/profile"
-			},
-			forms: {
-				signIn: "5a951cfbfd791632a09b3bc6"
-			}
-		}),
-		NgsConfigModule.forRoot({
-			env: environment as any,
-			dev_api_host: "http://localhost:3000",
-			prod_api_host: "http://185.208.174.92:3000"
-		}),
-		// NgsDiagramModule.forRoot(),
-		NgsUserModule.forRoot({
-			responseToUserInfo,
-			mapUserDisplayName
-		}),
-		NgsUserRoutingModule,
-		NgsSocketModule.forRoot({
-			development_uri: "http://localhost:3000",
-			production_uri: "http://185.208.174.92:3000",
-			env: environment as any
-		}),
-		// NgsBpmnModule.forRoot(),
+
 		SharedModule,
 		SourceModule,
-		StaticPageModule,
+		NgsLayoutModule.forRoot(NgsLayoutModuleConfig),
+		NgsAuthenticationModule.forRoot(ngsAuthenticationModuleConfig),
+		NgsFrontendAuthenticationModule.forRoot(ngsFrontendAuthenticationModuleConfig),
+		NgsConfigModule.forRoot(ngsConfigModuleConfig),
+		NgsDiagramModule.forRoot(),
+		NgsUserModule.forRoot(NgsUserModuleConfig),
+		NgsUserRoutingModule,
+		NgsSocketModule.forRoot(ngsSocketModuleConfig),
+		NgsWidgetModule.forRoot(NgsWidgetModuleConfig),
+		NgsWidgetTypesModule,
 		NgsFormModule.forRoot(),
-		RuleModule.forRoot({
-			stepClasses: ruleModuleConfig.stepClasses,
-			env: environment
-		}),
+		RuleModule.forRoot(ngsRuleModuleConfig),
 		GwtStepsModule,
+		NgsGridModule.forRoot(ngsGridModuleConfig),
+
+		StaticPageModule,
 		AppRoutingModule,
-		MatFormFieldModule,
 		DashboardModule,
+
 		OiModule
 	],
 	declarations: [ AppComponent ],

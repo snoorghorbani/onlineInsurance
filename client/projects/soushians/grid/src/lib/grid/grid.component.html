@@ -1,14 +1,22 @@
-<button mat-raised-button (click)="addItem()">add</button>
-<button mat-raised-button (click)="openConfig()">openConfig</button>
-
 <gridster [options]="options">
+    <div class="actions">
+        <button mat-mini-fab (click)="addItem($event)">
+            <mat-icon>add</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="openConfig($event)" *ngIf="havePermission$ | async">
+            <mat-icon>dashboard</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="saveConfig($event)">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
     <gridster-item [item]="item" *ngFor="let item of grid.items">
         <div class="initializer" fxLayout="row" fxLayoutAlign="space-between center">
             <div fxFlex="nogrow">
                 <button mat-icon-button (click)="removeItem(item)">
                     <mat-icon>delete</mat-icon>
                 </button>
-                <button mat-icon-button (click)="showConfig(item)">
+                <button *ngIf="item.type" mat-icon-button (click)="showConfig(item)">
                     <mat-icon>settings</mat-icon>
                 </button>
             </div>

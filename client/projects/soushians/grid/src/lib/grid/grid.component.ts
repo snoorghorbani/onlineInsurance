@@ -3,6 +3,9 @@ import { GridsterConfig, GridsterItem } from "angular-gridster2";
 import { Store } from "@ngrx/store";
 import { filter } from "rxjs/operators";
 import { MatBottomSheet } from "@angular/material";
+import { Observable } from "rxjs";
+
+import { getFrontendAuthenticationState } from "@soushians/frontend-authentication";
 
 import { AppState } from "../grid.reducer";
 import { GridModel } from "../models";
@@ -11,6 +14,7 @@ import { GridConfigurationService } from "../services/grid-configuration.service
 import { DynamicGridItemConfigComponent } from "../grid-item/dynamic-grid-item-config.directive";
 import { GridConfigComponent } from "../grid-config/grid-config.component";
 import { IGridItemModel } from "../models/gird-item.model";
+import { UpsertGridStartAction } from "../services/api/upsert-grid/upsert-grid.actions";
 
 @Component({
 	selector: "ngs-grid",
@@ -28,6 +32,7 @@ export class GridComponent implements OnInit {
 	@Output() initCallback = new EventEmitter();
 
 	@Input() oid: string;
+	havePermission$: Observable<boolean>;
 	options: GridsterConfig;
 	grid: GridModel;
 	ready = false;
@@ -40,6 +45,7 @@ export class GridComponent implements OnInit {
 	) {
 		this.options = {};
 		this.gridItemTypes = Object.keys(this.configurationService.config$.getValue().types);
+		this.havePermission$ = this.store.select(getFrontendAuthenticationState);
 	}
 
 	static itemChange(item, itemComponent) {
@@ -68,19 +74,34 @@ export class GridComponent implements OnInit {
 		this.grid.items.splice(this.grid.items.indexOf(item), 1);
 	}
 
-	addItem() {
+	addItem(e) {
+		e.stopPropagation();
 		this.grid.items.push({} as IGridItemModel<any>);
 	}
 	emptyCellClick(event: MouseEvent, item: GridsterItem) {
 		console.log("empty cell click", event, item);
 		this.grid.items.push(item as any);
 	}
-	openConfig() {
+	openConfig(e) {
+		e.stopPropagation();
+		e.preventDefault();
 		this.bottomSheet.open(GridConfigComponent, {
 			data: {
 				grid: this.grid
 			}
 		});
+	}
+	saveConfig(e) {
+		e.stopPropagation();
+		e.stopImmediatePropagation();
+		e.preventDefault();
+
+		/**
+		 * TODO: 
+		 * احزار هویت در سمت نود اتحام شود
+		* کانفیگ برای گرفتن شناسه کاربر
+		 */
+		this.store.dispatch(new UpsertGridStartAction(this.grid));
 	}
 	gridItemTypeChanged(item: IGridItemModel<any>) {
 		const bs = this.bottomSheet.open(DynamicGridItemConfigComponent, {
