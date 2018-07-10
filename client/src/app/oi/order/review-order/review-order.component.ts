@@ -45,7 +45,9 @@ export class ReviewOrderComponent implements OnInit {
 
 	constructor(private store: Store<AppState>, private router: Router, private orderService: OrderService) {
 		this.initFormGroup();
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+		this.orderForm$ = this.store
+			.select(state => state.order.newOrder.data as OrderFormModel)
+			.filter(orderForm => orderForm != null);
 		this.SellerAddress$ = this.orderForm$.map(orderForm => orderForm.SellerAddress);
 		this.SellerEconomicNo$ = this.orderForm$.map(orderForm => orderForm.SellerEconomicNo);
 		this.SellerName$ = this.orderForm$.map(orderForm => orderForm.SellerName);

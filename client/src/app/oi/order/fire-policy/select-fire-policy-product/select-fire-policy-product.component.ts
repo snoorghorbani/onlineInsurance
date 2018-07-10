@@ -83,7 +83,10 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 
 	selectPolicy(policy: PolicyCompareModel) {
 		this.selectedPolicy = policy;
-		let ProductId = policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).ProductId;
+		debugger;
+		// TODO: چک کردن پارامترهای تاثیر گذار در قیمت
+		// let ProductId = policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).ProductId;
+		let ProductId = policy.Prices[0].ProductId;
 		this._fillSelectedProduct();
 		this.formGroup.patchValue({ ProductId });
 		this.done.emit(this.orderForm);
@@ -153,6 +156,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		};
 	}
 	_fillSelectedProduct() {
+		debugger;
 		if (!this.selectedPolicy) return null;
 		this.selectedProduct = {
 			Price: this.getPrice(this.selectedPolicy),

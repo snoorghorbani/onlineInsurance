@@ -10,11 +10,11 @@ import { Router } from "@angular/router";
 import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
 import { getAccountInfo } from "@soushians/user";
 import { SigninRequiredAction, SigninContainerComponent } from "@soushians/authentication";
-import { CarDetailComponent } from "../../car-detail/car-detail.component";
-import { SelectProductComponent } from "../../select-product/select-product.component";
 import { InsurerInfoComponent } from "../../insurer-info/insurer-info.component";
 import { SaveOrderStartAction } from "../../services/api";
 import { map } from "rxjs/operators";
+import { HomeDetailComponent } from "../home-detail/home-detail.component";
+import { SelectFirePolicyProductComponent } from "../select-fire-policy-product/select-fire-policy-product.component";
 
 @Component({
 	selector: "order-purchase-fire-policy",
@@ -31,8 +31,8 @@ import { map } from "rxjs/operators";
 })
 export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
 	@ViewChild("stepper") stepper: MatStepper;
-	@ViewChild(CarDetailComponent) carDetailComponent: CarDetailComponent;
-	@ViewChild(SelectProductComponent) selectProductComponent: SelectProductComponent;
+	@ViewChild(HomeDetailComponent) carDetailComponent: HomeDetailComponent;
+	@ViewChild(SelectFirePolicyProductComponent) selectProductComponent: SelectFirePolicyProductComponent;
 	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn$: Observable<boolean>;

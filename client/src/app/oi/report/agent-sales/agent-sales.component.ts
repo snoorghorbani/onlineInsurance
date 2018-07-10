@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ReportService } from "../report.service";
+import { ReportService } from "../services/report.service";
 import { SalesReportFilter } from "../report.models";
+import { Observable } from "rxjs";
 
 @Component({
 	selector: "app-agent-sales",
@@ -19,14 +20,12 @@ export class AgentSalesComponent implements OnInit {
 		"BrokerCommission"
 	];
 
-	insuranceCompanies: any[];
-	agents: any[];
-	dataSource: any[];
+	insuranceCompanies$: Observable<any[]>;
+	agents$: Observable<any[]>;
+	dataSource$: Observable<any[]>;
 	filter: SalesReportFilter = new SalesReportFilter();
 
-	constructor(private reportService: ReportService) {
-		this.dataSource = [];
-	}
+	constructor(private reportService: ReportService) {}
 
 	ngOnInit() {
 		this.getInsuranceCompanies();
@@ -35,17 +34,20 @@ export class AgentSalesComponent implements OnInit {
 	}
 
 	getInsuranceCompanies(): void {
-		this.reportService.getInsuranceCompanies().subscribe(data => (this.insuranceCompanies = data));
+		this.insuranceCompanies$ = this.reportService.getInsuranceCompanies();
+		this.insuranceCompanies$.subscribe(a => {
+			debugger;
+		});
 	}
 
 	getAgents(): void {
-		this.reportService.getAgents().subscribe(data => (this.agents = data));
+		this.agents$ = this.reportService.getAgents();
+		this.agents$.subscribe(a => {
+			debugger;
+		});
 	}
 
 	getAgentSalesReport(): void {
-		this.reportService.getAgentSalesReport(this.filter).subscribe(data => {
-			debugger;
-			return (this.dataSource = data.Result.Items);
-		});
+		this.dataSource$ = this.reportService.getAgentSalesReport(this.filter);
 	}
 }

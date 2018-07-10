@@ -109,17 +109,14 @@ const type2: FirePolicyOrderFormModel = {
 		Options: [
 			{
 				DisplayValue: "آجری",
-				ExtensionData: {},
 				Value: 1
 			},
 			{
 				DisplayValue: "فلزی",
-				ExtensionData: {},
 				Value: 2
 			},
 			{
 				DisplayValue: "بتنی",
-				ExtensionData: {},
 				Value: 3
 			}
 		],
@@ -136,17 +133,14 @@ const type2: FirePolicyOrderFormModel = {
 		Options: [
 			{
 				DisplayValue: "یک واحد در آپارتمان",
-				ExtensionData: {},
 				Value: 1
 			},
 			{
 				DisplayValue: "یک ساختمان ویلایی",
-				ExtensionData: {},
 				Value: 2
 			},
 			{
 				DisplayValue: "آپارتمان یا مجتمع",
-				ExtensionData: {},
 				Value: 3
 			}
 		],

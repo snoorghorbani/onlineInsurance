@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
+import { env } from "../module-configs/env";
+
 import { PolicyModule } from "./policy";
 import { OrderModule } from "./order";
 import { ResultInterceptor } from "./result.interceptor";
@@ -22,7 +24,9 @@ import { ReportModule } from "./report/report.module";
 			env: environment
 		}),
 		GeoBoundaryModule.forRoot(),
-		ReportModule,
+		ReportModule.forRoot({
+			env
+		}),
 		OiCommonModule,
 		RoutingModule
 	],

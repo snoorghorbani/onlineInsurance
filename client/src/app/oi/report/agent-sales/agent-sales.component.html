@@ -1,64 +1,84 @@
-<label>InsuranceCompanyId</label>
-<select [(ngModel)]="filter.InsuranceCompanyId">
-  <option *ngFor="let ic of insuranceCompanies" [ngValue]="ic.Id">{{ic.Name}}</option>
-</select>
+<div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center start">
+  <mat-card fxFlex="30" fxLayout="row wrap" fxLayoutGap="25px">
 
-<label>AgentId</label>
-<select [(ngModel)]="filter.AgentId">
-  <option *ngFor="let a of agents" [ngValue]="a.Id">{{a.Name}}</option>
-</select>
+    <mat-form-field fxFlex> 
+      <mat-select placeholder="شرکت بیمه" [(ngModel)]="filter.InsuranceCompanyId">
+        <mat-option *ngFor="let ic of insuranceCompanies$ | async" [value]="ic.Id">
+          {{ic.Name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field fxFlex>
+      <mat-select placeholder="نماینده" [(ngModel)]="filter.AgentId">
+        <mat-option *ngFor="let agent of agents$ | async" [value]="agent.Id">
+          {{agent.Name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="fit" fxFlex>
+        <input matInput [matDatepicker]="_datepicker" placeholder="از تاریخ" [(ngModel)]="filter.DateRange.From">
+        <mat-datepicker-toggle matSuffix [for]="_datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #_datepicker></mat-datepicker>
+    </mat-form-field>
 
-<label>From</label>
-<input type="date" [(ngModel)]="filter.DateRange.From" />
+    <mat-form-field class="fit" fxFlex>
+        <input matInput [matDatepicker]="to_datepicker" placeholder="تا تاریخ" [(ngModel)]="filter.DateRange.To">
+        <mat-datepicker-toggle matSuffix [for]="to_datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #to_datepicker></mat-datepicker>
+    </mat-form-field>
 
-<label>To</label>
-<input type="date" [(ngModel)]="filter.DateRange.To" />
+    <button fxFlex="100" color="primary" mat-raised-button (click)="getAgentSalesReport()">جست و جو</button>
 
-<button (click)="getAgentSalesReport()">Search</button>
+  </mat-card>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <mat-card fxFlex="grow">
+    <table mat-table [dataSource]="dataSource$ | async">
+      
+      <ng-container matColumnDef="InsuranceCompany">
+        <th mat-header-cell *matHeaderCellDef> شرکت بیمه </th>
+        <td mat-cell *matCellDef="let data"> {{data.InsuranceCompany}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="Customer">
+      <th mat-header-cell *matHeaderCellDef> مشتری </th>
+      <td mat-cell *matCellDef="let data"> {{data.Customer}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Broker">
+      <th mat-header-cell *matHeaderCellDef> بازاریاب </th>
+      <td mat-cell *matCellDef="let data"> {{data.Broker}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Agent">
+      <th mat-header-cell *matHeaderCellDef> نماینده </th>
+      <td mat-cell *matCellDef="let data"> {{data.Agent}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef> توضیحات </th>
+      <td mat-cell *matCellDef="let data"> {{data.Description}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="AmountPaid">
+      <th mat-header-cell *matHeaderCellDef> مبلغ پرداخت شده </th>
+      <td mat-cell *matCellDef="let data"> {{data.AmountPaid.DisplayValue}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="AgentCommission">
+      <th mat-header-cell *matHeaderCellDef>درصد نماینده </th>
+      <td mat-cell *matCellDef="let data"> {{data.AgentCommission.DisplayValue}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="BrokerCommission">
+      <th mat-header-cell *matHeaderCellDef>درصد بازاریاب  </th>
+      <td mat-cell *matCellDef="let data"> {{data.BrokerCommission.DisplayValue}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="InsuranceCompany">
-    <th mat-header-cell *matHeaderCellDef> InsuranceCompany </th>
-    <td mat-cell *matCellDef="let data"> {{data.InsuranceCompany}} </td>
-  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
-  <ng-container matColumnDef="Customer">
-    <th mat-header-cell *matHeaderCellDef> Customer </th>
-    <td mat-cell *matCellDef="let data"> {{data.Customer}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Broker">
-    <th mat-header-cell *matHeaderCellDef> Broker </th>
-    <td mat-cell *matCellDef="let data"> {{data.Broker}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Agent">
-    <th mat-header-cell *matHeaderCellDef> Agent </th>
-    <td mat-cell *matCellDef="let data"> {{data.Agent}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Description">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let data"> {{data.Description}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="AmountPaid">
-    <th mat-header-cell *matHeaderCellDef> AmountPaid </th>
-    <td mat-cell *matCellDef="let data"> {{data.AmountPaid.DisplayValue}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="AgentCommission">
-    <th mat-header-cell *matHeaderCellDef> AgentCommission </th>
-    <td mat-cell *matCellDef="let data"> {{data.AgentCommission.DisplayValue}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="BrokerCommission">
-    <th mat-header-cell *matHeaderCellDef> BrokerCommission </th>
-    <td mat-cell *matCellDef="let data"> {{data.BrokerCommission.DisplayValue}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
+  </mat-card>
+</div>
