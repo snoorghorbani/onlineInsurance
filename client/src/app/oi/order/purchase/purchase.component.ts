@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { MatStepper, MatBottomSheetRef } from "@angular/material";
 import { Observable } from "rxjs/internal/Observable";
-import { OrderFormModel } from "../models";
+import { OrderFormModel, OrderFormType } from "../models";
 import { AppState } from "../order.reducers";
 import { Store } from "@ngrx/store";
 import { trigger, transition, animate, style, state } from "@angular/animations";
@@ -60,7 +60,9 @@ export class PurchaseComponent implements OnInit, OnDestroy {
 		);
 	}
 	ngOnInit() {
-		this.orderForm$ = this.store.select(state => state.order.newOrder.data).filter(orderForm => orderForm != null);
+		this.orderForm$ = this.store
+			.select(state => state.order.newOrder.data as OrderFormModel)
+			.filter(orderForm => orderForm != null);
 		this.store.dispatch(new FullscreenAction());
 	}
 	ngOnDestroy() {

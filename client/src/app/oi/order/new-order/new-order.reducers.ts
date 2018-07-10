@@ -1,10 +1,10 @@
-import { OrderFormModel } from "../models";
+import { OrderFormModel, OrderFormType } from "../models";
 import { FieldOptionModel, FieldModel } from "../models/field.model";
 import { GET_CAR_MODELS_OF_BRAND_ACTION_TYPES, GetCarModelsOfBrandActions } from "../../policy/services/api";
 import { NEW_ORDER_FORM_ACTION_TYPES, NewOrderFormActions } from "./new-order.actions";
 
 export interface State {
-	data: OrderFormModel;
+	data: OrderFormType;
 	carModels: FieldOptionModel[];
 }
 export const initialState: State = {
@@ -14,7 +14,7 @@ export const initialState: State = {
 export function reducer(state = initialState, action: GetCarModelsOfBrandActions | NewOrderFormActions): State {
 	switch (action.type) {
 		case NEW_ORDER_FORM_ACTION_TYPES.UPDATE: {
-			var order = setDisplayValue(action.payload);
+			var order = setDisplayValue(action.payload as OrderFormModel);
 			return {
 				...state,
 				data: { ...order }

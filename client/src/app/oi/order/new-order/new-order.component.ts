@@ -43,7 +43,7 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 		});
 
 		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data)
+			.select(state => state.order.newOrder.data as OrderFormModel)
 			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);

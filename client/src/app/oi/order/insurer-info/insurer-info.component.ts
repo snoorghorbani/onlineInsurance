@@ -69,7 +69,7 @@ export class InsurerInfoComponent implements OnInit {
 		// 	debugger;
 		// });
 		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data)
+			.select(state => state.order.newOrder.data as OrderFormModel)
 			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 		this.PolicyholderFirstName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFirstName);

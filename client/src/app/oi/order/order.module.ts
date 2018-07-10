@@ -65,6 +65,11 @@ import { FieldSelectComponent } from "./field-select/field-select.component";
 import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.component";
 import { RootEffects } from "./root/root.effects";
 import { OrderPanelComponent } from "./order-panel/order-panel.component";
+import { AboutThirdPartyPolicyComponent } from "./about-third-party-policy/about-third-party-policy.component";
+import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
+import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
+import { FieldInputComponent } from "./field-input/field-input.component";
+import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 
 @NgModule({
 	imports: [
@@ -108,6 +113,8 @@ import { OrderPanelComponent } from "./order-panel/order-panel.component";
 		PoliciesCompareItemComponent,
 		InsurerInfoComponent,
 		PurchaseComponent,
+		PurchaseFirePolicyComponent,
+		HomeDetailComponent,
 		ReviewOrderComponent,
 		MyOrdersComponent,
 		ViewOrderComponent,
@@ -115,10 +122,13 @@ import { OrderPanelComponent } from "./order-panel/order-panel.component";
 		RedirectToBankComponent,
 		DestroyableComponent,
 		FieldSelectComponent,
+		FieldInputComponent,
+		SelectFirePolicyProductComponent,
 		FieldDatepickerComponent,
-		OrderPanelComponent
+		OrderPanelComponent,
+		AboutThirdPartyPolicyComponent
 	],
-	exports: [ NewOrderComponent ]
+	exports: [ AboutThirdPartyPolicyComponent ]
 })
 export class OrderModule {
 	static forRoot(config?: OrderModuleConfig): ModuleWithProviders {

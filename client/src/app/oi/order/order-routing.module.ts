@@ -10,6 +10,7 @@ import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { ViewOrderComponent } from "./view-order/view-order.component";
 import { CartableComponent } from "./cartable/cartable.component";
 import { OrderPanelComponent } from "./order-panel/order-panel.component";
+import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
 
 const routes: Routes = [
 	{
@@ -30,8 +31,12 @@ const routes: Routes = [
 				component: InsurerInfoComponent
 			},
 			{
-				path: "purchase",
+				path: "purchase/third-party-policy",
 				component: PurchaseComponent
+			},
+			{
+				path: "purchase/fire-policy",
+				component: PurchaseFirePolicyComponent
 			},
 			{
 				path: "my-orders",

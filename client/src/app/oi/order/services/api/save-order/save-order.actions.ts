@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 
 import { SaveOrderApiModel } from "./save-order.model";
-import { OrderFormModel } from "../../../models";
+import { OrderFormType } from "../../../models";
 
 export const enum SAVE_ORDER_ACTION_TYPES {
 	START = "[SAVE_ORDER][API][SaveOrder] start",
@@ -11,11 +11,11 @@ export const enum SAVE_ORDER_ACTION_TYPES {
 
 export class SaveOrderStartAction implements Action {
 	readonly type = SAVE_ORDER_ACTION_TYPES.START;
-	constructor(public payload: OrderFormModel) {}
+	constructor(public payload: OrderFormType) {}
 }
 export class SaveOrderSucceedAction implements Action {
 	readonly type = SAVE_ORDER_ACTION_TYPES.SUCCEED;
-	constructor(public payload: OrderFormModel) {}
+	constructor(public payload: OrderFormType) {}
 }
 export class SaveOrderFailedAction implements Action {
 	readonly type = SAVE_ORDER_ACTION_TYPES.FAILED;

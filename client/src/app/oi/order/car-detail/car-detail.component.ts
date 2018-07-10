@@ -86,7 +86,7 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	}
 	_select_orderForm() {
 		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data)
+			.select(state => state.order.newOrder.data as OrderFormModel)
 			.pipe(takeUntil(this.unsubscribe), filter(orderForm => orderForm != null), distinctUntilChanged());
 	}
 	_init_properties() {

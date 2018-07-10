@@ -3,7 +3,7 @@ import { Action } from "@ngrx/store";
 import { ComparePoliciesApiModel } from "./compare-policies.model";
 import { PolicyModel } from "../../../models/policy.model";
 import { PolicyCompareModel } from "../../../models/policy-compare.model";
-import { OrderFormModel } from "../../../../order/models";
+import { OrderFormType } from "../../../../order/models";
 
 export const enum COMPARE_POLICIES_ACTION_TYPES {
 	START = "[COMPARE_POLICIES][API][ComparePolicies] start",
@@ -13,7 +13,7 @@ export const enum COMPARE_POLICIES_ACTION_TYPES {
 
 export class ComparePoliciesStartAction implements Action {
 	readonly type = COMPARE_POLICIES_ACTION_TYPES.START;
-	constructor(public payload: OrderFormModel) {}
+	constructor(public payload: OrderFormType) {}
 }
 export class ComparePoliciesSucceedAction implements Action {
 	readonly type = COMPARE_POLICIES_ACTION_TYPES.SUCCEED;

@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 
 import { GetNewOrderFormApiModel } from "./get-new-order-form.model";
-import { OrderFormModel } from "../../../models/order-form.model";
+import { OrderFormType } from "../../../models";
 
 export const enum GET_NEW_ORDER_FORM_ACTION_TYPES {
 	START = "[GET_NEW_ORDER_FORM][API][GetNewOrderForm] start",
@@ -15,7 +15,7 @@ export class GetNewOrderFormStartAction implements Action {
 }
 export class GetNewOrderFormSucceedAction implements Action {
 	readonly type = GET_NEW_ORDER_FORM_ACTION_TYPES.SUCCEED;
-	constructor(public payload: OrderFormModel) {}
+	constructor(public payload: OrderFormType) {}
 }
 export class GetNewOrderFormFailedAction implements Action {
 	readonly type = GET_NEW_ORDER_FORM_ACTION_TYPES.FAILED;

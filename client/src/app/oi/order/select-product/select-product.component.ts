@@ -58,7 +58,7 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 		this.store.select(state => state.order.carDetail.data).subscribe(policies => this.policies$.next(policies));
 
 		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data)
+			.select(state => state.order.newOrder.data as OrderFormModel)
 			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 		this.PolicyPushesheMali$ = this.orderForm$.pipe(
