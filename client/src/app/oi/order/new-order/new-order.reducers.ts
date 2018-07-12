@@ -37,11 +37,13 @@ const setDisplayValue = function(order: OrderFormModel): OrderFormModel {
 	for (const key in order) {
 		if (order.hasOwnProperty(key)) {
 			const field: FieldModel = order[key];
-			if (field.Options) {
-				const selectedOption = field.Options.find(option => option.Value == field.Value);
-				if (selectedOption) field.DisplayValue = selectedOption.DisplayValue || selectedOption.DisplayName;
-			} else {
-				order[key].DisplayValue = order[key].DisplayValue || order[key].Value;
+			if (field != null) {
+				if (field.Options) {
+					const selectedOption = field.Options.find(option => option.Value == field.Value);
+					if (selectedOption) field.DisplayValue = selectedOption.DisplayValue || selectedOption.DisplayName;
+				} else {
+					order[key].DisplayValue = order[key].DisplayValue || order[key].Value;
+				}
 			}
 		}
 	}

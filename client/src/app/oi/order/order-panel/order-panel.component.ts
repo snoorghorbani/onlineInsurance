@@ -11,7 +11,7 @@ import { ApproveOrderStartAction, RejectOrderStartAction } from "../services/api
 import { OrderService, CartableService } from "../services";
 import { FieldModel } from "../models/field.model";
 import { map, switchMap } from "rxjs/operators";
-import { FeatureState } from "../order.reducers";
+import { AppState } from "../order.reducers";
 import { ChangeLayout } from "@soushians/layout";
 import { ActivatedRoute } from "@angular/router";
 
@@ -33,7 +33,7 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild("formRef") formEl: FormViewComponent;
 
 	constructor(
-		private store: Store<FeatureState>,
+		private store: Store<AppState>,
 		private service: OrderService,
 		private router: ActivatedRoute,
 		private cartableService: CartableService,
@@ -42,6 +42,10 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngOnInit() {
 		this._select_order();
 		this._observe_on_order();
+		this.store.select(s => s.order.orderPanel.data).subscribe(order => {
+			debugger;
+			this.order$.next(order);
+		});
 	}
 	ngAfterViewInit() {
 		this.store.dispatch(new ChangeLayout("with-margin"));
@@ -72,6 +76,7 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 	_observe_on_order() {
 		this.order$.subscribe(order => {
+			debugger;
 			this.readonlyFields = this.cartableService.getReadonlyField(order);
 			this.activeOrderEditableField = this.cartableService.getEditableField(order);
 			this.orderEditableFieldSchema = this.cartableService.getEditableFieldSchema(this.activeOrderEditableField);

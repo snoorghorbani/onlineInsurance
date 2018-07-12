@@ -70,6 +70,7 @@ import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/
 import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
 import { FieldInputComponent } from "./field-input/field-input.component";
 import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
+import { OrderPanelEffects } from "./order-panel/order-panel.effects";
 
 @NgModule({
 	imports: [
@@ -152,7 +153,8 @@ export class OrderModule {
 			PlaceOrderApiEffects,
 			GetMyCartableApiEffects,
 			ApproveOrderApiEffects,
-			RejectOrderApiEffects
+			RejectOrderApiEffects,
+			OrderPanelEffects
 		]),
 		OrderRoutingModule
 	],

@@ -20,8 +20,13 @@ export class ApproveOrderApiEffects {
 		.ofType(APPROVE_ORDER_ACTION_TYPES.START)
 		.pipe(
 			map(action => action.payload),
-			switchMap(payload => this.service.ApproveOrder(payload)),
-			map(res => new ApproveOrderSucceedAction(res)),
-			catchError(err => Observable.of(new ApproveOrderFailedAction(err)))
+			switchMap(payload =>
+				this.service
+					.ApproveOrder(payload)
+					.pipe(
+						map(res => new ApproveOrderSucceedAction(res)),
+						catchError(err => Observable.of(new ApproveOrderFailedAction(err)))
+					)
+			)
 		);
 }

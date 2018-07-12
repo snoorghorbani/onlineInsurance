@@ -14,6 +14,7 @@ export const initialState: State = {
 export function reducer(state = initialState, action: GetCarModelsOfBrandActions | NewOrderFormActions): State {
 	switch (action.type) {
 		case NEW_ORDER_FORM_ACTION_TYPES.UPDATE: {
+			debugger;
 			var order = setDisplayValue(action.payload);
 			return {
 				...state,
