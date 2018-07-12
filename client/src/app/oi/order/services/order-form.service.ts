@@ -33,10 +33,10 @@ export class OrderFormService {
 			.map((response: any) => response.Result as OrderFormModel);
 	}
 	ApproveOrder(orderForm: OrderFormModel): Observable<OrderFormModel> {
-		return of(approveOrder);
-		// return this.http
-		// 	.post(`${this.configurationService.config.env.server}/order/ApproveOrder`, orderForm)
-		// 	.map((response: any) => response.Result as OrderFormModel);
+		// return of(approveOrder);
+		return this.http
+			.post(`${this.configurationService.config.env.server}/order/ApproveOrder`, orderForm)
+			.map((response: any) => response.Result as OrderFormModel);
 	}
 	RejectOrder(orderForm: OrderFormModel): Observable<OrderFormModel> {
 		return this.http

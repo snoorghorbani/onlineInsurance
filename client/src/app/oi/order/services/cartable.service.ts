@@ -62,6 +62,9 @@ export class CartableService {
 		return schema;
 	}
 	getInputType(field: FieldModel): any {
+		debugger;
+		if (field.Name.endsWith("Date")) return "date";
+		if (field.Name.endsWith("Image")) return "file";
 		if (field.Options) return "select";
 		if (field.Value === false || field.Value === true) return "checkbox";
 
