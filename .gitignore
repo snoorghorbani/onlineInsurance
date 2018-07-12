@@ -33,7 +33,7 @@ testem.log
 
 #Build
 public/css/main.css
-
+./client/dist
 
 # API keys and secrets
 #.env
@@ -73,3 +73,6 @@ client/dist
 Thumbs.db
 /.vs/MyShatelUI/v15
 .vs/slnx.sqlite
+
+# starter libraries
+./client/projects/soushians

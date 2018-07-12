@@ -8,7 +8,7 @@
                 <button mat-raised-button color="primary" (click)="rejectOrder(formRef.formGroup.value)">
                     رد
                 </button>
-                <button mat-raised-button color="primary" (click)="approveOrder(formRef.formGroup.value)">
+                <button mat-raised-button *ngIf="flowIsActive$ | async" color="primary" (click)="approveOrder(formRef.formGroup.value)">
                     تایید
                 </button>
             </div>

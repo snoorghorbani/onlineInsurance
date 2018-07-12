@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Observable";
 import { of } from "rxjs";
 
 import { OrderFormModel } from "../models/order-form.model";
-import { GetNewOrderForm, SaveOrderForm } from "./mock";
 import { OrderConfigurationService } from "./order-configuration.service";
 import { FirePolicyOrderFormModel } from "../models";
 import { share } from "rxjs/operators";

@@ -33,8 +33,8 @@
         "dist/@soushians/shared"
       ],
       "@soushians/authentication": [
-        "projects/soushians/authentication/src/public_api"
         // "dist/@soushians/authentication"
+        "projects/soushians/authentication/src/public_api"
       ],
       "@soushians/form": [
         // "dist/@soushians/form"

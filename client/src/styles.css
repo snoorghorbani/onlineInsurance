@@ -407,3 +407,28 @@ mat-form-field.edit .mat-form-field-wrapper {
 mat-form-field.fit {
 	width: 100%;
 }
+
+/**
+* table
+*/
+th.mat-header-cell {
+	text-align: right !important;
+}
+/**
+* end
+*/
+
+/**
+* material tab component
+*/
+
+mat-tab-group {
+	direction: ltr;
+}
+/* .mat-tab-body-wrapper {
+	direction: rtl;
+} */
+
+/**
+* end
+*/

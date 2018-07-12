@@ -22,7 +22,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	unsubscribe = new Subject<void>();
-
+	flowIsActive$: Observable<boolean>;
 	displayedColumns: string[] = [ "Summary", "WorkflowState" ];
 
 	order$ = new BehaviorSubject<OrderFormModel>(new OrderFormModel());
@@ -46,6 +46,7 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 			debugger;
 			this.order$.next(order);
 		});
+		this._set_flow_finished();
 	}
 	ngAfterViewInit() {
 		this.store.dispatch(new ChangeLayout("with-margin"));
@@ -81,5 +82,8 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.activeOrderEditableField = this.cartableService.getEditableField(order);
 			this.orderEditableFieldSchema = this.cartableService.getEditableFieldSchema(this.activeOrderEditableField);
 		});
+	}
+	_set_flow_finished() {
+		this.flowIsActive$ = this.order$.pipe(map(o => o.WorkflowState.Status != 3));
 	}
 }

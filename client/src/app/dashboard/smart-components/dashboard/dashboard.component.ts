@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
 
-import { EnableComfortableModeAction, DisableComfortableModeAction } from "@soushians/layout";
+import { EnableComfortableModeAction, DisableComfortableModeAction, ChangeLayout } from "@soushians/layout";
 
 import { AppState } from "../../../app.states";
 
@@ -18,5 +18,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	ngOnInit() {}
 	ngOnDestroy() {
 		this.store.dispatch(new DisableComfortableModeAction());
+		this.store.dispatch(new ChangeLayout("without-margin"));
 	}
 }

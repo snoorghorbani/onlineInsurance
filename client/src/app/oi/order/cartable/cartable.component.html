@@ -1,30 +1,32 @@
 <div fxLayout="row wrap" fxLayoutGap="25px" fxLayoutAlign="center start">
-    <table fxFlex="55" mat-table [dataSource]="orders$ | async" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
+    <mat-card fxFlex="55" >
+        <table mat-table [dataSource]="orders$ | async">
+            <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="Summary">
-        <th mat-header-cell *matHeaderCellDef> توضیحات </th>
-        <td mat-cell *matCellDef="let element"> {{element.Summary}} </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="WorkflowState">
-        <th mat-header-cell *matHeaderCellDef> وضعیت </th>
-        <td mat-cell *matCellDef="let element"> {{element.WorkflowState}} </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="Actions">
-        <th mat-header-cell *matHeaderCellDef>  </th>
-        <td mat-cell *matCellDef="let element"> 
-            <button mat-icon-button [routerLink]="['/order/panel' , element.Id]">
-                <mat-icon>subdirectory_arrow_left</mat-icon>
-            </button>    
-        </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+            
+            <!-- Position Column -->
+            <ng-container matColumnDef="Summary">
+                <th mat-header-cell *matHeaderCellDef> توضیحات </th>
+                <td mat-cell *matCellDef="let element"> {{element.Summary}} </td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="WorkflowState">
+                <th mat-header-cell *matHeaderCellDef> وضعیت </th>
+                <td mat-cell *matCellDef="let element"> {{element.WorkflowState}} </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="Actions">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button mat-icon-button [routerLink]="['/order/panel' , element.Id]">
+                        <mat-icon>subdirectory_arrow_left</mat-icon>
+                    </button>    
+                </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-card>
 </div>

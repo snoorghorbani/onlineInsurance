@@ -1,8 +1,9 @@
 :host {
 	height: 70vh;
 }
-#bg {
+.bg {
 	height: 70vh;
+	direction: rtl;
 	/* background-image: url("/assets/images/car.jpg"); */
 }
 .bimeh {
