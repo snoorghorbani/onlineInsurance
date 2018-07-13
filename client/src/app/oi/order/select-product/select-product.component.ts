@@ -33,22 +33,22 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	@Input() mode: "view" | "edit" = "view";
 	@Input() boxMode: "disable" | "loading" = "loading";
+	price: PriceModel;
+	logos: { [name: string]: string };
 	policies$: BehaviorSubject<PolicyCompareModel[]> = new BehaviorSubject<PolicyCompareModel[]>([]);
 	formGroup: FormGroup;
-	activePolicy: PolicyCompareModel;
-	price: PriceModel;
-	PolicyTermDisplayValue: string;
-	logos: { [name: string]: string };
 	orderForm: OrderFormModel;
 	orderForm$: Observable<OrderFormModel>;
-	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyTerm$: Observable<FieldModel>;
+	activePolicy: PolicyCompareModel;
 	selectedPolicy: PolicyCompareModel;
 	selectedProduct: any;
+	PolicyPushesheMali$: Observable<FieldModel>;
 	SelectedPolicyTerm$: Observable<string>;
-	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
+	companyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
+	PolicyTermDisplayValue: string;
 	constructor(private store: Store<AppState>) {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
@@ -198,8 +198,14 @@ export class SelectProductComponent implements OnInit, OnDestroy {
 	}
 	_createFormGroup() {
 		this.formGroup = new FormGroup({
-			PolicyPushesheMali: new FormControl(""),
-			PolicyTerm: new FormControl(""),
+			EarthquakeExtraCoverage: new FormControl(false),
+			PipeExplotionExtraCoverage: new FormControl(false),
+			EarthSummitExtraCoverage: new FormControl(false),
+			AirplanFallExtraCoverage: new FormControl(false),
+			StormExtraCoverage: new FormControl(false),
+			FloodExtraCoverage: new FormControl(false),
+			HarzExtraCoverage: new FormControl(false),
+			SnowRainExtraCoverage: new FormControl(false),
 			ProductId: new FormControl("")
 		});
 	}

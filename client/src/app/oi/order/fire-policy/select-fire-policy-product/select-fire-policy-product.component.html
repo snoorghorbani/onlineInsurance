@@ -3,30 +3,34 @@
     <mat-card>
       <h3>بیمه نامه خود را انتخاب نمایید.</h3>
       <mat-card-content fxLayout="row wrap" fxLayoutGap="25px">
-        <!-- <div fxFlex="40">
-          <app-field-select
-          [formGroup]="formGroup"
-          [placeholder]="(PolicyPushesheMali$ | async)?.Label"
-          controlName="PolicyPushesheMali"
-          [description]="(PolicyPushesheMali$ | async)?.Description"
-          [hint]="(PolicyPushesheMali$ | async)?.Description"
-          [mode]="mode"
-          [tooltip]="(PolicyPushesheMali$ | async)?.Description"
-          [options]="(PolicyPushesheMali$ | async)?.Options"
-          ></app-field-select>
+        <div fxFlex="100">
+            <mat-form-field >
+                  <mat-chip-list #chipList>
+                    <mat-chip
+                      *ngFor="let fruit of selectedadditionalCoverage"
+                      selectable="true"
+                      removable="true"
+                      (removed)="remove(fruit)">
+                      {{fruit}}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input
+                      placeholder="New fruit..."
+                      #additionalCoverageInput
+                      [formControl]="additionalCoverageFormControl"
+                      [matAutocomplete]="auto"
+                      [matChipInputFor]="chipList"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <!-- [matChipInputSeparatorKeyCodes]="separatorKeysCodes" -->
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let fruit of filteredCoverage | async" [value]="fruit">
+                      {{fruit}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>
         </div>
-        <div fxFlex="40">
-          <app-field-select
-          [formGroup]="formGroup"
-          [placeholder]="(PolicyTerm$ | async)?.Label"
-          controlName="PolicyTerm"
-          [description]="(PolicyTerm$ | async)?.Description"
-          [hint]="(PolicyTerm$ | async)?.Description"
-          [mode]="mode"
-          [tooltip]="(PolicyTerm$ | async)?.Description"
-          [options]="(PolicyTerm$ | async)?.Options"
-          ></app-field-select>
-        </div> -->
         <div *ngIf="selectedProduct" fxFlex="100" fxLayout="row wrap" fxLayoutGap="25px">
           <div fxFlex="40">
             قیمت

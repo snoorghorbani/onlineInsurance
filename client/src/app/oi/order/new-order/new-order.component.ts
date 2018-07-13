@@ -30,7 +30,7 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 	CarModel$: Observable<FieldModel>;
 	CarModelOptions$: Observable<FieldOptionModel[]>;
 	CarProductionYear$: Observable<FieldModel>;
-	CarYearsWithoutIncident$: Observable<FieldModel>;
+	NoDamageRecord$: Observable<FieldModel>;
 	LastPolicyExpirationDate$: Observable<FieldModel>;
 
 	constructor(private store: Store<AppState>, private router: Router) {
@@ -38,7 +38,7 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 			CarBrand: new FormControl(""),
 			CarModel: new FormControl(""),
 			CarProductionYear: new FormControl(""),
-			CarYearsWithoutIncident: new FormControl(""),
+			NoDamageRecord: new FormControl(""),
 			LastPolicyExpirationDate: new FormControl("")
 		});
 
@@ -53,7 +53,7 @@ export class NewOrderComponent implements OnInit, OnDestroy {
 			.subscribe(CarBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand: CarBrand })));
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
 		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
-		this.CarYearsWithoutIncident$ = this.orderForm$.map(orderForm => orderForm.CarYearsWithoutIncident);
+		this.NoDamageRecord$ = this.orderForm$.map(orderForm => orderForm.NoDamageRecord);
 		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
 	}
 

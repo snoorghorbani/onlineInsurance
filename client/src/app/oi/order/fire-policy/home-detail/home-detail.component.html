@@ -5,58 +5,58 @@
       <div [formGroup]="formGroup">
         <app-field-select
           [formGroup]="formGroup"
-          [placeholder]="(noemelk$ | async)?.Label"
-          controlName="noemelk"
-          [description]="(noemelk$ | async)?.Description"
-          [hint]="(noemelk$ | async)?.Description"
+          [placeholder]="(EstateType$ | async)?.Label"
+          controlName="EstateType"
+          [description]="(EstateType$ | async)?.Description"
+          [hint]="(EstateType$ | async)?.Description"
           [mode]="mode"
-          [tooltip]="(noemelk$ | async)?.Description"
-          [options]="(noemelk$ | async)?.Options"
+          [tooltip]="(EstateType$ | async)?.Description"
+          [options]="(EstateType$ | async)?.Options"
         ></app-field-select>
 
         <app-field-input
           [formGroup]="formGroup"
-          [placeholder]="(tedadvahed$ | async)?.Label"
-          controlName="tedadvahed"
-          [description]="(tedadvahed$ | async)?.Description"
-          [hint]="(tedadvahed$ | async)?.Description"
+          [placeholder]="(Units$ | async)?.Label"
+          controlName="Units"
+          [description]="(Units$ | async)?.Description"
+          [hint]="(Units$ | async)?.Description"
           [mode]="mode"
-          [tooltip]="(tedadvahed$ | async)?.Description"
-          [options]="(tedadvahed$ | async)?.Options"
+          [tooltip]="(Units$ | async)?.Description"
+          [options]="(Units$ | async)?.Options"
         ></app-field-input>
         
         <app-field-select
         [formGroup]="formGroup"
-        [placeholder]="(noesaze$ | async)?.Label"
-        controlName="noesaze"
-        [description]="(noesaze$ | async)?.Description"
-        [hint]="(noesaze$ | async)?.Description"
+        [placeholder]="(BuildType$ | async)?.Label"
+        controlName="BuildType"
+        [description]="(BuildType$ | async)?.Description"
+        [hint]="(BuildType$ | async)?.Description"
         [mode]="mode"
-        [tooltip]="(noesaze$ | async)?.Description"
-        [options]="(noesaze$ | async)?.Options"
+        [tooltip]="(BuildType$ | async)?.Description"
+        [options]="(BuildType$ | async)?.Options"
         ></app-field-select>
       </div>
 
       <app-field-input
         [formGroup]="formGroup"
-        [placeholder]="(metrazh$ | async)?.Label"
-        controlName="metrazh"
-        [description]="(metrazh$ | async)?.Description"
-        [hint]="(metrazh$ | async)?.Description"
+        [placeholder]="(Area$ | async)?.Label"
+        controlName="Area"
+        [description]="(Area$ | async)?.Description"
+        [hint]="(Area$ | async)?.Description"
         [mode]="mode"
-        [tooltip]="(metrazh$ | async)?.Description"
-        [options]="(metrazh$ | async)?.Options"
+        [tooltip]="(Area$ | async)?.Description"
+        [options]="(Area$ | async)?.Options"
       ></app-field-input>
 
       <app-field-input
         [formGroup]="formGroup"
-        [placeholder]="(arzeshlavazem$ | async)?.Label"
-        controlName="arzeshlavazem"
-        [description]="(arzeshlavazem$ | async)?.Description"
-        [hint]="(arzeshlavazem$ | async)?.Description"
+        [placeholder]="(ThingsValue$ | async)?.Label"
+        controlName="ThingsValue"
+        [description]="(ThingsValue$ | async)?.Description"
+        [hint]="(ThingsValue$ | async)?.Description"
         [mode]="mode"
-        [tooltip]="(arzeshlavazem$ | async)?.Description"
-        [options]="(arzeshlavazem$ | async)?.Options"
+        [tooltip]="(ThingsValue$ | async)?.Description"
+        [options]="(ThingsValue$ | async)?.Options"
       ></app-field-input>
 
     </mat-card-content>

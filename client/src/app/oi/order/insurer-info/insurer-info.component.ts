@@ -40,8 +40,8 @@ export class InsurerInfoComponent implements OnInit {
 	PolicyholderNationalCode$: Observable<FieldModel>;
 	PolicyholderBirthDate$: Observable<FieldModel>;
 	PolicyholderFatherName$: Observable<FieldModel>;
-	DeliveryAddress$: Observable<FieldModel>;
-	DeliveryAddressCityId$: Observable<FieldModel>;
+	DeliveryPlaceAddress$: Observable<FieldModel>;
+	DeliveryPlaceCityId$: Observable<FieldModel>;
 	PolicyAddressCityId$: Observable<FieldModel>;
 	PolicyAddress$: Observable<FieldModel>;
 	PolicyAddressSource$: Observable<FieldModel>;
@@ -84,8 +84,8 @@ export class InsurerInfoComponent implements OnInit {
 		this.PolicyAddress$ = this.orderForm$.map(orderForm => orderForm.PolicyAddress);
 		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
 		this.PolicyAddressSource$ = this.orderForm$.map(orderForm => orderForm.PolicyAddressSource);
-		this.DeliveryAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryAddress);
-		this.DeliveryAddressCityId$ = this.orderForm$.map(orderForm => orderForm.DeliveryAddressCityId);
+		this.DeliveryPlaceAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryPlaceAddress);
+		this.DeliveryPlaceCityId$ = this.orderForm$.map(orderForm => orderForm.DeliveryPlaceCityId);
 		this.DeliveryDate$ = this.orderForm$.map(orderForm => orderForm.DeliveryDate);
 		this.DeliveryTime$ = this.orderForm$.map(orderForm => orderForm.DeliveryTime);
 		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
@@ -123,8 +123,8 @@ export class InsurerInfoComponent implements OnInit {
 			PolicyholderCarIdCardBack: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
 			PolicyholderCarIdCardFront: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
 
-			// LastPolicyYearsWithoutIncident: new FormControl("1"),
-			// LastPolicyNumOfUsedPropertyCoupon: new FormControl("0"),
+			// LastPolicyDiscountYears: new FormControl("1"),
+			// LastPolicyUsedPropertyCoupons: new FormControl("0"),
 			// LastPolicyNumOfUsedPersonCoupon: new FormControl("0"),
 
 			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
@@ -134,8 +134,8 @@ export class InsurerInfoComponent implements OnInit {
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
 
-			DeliveryAddressCityId: new FormControl("", [ Validators.required ]),
-			DeliveryAddress: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceCityId: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl("", [ Validators.required ]),
 
 			PolicyAddressSource: new FormControl("", [ Validators.required ]),
 			PolicyAddressCityId: new FormControl("", [ Validators.required ]),

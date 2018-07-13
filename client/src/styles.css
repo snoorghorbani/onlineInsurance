@@ -425,6 +425,10 @@ th.mat-header-cell {
 mat-tab-group {
 	direction: ltr;
 }
+.mat-tab-label-container {
+	direction: rtl;
+}
+
 /* .mat-tab-body-wrapper {
 	direction: rtl;
 } */

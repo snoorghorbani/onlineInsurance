@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ViewChild, ElementRef } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Subject, BehaviorSubject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { Router } from "@angular/router";
 import { trigger, state, transition, animate, style } from "@angular/animations";
-import { takeUntil, map, take, filter, distinctUntilChanged } from "rxjs/operators";
+import { takeUntil, map, take, filter, distinctUntilChanged, startWith } from "rxjs/operators";
 
 import { AppState } from "../../order.reducers";
 import { ComparePoliciesStartAction } from "../../../policy/services/api";
@@ -13,6 +13,7 @@ import { FieldModel } from "../../models/field.model";
 import { FirePolicyOrderFormModel } from "../../models";
 import { PolicyCompareModel, PriceModel } from "../../../policy/models/policy-compare.model";
 import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
+import { MatAutocompleteSelectedEvent, MatChipInputEvent } from "@angular/material";
 
 @Component({
 	selector: "order-fire-policy-select-product",
@@ -61,6 +62,11 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 			.select(state => state.order.newOrder.data as FirePolicyOrderFormModel)
 			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
+
+		this.filteredCoverage = this.additionalCoverageFormControl.valueChanges.pipe(
+			startWith(null),
+			map((fruit: string | null) => (fruit ? this._filter(fruit) : this.additionalCoverage.slice()))
+		);
 	}
 
 	ngOnInit() {
@@ -217,5 +223,52 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		// this.PolicyTerm$
 		// 	.pipe(take(1))
 		// 	.subscribe(PolicyTerm => this.formGroup.patchValue({ PolicyTerm: PolicyTerm.Options[0].Value }));
+	}
+
+	// additional coverage
+	additionalCoverageFormControl = new FormControl();
+	addOnBlur = false;
+	// separatorKeysCodes: number[] = [ ENTER, COMMA ];
+	filteredCoverage: Observable<string[]>;
+	selectedadditionalCoverage: string[] = [];
+	additionalCoverage: string[] = [ "Apple", "Lemon", "Lime", "Orange", "Strawberry" ];
+
+	@ViewChild("additionalCoverageInput") additionalCoverageInput: ElementRef;
+
+	add(event: MatChipInputEvent): void {
+		const input = event.input;
+		const value = event.value;
+
+		// Add our fruit
+		if ((value || "").trim()) {
+			this.selectedadditionalCoverage.push(value.trim());
+		}
+
+		// Reset the input value
+		if (input) {
+			input.value = "";
+		}
+
+		this.additionalCoverageFormControl.setValue(null);
+	}
+
+	remove(fruit: string): void {
+		const index = this.selectedadditionalCoverage.indexOf(fruit);
+
+		if (index >= 0) {
+			this.selectedadditionalCoverage.splice(index, 1);
+		}
+	}
+
+	selected(event: MatAutocompleteSelectedEvent): void {
+		this.selectedadditionalCoverage.push(event.option.viewValue);
+		this.additionalCoverageInput.nativeElement.value = "";
+		this.additionalCoverageFormControl.setValue(null);
+	}
+
+	private _filter(value: string): string[] {
+		const filterValue = value.toLowerCase();
+
+		return this.additionalCoverage.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
 	}
 }

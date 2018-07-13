@@ -19,10 +19,10 @@
             <mat-grid-tile>{{(PolicyholderBirthDate$ | async)?.DisplayValue}}</mat-grid-tile>
             <mat-grid-tile colspan="2" class="th">{{(PolicyAddress$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile colspan="4">{{(PolicyAddress$ | async)?.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="2" class="th">{{(DeliveryAddress$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="4">{{(DeliveryAddress$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="2" class="th">{{(DeliveryPlaceAddress$ | async)?.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="4">{{(DeliveryPlaceAddress$ | async)?.DisplayValue}}</mat-grid-tile>
             <!-- <mat-grid-tile class="th">شرکت بیمه</mat-grid-tile>
-            <mat-grid-tile colspan="4">{{(DeliveryAddress$ | async)?.DisplayValue}}</mat-grid-tile> -->
+            <mat-grid-tile colspan="4">{{(DeliveryPlaceAddress$ | async)?.DisplayValue}}</mat-grid-tile> -->
           </mat-grid-list>
         </mat-card>
         <h3>مشخصات بیمه نامه</h3>
@@ -44,8 +44,8 @@
   
             <mat-grid-tile colspan="2" class="th">{{(LastPolicyExpirationDate$ | async)?.Label}}</mat-grid-tile>
             <mat-grid-tile colspan="1">{{(LastPolicyExpirationDate$ | async)?.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="2" class="th">{{(LastPolicyYearsWithoutIncident$ | async)?.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{(LastPolicyYearsWithoutIncident$ | async)?.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="2" class="th">{{(LastPolicyDiscountYears$ | async)?.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{(LastPolicyDiscountYears$ | async)?.DisplayValue}}</mat-grid-tile>
           </mat-grid-list>
         </mat-card>
         <h3>مشخصات کارگزار</h3>

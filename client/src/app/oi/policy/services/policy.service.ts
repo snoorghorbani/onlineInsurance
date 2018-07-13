@@ -29,13 +29,13 @@ export class PolicyService {
 	}
 	ComparePolicies(data: ComparePoliciesApiModel.Request): Observable<PolicyCompareModel[]> {
 		const model = new ComparePoliciesApiModel.Request(data);
-		return of(comparePoliciesData.Items);
-		// return this.http
-		// 	.post<ComparePoliciesApiModel.Response>(
-		// 		`${this.configurationService.config.env.server}/policy/ComparePolicies`,
-		// 		model.getRequestBody()
-		// 	)
-		// 	.pipe(map(response => response.Result.Items), share());
+		// return of(comparePoliciesData.Items);
+		return this.http
+			.post<ComparePoliciesApiModel.Response>(
+				`${this.configurationService.config.env.server}/policy/ComparePolicies`,
+				model.getRequestBody()
+			)
+			.pipe(map(response => response.Result.Items), share());
 	}
 }
 

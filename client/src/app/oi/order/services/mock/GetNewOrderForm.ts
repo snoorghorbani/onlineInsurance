@@ -382,12 +382,12 @@ export const GetNewOrderForm = {
 		SequenceIndex: 93,
 		Status: 4
 	},
-	CarYearsWithoutIncident: {
+	NoDamageRecord: {
 		Value: null,
 		ExtensionData: {},
 		DisplayValue: null,
 		Label: "تخفیف عدم خسارت",
-		Name: "CarYearsWithoutIncident",
+		Name: "NoDamageRecord",
 		Options: [
 			{
 				ExtensionData: {},
@@ -553,22 +553,22 @@ export const GetNewOrderForm = {
 		SequenceIndex: 30,
 		Status: 1
 	},
-	DeliveryAddress: {
+	DeliveryPlaceAddress: {
 		Value: null,
 		ExtensionData: {},
 		DisplayValue: null,
 		Label: "نشانی ارسال",
-		Name: "DeliveryAddress",
+		Name: "DeliveryPlaceAddress",
 		Options: null,
 		SequenceIndex: 150,
 		Status: 1
 	},
-	DeliveryAddressCityId: {
+	DeliveryPlaceCityId: {
 		Value: null,
 		ExtensionData: {},
 		DisplayValue: null,
 		Label: "شهر",
-		Name: "DeliveryAddressCityId",
+		Name: "DeliveryPlaceCityId",
 		Options: [],
 		SequenceIndex: 147,
 		Status: 1
@@ -628,12 +628,12 @@ export const GetNewOrderForm = {
 		SequenceIndex: 111,
 		Status: 1
 	},
-	LastPolicyNumOfUsedPersonCoupon: {
+	LastPolicyUsedPersonCoupons: {
 		Value: null,
 		ExtensionData: {},
 		DisplayValue: null,
 		Label: "کوپن مصرف شده جانی",
-		Name: "LastPolicyNumOfUsedPersonCoupon",
+		Name: "LastPolicyUsedPersonCoupons",
 		Options: [
 			{
 				ExtensionData: {},
@@ -659,12 +659,12 @@ export const GetNewOrderForm = {
 		SequenceIndex: 108,
 		Status: 4
 	},
-	LastPolicyNumOfUsedPropertyCoupon: {
+	LastPolicyUsedPropertyCoupons: {
 		Value: null,
 		ExtensionData: {},
 		DisplayValue: null,
 		Label: "کوپن مصرف شده مالی",
-		Name: "LastPolicyNumOfUsedPropertyCoupon",
+		Name: "LastPolicyUsedPropertyCoupons",
 		Options: [
 			{
 				ExtensionData: {},
@@ -685,12 +685,12 @@ export const GetNewOrderForm = {
 		SequenceIndex: 105,
 		Status: 4
 	},
-	LastPolicyYearsWithoutIncident: {
+	LastPolicyDiscountYears: {
 		Value: null,
 		ExtensionData: {},
 		DisplayValue: null,
 		Label: "سال تخفیف درج شده در بیمه نامه قبلی",
-		Name: "LastPolicyYearsWithoutIncident",
+		Name: "LastPolicyDiscountYears",
 		Options: [
 			{
 				ExtensionData: {},

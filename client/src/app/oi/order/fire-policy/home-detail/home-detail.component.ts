@@ -20,6 +20,7 @@ import { takeUntil, map, distinctUntilChanged, filter, take } from "rxjs/operato
 export class HomeDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	@Input() mode: "view" | "edit" = "edit";
+
 	unsubscribe = new Subject<void>();
 	pauser = new Subject();
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
@@ -27,11 +28,11 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	orderForm: FirePolicyOrderFormModel;
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 
-	noemelk$: Observable<FieldModel>;
-	tedadvahed$: Observable<FieldModel>;
-	noesaze$: Observable<FieldModel>;
-	metrazh$: Observable<FieldModel>;
-	arzeshlavazem$: Observable<FieldModel>;
+	EstateType$: Observable<FieldModel>;
+	Units$: Observable<FieldModel>;
+	BuildType$: Observable<FieldModel>;
+	Area$: Observable<FieldModel>;
+	ThingsValue$: Observable<FieldModel>;
 
 	FocuseddPolicy: PolicyCompareModel;
 	companyInfoDataSource: any[];
@@ -48,7 +49,7 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction(2));
+		this.store.dispatch(new GetNewOrderFormStartAction(4));
 		this._set_formGroup_relation_logic();
 	}
 	ngOnDestroy() {
@@ -94,22 +95,22 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	_check_and_contol_incident_formControls(years) {
 		debugger;
 		if (years > 0) {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
+			this.formGroup.get("LastPolicyDiscountYears").disable();
+			this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+			this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
 		} else {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").enable();
+			this.formGroup.get("LastPolicyDiscountYears").enable();
+			this.formGroup.get("LastPolicyUsedPropertyCoupons").enable();
+			this.formGroup.get("LastPolicyUsedPersonCoupons").enable();
 		}
 	}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			noemelk: new FormControl("", Validators.required),
-			tedadvahed: new FormControl("", Validators.required),
-			noesaze: new FormControl("", Validators.required),
-			metrazh: new FormControl("", Validators.required),
-			arzeshlavazem: new FormControl("", Validators.required)
+			EstateType: new FormControl("", Validators.required),
+			Units: new FormControl("", Validators.required),
+			BuildType: new FormControl("", Validators.required),
+			Area: new FormControl("", Validators.required),
+			ThingsValue: new FormControl("", Validators.required)
 		});
 	}
 	_set_formGroup_validation() {
@@ -141,14 +142,14 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	}
 	_set_formGroup_relation_logic() {}
 	_map_orderForm_to_fields() {
-		this.noemelk$ = this.orderForm$.map(orderForm => {
+		this.EstateType$ = this.orderForm$.map(orderForm => {
 			debugger;
-			return orderForm.noemelk;
+			return orderForm.EstateType;
 		});
-		this.noesaze$ = this.orderForm$.map(orderForm => orderForm.noesaze);
-		this.tedadvahed$ = this.orderForm$.map(orderForm => orderForm.tedadvahed);
-		this.metrazh$ = this.orderForm$.map(orderForm => orderForm.metrazh);
-		this.arzeshlavazem$ = this.orderForm$.map(orderForm => orderForm.arzeshlavazem);
+		this.BuildType$ = this.orderForm$.map(orderForm => orderForm.BuildType);
+		this.Units$ = this.orderForm$.map(orderForm => orderForm.Units);
+		this.Area$ = this.orderForm$.map(orderForm => orderForm.Area);
+		this.ThingsValue$ = this.orderForm$.map(orderForm => orderForm.ThingsValue);
 	}
 	_validate_all_form_fields(formGroup: FormGroup) {
 		Object.keys(formGroup.controls).forEach(field => {

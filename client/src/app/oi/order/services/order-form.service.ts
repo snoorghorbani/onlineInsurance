@@ -6,7 +6,7 @@ import { of } from "rxjs";
 import { OrderFormModel } from "../models/order-form.model";
 import { OrderConfigurationService } from "./order-configuration.service";
 import { FirePolicyOrderFormModel } from "../models";
-import { share } from "rxjs/operators";
+import { share, map } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root"
@@ -17,30 +17,26 @@ export class OrderFormService {
 	GetNewOrderForm(type): Observable<OrderFormModel | FirePolicyOrderFormModel> {
 		// return of(GetNewOrderForm as OrderFormModel);
 		debugger;
-		if (type == 1)
-			return this.http
-				.get(`${this.configurationService.config.env.server}/order/GetNewOrderForm/?type=${type}`)
-				.map((response: any) => response.Result as OrderFormModel);
-		else if (type == 2) {
-			return of(type2).pipe(share());
-		}
+		return this.http
+			.get(`${this.configurationService.config.env.server}/order/GetNewOrderForm/?type=${type}`)
+			.pipe(map((response: any) => response.Result as OrderFormModel));
 	}
 	SaveOrderForm(): Observable<OrderFormModel> {
 		// return of(SaveOrderForm as OrderFormModel);
 		return this.http
 			.get(`${this.configurationService.config.env.server}/order/SaveOrderForm`)
-			.map((response: any) => response.Result as OrderFormModel);
+			.pipe(map((response: any) => response.Result as OrderFormModel));
 	}
 	ApproveOrder(orderForm: OrderFormModel): Observable<OrderFormModel> {
 		// return of(approveOrder);
 		return this.http
 			.post(`${this.configurationService.config.env.server}/order/ApproveOrder`, orderForm)
-			.map((response: any) => response.Result as OrderFormModel);
+			.pipe(map((response: any) => response.Result as OrderFormModel));
 	}
 	RejectOrder(orderForm: OrderFormModel): Observable<OrderFormModel> {
 		return this.http
 			.post(`${this.configurationService.config.env.server}/order/RejectOrder`, orderForm)
-			.map((response: any) => response.Result as OrderFormModel);
+			.pipe(map((response: any) => response.Result as OrderFormModel));
 	}
 }
 const approveOrder = {
@@ -203,14 +199,14 @@ const approveOrder = {
 		SequenceIndex: 93,
 		Status: 2
 	},
-	CarYearsWithoutIncident: {
+	NoDamageRecord: {
 		Value: 1,
 		ExtensionData: null,
 		Description:
 			"چنانچه هر 4 کوپن بیمه خود را دارید این عدد برابر است با سال تخفیف درج شده روی بیمه قبلی + مدت قرارداد بیمه قبلی با تغییر شرکت تخفیف شما منتقل خواهد شد",
 		DisplayValue: "1 سال",
 		Label: "تخفیف عدم خسارت",
-		Name: "CarYearsWithoutIncident",
+		Name: "NoDamageRecord",
 		Options: [
 			{ ExtensionData: null, DisplayValue: "6 ماه", Value: 0.5 },
 			{ ExtensionData: null, DisplayValue: "1 سال", Value: 1 },
@@ -258,24 +254,24 @@ const approveOrder = {
 		SequenceIndex: 30,
 		Status: 2
 	},
-	DeliveryAddress: {
+	DeliveryPlaceAddress: {
 		Value: "تست",
 		ExtensionData: null,
 		Description: null,
 		DisplayValue: null,
 		Label: null,
-		Name: "DeliveryAddress",
+		Name: "DeliveryPlaceAddress",
 		Options: null,
 		SequenceIndex: 0,
 		Status: 0
 	},
-	DeliveryAddressCityId: {
+	DeliveryPlaceCityId: {
 		Value: 1,
 		ExtensionData: null,
 		Description: null,
 		DisplayValue: "تهران",
 		Label: null,
-		Name: "DeliveryAddressCityId",
+		Name: "DeliveryPlaceCityId",
 		Options: [
 			{ ExtensionData: null, DisplayValue: "تهران", Value: 1 },
 			{ ExtensionData: null, DisplayValue: "اراک", Value: 2 },
@@ -367,13 +363,13 @@ const approveOrder = {
 		SequenceIndex: 111,
 		Status: 2
 	},
-	LastPolicyNumOfUsedPersonCoupon: {
+	LastPolicyUsedPersonCoupons: {
 		Value: null,
 		ExtensionData: null,
 		Description: null,
 		DisplayValue: null,
 		Label: "کوپن مصرف شده جانی",
-		Name: "LastPolicyNumOfUsedPersonCoupon",
+		Name: "LastPolicyUsedPersonCoupons",
 		Options: [
 			{ ExtensionData: null, DisplayValue: "کوپنی مصرف نشده", Value: 0 },
 			{ ExtensionData: null, DisplayValue: "1", Value: 1 },
@@ -383,13 +379,13 @@ const approveOrder = {
 		SequenceIndex: 108,
 		Status: 2
 	},
-	LastPolicyNumOfUsedPropertyCoupon: {
+	LastPolicyUsedPropertyCoupons: {
 		Value: null,
 		ExtensionData: null,
 		Description: null,
 		DisplayValue: null,
 		Label: "کوپن مصرف شده مالی",
-		Name: "LastPolicyNumOfUsedPropertyCoupon",
+		Name: "LastPolicyUsedPropertyCoupons",
 		Options: [
 			{ ExtensionData: null, DisplayValue: "1", Value: 1 },
 			{ ExtensionData: null, DisplayValue: "2", Value: 2 },
@@ -398,13 +394,13 @@ const approveOrder = {
 		SequenceIndex: 105,
 		Status: 2
 	},
-	LastPolicyYearsWithoutIncident: {
+	LastPolicyDiscountYears: {
 		Value: null,
 		ExtensionData: null,
 		Description: null,
 		DisplayValue: null,
 		Label: "سال تخفیف درج شده در بیمه نامه قبلی",
-		Name: "LastPolicyYearsWithoutIncident",
+		Name: "LastPolicyDiscountYears",
 		Options: [
 			{ ExtensionData: null, DisplayValue: "6 ماه", Value: 0.5 },
 			{ ExtensionData: null, DisplayValue: "1 سال", Value: 1 },
@@ -1009,45 +1005,45 @@ const type2: FirePolicyOrderFormModel = {
 		Status: 4,
 		Value: null
 	},
-	arzeshlavazem: {
+	ShippingCost: {
 		Description: null,
 		DisplayValue: null,
 		ExtensionData: {},
 		Label: "ارزش لوازم همه ی واحدهای مجتمع (تومان)",
-		Name: "arzeshlavazem",
+		Name: "ShippingCost",
 		Options: null,
 		SequenceIndex: 87,
 		Status: 4,
 		Value: null
 	},
-	metrazh: {
+	Area: {
 		Description: null,
 		DisplayValue: null,
 		ExtensionData: {},
 		Label: "متراژ مجتمع (مجموع مساحت همه ی واحدها + مشاعات)",
-		Name: "metrazh",
+		Name: "Area",
 		Options: null,
 		SequenceIndex: 87,
 		Status: 4,
 		Value: null
 	},
-	tedadvahed: {
+	BuildingFloors: {
 		Description: null,
 		DisplayValue: null,
 		ExtensionData: {},
 		Label: "تعداد واحد",
-		Name: "tedadvahed",
+		Name: "BuildingFloors",
 		Options: null,
 		SequenceIndex: 87,
 		Status: 4,
 		Value: null
 	},
-	noesaze: {
+	BuildType: {
 		Description: null,
 		DisplayValue: null,
 		ExtensionData: {},
 		Label: "نوع سازه",
-		Name: "noesaze",
+		Name: "BuildType",
 		Options: [
 			{
 				DisplayValue: "آجری",
@@ -1066,12 +1062,12 @@ const type2: FirePolicyOrderFormModel = {
 		Status: 4,
 		Value: null
 	},
-	noemelk: {
+	EstateType: {
 		Description: null,
 		DisplayValue: null,
 		ExtensionData: {},
 		Label: "نوع ملک",
-		Name: "noemelk",
+		Name: "EstateType",
 		Options: [
 			{
 				DisplayValue: "یک واحد در آپارتمان",

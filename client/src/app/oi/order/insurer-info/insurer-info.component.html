@@ -125,16 +125,16 @@
               </h4>
                 <form [formGroup]="formGroup" fxLayout="row wrap" fxLayoutGap="25px">
                   <mat-form-field fxFlex="20">
-                      <mat-select [placeholder]="(DeliveryAddressCityId$ | async)?.Label" formControlName="DeliveryAddressCityId">
-                        <mat-option *ngFor="let item of (DeliveryAddressCityId$ | async)?.Options" [value]="item.Value">
+                      <mat-select [placeholder]="(DeliveryPlaceCityId$ | async)?.Label" formControlName="DeliveryPlaceCityId">
+                        <mat-option *ngFor="let item of (DeliveryPlaceCityId$ | async)?.Options" [value]="item.Value">
                           {{ item.DisplayValue }}
                         </mat-option>
                       </mat-select>
-                      <mat-icon class="tooltip md-18" *ngIf="(DeliveryAddressCityId$ | async)?.Description" [matTooltip]="(DeliveryAddressCityId$ | async)?.Description">help</mat-icon>
+                      <mat-icon class="tooltip md-18" *ngIf="(DeliveryPlaceCityId$ | async)?.Description" [matTooltip]="(DeliveryPlaceCityId$ | async)?.Description">help</mat-icon>
                   </mat-form-field>
                   <mat-form-field class="fill" fxFlex="80">
-                    <input matInput [placeholder]="(DeliveryAddress$ | async)?.Label" formControlName="DeliveryAddress">
-                    <mat-icon class="tooltip md-18" *ngIf="(DeliveryAddress$ | async)?.Description" [matTooltip]="(DeliveryAddress$ | async)?.Description">help</mat-icon>
+                    <input matInput [placeholder]="(DeliveryPlaceAddress$ | async)?.Label" formControlName="DeliveryPlaceAddress">
+                    <mat-icon class="tooltip md-18" *ngIf="(DeliveryPlaceAddress$ | async)?.Description" [matTooltip]="(DeliveryPlaceAddress$ | async)?.Description">help</mat-icon>
                   </mat-form-field>
                 </form>
                 <h4>

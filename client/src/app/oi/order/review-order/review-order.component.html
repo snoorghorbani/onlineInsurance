@@ -41,8 +41,8 @@
           <mat-grid-tile>{{(PolicyholderBirthDate$ | async)?.Value}}</mat-grid-tile>
           <mat-grid-tile class="th">{{(PolicyAddress$ | async)?.Label}}</mat-grid-tile>
           <mat-grid-tile colspan="5">{{(PolicyAddress$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(DeliveryAddress$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="5">{{(DeliveryAddress$ | async)?.Value}}</mat-grid-tile>
+          <mat-grid-tile class="th">{{(DeliveryPlaceAddress$ | async)?.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="5">{{(DeliveryPlaceAddress$ | async)?.Value}}</mat-grid-tile>
           <mat-grid-tile class="th">شرکت بیمه</mat-grid-tile>
           <mat-grid-tile colspan="5">biemh</mat-grid-tile>
         </mat-grid-list>
@@ -66,8 +66,8 @@
 
           <mat-grid-tile colspan="3" class="th">{{(LastPolicyExpirationDate$ | async)?.Label}}</mat-grid-tile>
           <mat-grid-tile colspan="3">{{(LastPolicyExpirationDate$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile colspan="3" class="th">{{(LastPolicyYearsWithoutIncident$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="3">{{(LastPolicyYearsWithoutIncident$ | async)?.Value}}</mat-grid-tile>
+          <mat-grid-tile colspan="3" class="th">{{(LastPolicyDiscountYears$ | async)?.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="3">{{(LastPolicyDiscountYears$ | async)?.Value}}</mat-grid-tile>
           <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheMali$ | async)?.Label}}</mat-grid-tile>
           <mat-grid-tile colspan="1">{{(PolicyPushesheMali$ | async)?.DisplayValue}}</mat-grid-tile>
           <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheRanande$ | async)?.Label}}</mat-grid-tile>

@@ -31,12 +31,12 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	CarModelOptions$: Observable<FieldOptionModel[]>;
 	CarProductionYear$: Observable<FieldModel>;
 	CarUsage$: Observable<FieldModel>;
-	CarYearsWithoutIncident$: Observable<FieldModel>;
+	NoDamageRecord$: Observable<FieldModel>;
 	LastPolicyExpirationDate$: Observable<FieldModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
-	LastPolicyYearsWithoutIncident$: Observable<FieldModel>;
-	LastPolicyNumOfUsedPropertyCoupon$: Observable<FieldModel>;
-	LastPolicyNumOfUsedPersonCoupon$: Observable<FieldModel>;
+	LastPolicyDiscountYears$: Observable<FieldModel>;
+	LastPolicyUsedPropertyCoupons$: Observable<FieldModel>;
+	LastPolicyUsedPersonCoupons$: Observable<FieldModel>;
 	FocuseddPolicy: PolicyCompareModel;
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
@@ -97,13 +97,13 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 	_check_and_contol_incident_formControls(years) {
 		debugger;
 		if (years > 0) {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").disable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").disable();
+			this.formGroup.get("LastPolicyDiscountYears").disable();
+			this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+			this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
 		} else {
-			this.formGroup.get("LastPolicyYearsWithoutIncident").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPropertyCoupon").enable();
-			this.formGroup.get("LastPolicyNumOfUsedPersonCoupon").enable();
+			this.formGroup.get("LastPolicyDiscountYears").enable();
+			this.formGroup.get("LastPolicyUsedPropertyCoupons").enable();
+			this.formGroup.get("LastPolicyUsedPersonCoupons").enable();
 		}
 	}
 	_create_formGroup() {
@@ -112,11 +112,11 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			CarModel: new FormControl(""),
 			CarProductionYear: new FormControl(""),
 			CarUsage: new FormControl(""),
-			CarYearsWithoutIncident: new FormControl(""),
+			NoDamageRecord: new FormControl(""),
 			LastPolicyExpirationDate: new FormControl(""),
-			LastPolicyYearsWithoutIncident: new FormControl(),
-			LastPolicyNumOfUsedPropertyCoupon: new FormControl(),
-			LastPolicyNumOfUsedPersonCoupon: new FormControl()
+			LastPolicyDiscountYears: new FormControl(),
+			LastPolicyUsedPropertyCoupons: new FormControl(),
+			LastPolicyUsedPersonCoupons: new FormControl()
 		});
 	}
 	_set_formGroup_validation() {
@@ -152,27 +152,25 @@ export class CarDetailComponent implements OnInit, OnDestroy {
 			.valueChanges.pipe(takeUntil(this.unsubscribe), filter(carBrand => carBrand != ""))
 			.subscribe(carBrand => this.store.dispatch(new GetCarModelsOfBrandStartAction({ carBrand })));
 		this.formGroup
-			.get("CarYearsWithoutIncident")
+			.get("NoDamageRecord")
 			.valueChanges.pipe(takeUntil(this.unsubscribe))
 			.subscribe(years => this._check_and_contol_incident_formControls(years));
 	}
 	_map_orderForm_to_fields() {
-		this.CarBrand$ = this.orderForm$.map(orderForm => orderForm.CarBrand);
-		this.CarModel$ = this.orderForm$.map(orderForm => orderForm.CarModel);
+		this.CarBrand$ = this.orderForm$.pipe(map(orderForm => orderForm.CarBrand));
+		this.CarModel$ = this.orderForm$.pipe(map(orderForm => orderForm.CarModel));
 		this.CarModelOptions$ = this.store.select(state => state.order.newOrder.carModels);
-		this.CarProductionYear$ = this.orderForm$.map(orderForm => orderForm.CarProductionYear);
-		this.CarUsage$ = this.orderForm$.map(orderForm => orderForm.CarUsage);
-		this.CarYearsWithoutIncident$ = this.orderForm$.map(orderForm => orderForm.CarYearsWithoutIncident);
-		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
-		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
-		this.LastPolicyYearsWithoutIncident$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyYearsWithoutIncident
+		this.CarProductionYear$ = this.orderForm$.pipe(map(orderForm => orderForm.CarProductionYear));
+		this.CarUsage$ = this.orderForm$.pipe(map(orderForm => orderForm.CarUsage));
+		this.NoDamageRecord$ = this.orderForm$.pipe(map(orderForm => orderForm.NoDamageRecord));
+		this.LastPolicyExpirationDate$ = this.orderForm$.pipe(map(orderForm => orderForm.LastPolicyExpirationDate));
+		this.PolicyPushesheMali$ = this.orderForm$.pipe(map(orderForm => orderForm.PolicyPushesheMali));
+		this.LastPolicyDiscountYears$ = this.orderForm$.pipe(map(orderForm => orderForm.LastPolicyDiscountYears));
+		this.LastPolicyUsedPropertyCoupons$ = this.orderForm$.pipe(
+			map(orderForm => orderForm.LastPolicyUsedPropertyCoupons)
 		);
-		this.LastPolicyNumOfUsedPropertyCoupon$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyNumOfUsedPropertyCoupon
-		);
-		this.LastPolicyNumOfUsedPersonCoupon$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyNumOfUsedPersonCoupon
+		this.LastPolicyUsedPersonCoupons$ = this.orderForm$.pipe(
+			map(orderForm => orderForm.LastPolicyUsedPersonCoupons)
 		);
 	}
 	_validate_all_form_fields(formGroup: FormGroup) {

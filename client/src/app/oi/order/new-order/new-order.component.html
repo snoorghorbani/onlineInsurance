@@ -58,12 +58,12 @@
     </mat-form-field>
     
     <mat-form-field fxFlex="46">
-        <mat-select [placeholder]="(CarYearsWithoutIncident$ | async)?.Label"  formControlName="CarYearsWithoutIncident">
-          <mat-option *ngFor="let item of (CarYearsWithoutIncident$ | async)?.Options" [value]="item.Value">
+        <mat-select [placeholder]="(NoDamageRecord$ | async)?.Label"  formControlName="NoDamageRecord">
+          <mat-option *ngFor="let item of (NoDamageRecord$ | async)?.Options" [value]="item.Value">
             {{ item.DisplayValue }}
           </mat-option>
         </mat-select>
-        <mat-icon class="tooltip md-18" *ngIf="(CarYearsWithoutIncident$ | async)?.Description" [matTooltip]="(CarYearsWithoutIncident$ | async)?.Description">help</mat-icon>
+        <mat-icon class="tooltip md-18" *ngIf="(NoDamageRecord$ | async)?.Description" [matTooltip]="(NoDamageRecord$ | async)?.Description">help</mat-icon>
     </mat-form-field>
     
     <mat-form-field fxFlex="46">

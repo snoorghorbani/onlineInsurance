@@ -43,14 +43,14 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 	PolicyholderPhone$: Observable<FieldModel>;
 	PolicyholderBirthDate$: Observable<FieldModel>;
 	PolicyholderMobile$: Observable<FieldModel>;
-	DeliveryAddress$: Observable<FieldModel>;
+	DeliveryPlaceAddress$: Observable<FieldModel>;
 	PolicyAddress$: Observable<FieldModel>;
 	CarModel$: Observable<FieldModel>;
 	CarUsage$: Observable<FieldModel>;
 	PolicyTerm$: Observable<FieldModel>;
 	Discount$: Observable<FieldModel>;
 	LastPolicyExpirationDate$: Observable<FieldModel>;
-	LastPolicyYearsWithoutIncident$: Observable<FieldModel>;
+	LastPolicyDiscountYears$: Observable<FieldModel>;
 	PolicyPushesheMali$: Observable<FieldModel>;
 	PolicyPushesheRanande$: Observable<FieldModel>;
 	PolicyPushesheSarneshin$: Observable<FieldModel>;
@@ -97,15 +97,15 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
 		this.PolicyholderBirthDate$ = this.orderForm$.map(orderForm => orderForm.PolicyholderBirthDate);
 		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
-		this.DeliveryAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryAddress);
+		this.DeliveryPlaceAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryPlaceAddress);
 		this.PolicyAddress$ = this.orderForm$.map(orderForm => orderForm.PolicyAddress);
 		this.CarModel$ = this.orderForm$.map(orderForm => orderForm.CarModel);
 		this.CarUsage$ = this.orderForm$.map(orderForm => orderForm.CarUsage);
 		this.PolicyTerm$ = this.orderForm$.map(orderForm => orderForm.PolicyTerm);
 		this.Discount$ = this.orderForm$.map(orderForm => orderForm.Discount);
 		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
-		this.LastPolicyYearsWithoutIncident$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyYearsWithoutIncident
+		this.LastPolicyDiscountYears$ = this.orderForm$.map(
+			orderForm => orderForm.LastPolicyDiscountYears
 		);
 		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
 		this.PolicyPushesheRanande$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheRanande);
