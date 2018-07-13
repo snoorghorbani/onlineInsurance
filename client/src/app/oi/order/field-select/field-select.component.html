@@ -1,8 +1,9 @@
 <div [formGroup]="formGroup">
     <div class="field-wrapper">
       <div [@filedAnimation]="mode">
-        <mat-form-field class="fit" [(ngClass)]="mode">
-          <mat-select [placeholder]="placeholder" [formControlName]="controlName">
+        <mat-form-field class="fit" [(ngClass)]="mode" [appearance]="appearance">
+            <mat-label>{{placeholder}}</mat-label>
+            <mat-select [placeholder]="placeholder" [formControlName]="controlName">
             <mat-option *ngFor="let item of options" [value]="item.Value">
               {{ item.DisplayName || item.DisplayValue }}
             </mat-option>

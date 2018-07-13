@@ -1,0 +1,45 @@
+<div MatDialogContent fxLayout="row wrap">
+  <div fxFlex="100">
+      شما بیمه البرز با قیمت 
+      <b>
+        {{data.price.Price.DisplayValue}}
+      </b> 
+      انتخاب نمودید:
+  </div>
+  <div fxFlex="100">
+      برای ملک مسکونی با متراژ 
+      <b>
+        {{data.orderForm.Area.Value}}
+      </b>
+      متر مربع
+  </div>
+  <div fxFlex="50">
+    هزینه ساخت بنا:  
+    <b>
+      {{data.orderForm.ConstructionCostPerSquareMeter.Value * data.orderForm.Area.Value}} 
+    </b>
+    تومان 
+  </div>
+  <div fxFlex="40">
+    ارزش لوازم خانه:  
+    <b>
+        {{data.orderForm.ThingsValue.Value}}
+    </b>
+    تومان
+  </div>
+  <div fxFlex="100">
+      پوشش های اضافی:
+  </div>
+  <div fxFlex="50">
+      زلزله:  
+    <b>
+      {{data.orderForm.EarthquakeExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+    </b>
+    تومان 
+  </div>
+</div>
+
+<div MatDialogActions>
+  <button mat-button MatDialogClose>رد</button>
+  <button mat-raised-button color="primary" (click)="approved()">تایید</button>
+</div>

@@ -9,6 +9,7 @@ import { GetCarModelsOfBrand } from "./mock";
 import { GetCarModelsOfBrandApiModel, ComparePoliciesApiModel } from "./api";
 import { PolicyCompareModel } from "../models/policy-compare.model";
 import { PolicyConfigurationService } from "./policy-configuration.service";
+import { OrderFormType } from "../../order/models";
 
 @Injectable({
 	providedIn: "root"
@@ -27,7 +28,8 @@ export class PolicyService {
 			)
 			.map(response => response.Result);
 	}
-	ComparePolicies(data: ComparePoliciesApiModel.Request): Observable<PolicyCompareModel[]> {
+	ComparePolicies(data: OrderFormType): Observable<PolicyCompareModel[]> {
+		debugger;
 		const model = new ComparePoliciesApiModel.Request(data);
 		// return of(comparePoliciesData.Items);
 		return this.http

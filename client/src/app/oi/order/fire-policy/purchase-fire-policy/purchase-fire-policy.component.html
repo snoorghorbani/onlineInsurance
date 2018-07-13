@@ -7,12 +7,12 @@
 <button class="question" mat-mini-fab>
   <mat-icon>question_answer</mat-icon>
 </button>
-<div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="25px">
-  <div class="blk" fxFlex [@card]="state.car.animateState">
-    <order-home-detail class="card-box" (done)="doneCar($event)"></order-home-detail>
+<div fxLayout="row wrap">
+  <div class="blk" fxFlex="100">
+    <order-home-detail [orderForm]="orderForm" (done)="homeIsDone($event)"></order-home-detail>
   </div>
-  <div class="blk" fxFlex [@card]="state.product.animateState">
-    <order-fire-policy-select-product class="card-box" (done)="doneProduct($event)"></order-fire-policy-select-product>
+  <div class="blk" fxFlex="100">
+    <order-fire-policy-select-product [orderForm]="orderForm" [policies]="policies$ | async" (select)="selectProduct($event)"></order-fire-policy-select-product>
   </div>
   <div class="blk" fxFlex [@card]="state.insurer.animateState">
     <!-- <order-insurer-info class="card-box" [mode]="state.insurer.mode" [signedIn]="signedIn$ | async" (done)="doneInsurer($event)" (signInRequest)="signInRequest()"></order-insurer-info> -->

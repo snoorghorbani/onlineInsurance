@@ -35,9 +35,11 @@ export class FieldSelectComponent implements OnInit {
 	@Input() hint: string;
 	@Input() tooltip: string;
 	@Input() options: any[];
+	@Input() appearance: string;
 	DisplayValue$: Observable<string>;
 	constructor() {
 		this.mode = "edit";
+		this.appearance = "legacy";
 	}
 
 	ngOnInit() {

@@ -35,8 +35,8 @@ export class InsurerInfoComponent implements OnInit {
 	PolicyholderFirstName$: Observable<FieldModel>;
 	PolicyholderLastName$: Observable<FieldModel>;
 	LastPolicyImage$: Observable<FieldModel>;
-	PolicyholderCarIdCardBack$: Observable<FieldModel>;
-	PolicyholderCarIdCardFront$: Observable<FieldModel>;
+	CarCardBackImage$: Observable<FieldModel>;
+	CarCardFrontImage$: Observable<FieldModel>;
 	PolicyholderNationalCode$: Observable<FieldModel>;
 	PolicyholderBirthDate$: Observable<FieldModel>;
 	PolicyholderFatherName$: Observable<FieldModel>;
@@ -75,8 +75,8 @@ export class InsurerInfoComponent implements OnInit {
 		this.PolicyholderFirstName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFirstName);
 		this.PolicyholderLastName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderLastName);
 		this.LastPolicyImage$ = this.orderForm$.map(orderForm => orderForm.LastPolicyImage);
-		this.PolicyholderCarIdCardBack$ = this.orderForm$.map(orderForm => orderForm.PolicyholderCarIdCardBack);
-		this.PolicyholderCarIdCardFront$ = this.orderForm$.map(orderForm => orderForm.PolicyholderCarIdCardFront);
+		this.CarCardBackImage$ = this.orderForm$.map(orderForm => orderForm.CarCardBackImage);
+		this.CarCardFrontImage$ = this.orderForm$.map(orderForm => orderForm.CarCardFrontImage);
 		this.PolicyholderNationalCode$ = this.orderForm$.map(orderForm => orderForm.PolicyholderNationalCode);
 		this.PolicyholderBirthDate$ = this.orderForm$.map(orderForm => orderForm.PolicyholderBirthDate);
 		this.PolicyholderFatherName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFatherName);
@@ -120,8 +120,8 @@ export class InsurerInfoComponent implements OnInit {
 			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
-			PolicyholderCarIdCardBack: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
-			PolicyholderCarIdCardFront: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
+			CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
+			CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
 
 			// LastPolicyDiscountYears: new FormControl("1"),
 			// LastPolicyUsedPropertyCoupons: new FormControl("0"),

@@ -7,7 +7,7 @@ import { Subject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
 import { FieldModel, FieldOptionModel } from "../../models/field.model";
-import { FirePolicyOrderFormModel } from "../../models";
+import { FirePolicyOrderFormModel, OrderFormType } from "../../models";
 import { PolicyCompareModel } from "../../../policy/models/policy-compare.model";
 import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
 import { takeUntil, map, distinctUntilChanged, filter, take } from "rxjs/operators";
@@ -25,32 +25,44 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	pauser = new Subject();
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	formGroup: FormGroup;
-	orderForm: FirePolicyOrderFormModel;
-	orderForm$: Observable<FirePolicyOrderFormModel>;
 
-	EstateType$: Observable<FieldModel>;
-	Units$: Observable<FieldModel>;
-	BuildType$: Observable<FieldModel>;
-	Area$: Observable<FieldModel>;
-	ThingsValue$: Observable<FieldModel>;
+	ready = false;
+	_orderForm: FirePolicyOrderFormModel;
+	@Input()
+	set orderForm(orderForm: FirePolicyOrderFormModel) {
+		if (!orderForm) return;
+		this._orderForm = orderForm;
+		this._set_formGroup_validation(orderForm);
+		this._patchValue_formGroup_on_orderForm_change(orderForm);
+		this._map_orderForm_to_fields(orderForm);
+		this.ready = true;
+	}
+	get orderForm() {
+		return this._orderForm;
+	}
 
-	FocuseddPolicy: PolicyCompareModel;
+	EstateType: FieldModel;
+	Units: FieldModel;
+	BuildType: FieldModel;
+	Area: FieldModel;
+	ThingsValue: FieldModel;
+
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
+
 	constructor(private store: Store<AppState>) {
 		this._init_properties();
-		this._select_orderForm();
 		this._create_formGroup();
-		this._set_formGroup_validation();
-		this._patchValue_formGroup_on_orderForm_change();
-		this._subscribe_on_orderForm();
-		this._map_orderForm_to_fields();
 	}
 
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction(4));
 		this._set_formGroup_relation_logic();
+		this.formGroup.valueChanges.subscribe(values => {
+			if (!this.formGroup.valid) return;
+			this.done.emit(this.formGroup.value);
+		});
 	}
 	ngOnDestroy() {
 		this.unsubscribe.next();
@@ -66,7 +78,6 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 		const formValue = this.formGroup.value;
 		Object.keys(formValue || {}).forEach(key => (this.orderForm[key].Value = formValue[key]));
 		this.store.dispatch(new NewOrderFormUpdateAction(this.orderForm));
-		this.done.emit();
 	}
 
 	viewMode() {
@@ -75,18 +86,15 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	editMode() {
 		this.mode = "edit";
 	}
+	toggleCoverage(coverageName: string) {
+		const current = this.formGroup.get(coverageName).value;
+		this.formGroup.get(coverageName).setValue(!current);
+	}
 
 	/**
 	 * Private methods
 	 */
-	_subscribe_on_orderForm() {
-		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
-	}
-	_select_orderForm() {
-		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data as FirePolicyOrderFormModel)
-			.pipe(takeUntil(this.unsubscribe), filter(orderForm => orderForm != null), distinctUntilChanged());
-	}
+	_subscribe_on_orderForm() {}
 	_init_properties() {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
@@ -110,46 +118,45 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 			Units: new FormControl("", Validators.required),
 			BuildType: new FormControl("", Validators.required),
 			Area: new FormControl("", Validators.required),
-			ThingsValue: new FormControl("", Validators.required)
+			ThingsValue: new FormControl("", Validators.required),
+			EarthquakeExtraCoverage: new FormControl(false),
+			PipeExplotionExtraCoverage: new FormControl(false),
+			EarthSummitExtraCoverage: new FormControl(false),
+			AirplanFallExtraCoverage: new FormControl(false),
+			StormExtraCoverage: new FormControl(false),
+			FloodExtraCoverage: new FormControl(false),
+			HarzExtraCoverage: new FormControl(false),
+			SnowRainExtraCoverage: new FormControl(false),
+			DoctorEngineerDiscount: new FormControl(false),
+			LifeInsuranceDiscount: new FormControl(false),
+			LongTermAccountDiscount: new FormControl(false)
 		});
 	}
-	_set_formGroup_validation() {
-		this.orderForm$.pipe(take(1)).subscribe(orderForm => {
-			Object.keys(this.formGroup.controls).forEach(key => {
-				if (orderForm[key].Status == 4) {
-					this.formGroup.get(key).setValidators([ Validators.required ]);
-					this.formGroup.get(key).updateValueAndValidity();
-				}
-			});
+	_set_formGroup_validation(orderForm: OrderFormType) {
+		Object.keys(this.formGroup.controls).forEach(key => {
+			if (orderForm[key].Status == 4) {
+				this.formGroup.get(key).setValidators([ Validators.required ]);
+				this.formGroup.get(key).updateValueAndValidity();
+			}
 			this.formGroup.updateValueAndValidity();
 		});
 	}
-	_patchValue_formGroup_on_orderForm_change() {
-		this.orderForm$
-			.pipe(
-				map(orderForm => {
-					var values = {};
-					Object.keys(orderForm)
-						.filter(key => key in this.formGroup.controls)
-						.filter(key => orderForm[key].Value)
-						.map(key => (values[key] = orderForm[key].Value));
-					return values;
-				})
-			)
-			.subscribe(values => {
-				this.formGroup.patchValue(values);
-			});
+	_patchValue_formGroup_on_orderForm_change(orderForm: OrderFormType) {
+		var values = {};
+		Object.keys(orderForm)
+			.filter(key => key in this.formGroup.controls)
+			.filter(key => orderForm[key].Value)
+			.map(key => (values[key] = orderForm[key].Value));
+
+		this.formGroup.patchValue(values);
 	}
 	_set_formGroup_relation_logic() {}
-	_map_orderForm_to_fields() {
-		this.EstateType$ = this.orderForm$.map(orderForm => {
-			debugger;
-			return orderForm.EstateType;
-		});
-		this.BuildType$ = this.orderForm$.map(orderForm => orderForm.BuildType);
-		this.Units$ = this.orderForm$.map(orderForm => orderForm.Units);
-		this.Area$ = this.orderForm$.map(orderForm => orderForm.Area);
-		this.ThingsValue$ = this.orderForm$.map(orderForm => orderForm.ThingsValue);
+	_map_orderForm_to_fields(orderForm) {
+		this.EstateType = orderForm.EstateType;
+		this.BuildType = orderForm.BuildType;
+		this.Units = orderForm.Units;
+		this.Area = orderForm.Area;
+		this.ThingsValue = orderForm.ThingsValue;
 	}
 	_validate_all_form_fields(formGroup: FormGroup) {
 		Object.keys(formGroup.controls).forEach(field => {

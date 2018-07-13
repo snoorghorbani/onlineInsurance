@@ -22,7 +22,9 @@ import {
 	MatChipsModule,
 	MatRadioModule,
 	MatListModule,
-	MatBottomSheetModule
+	MatBottomSheetModule,
+	MatDividerModule,
+	MatDialogModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -72,6 +74,7 @@ import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.compo
 import { FieldInputComponent } from "./field-input/field-input.component";
 import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 import { OrderPanelEffects } from "./order-panel/order-panel.effects";
+import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy-confirmation/selectd-policy-confirmation.component";
 
 @NgModule({
 	imports: [
@@ -88,7 +91,9 @@ import { OrderPanelEffects } from "./order-panel/order-panel.effects";
 		MatIconModule,
 		MatButtonModule,
 		MatTooltipModule,
+		MatDialogModule,
 		MatChipsModule,
+		MatDividerModule,
 		MatRadioModule,
 		MatAutocompleteModule,
 		MatBottomSheetModule,
@@ -127,10 +132,12 @@ import { OrderPanelEffects } from "./order-panel/order-panel.effects";
 		FieldSelectComponent,
 		FieldInputComponent,
 		SelectFirePolicyProductComponent,
+		SelectdPolicyConfirmationComponent,
 		FieldDatepickerComponent,
 		OrderPanelComponent,
 		AboutThirdPartyPolicyComponent
 	],
+	entryComponents: [ SelectdPolicyConfirmationComponent ],
 	exports: [ AboutThirdPartyPolicyComponent ]
 })
 export class OrderModule {

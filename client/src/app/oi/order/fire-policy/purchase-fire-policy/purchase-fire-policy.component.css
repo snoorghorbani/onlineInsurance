@@ -1,6 +1,5 @@
 :host {
 	width: 100%;
-	padding: 50px;
 }
 .close {
 	position: fixed;
@@ -22,8 +21,4 @@
 }
 .card-box {
 	transform: translateX(0);
-}
-.blk {
-	height: calc(100vh - 100px);
-	overflow: auto;
 }

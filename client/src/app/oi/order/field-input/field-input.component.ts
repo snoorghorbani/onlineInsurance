@@ -34,10 +34,12 @@ export class FieldInputComponent implements OnInit {
 	@Input() mode: "view" | "edit";
 	@Input() hint: string;
 	@Input() tooltip: string;
+	@Input() appearance: string;
 	@Input() options: any[];
 	DisplayValue$: Observable<string>;
 	constructor() {
 		this.mode = "edit";
+		this.appearance = "legacy";
 	}
 
 	ngOnInit() {

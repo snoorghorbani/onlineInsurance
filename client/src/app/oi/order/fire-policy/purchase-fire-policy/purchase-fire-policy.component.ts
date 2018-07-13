@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
-import { MatStepper, MatBottomSheetRef } from "@angular/material";
+import { MatStepper, MatBottomSheetRef, MatDialog } from "@angular/material";
 import { Observable } from "rxjs/internal/Observable";
-import { FirePolicyOrderFormModel } from "../../models";
+import { FirePolicyOrderFormModel, OrderFormType } from "../../models";
 import { AppState } from "../../order.reducers";
 import { Store } from "@ngrx/store";
 import { trigger, transition, animate, style, state } from "@angular/animations";
@@ -12,9 +12,14 @@ import { getAccountInfo } from "@soushians/user";
 import { SigninRequiredAction, SigninContainerComponent } from "@soushians/authentication";
 import { InsurerInfoComponent } from "../../insurer-info/insurer-info.component";
 import { SaveOrderStartAction } from "../../services/api";
-import { map } from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
 import { HomeDetailComponent } from "../home-detail/home-detail.component";
 import { SelectFirePolicyProductComponent } from "../select-fire-policy-product/select-fire-policy-product.component";
+import { ComparePoliciesStartAction } from "../../../policy/services/api";
+import { PolicyCompareModel, PriceModel } from "../../../policy/models";
+import { PolicyService } from "../../../policy/services";
+import { BehaviorSubject } from "rxjs";
+import { SelectdPolicyConfirmationComponent } from "../selectd-policy-confirmation/selectd-policy-confirmation.component";
 
 @Component({
 	selector: "order-purchase-fire-policy",
@@ -34,11 +39,14 @@ export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
 	@ViewChild(HomeDetailComponent) carDetailComponent: HomeDetailComponent;
 	@ViewChild(SelectFirePolicyProductComponent) selectProductComponent: SelectFirePolicyProductComponent;
 	@ViewChild(InsurerInfoComponent) insurerInfoComponent: InsurerInfoComponent;
-	orderForm$: Observable<FirePolicyOrderFormModel>;
+	orderForm: FirePolicyOrderFormModel;
+	policies$: Observable<PolicyCompareModel[]>;
 	signedIn$: Observable<boolean>;
 	state: any;
 	constructor(
 		private store: Store<AppState>,
+		private policyService: PolicyService,
+		public dialog: MatDialog,
 		private router: Router // private signinBottomSheetRef: MatBottomSheetRef<SigninContainerComponent>
 	) {
 		this.state = {
@@ -60,24 +68,39 @@ export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
 		);
 	}
 	ngOnInit() {
-		this.orderForm$ = this.store
+		this.store
 			.select(state => state.order.newOrder.data as FirePolicyOrderFormModel)
-			.filter(orderForm => orderForm != null);
+			.filter(orderForm => orderForm != null)
+			.subscribe(orderForm => {
+				this.orderForm = orderForm;
+				this.policies$ = this.policyService.ComparePolicies(this.orderForm);
+			});
 		this.store.dispatch(new FullscreenAction());
 	}
 	ngOnDestroy() {
 		this.store.dispatch(new ExitFullscreenAction());
 	}
-	doneCar(orderForm: FirePolicyOrderFormModel) {
-		this.carDetailComponent.viewMode();
-		this.selectProductComponent.editMode();
-		this.state.product.animateState = "in";
+	homeIsDone(formValue) {
+		debugger;
+		Object.keys(formValue).forEach(k => (this.orderForm[k].Value = formValue[k]));
+		this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 	}
-	doneProduct(orderForm: FirePolicyOrderFormModel) {
-		this.selectProductComponent.viewMode();
-		this.insurerInfoComponent.editMode();
-		this.state.insurer.animateState = "in";
-		this.store.dispatch(new SaveOrderStartAction(orderForm));
+	selectProduct(price: PriceModel) {
+		debugger;
+		this.orderForm.ProductId.Value = price.ProductId;
+
+		const dialogRef = this.dialog.open(SelectdPolicyConfirmationComponent, {
+			width: "500px",
+			data: { orderForm: this.orderForm, price }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log("The dialog was closed");
+			debugger;
+			// this.animal = result;
+		});
+
+		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 	}
 	doneInsurer(orderForm: FirePolicyOrderFormModel) {
 		this.router.navigate([ "order/view", orderForm.Id.Value ]);
@@ -90,5 +113,8 @@ export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
+	}
+	_get_products(orderForm: OrderFormType) {
+		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 }

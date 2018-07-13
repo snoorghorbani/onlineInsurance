@@ -23,9 +23,10 @@
 }
 mat-icon.tooltip {
 	position: absolute;
-	left: 15px;
-	font-size: 18px;
+	left: 2px;
+	font-size: 20px;
 	color: #555;
+	top: -6px;
 }
 .fit {
 	width: 100%;

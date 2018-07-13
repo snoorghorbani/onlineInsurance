@@ -1,19 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Subject, BehaviorSubject } from "rxjs";
+import { Subject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from "rxjs/internal/Observable";
-import { Router } from "@angular/router";
 import { trigger, state, transition, animate, style } from "@angular/animations";
-import { takeUntil, map, take, filter, distinctUntilChanged, startWith } from "rxjs/operators";
 
 import { AppState } from "../../order.reducers";
-import { ComparePoliciesStartAction } from "../../../policy/services/api";
-import { FieldModel } from "../../models/field.model";
 import { FirePolicyOrderFormModel } from "../../models";
 import { PolicyCompareModel, PriceModel } from "../../../policy/models/policy-compare.model";
-import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
-import { MatAutocompleteSelectedEvent, MatChipInputEvent } from "@angular/material";
+import { MatDialog } from "@angular/material";
+import { SelectdPolicyConfirmationComponent } from "../selectd-policy-confirmation/selectd-policy-confirmation.component";
 
 @Component({
 	selector: "order-fire-policy-select-product",
@@ -29,20 +25,42 @@ import { MatAutocompleteSelectedEvent, MatChipInputEvent } from "@angular/materi
 	]
 })
 export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
-	@Output() done = new EventEmitter();
+	@Output() select = new EventEmitter();
 	unsubscribe = new Subject<void>();
 	ready = false;
 	// displayedColumns = ['icon', 'companyName', 'totalPenalty', 'dayPenalty', 'penalty', 'satisfaction', 'portion', 'complaint', 'branch', 'discount'];
 	@Input() mode: "view" | "edit" = "view";
 	@Input() boxMode: "disable" | "loading" = "loading";
-	policies$: BehaviorSubject<PolicyCompareModel[]> = new BehaviorSubject<PolicyCompareModel[]>([]);
+	@Input() policies: PolicyCompareModel[] = [];
 	formGroup: FormGroup;
 	activePolicy: PolicyCompareModel;
 	price: PriceModel;
 	PolicyTermDisplayValue: string;
 	logos: { [name: string]: string };
-	orderForm: FirePolicyOrderFormModel;
-	orderForm$: Observable<FirePolicyOrderFormModel>;
+
+	displayedColumns: string[] = [
+		"InsuranceCompany",
+		"SatheTavangariyeMali",
+		"TedadeMarakezePardakhteKhesarat",
+		"ModatZamanePasokhgoieBeShekayat",
+		"MizaneShekayateMoshtariyan",
+		"actions"
+	];
+	dataSource = [];
+
+	_orderForm: FirePolicyOrderFormModel;
+	@Input()
+	set orderForm(orderForm: FirePolicyOrderFormModel) {
+		if (!orderForm) return;
+		this._orderForm = orderForm;
+		// this._get_products(orderForm);
+		this._setFormGroupValidation(orderForm);
+		this._setFormGroupDefaultValue(orderForm);
+		this._syncStoreAndFormGroup(orderForm);
+	}
+	get orderForm() {
+		return this._orderForm;
+	}
 	// PolicyTerm$: Observable<FieldModel>;
 	selectedPolicy: PolicyCompareModel;
 	selectedProduct: any;
@@ -50,23 +68,13 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 	companyInfoDataSource: any[];
 	policyInfoDataSource: any[];
 	companyInfoDisplayCol: any[];
-	constructor(private store: Store<AppState>) {
+	constructor() {
 		this.companyInfoDataSource = [];
 		this.policyInfoDataSource = [];
 		this.companyInfoDisplayCol = [ "key", "value" ];
 		this._createFormGroup();
 		this._initInsLogos();
-		this.store.select(state => state.order.carDetail.data).subscribe(policies => this.policies$.next(policies));
-
-		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data as FirePolicyOrderFormModel)
-			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
-		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
-
-		this.filteredCoverage = this.additionalCoverageFormControl.valueChanges.pipe(
-			startWith(null),
-			map((fruit: string | null) => (fruit ? this._filter(fruit) : this.additionalCoverage.slice()))
-		);
+		// this.store.select(state => state.order.carDetail.data).subscribe(policies => this.policies.next(policies));
 	}
 
 	ngOnInit() {
@@ -77,10 +85,6 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		// 		([ value, PolicyTerm ]) =>
 		// 			(this.PolicyTermDisplayValue = PolicyTerm.Options.find(i => i.Value == value).DisplayValue)
 		// 	);
-		this._setFormGroupValidation();
-		this._setFormGroupDefaultValue();
-		this._syncStoreAndFormGroup();
-		this._ObserveOnOrderFormAndGetProducts();
 	}
 	ngOnDestroy() {
 		this.unsubscribe.next();
@@ -89,13 +93,12 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 
 	selectPolicy(policy: PolicyCompareModel) {
 		this.selectedPolicy = policy;
-		debugger;
 		// TODO: چک کردن پارامترهای تاثیر گذار در قیمت
 		// let ProductId = policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).ProductId;
 		let ProductId = policy.Prices[0].ProductId;
 		this._fillSelectedProduct();
 		this.formGroup.patchValue({ ProductId });
-		this.done.emit(this.orderForm);
+		this.select.emit(policy.Prices[0]);
 	}
 	open(policy: PolicyCompareModel) {
 		this.activePolicy = policy;
@@ -162,44 +165,30 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		};
 	}
 	_fillSelectedProduct() {
-		debugger;
 		if (!this.selectedPolicy) return null;
 		this.selectedProduct = {
 			Price: this.getPrice(this.selectedPolicy),
 			FinalPrice: this.getFinalPrice(this.selectedPolicy)
 		};
 	}
-	_syncStoreAndFormGroup() {
-		this.formGroup.valueChanges
-			.pipe(
-				takeUntil(this.unsubscribe),
-				map(formValue => {
-					Object.keys(formValue || {}).forEach(key => (this.orderForm[key].Value = formValue[key]));
-					return this.orderForm;
-				})
-			)
-			.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)));
-		this.orderForm$
-			.pipe(
-				take(1),
-				map(orderForm => {
-					var values = {};
-					Object.keys(orderForm)
-						.filter(key => key in this.formGroup.controls)
-						.filter(key => orderForm[key].Value)
-						.map(key => (values[key] = orderForm[key].Value));
-					return values;
-				})
-			)
-			.subscribe(values => {
-				this.formGroup.patchValue(values);
-			});
-	}
-	_ObserveOnOrderFormAndGetProducts() {
-		this.orderForm$
-			// .pipe(takeUntil(this.unsubscribe), filter(() => this.formGroup.valid))
-			.pipe(takeUntil(this.unsubscribe))
-			.subscribe(orderForm => this.store.dispatch(new ComparePoliciesStartAction(orderForm)));
+	_syncStoreAndFormGroup(orderForm) {
+		// this.formGroup.valueChanges
+		// 	.pipe(
+		// 		takeUntil(this.unsubscribe),
+		// 		map(formValue => {
+		// 			Object.keys(formValue || {}).forEach(key => (this.orderForm[key].Value = formValue[key]));
+		// 			return this.orderForm;
+		// 		})
+		// 	)
+		// 	.subscribe(orderForm => this.store.dispatch(new NewOrderFormUpdateAction(orderForm)));
+
+		var values = {};
+		Object.keys(orderForm)
+			.filter(key => key in this.formGroup.controls)
+			.filter(key => orderForm[key].Value)
+			.map(key => (values[key] = orderForm[key].Value));
+
+		this.formGroup.patchValue(values);
 	}
 	_createFormGroup() {
 		this.formGroup = new FormGroup({
@@ -208,67 +197,18 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 			ProductId: new FormControl("")
 		});
 	}
-	_setFormGroupValidation() {
-		this.orderForm$.pipe(take(1)).subscribe(orderForm => {
-			Object.keys(this.formGroup.controls).forEach(key => {
-				if (orderForm[key].Status == 1) {
-					this.formGroup.get(key).setValidators([ Validators.required ]);
-					this.formGroup.get(key).updateValueAndValidity();
-				}
-			});
-			this.formGroup.updateValueAndValidity();
+	_setFormGroupValidation(orderForm) {
+		Object.keys(this.formGroup.controls).forEach(key => {
+			if (orderForm[key].Status == 1) {
+				this.formGroup.get(key).setValidators([ Validators.required ]);
+				this.formGroup.get(key).updateValueAndValidity();
+			}
 		});
+		this.formGroup.updateValueAndValidity();
 	}
-	_setFormGroupDefaultValue() {
+	_setFormGroupDefaultValue(orderForm) {
 		// this.PolicyTerm$
 		// 	.pipe(take(1))
 		// 	.subscribe(PolicyTerm => this.formGroup.patchValue({ PolicyTerm: PolicyTerm.Options[0].Value }));
-	}
-
-	// additional coverage
-	additionalCoverageFormControl = new FormControl();
-	addOnBlur = false;
-	// separatorKeysCodes: number[] = [ ENTER, COMMA ];
-	filteredCoverage: Observable<string[]>;
-	selectedadditionalCoverage: string[] = [];
-	additionalCoverage: string[] = [ "Apple", "Lemon", "Lime", "Orange", "Strawberry" ];
-
-	@ViewChild("additionalCoverageInput") additionalCoverageInput: ElementRef;
-
-	add(event: MatChipInputEvent): void {
-		const input = event.input;
-		const value = event.value;
-
-		// Add our fruit
-		if ((value || "").trim()) {
-			this.selectedadditionalCoverage.push(value.trim());
-		}
-
-		// Reset the input value
-		if (input) {
-			input.value = "";
-		}
-
-		this.additionalCoverageFormControl.setValue(null);
-	}
-
-	remove(fruit: string): void {
-		const index = this.selectedadditionalCoverage.indexOf(fruit);
-
-		if (index >= 0) {
-			this.selectedadditionalCoverage.splice(index, 1);
-		}
-	}
-
-	selected(event: MatAutocompleteSelectedEvent): void {
-		this.selectedadditionalCoverage.push(event.option.viewValue);
-		this.additionalCoverageInput.nativeElement.value = "";
-		this.additionalCoverageFormControl.setValue(null);
-	}
-
-	private _filter(value: string): string[] {
-		const filterValue = value.toLowerCase();
-
-		return this.additionalCoverage.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
 	}
 }

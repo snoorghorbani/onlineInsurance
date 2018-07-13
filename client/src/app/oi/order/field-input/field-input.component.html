@@ -1,9 +1,10 @@
 <div [formGroup]="formGroup">
     <div class="field-wrapper">
       <div [@filedAnimation]="mode">
-        <mat-form-field class="fit" [(ngClass)]="mode">
+        <mat-form-field class="fit" [(ngClass)]="mode" [appearance]="appearance">
+          <mat-label>{{placeholder}}</mat-label>
           <input matInput [placeholder]="placeholder" [formControlName]="controlName"/>
-          <mat-icon class="tooltip md-18" *ngIf="tooltip" [matTooltip]="tooltip">help</mat-icon>
+        <mat-icon class="tooltip md-18" *ngIf="tooltip" [matTooltip]="tooltip">help</mat-icon>
         </mat-form-field>
         <div class="value-box"> 
           <span class="name">

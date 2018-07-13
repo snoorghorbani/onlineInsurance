@@ -91,13 +91,13 @@
               </mat-accordion>
               <div fxLayout="row wrap" fxLayoutGap="25px">
                   <file-drop fxFlex 
-                    [headertext]="(PolicyholderCarIdCardBack$ | async)?.Label" 
+                    [headertext]="(CarCardBackImage$ | async)?.Label" 
                     (onFileDrop)="LastPolicyImageDropped($event)" 
                     (onFileOver)="LastPolicyImageFileOver($event)" 
                     (onFileLeave)="LastPolicyImageFileLeave($event)"
                   ></file-drop>
                   <file-drop fxFlex
-                    [headertext]="(PolicyholderCarIdCardFront$ | async)?.Label" 
+                    [headertext]="(CarCardFrontImage$ | async)?.Label" 
                     (onFileDrop)="LastPolicyImageDropped($event)" 
                     (onFileOver)="LastPolicyImageFileOver($event)" 
                     (onFileLeave)="LastPolicyImageFileLeave($event)"

@@ -1,68 +1,137 @@
-<div fxLayout="row">
-  <mat-card fxFlex>
-      <h3>مشخصات خودرو را ثبت نمایید.</h3>
-    <mat-card-content fxLayout="column" fxLayoutAlign="space-around stretch">
-      <div [formGroup]="formGroup">
-        <app-field-select
-          [formGroup]="formGroup"
-          [placeholder]="(EstateType$ | async)?.Label"
-          controlName="EstateType"
-          [description]="(EstateType$ | async)?.Description"
-          [hint]="(EstateType$ | async)?.Description"
-          [mode]="mode"
-          [tooltip]="(EstateType$ | async)?.Description"
-          [options]="(EstateType$ | async)?.Options"
-        ></app-field-select>
+<div fxLayout="column" *ngIf="ready">
+  <mat-card fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-around stretch" >
 
-        <app-field-input
-          [formGroup]="formGroup"
-          [placeholder]="(Units$ | async)?.Label"
-          controlName="Units"
-          [description]="(Units$ | async)?.Description"
-          [hint]="(Units$ | async)?.Description"
-          [mode]="mode"
-          [tooltip]="(Units$ | async)?.Description"
-          [options]="(Units$ | async)?.Options"
-        ></app-field-input>
-        
-        <app-field-select
-        [formGroup]="formGroup"
-        [placeholder]="(BuildType$ | async)?.Label"
-        controlName="BuildType"
-        [description]="(BuildType$ | async)?.Description"
-        [hint]="(BuildType$ | async)?.Description"
-        [mode]="mode"
-        [tooltip]="(BuildType$ | async)?.Description"
-        [options]="(BuildType$ | async)?.Options"
-        ></app-field-select>
+    <app-field-select fxFlex="30"
+      [formGroup]="formGroup"
+      [placeholder]="EstateType.Label"
+      controlName="EstateType"
+      [description]="EstateType.Description"
+      [hint]="EstateType.Description"
+      [mode]="mode"
+      [tooltip]="EstateType.Description"
+      [options]="EstateType.Options"
+      appearance="fill"
+    ></app-field-select>
+      
+    <app-field-input fxFlex="30"
+      [formGroup]="formGroup"
+      [placeholder]="Units.Label"
+      controlName="Units"
+      [description]="Units.Description"
+      [hint]="Units.Description"
+      [mode]="mode"
+      [tooltip]="Units.Description"
+      [options]="Units.Options"
+      appearance="fill"
+    ></app-field-input>
+      
+    <app-field-select fxFlex="30"
+      [formGroup]="formGroup"
+      [placeholder]="BuildType.Label"
+      controlName="BuildType"
+      [description]="BuildType.Description"
+      [hint]="BuildType.Description"
+      [mode]="mode"
+      [tooltip]="BuildType.Description"
+      [options]="BuildType.Options"
+      appearance="fill"
+    ></app-field-select>
+      
+    <app-field-input fxFlex="30"
+      [formGroup]="formGroup"
+      [placeholder]="Area.Label"
+      controlName="Area"
+      [description]="Area.Description"
+      [hint]="Area.Description"
+      [mode]="mode"
+      [tooltip]="Area.Description"
+      [options]="Area.Options"
+      appearance="fill"
+      ></app-field-input>
+      
+      <app-field-input fxFlex="30"
+      [formGroup]="formGroup"
+      [placeholder]="ThingsValue.Label"
+      controlName="ThingsValue"
+      [description]="ThingsValue.Description"
+      [hint]="ThingsValue.Description"
+      [mode]="mode"
+      [tooltip]="ThingsValue.Description"
+      [options]="ThingsValue.Options"
+      appearance="fill"
+    ></app-field-input>
+    
+    <app-field-select fxFlex="30"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.ConstructionCostPerSquareMeter.Label"
+      controlName="BuildType"
+      [description]="orderForm.ConstructionCostPerSquareMeter.Description"
+      [hint]="orderForm.ConstructionCostPerSquareMeter.Description"
+      [mode]="mode"
+      [tooltip]="orderForm.ConstructionCostPerSquareMeter.Description"
+      [options]="orderForm.ConstructionCostPerSquareMeter.Options"
+      appearance="fill"
+  ></app-field-select>
+  </mat-card>
+
+  <mat-card fxFlex="100" id="coverage-buttons" fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="25px" [formGroup]="formGroup">
+    <h3 fxFlex="100">تخفیف ها</h3>
+    <div fxFlex="30" fxLayout="column">
+        <mat-checkbox fxFlex formControlName="DoctorEngineerDiscount">
+            {{orderForm.DoctorEngineerDiscount.Label}}
+        </mat-checkbox>
+    </div>
+    <div fxFlex="30" fxLayout="column">
+        <mat-checkbox fxFlex formControlName="LifeInsuranceDiscount">
+            {{orderForm.LifeInsuranceDiscount.Label}}
+        </mat-checkbox>
+        <mat-form-field *ngIf="formGroup.get('LifeInsuranceDiscount').value">
+          <mat-select [placeholder]="orderForm.LifeInsuranceCompanyId.Label">
+            <mat-option *ngFor="let item of orderForm.LifeInsuranceCompanyId.Options" [value]="item.Value">
+              {{item.DisplayValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxFlex="30" fxLayout="column">
+        <mat-checkbox fxFlex formControlName="LongTermAccountDiscount">
+            {{orderForm.LongTermAccountDiscount.Label}}
+        </mat-checkbox>
+        <mat-form-field *ngIf="formGroup.get('LongTermAccountDiscount').value">
+            <mat-select [placeholder]="orderForm.LongTermAccountBankId.Label">
+              <mat-option *ngFor="let item of orderForm.LongTermAccountBankId.Options" [value]="item.Value">
+                {{item.DisplayValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
       </div>
+  </mat-card>
 
-      <app-field-input
-        [formGroup]="formGroup"
-        [placeholder]="(Area$ | async)?.Label"
-        controlName="Area"
-        [description]="(Area$ | async)?.Description"
-        [hint]="(Area$ | async)?.Description"
-        [mode]="mode"
-        [tooltip]="(Area$ | async)?.Description"
-        [options]="(Area$ | async)?.Options"
-      ></app-field-input>
-
-      <app-field-input
-        [formGroup]="formGroup"
-        [placeholder]="(ThingsValue$ | async)?.Label"
-        controlName="ThingsValue"
-        [description]="(ThingsValue$ | async)?.Description"
-        [hint]="(ThingsValue$ | async)?.Description"
-        [mode]="mode"
-        [tooltip]="(ThingsValue$ | async)?.Description"
-        [options]="(ThingsValue$ | async)?.Options"
-      ></app-field-input>
-
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button color="primary" *ngIf="mode == 'edit'" (click)="complete()"  [disabled]="formGroup.invalid">ثبت</button>
-      <button mat-raised-button color="primary" *ngIf="mode == 'view'" (click)="editMode()">ویرایش</button>
-    </mat-card-actions>
+  <mat-card fxFlex="100" id="coverage-buttons" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="25px">
+    <h3 fxFlex="100">پوشش های اضافی</h3>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('EarthquakeExtraCoverage')" [color]="formGroup.get('EarthquakeExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.EarthquakeExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('PipeExplotionExtraCoverage')" [color]="formGroup.get('PipeExplotionExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.PipeExplotionExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('EarthSummitExtraCoverage')" [color]="formGroup.get('EarthSummitExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.EarthSummitExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('AirplanFallExtraCoverage')" [color]="formGroup.get('AirplanFallExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.AirplanFallExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('StormExtraCoverage')" [color]="formGroup.get('StormExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.StormExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('FloodExtraCoverage')" [color]="formGroup.get('FloodExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.FloodExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('HarzExtraCoverage')" [color]="formGroup.get('HarzExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.HarzExtraCoverage.Label}}
+    </button>
+    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('SnowRainExtraCoverage')" [color]="formGroup.get('SnowRainExtraCoverage').value ? 'primary' : 'default'">
+      {{orderForm.SnowRainExtraCoverage.Label}}
+    </button>
   </mat-card>
 </div>
