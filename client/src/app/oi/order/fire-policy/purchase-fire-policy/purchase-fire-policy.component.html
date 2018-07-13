@@ -14,7 +14,7 @@
   <div class="blk" fxFlex="100">
     <order-fire-policy-select-product [orderForm]="orderForm" [policies]="policies$ | async" (select)="selectProduct($event)"></order-fire-policy-select-product>
   </div>
-  <div class="blk" fxFlex [@card]="state.insurer.animateState">
+  <div class="blk" fxFlex>
     <!-- <order-insurer-info class="card-box" [mode]="state.insurer.mode" [signedIn]="signedIn$ | async" (done)="doneInsurer($event)" (signInRequest)="signInRequest()"></order-insurer-info> -->
   </div>
 </div>

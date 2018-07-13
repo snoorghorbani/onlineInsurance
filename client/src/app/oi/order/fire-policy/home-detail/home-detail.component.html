@@ -1,70 +1,70 @@
 <div fxLayout="column" *ngIf="ready">
   <mat-card fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-around stretch" >
 
-    <app-field-select fxFlex="30"
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
       [formGroup]="formGroup"
-      [placeholder]="EstateType.Label"
-      controlName="EstateType"
-      [description]="EstateType.Description"
-      [hint]="EstateType.Description"
+      [placeholder]="orderForm.EstateType.Label"
+      controlName="orderForm.EstateType"
+      [description]="orderForm.EstateType.Description"
+      [hint]="orderForm.EstateType.Description"
       [mode]="mode"
-      [tooltip]="EstateType.Description"
-      [options]="EstateType.Options"
+      [tooltip]="orderForm.EstateType.Description"
+      [options]="orderForm.EstateType.Options"
       appearance="fill"
     ></app-field-select>
       
-    <app-field-input fxFlex="30"
+    <app-field-input fxFlex="30" fxFlex.lt-sm="100"
       [formGroup]="formGroup"
-      [placeholder]="Units.Label"
-      controlName="Units"
-      [description]="Units.Description"
-      [hint]="Units.Description"
+      [placeholder]="orderForm.Units.Label"
+      controlName="orderForm.Units"
+      [description]="orderForm.Units.Description"
+      [hint]="orderForm.Units.Description"
       [mode]="mode"
-      [tooltip]="Units.Description"
-      [options]="Units.Options"
+      [tooltip]="orderForm.Units.Description"
+      [options]="orderForm.Units.Options"
       appearance="fill"
     ></app-field-input>
       
-    <app-field-select fxFlex="30"
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
       [formGroup]="formGroup"
-      [placeholder]="BuildType.Label"
-      controlName="BuildType"
-      [description]="BuildType.Description"
-      [hint]="BuildType.Description"
+      [placeholder]="orderForm.BuildType.Label"
+      controlName="orderForm.BuildType"
+      [description]="orderForm.BuildType.Description"
+      [hint]="orderForm.BuildType.Description"
       [mode]="mode"
-      [tooltip]="BuildType.Description"
-      [options]="BuildType.Options"
+      [tooltip]="orderForm.BuildType.Description"
+      [options]="orderForm.BuildType.Options"
       appearance="fill"
     ></app-field-select>
       
-    <app-field-input fxFlex="30"
+    <app-field-input fxFlex="30" fxFlex.lt-sm="100"
       [formGroup]="formGroup"
-      [placeholder]="Area.Label"
-      controlName="Area"
-      [description]="Area.Description"
-      [hint]="Area.Description"
+      [placeholder]="orderForm.Area.Label"
+      controlName="orderForm.Area"
+      [description]="orderForm.Area.Description"
+      [hint]="orderForm.Area.Description"
       [mode]="mode"
-      [tooltip]="Area.Description"
-      [options]="Area.Options"
+      [tooltip]="orderForm.Area.Description"
+      [options]="orderForm.Area.Options"
       appearance="fill"
       ></app-field-input>
       
-      <app-field-input fxFlex="30"
+      <app-field-input fxFlex="30" fxFlex.lt-sm="100"
       [formGroup]="formGroup"
-      [placeholder]="ThingsValue.Label"
-      controlName="ThingsValue"
-      [description]="ThingsValue.Description"
-      [hint]="ThingsValue.Description"
+      [placeholder]="orderForm.ThingsValue.Label"
+      controlName="orderForm.ThingsValue"
+      [description]="orderForm.ThingsValue.Description"
+      [hint]="orderForm.ThingsValue.Description"
       [mode]="mode"
-      [tooltip]="ThingsValue.Description"
-      [options]="ThingsValue.Options"
+      [tooltip]="orderForm.ThingsValue.Description"
+      [options]="orderForm.ThingsValue.Options"
       appearance="fill"
     ></app-field-input>
     
-    <app-field-select fxFlex="30"
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
       [formGroup]="formGroup"
       [placeholder]="orderForm.ConstructionCostPerSquareMeter.Label"
-      controlName="BuildType"
+      controlName="orderForm.BuildType"
       [description]="orderForm.ConstructionCostPerSquareMeter.Description"
       [hint]="orderForm.ConstructionCostPerSquareMeter.Description"
       [mode]="mode"
@@ -76,12 +76,12 @@
 
   <mat-card fxFlex="100" id="coverage-buttons" fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="25px" [formGroup]="formGroup">
     <h3 fxFlex="100">تخفیف ها</h3>
-    <div fxFlex="30" fxLayout="column">
+    <div fxFlex="30" fxFlex.lt-sm="100" fxLayout="column">
         <mat-checkbox fxFlex formControlName="DoctorEngineerDiscount">
             {{orderForm.DoctorEngineerDiscount.Label}}
         </mat-checkbox>
     </div>
-    <div fxFlex="30" fxLayout="column">
+    <div fxFlex="30" fxFlex.lt-sm="100" fxLayout="column">
         <mat-checkbox fxFlex formControlName="LifeInsuranceDiscount">
             {{orderForm.LifeInsuranceDiscount.Label}}
         </mat-checkbox>
@@ -93,7 +93,7 @@
           </mat-select>
         </mat-form-field>
     </div>
-    <div fxFlex="30" fxLayout="column">
+    <div fxFlex="30" fxFlex.lt-sm="100" fxLayout="column">
         <mat-checkbox fxFlex formControlName="LongTermAccountDiscount">
             {{orderForm.LongTermAccountDiscount.Label}}
         </mat-checkbox>
@@ -109,28 +109,28 @@
 
   <mat-card fxFlex="100" id="coverage-buttons" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="25px">
     <h3 fxFlex="100">پوشش های اضافی</h3>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('EarthquakeExtraCoverage')" [color]="formGroup.get('EarthquakeExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('EarthquakeExtraCoverage')" [color]="formGroup.get('EarthquakeExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.EarthquakeExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('PipeExplotionExtraCoverage')" [color]="formGroup.get('PipeExplotionExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('PipeExplotionExtraCoverage')" [color]="formGroup.get('PipeExplotionExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.PipeExplotionExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('EarthSummitExtraCoverage')" [color]="formGroup.get('EarthSummitExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('EarthSummitExtraCoverage')" [color]="formGroup.get('EarthSummitExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.EarthSummitExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('AirplanFallExtraCoverage')" [color]="formGroup.get('AirplanFallExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('AirplanFallExtraCoverage')" [color]="formGroup.get('AirplanFallExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.AirplanFallExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('StormExtraCoverage')" [color]="formGroup.get('StormExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('StormExtraCoverage')" [color]="formGroup.get('StormExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.StormExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('FloodExtraCoverage')" [color]="formGroup.get('FloodExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('FloodExtraCoverage')" [color]="formGroup.get('FloodExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.FloodExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('HarzExtraCoverage')" [color]="formGroup.get('HarzExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('HarzExtraCoverage')" [color]="formGroup.get('HarzExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.HarzExtraCoverage.Label}}
     </button>
-    <button mat-raised-button fxFlex="22" (click)="toggleCoverage('SnowRainExtraCoverage')" [color]="formGroup.get('SnowRainExtraCoverage').value ? 'primary' : 'default'">
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('SnowRainExtraCoverage')" [color]="formGroup.get('SnowRainExtraCoverage').value ? 'primary' : 'default'">
       {{orderForm.SnowRainExtraCoverage.Label}}
     </button>
   </mat-card>

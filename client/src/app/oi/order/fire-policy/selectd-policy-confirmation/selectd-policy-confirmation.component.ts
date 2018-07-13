@@ -10,9 +10,7 @@ export class SelectdPolicyConfirmationComponent implements OnInit, OnDestroy {
 	constructor(
 		public dialogRef: MatDialogRef<SelectdPolicyConfirmationComponent>,
 		@Inject(MAT_DIALOG_DATA) public data
-	) {
-		debugger;
-	}
+	) {}
 
 	approved(): void {
 		this.dialogRef.close(true);
