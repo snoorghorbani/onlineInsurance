@@ -85,13 +85,13 @@ export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
 		Object.keys(formValue).forEach(k => (this.orderForm[k].Value = formValue[k]));
 		this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 	}
-	selectProduct(price: PriceModel) {
+	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
 		debugger;
 		this.orderForm.ProductId.Value = price.ProductId;
 
 		const dialogRef = this.dialog.open(SelectdPolicyConfirmationComponent, {
 			width: "500px",
-			data: { orderForm: this.orderForm, price }
+			data: { orderForm: this.orderForm, price, policy }
 		});
 
 		dialogRef.afterClosed().subscribe(result => {

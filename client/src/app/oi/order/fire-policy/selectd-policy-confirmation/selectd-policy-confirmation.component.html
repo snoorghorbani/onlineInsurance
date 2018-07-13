@@ -1,6 +1,11 @@
-<div MatDialogContent fxLayout="row wrap">
+<h3 MatDialogTitle>تایید سفارش</h3>
+<div MatDialogContent fxLayout="row wrap" id="box">
   <div fxFlex="100">
-      شما بیمه البرز با قیمت 
+      شما 
+      <b>
+          {{data.policy.InsuranceCompany}}
+      </b>
+      با قیمت 
       <b>
         {{data.price.Price.DisplayValue}}
       </b> 

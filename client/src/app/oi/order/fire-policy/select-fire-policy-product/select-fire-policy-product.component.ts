@@ -98,7 +98,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		let ProductId = policy.Prices[0].ProductId;
 		this._fillSelectedProduct();
 		this.formGroup.patchValue({ ProductId });
-		this.select.emit(policy.Prices[0]);
+		this.select.emit({ price: policy.Prices[0], policy });
 	}
 	open(policy: PolicyCompareModel) {
 		this.activePolicy = policy;
