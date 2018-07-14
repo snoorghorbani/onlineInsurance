@@ -57,11 +57,9 @@ export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
 			data: { orderForm: this.orderForm, price, policy }
 		});
 
-		dialogRef.afterClosed().subscribe(() => {
-			debugger;
+		dialogRef.afterClosed().subscribe((approved: boolean) => {
+			if (approved) this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 		});
-
-		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 	}
 	doneInsurer(orderForm: FirePolicyOrderFormModel) {
 		this.router.navigate([ "order/view", orderForm.Id.Value ]);
