@@ -12,6 +12,7 @@ import { CartableComponent } from "./cartable/cartable.component";
 import { OrderPanelComponent } from "./order-panel/order-panel.component";
 import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
 import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
+import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component";
 
 const routes: Routes = [
 	{
@@ -39,12 +40,12 @@ const routes: Routes = [
 						component: PurchaseFirePolicyComponent,
 						children: [
 							{
-								path: "",
+								path: "select-product",
 								component: SelectFirePolicyProductComponent
 							},
 							{
-								path: "insurer-info",
-								component: PurchaseFirePolicyComponent
+								path: "insurer-info/:Id",
+								component: FirePolicyInsurerInfoComponent
 							}
 						]
 					},

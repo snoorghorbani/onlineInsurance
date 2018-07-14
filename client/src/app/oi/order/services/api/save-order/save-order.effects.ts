@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Actions, Effect } from "@ngrx/effects";
 import { map, switchMap, catchError } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 import { OrderService } from "../../order.service";
 import {
@@ -15,7 +16,7 @@ import { throwError, of } from "rxjs";
 
 @Injectable()
 export class SaveOrderApiEffects {
-	constructor(private actions$: Actions<SaveOrderActions>, private service: OrderService) {}
+	constructor(private actions$: Actions<SaveOrderActions>, private service: OrderService, private router: Router) {}
 
 	@Effect()
 	start$ = this.actions$
@@ -31,8 +32,13 @@ export class SaveOrderApiEffects {
 					)
 			)
 		);
-	@Effect()
-	update_store$ = this.actions$
-		.ofType(SAVE_ORDER_ACTION_TYPES.SUCCEED)
-		.pipe(map(action => action.payload), map(res => new NewOrderFormUpdateAction(res)));
+
+	@Effect({ dispatch: false })
+	update_store$ = this.actions$.ofType(SAVE_ORDER_ACTION_TYPES.SUCCEED).pipe(
+		map(action => action.payload),
+		map(res => {
+			// new NewOrderFormUpdateAction(res);
+			this.router.navigate([ "order/purchase/fire-policy/insurer-info", res.Id.Value ]);
+		})
+	);
 }

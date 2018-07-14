@@ -34,6 +34,7 @@ import { StoreModule } from "@ngrx/store";
 
 import { NgsFormModule } from "@soushians/form";
 import { SharedModule } from "@soushians/shared";
+import { RouterModule } from "@angular/router";
 
 import { TestComponent } from "./test/test.component";
 import { OrderRoutingModule } from "./order-routing.module";
@@ -49,7 +50,6 @@ import {
 } from "./services/api";
 import { OrderComponent } from "./order.component";
 import { NewOrderComponent } from "./new-order/new-order.component";
-import { RouterModule } from "@angular/router";
 import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
 import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
 import { SaveOrderApiEffects } from "./services/api/save-order";
@@ -60,7 +60,6 @@ import { ViewOrderComponent } from "./view-order/view-order.component";
 import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
 import { CartableComponent } from "./cartable/cartable.component";
 import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
-import { DestroyableComponent } from "./destroyable/destroyable.component";
 import { OiCommonModule } from "../common/common.module";
 import { CarDetailComponent } from "./car-detail/car-detail.component";
 import { SelectProductComponent } from "./select-product/select-product.component";
@@ -69,13 +68,16 @@ import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.co
 import { RootEffects } from "./root/root.effects";
 import { OrderPanelComponent } from "./order-panel/order-panel.component";
 import { AboutThirdPartyPolicyComponent } from "./about-third-party-policy/about-third-party-policy.component";
-import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
-import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
 import { FieldInputComponent } from "./field-input/field-input.component";
 import { OrderPanelEffects } from "./order-panel/order-panel.effects";
+
+// fire policy
+import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
+import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
 import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy-confirmation/selectd-policy-confirmation.component";
 import { FirePolicyProductsListComponent } from "./fire-policy/fire-policy-products-list/fire-policy-products-list.component";
 import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
+import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component";
 
 @NgModule({
 	imports: [
@@ -130,10 +132,10 @@ import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-poli
 		SelectFirePolicyProductComponent,
 		CartableComponent,
 		RedirectToBankComponent,
-		DestroyableComponent,
 		FieldSelectComponent,
 		FieldInputComponent,
 		FirePolicyProductsListComponent,
+		FirePolicyInsurerInfoComponent,
 		SelectdPolicyConfirmationComponent,
 		FieldDatepickerComponent,
 		OrderPanelComponent,

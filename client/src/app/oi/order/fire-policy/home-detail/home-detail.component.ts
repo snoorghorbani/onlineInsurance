@@ -63,6 +63,7 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 			BuildType: new FormControl("", Validators.required),
 			Area: new FormControl("", Validators.required),
 			ThingsValue: new FormControl("", Validators.required),
+			ConstructionCostPerSquareMeter: new FormControl("", Validators.required),
 			EarthquakeExtraCoverage: new FormControl(false),
 			PipeExplotionExtraCoverage: new FormControl(false),
 			EarthSummitExtraCoverage: new FormControl(false),
