@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule, LOCALE_ID } from "@angular/core";
 import {
 	MatSidenavModule,
@@ -17,38 +18,38 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 /**
  *  ngs module
  * */
-import { SharedModule } from "@soushians/shared";
-import { NgsAuthenticationModule } from "@soushians/authentication";
 import { NgsFrontendAuthenticationModule } from "@soushians/frontend-authentication";
-import { NgsLayoutModule } from "@soushians/layout";
+import { NgsAuthenticationModule } from "@soushians/authentication";
 import { NgsUserModule, NgsUserRoutingModule } from "@soushians/user";
-import { NgsConfigModule } from "@soushians/config";
-import { SourceModule } from "@soushians/source";
-import { NgsSocketModule } from "@soushians/socket";
+import { NgsWidgetTypesModule } from "@soushians/widget-types";
 import { NgsDiagramModule } from "@soushians/diagram";
+import { NgsSocketModule } from "@soushians/socket";
+import { NgsLayoutModule } from "@soushians/layout";
+import { NgsConfigModule } from "@soushians/config";
+import { NgsWidgetModule } from "@soushians/widget";
+import { SharedModule } from "@soushians/shared";
+import { SourceModule } from "@soushians/source";
 import { NgsFormModule } from "@soushians/form";
 import { NgsGridModule } from "@soushians/grid";
-import { CommonModule } from "@angular/common";
 import { RuleModule } from "@soushians/rule";
-import { NgsWidgetModule } from "@soushians/widget";
-import { NgsWidgetTypesModule } from "@soushians/widget-types";
 
 /**
  *  module configs
  * */
-import { ngsAuthenticationModuleConfig } from "./module-configs/ngs-authentication.module-config";
-import { ngsFrontendAuthenticationModuleConfig } from "./module-configs/ngs-frontend-authentication.module-config";
-import { ngsConfigModuleConfig } from "./module-configs/ngs-config.module-config";
-import { ngsGridModuleConfig } from "./module-configs/ngs-grid.module-config";
-import { ngsSocketModuleConfig } from "./module-configs/ngs-socket.module-config";
-import { ngsRuleModuleConfig } from "./module-configs/ngs-rule.module-config";
-import { NgsWidgetModuleConfig } from "./module-configs/ngs-widget.module-config";
-import { NgsUserModuleConfig } from "./module-configs/ngs-user.module-config";
+import { NgsFrontendAuthenticationModuleConfig } from "./module-configs/ngs-frontend-authentication.module-config";
+import { NgsAuthenticationModuleConfig } from "./module-configs/ngs-authentication.module-config";
+import { NgsDiagramModuleConfig } from "./module-configs/ngs-diagram.module-config";
 import { NgsLayoutModuleConfig } from "./module-configs/ngs-layout.module-config";
+import { NgsConfigModuleConfig } from "./module-configs/ngs-config.module-config";
+import { NgsWidgetModuleConfig } from "./module-configs/ngs-widget.module-config";
+import { NgsSocketModuleConfig } from "./module-configs/ngs-socket.module-config";
+import { NgsGridModuleConfig } from "./module-configs/ngs-grid.module-config";
+import { NgsRuleModuleConfig } from "./module-configs/ngs-rule.module-config";
+import { NgsUserModuleConfig } from "./module-configs/ngs-user.module-config";
+import { NgsFormModuleConfig } from "./module-configs/ngs-form.module-config";
 
 import { StaticPageModule } from "./static-page";
 
-import { CoreModule } from "./core";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { reducers } from "./app.reducers";
@@ -61,7 +62,6 @@ import { GwtStepsModule } from "./gwt-steps/gwt-steps.module";
 
 @NgModule({
 	imports: [
-		CoreModule,
 		CommonModule,
 		// ServiceWorkerModule.register("/ngsw-worker.js", { enabled: environment.production }),
 		// ServiceWorkerModule.register('/ngsw-worker.js', {enabled: true}),
@@ -73,20 +73,19 @@ import { GwtStepsModule } from "./gwt-steps/gwt-steps.module";
 
 		SharedModule,
 		SourceModule,
+		NgsFrontendAuthenticationModule.forRoot(NgsFrontendAuthenticationModuleConfig),
+		NgsAuthenticationModule.forRoot(NgsAuthenticationModuleConfig),
+		NgsDiagramModule.forRoot(NgsDiagramModuleConfig),
 		NgsLayoutModule.forRoot(NgsLayoutModuleConfig),
-		NgsAuthenticationModule.forRoot(ngsAuthenticationModuleConfig),
-		NgsFrontendAuthenticationModule.forRoot(ngsFrontendAuthenticationModuleConfig),
-		NgsConfigModule.forRoot(ngsConfigModuleConfig),
-		NgsDiagramModule.forRoot(),
-		NgsUserModule.forRoot(NgsUserModuleConfig),
-		NgsUserRoutingModule,
-		NgsSocketModule.forRoot(ngsSocketModuleConfig),
+		NgsConfigModule.forRoot(NgsConfigModuleConfig),
+		NgsSocketModule.forRoot(NgsSocketModuleConfig),
 		NgsWidgetModule.forRoot(NgsWidgetModuleConfig),
-		NgsWidgetTypesModule,
-		NgsFormModule.forRoot(),
-		RuleModule.forRoot(ngsRuleModuleConfig),
+		NgsUserModule.forRoot(NgsUserModuleConfig),
+		NgsGridModule.forRoot(NgsGridModuleConfig),
+		NgsFormModule.forRoot(NgsFormModuleConfig),
+		RuleModule.forRoot(NgsRuleModuleConfig),
+		NgsUserRoutingModule,
 		GwtStepsModule,
-		NgsGridModule.forRoot(ngsGridModuleConfig),
 
 		StaticPageModule,
 		AppRoutingModule,
