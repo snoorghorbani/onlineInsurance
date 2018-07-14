@@ -7,21 +7,4 @@
 <button class="question" mat-mini-fab>
   <mat-icon>question_answer</mat-icon>
 </button>
-<div fxLayout="row wrap">
-  <div class="blk" fxFlex="100">
-    <order-home-detail [orderForm]="orderForm" (done)="homeIsDone($event)"></order-home-detail>
-  </div>
-  <div class="blk" fxFlex="100">
-    <order-fire-policy-select-product [orderForm]="orderForm" [policies]="policies$ | async" (select)="selectProduct($event)"></order-fire-policy-select-product>
-  </div>
-  <div class="blk" fxFlex>
-    <!-- <order-insurer-info class="card-box" [mode]="state.insurer.mode" [signedIn]="signedIn$ | async" (done)="doneInsurer($event)" (signInRequest)="signInRequest()"></order-insurer-info> -->
-  </div>
-</div>
-
-
-
-
-    <!-- <div fxFlex="40">
-      <order-view-order [orderForm]="orderForm$ | async" (done)="next()"></order-view-order>
-    </div> -->
+<router-outlet></router-outlet>

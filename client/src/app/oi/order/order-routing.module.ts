@@ -11,6 +11,7 @@ import { ViewOrderComponent } from "./view-order/view-order.component";
 import { CartableComponent } from "./cartable/cartable.component";
 import { OrderPanelComponent } from "./order-panel/order-panel.component";
 import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
+import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 
 const routes: Routes = [
 	{
@@ -31,12 +32,27 @@ const routes: Routes = [
 				component: InsurerInfoComponent
 			},
 			{
-				path: "purchase/third-party-policy",
-				component: PurchaseComponent
-			},
-			{
-				path: "purchase/fire-policy",
-				component: PurchaseFirePolicyComponent
+				path: "purchase",
+				children: [
+					{
+						path: "fire-policy",
+						component: PurchaseFirePolicyComponent,
+						children: [
+							{
+								path: "",
+								component: SelectFirePolicyProductComponent
+							},
+							{
+								path: "insurer-info",
+								component: PurchaseFirePolicyComponent
+							}
+						]
+					},
+					{
+						path: "third-party-policy",
+						component: PurchaseComponent
+					}
+				]
 			},
 			{
 				path: "my-orders",

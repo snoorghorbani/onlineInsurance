@@ -72,9 +72,10 @@ import { AboutThirdPartyPolicyComponent } from "./about-third-party-policy/about
 import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
 import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
 import { FieldInputComponent } from "./field-input/field-input.component";
-import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 import { OrderPanelEffects } from "./order-panel/order-panel.effects";
 import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy-confirmation/selectd-policy-confirmation.component";
+import { FirePolicyProductsListComponent } from "./fire-policy/fire-policy-products-list/fire-policy-products-list.component";
+import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 
 @NgModule({
 	imports: [
@@ -126,12 +127,13 @@ import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy
 		ReviewOrderComponent,
 		MyOrdersComponent,
 		ViewOrderComponent,
+		SelectFirePolicyProductComponent,
 		CartableComponent,
 		RedirectToBankComponent,
 		DestroyableComponent,
 		FieldSelectComponent,
 		FieldInputComponent,
-		SelectFirePolicyProductComponent,
+		FirePolicyProductsListComponent,
 		SelectdPolicyConfirmationComponent,
 		FieldDatepickerComponent,
 		OrderPanelComponent,

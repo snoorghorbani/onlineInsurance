@@ -1,73 +1,88 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
-import { Subject } from "rxjs";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { MatDialog } from "@angular/material";
 import { Observable } from "rxjs/internal/Observable";
+import { Store } from "@ngrx/store";
+import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
+
+import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
+import { getAccountInfo } from "@soushians/user";
+import { SigninRequiredAction } from "@soushians/authentication";
 
 import { FirePolicyOrderFormModel } from "../../models";
-import { PolicyCompareModel } from "../../../policy/models/policy-compare.model";
+import { AppState } from "../../order.reducers";
+import { SaveOrderStartAction, GetNewOrderFormStartAction } from "../../services/api";
+import { PolicyCompareModel, PriceModel } from "../../../policy/models";
+import { PolicyService } from "../../../policy/services";
+import { SelectdPolicyConfirmationComponent } from "../selectd-policy-confirmation/selectd-policy-confirmation.component";
 
 @Component({
-	selector: "order-fire-policy-select-product",
 	templateUrl: "./select-fire-policy-product.component.html",
 	styleUrls: [ "./select-fire-policy-product.component.css" ]
 })
 export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
-	@Output() select = new EventEmitter();
-	@Input() policies: PolicyCompareModel[] = [];
-	@Input() orderForm: FirePolicyOrderFormModel;
+	orderForm: FirePolicyOrderFormModel;
+	policies$: Observable<PolicyCompareModel[]>;
+	signedIn$: Observable<boolean>;
 
-	unsubscribe = new Subject<void>();
-	ready: boolean;
-	logos: { [name: string]: string };
-	displayedColumns: string[];
-	dataSource = [];
-
-	constructor() {
-		this._set_default_values();
+	constructor(
+		private store: Store<AppState>,
+		private policyService: PolicyService,
+		public dialog: MatDialog,
+		private router: Router
+	) {
+		this.signedIn$ = this.store.select(getAccountInfo).pipe(map(user => (user.DisplayName == null ? false : true)));
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.store.dispatch(new GetNewOrderFormStartAction(4));
+		this.store.dispatch(new FullscreenAction());
+		this._select_order_form_store_and_subscribe();
+	}
+
 	ngOnDestroy() {
-		this.unsubscribe.next();
-		this.unsubscribe.complete();
+		this.store.dispatch(new ExitFullscreenAction());
 	}
 
-	selectPolicy(policy: PolicyCompareModel) {
-		this.select.emit({ price: policy.Prices[0], policy });
+	homeIsDone(formValue) {
+		Object.keys(formValue).forEach(k => (this.orderForm[k].Value = formValue[k]));
+		this.policies$ = this.policyService.ComparePolicies(this.orderForm);
+	}
+	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
+		this.orderForm.ProductId.Value = price.ProductId;
+
+		const dialogRef = this.dialog.open(SelectdPolicyConfirmationComponent, {
+			width: "500px",
+			data: { orderForm: this.orderForm, price, policy }
+		});
+
+		dialogRef.afterClosed().subscribe((approved: boolean) => {
+			if (approved) this.store.dispatch(new SaveOrderStartAction(this.orderForm));
+		});
+	}
+	doneInsurer(orderForm: FirePolicyOrderFormModel) {
+		this.router.navigate([ "order/view", orderForm.Id.Value ]);
+	}
+	fullscreenToggle() {
+		this.store.dispatch(new ToggleFullscreenAction());
+	}
+	signInRequest() {
+		this.store.dispatch(new SigninRequiredAction());
 	}
 
-	getFinalPrice(policy: PolicyCompareModel) {
-		// return policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).FinalPrice.DisplayValue;
+	/**
+	 * private methods
+	 */
+	_get_products() {
+		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
-	getPrice(policy: PolicyCompareModel) {
-		// return policy.Prices.find(p => p.Description == this.PolicyTermDisplayValue).Price.DisplayValue;
-	}
-
-	_set_default_values() {
-		this.ready = false;
-		this.displayedColumns = [
-			"InsuranceCompany",
-			"SatheTavangariyeMali",
-			"TedadeMarakezePardakhteKhesarat",
-			"ModatZamanePasokhgoieBeShekayat",
-			"MizaneShekayateMoshtariyan",
-			"actions"
-		];
-		this.logos = {
-			"بیمه آسیا": "assets\\ins-logos\\asia.png",
-			"بیمه سرمد": "assets\\ins-logos\\sarmard.png",
-			"بیمه دی": "assets\\ins-logos\\day.png",
-			"بیمه البرز": "assets\\ins-logos\\alborz.png",
-			"بیمه دانا": "assets\\ins-logos\\dana.png",
-			"بیمه ایران": "assets\\ins-logos\\iran.png",
-			"بیمه کارآفرین": "assets\\ins-logos\\karafarin.png",
-			"بیمه ما": "assets\\ins-logos\\ma.png",
-			"بیمه ملت": "assets\\ins-logos\\melat.png",
-			"بیمه نوین": "assets\\ins-logos\\novin.png",
-			"بیمه پارسیان": "assets\\ins-logos\\parsian.png",
-			"بیمه پاسارگاد": "assets\\ins-logos\\pasargad.png",
-			"بیمه رازی": "assets\\ins-logos\\razi.png",
-			"بیمه سامان": "assets\\ins-logos\\saman.png",
-			"بیمه سینا": "assets\\ins-logos\\sina.png"
-		};
+	_select_order_form_store_and_subscribe() {
+		this.store
+			.select(state => state.order.newOrder.data as FirePolicyOrderFormModel)
+			.filter(orderForm => orderForm != null)
+			.subscribe(orderForm => {
+				this.orderForm = orderForm;
+				this.policies$ = this.policyService.ComparePolicies(this.orderForm);
+			});
 	}
 }
