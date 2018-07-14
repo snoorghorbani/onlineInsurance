@@ -18,6 +18,7 @@ import { GeoBoundaryService } from "../../../geo-boundary";
 import { CityModel } from "../../../geo-boundary/models";
 import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
 import { SaveOrderStartAction } from "../../services/api/save-order";
+import { getAccountInfo } from "@soushians/user";
 
 @Component({
 	selector: "order-fire-policy-insurer-info",
@@ -87,6 +88,8 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this.DeliveryDate$ = this.orderForm$.map(orderForm => orderForm.DeliveryDate);
 		this.DeliveryTime$ = this.orderForm$.map(orderForm => orderForm.DeliveryTime);
 		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
+
+		this.store.select(getAccountInfo).subscribe(user => (this.signedIn = !!user.DisplayName));
 	}
 
 	ngOnInit() {
