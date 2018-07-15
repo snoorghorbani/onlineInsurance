@@ -4,7 +4,7 @@ import { RouterModule, Routes, PreloadAllModules } from "@angular/router";
 import { LayoutOutlets } from "@soushians/layout";
 
 import { FooterComponent, NewsletterComponent } from "./common";
-import { MainComponent } from "./common/main/main.component";
+import { ToolbarMenuComponent } from "./common/toolbar-menu/toolbar-menu.component";
 
 const routes: Routes = [
 	{
@@ -19,7 +19,7 @@ const routes: Routes = [
 	},
 	{
 		path: "",
-		component: MainComponent,
+		component: ToolbarMenuComponent,
 		outlet: LayoutOutlets.ngs_layout_toolbar_menu
 	}
 ];

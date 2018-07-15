@@ -24,7 +24,7 @@ import { NewsletterComponent } from "./newsletter/newsletter.component";
 import { ReminderComponent } from "./reminder/reminder.component";
 import { WeAreComponent } from "./we-are/we-are.component";
 import { HowToBuyPolicyComponent } from "./how-to-buy-policy/how-to-buy-policy.component";
-import { MainComponent } from "./main/main.component";
+import { ToolbarMenuComponent } from "./toolbar-menu/toolbar-menu.component";
 
 @NgModule({
 	imports: [
@@ -53,7 +53,7 @@ import { MainComponent } from "./main/main.component";
 		ReminderComponent,
 		ReminderComponent,
 		WeAreComponent,
-		MainComponent,
+		ToolbarMenuComponent,
 		HowToBuyPolicyComponent
 	],
 	exports: [
