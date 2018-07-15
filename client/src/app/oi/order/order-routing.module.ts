@@ -23,17 +23,17 @@ const routes: Routes = [
 		component: OrderComponent,
 		children: [
 			{
-				path: "test",
-				component: TestComponent
-			},
-			{
-				path: "neworder",
-				component: NewOrderComponent
-			},
-
-			{
 				path: "insurer-info",
-				component: InsurerInfoComponent
+				children: [
+					{
+						path: "4/:Id",
+						component: FirePolicyInsurerInfoComponent
+					},
+					{
+						path: "5/:Id",
+						component: EarthquakePolicyInsurerInfoComponent
+					}
+				]
 			},
 			{
 				path: "purchase",
@@ -45,10 +45,6 @@ const routes: Routes = [
 							{
 								path: "select-product",
 								component: SelectFirePolicyProductComponent
-							},
-							{
-								path: "insurer-info/:Id",
-								component: FirePolicyInsurerInfoComponent
 							}
 						]
 					},
@@ -59,10 +55,6 @@ const routes: Routes = [
 							{
 								path: "select-product",
 								component: SelectEarthquakePolicyProductComponent
-							},
-							{
-								path: "insurer-info/:Id",
-								component: EarthquakePolicyInsurerInfoComponent
 							}
 						]
 					},

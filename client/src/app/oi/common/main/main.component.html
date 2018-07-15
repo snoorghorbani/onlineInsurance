@@ -1,0 +1,12 @@
+<ng-container>
+  <button mat-button [matMenuTriggerFor]="menu">بیمه وسایل نقلیه</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="">بیمه بدنه</button>
+    <button mat-menu-item routerLink="/order/purchase/third-party-policy">بیمه شخص ثالث</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="menu2">Menu</button>
+  <mat-menu #menu2="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+</ng-container>

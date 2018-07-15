@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MatDialog } from "@angular/material";
 import { Observable } from "rxjs/internal/Observable";
-import { Store } from "@ngrx/store";
+import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
+import { Store } from "@ngrx/store";
 
 import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
-import { getAccountInfo } from "@soushians/user";
 import { SigninRequiredAction } from "@soushians/authentication";
+import { getAccountInfo } from "@soushians/user";
 
+import { SelectdEarthquakePolicyConfirmationComponent } from "../selectd-earthquake-policy-confirmation/selectd-earthquake-policy-confirmation.component";
 import { SaveOrderStartAction, GetNewOrderFormStartAction } from "../../services/api";
 import { PolicyCompareModel, PriceModel } from "../../../policy/models";
 import { EarthquakePolicyOrderFormModel } from "../../models";
 import { PolicyService } from "../../../policy/services";
 import { AppState } from "../../order.reducers";
-import { SelectdPolicyConfirmationComponent } from "../../fire-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component";
 
 @Component({
 	templateUrl: "./select-earthquake-policy-product.component.html",
@@ -51,7 +51,7 @@ export class SelectEarthquakePolicyProductComponent implements OnInit, OnDestroy
 	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
 		this.orderForm.ProductId.Value = price.ProductId;
 
-		const dialogRef = this.dialog.open(SelectdPolicyConfirmationComponent, {
+		const dialogRef = this.dialog.open(SelectdEarthquakePolicyConfirmationComponent, {
 			width: "500px",
 			data: { orderForm: this.orderForm, price, policy }
 		});

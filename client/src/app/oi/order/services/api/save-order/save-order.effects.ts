@@ -38,7 +38,7 @@ export class SaveOrderApiEffects {
 		map(action => action.payload),
 		map(res => {
 			// new NewOrderFormUpdateAction(res);
-			this.router.navigate([ "order/purchase/fire-policy/insurer-info", res.Id.Value ]);
+			this.router.navigate([ "order", "insurer-info", res.Type.Value, res.Id.Value ]);
 		})
 	);
 }

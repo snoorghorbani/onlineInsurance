@@ -12,7 +12,8 @@ import {
 	MatSnackBarModule,
 	MatTableModule,
 	MatSelectModule,
-	MatFormFieldModule
+	MatFormFieldModule,
+	MatMenuModule
 } from "@angular/material";
 
 import { FooterComponent } from "./footer/footer.component";
@@ -23,6 +24,7 @@ import { NewsletterComponent } from "./newsletter/newsletter.component";
 import { ReminderComponent } from "./reminder/reminder.component";
 import { WeAreComponent } from "./we-are/we-are.component";
 import { HowToBuyPolicyComponent } from "./how-to-buy-policy/how-to-buy-policy.component";
+import { MainComponent } from "./main/main.component";
 
 @NgModule({
 	imports: [
@@ -36,6 +38,7 @@ import { HowToBuyPolicyComponent } from "./how-to-buy-policy/how-to-buy-policy.c
 		MatCardModule,
 		MatIconModule,
 		MatButtonModule,
+		MatMenuModule,
 		RouterModule,
 		MatCheckboxModule,
 		MatSnackBarModule,
@@ -50,6 +53,7 @@ import { HowToBuyPolicyComponent } from "./how-to-buy-policy/how-to-buy-policy.c
 		ReminderComponent,
 		ReminderComponent,
 		WeAreComponent,
+		MainComponent,
 		HowToBuyPolicyComponent
 	],
 	exports: [
