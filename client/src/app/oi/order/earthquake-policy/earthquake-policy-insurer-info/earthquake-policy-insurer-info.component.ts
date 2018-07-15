@@ -21,11 +21,11 @@ import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
 import { SaveOrderStartAction } from "../../services/api/save-order";
 
 @Component({
-	selector: "order-fire-policy-insurer-info",
-	templateUrl: "./fire-policy-insurer-info.component.html",
-	styleUrls: [ "./fire-policy-insurer-info.component.css" ]
+	selector: "order-earthquake-policy-insurer-info",
+	templateUrl: "./earthquake-policy-insurer-info.component.html",
+	styleUrls: [ "./earthquake-policy-insurer-info.component.css" ]
 })
-export class FirePolicyInsurerInfoComponent implements OnInit {
+export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	@Output("signInRequest") signInRequest$ = new EventEmitter();
 	signedIn: boolean;

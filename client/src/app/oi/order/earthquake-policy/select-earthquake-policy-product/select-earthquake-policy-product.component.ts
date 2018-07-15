@@ -9,19 +9,19 @@ import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "
 import { getAccountInfo } from "@soushians/user";
 import { SigninRequiredAction } from "@soushians/authentication";
 
-import { FirePolicyOrderFormModel } from "../../models";
-import { AppState } from "../../order.reducers";
 import { SaveOrderStartAction, GetNewOrderFormStartAction } from "../../services/api";
 import { PolicyCompareModel, PriceModel } from "../../../policy/models";
+import { EarthquakePolicyOrderFormModel } from "../../models";
 import { PolicyService } from "../../../policy/services";
-import { SelectdPolicyConfirmationComponent } from "../selectd-policy-onfirmation/selectd-policy-confirmation.component";
+import { AppState } from "../../order.reducers";
+import { SelectdPolicyConfirmationComponent } from "../../fire-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component";
 
 @Component({
-	templateUrl: "./select-fire-policy-product.component.html",
-	styleUrls: [ "./select-fire-policy-product.component.css" ]
+	templateUrl: "./select-earthquake-policy-product.component.html",
+	styleUrls: [ "./select-earthquake-policy-product.component.css" ]
 })
-export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
-	orderForm: FirePolicyOrderFormModel;
+export class SelectEarthquakePolicyProductComponent implements OnInit, OnDestroy {
+	orderForm: EarthquakePolicyOrderFormModel;
 	policies$: Observable<PolicyCompareModel[]>;
 	signedIn$: Observable<boolean>;
 
@@ -35,7 +35,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction(4));
+		this.store.dispatch(new GetNewOrderFormStartAction(5));
 		this.store.dispatch(new FullscreenAction());
 		this._select_order_form_store_and_subscribe();
 	}
@@ -60,7 +60,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 			if (approved) this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 		});
 	}
-	doneInsurer(orderForm: FirePolicyOrderFormModel) {
+	doneInsurer(orderForm: EarthquakePolicyOrderFormModel) {
 		this.router.navigate([ "order/view", orderForm.Id.Value ]);
 	}
 	fullscreenToggle() {
@@ -78,7 +78,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 	}
 	_select_order_form_store_and_subscribe() {
 		this.store
-			.select(state => state.order.newOrder.data as FirePolicyOrderFormModel)
+			.select(state => state.order.newOrder.data as EarthquakePolicyOrderFormModel)
 			.filter(orderForm => orderForm != null)
 			.subscribe(orderForm => {
 				this.orderForm = orderForm;

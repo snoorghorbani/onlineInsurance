@@ -74,10 +74,17 @@ import { OrderPanelEffects } from "./order-panel/order-panel.effects";
 // fire policy
 import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
 import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
-import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy-confirmation/selectd-policy-confirmation.component";
+import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component";
 import { FirePolicyProductsListComponent } from "./fire-policy/fire-policy-products-list/fire-policy-products-list.component";
 import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component";
+// earthquake policy
+import { PurchaseEarthquakePolicyComponent } from "./earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component";
+import { EarthquakeHomeDetailComponent } from "./earthquake-policy/home-detail/home-detail.component";
+import { SelectdEarthquakePolicyConfirmationComponent } from "./earthquake-policy/selectd-earthquake-policy-confirmation/selectd-earthquake-policy-confirmation.component";
+import { EarthquakePolicyProductsListComponent } from "./earthquake-policy/earthquake-policy-products-list/earthquake-policy-products-list.component";
+import { EarthquakePolicyInsurerInfoComponent } from "./earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component";
+import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component";
 
 @NgModule({
 	imports: [
@@ -124,24 +131,32 @@ import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insure
 		PoliciesCompareItemComponent,
 		InsurerInfoComponent,
 		PurchaseComponent,
-		PurchaseFirePolicyComponent,
-		HomeDetailComponent,
 		ReviewOrderComponent,
 		MyOrdersComponent,
 		ViewOrderComponent,
-		SelectFirePolicyProductComponent,
 		CartableComponent,
 		RedirectToBankComponent,
 		FieldSelectComponent,
 		FieldInputComponent,
-		FirePolicyProductsListComponent,
-		FirePolicyInsurerInfoComponent,
-		SelectdPolicyConfirmationComponent,
 		FieldDatepickerComponent,
 		OrderPanelComponent,
-		AboutThirdPartyPolicyComponent
+		AboutThirdPartyPolicyComponent,
+		// fire policy components
+		PurchaseFirePolicyComponent,
+		HomeDetailComponent,
+		SelectdPolicyConfirmationComponent,
+		FirePolicyProductsListComponent,
+		FirePolicyInsurerInfoComponent,
+		SelectFirePolicyProductComponent,
+		// earthquake policy components
+		PurchaseEarthquakePolicyComponent,
+		EarthquakeHomeDetailComponent,
+		SelectdEarthquakePolicyConfirmationComponent,
+		EarthquakePolicyProductsListComponent,
+		EarthquakePolicyInsurerInfoComponent,
+		SelectEarthquakePolicyProductComponent
 	],
-	entryComponents: [ SelectdPolicyConfirmationComponent ],
+	entryComponents: [ SelectdPolicyConfirmationComponent, SelectdEarthquakePolicyConfirmationComponent ],
 	exports: [ AboutThirdPartyPolicyComponent ]
 })
 export class OrderModule {

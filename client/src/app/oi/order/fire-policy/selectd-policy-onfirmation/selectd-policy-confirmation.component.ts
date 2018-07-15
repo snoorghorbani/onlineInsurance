@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 	templateUrl: "./selectd-policy-confirmation.component.html",
 	styleUrls: [ "./selectd-policy-confirmation.component.css" ]
 })
-export class SelectdPolicyConfirmationComponent implements OnInit {
+export class SelectdPolicyConfirmationComponent {
 	constructor(
 		public dialogRef: MatDialogRef<SelectdPolicyConfirmationComponent>,
 		@Inject(MAT_DIALOG_DATA) public data

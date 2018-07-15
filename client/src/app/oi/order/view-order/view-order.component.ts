@@ -59,7 +59,7 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 	TotalPremium$: Observable<FieldModel>;
 	ShippingCost$: Observable<FieldModel>;
 	AmountPayable$: Observable<FieldModel>;
-	AgreementTerms$: Observable<FieldModel>;
+	AcceptAgreementTerms$: Observable<FieldModel>;
 
 	constructor(
 		private store: Store<AppState>,
@@ -116,7 +116,7 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 		this.Discount$ = this.orderForm$.map(orderForm => orderForm.Discount);
 		this.ShippingCost$ = this.orderForm$.map(orderForm => orderForm.ShippingCost);
 		this.AmountPayable$ = this.orderForm$.map(orderForm => orderForm.AmountPayable);
-		this.AgreementTerms$ = this.orderForm$.map(orderForm => orderForm.AgreementTerms);
+		this.AcceptAgreementTerms$ = this.orderForm$.map(orderForm => orderForm.AcceptAgreementTerms);
 
 		this.orderForm$
 			.map(orderForm => orderForm.PaymentId)
@@ -132,7 +132,7 @@ export class ViewOrderComponent implements OnInit, OnDestroy {
 	}
 	initFormGroup() {
 		this.formGroup = new FormGroup({
-			AgreementTerms: new FormControl(false, [ Validators.requiredTrue ])
+			AcceptAgreementTerms: new FormControl(false, [ Validators.requiredTrue ])
 		});
 	}
 	pay() {
