@@ -1,7 +1,7 @@
 <div [formGroup]="formGroup">
     <div class="field-wrapper">
       <div [@filedAnimation]="mode">
-        <mat-form-field class="fit" [(ngClass)]="mode">
+        <mat-form-field class="fit" [(ngClass)]="mode" [appearance]="appearance">
             <input matInput [matDatepicker]="_datepicker" [placeholder]="placeholder" [formControlName]="controlName">
             <mat-datepicker-toggle matSuffix [for]="_datepicker"></mat-datepicker-toggle>
             <mat-datepicker #_datepicker></mat-datepicker>

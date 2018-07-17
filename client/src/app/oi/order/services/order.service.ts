@@ -5,7 +5,7 @@ import { of, throwError } from "rxjs";
 import { share, map, switchMap, withLatestFrom, publishLast, refCount, catchError } from "rxjs/operators";
 
 import { OrderType } from "../models/order-type.model";
-import { OrderFormModel, DeliveryTimeModel, OrderSummaryModel } from "../models";
+import { OrderFormModel, DeliveryTimeModel, OrderSummaryModel, OrderFormType } from "../models";
 import { GetDeliveryTimeTableApiModel, PlaceOrderApiModel, GetMyCartableApiModel, SaveOrderApiModel } from "./api";
 import { GetMyOrdersApiModel } from "./api/get-my-orders";
 import { GetOrderApiModel } from "./api/get-order";
@@ -45,10 +45,10 @@ export class OrderService {
 			.get<GetMyCartableApiModel.Response>(`${this.configurationService.config.env.server}/order/GetMyCartable`)
 			.pipe(share(), map(response => response.Result.Items));
 	}
-	GetOrder({ Id }: Partial<GetOrderApiModel.Request>): Observable<OrderFormModel> {
+	GetOrder<T = OrderFormModel>({ Id }: Partial<GetOrderApiModel.Request>): Observable<T> {
 		debugger;
 		return this.http
-			.get<GetOrderApiModel.Response>(`${this.configurationService.config.env.server}/order/GetOrder/${Id}`)
+			.get<GetOrderApiModel.Response<T>>(`${this.configurationService.config.env.server}/order/GetOrder/${Id}`)
 			.pipe(map(response => response.Result), share());
 	}
 	PlaceOrder(orderForm: OrderFormModel): Observable<any> {

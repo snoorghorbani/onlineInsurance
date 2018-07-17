@@ -30,6 +30,7 @@ export class FieldDatepickerComponent implements OnInit {
 	@Input() placeholder: string;
 	@Input() controlName: string;
 	@Input() description: string;
+	@Input() appearance: string;
 	@Input() mode: "view" | "edit";
 	@Input() hint: string;
 	@Input() tooltip: string;

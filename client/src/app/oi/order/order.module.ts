@@ -85,6 +85,7 @@ import { SelectdEarthquakePolicyConfirmationComponent } from "./earthquake-polic
 import { EarthquakePolicyProductsListComponent } from "./earthquake-policy/earthquake-policy-products-list/earthquake-policy-products-list.component";
 import { EarthquakePolicyInsurerInfoComponent } from "./earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component";
 import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component";
+import { DynamicOrderFieldDirective } from "./dynamic-field/dynamic-grid-item-view.directive";
 
 @NgModule({
 	imports: [
@@ -141,6 +142,7 @@ import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/sele
 		FieldDatepickerComponent,
 		OrderPanelComponent,
 		AboutThirdPartyPolicyComponent,
+		DynamicOrderFieldDirective,
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,
@@ -156,7 +158,14 @@ import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/sele
 		EarthquakePolicyInsurerInfoComponent,
 		SelectEarthquakePolicyProductComponent
 	],
-	entryComponents: [ SelectdPolicyConfirmationComponent, SelectdEarthquakePolicyConfirmationComponent ],
+	entryComponents: [
+		SelectdPolicyConfirmationComponent,
+		SelectdEarthquakePolicyConfirmationComponent,
+		// TODO: move to @soushians/form module
+		FieldInputComponent,
+		FieldSelectComponent,
+		FieldDatepickerComponent
+	],
 	exports: [ AboutThirdPartyPolicyComponent ]
 })
 export class OrderModule {

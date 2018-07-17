@@ -22,8 +22,8 @@ export namespace GetOrderApiModel {
 		}
 	}
 
-	export class Response {
-		Result: OrderFormModel;
+	export class Response<T> {
+		Result: T;
 		constructor() {}
 	}
 }
