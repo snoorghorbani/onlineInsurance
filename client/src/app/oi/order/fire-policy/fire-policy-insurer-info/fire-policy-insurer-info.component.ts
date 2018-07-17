@@ -32,23 +32,7 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	formGroup: FormGroup;
 	orderForm: OrderFormModel;
 	orderForm$: Observable<OrderFormModel>;
-	PolicyholderFirstName$: Observable<FieldModel>;
-	PolicyholderLastName$: Observable<FieldModel>;
-	LastPolicyImage$: Observable<FieldModel>;
-	CarCardBackImage$: Observable<FieldModel>;
-	CarCardFrontImage$: Observable<FieldModel>;
-	PolicyholderNationalCode$: Observable<FieldModel>;
-	PolicyholderBirthDate$: Observable<FieldModel>;
-	PolicyholderFatherName$: Observable<FieldModel>;
-	DeliveryPlaceAddress$: Observable<FieldModel>;
-	DeliveryPlaceCityId$: Observable<FieldModel>;
-	PolicyAddressCityId$: Observable<FieldModel>;
-	PolicyAddress$: Observable<FieldModel>;
-	PolicyAddressSource$: Observable<FieldModel>;
-	PolicyholderPhone$: Observable<FieldModel>;
-	DeliveryDate$: Observable<FieldModel>;
-	DeliveryTime$: Observable<FieldModel>;
-	PolicyholderMobile$: Observable<FieldModel>;
+
 	DelieryTimeTableDisplayColumns: string[];
 	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
 	Cities$: Observable<CityModel[]>;
@@ -71,23 +55,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			.select(state => state.order.newOrder.data as OrderFormModel)
 			.pipe(filter(orderForm => orderForm != null), distinctUntilChanged());
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
-		this.PolicyholderFirstName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFirstName);
-		this.PolicyholderLastName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderLastName);
-		this.LastPolicyImage$ = this.orderForm$.map(orderForm => orderForm.LastPolicyImage);
-		this.CarCardBackImage$ = this.orderForm$.map(orderForm => orderForm.CarCardBackImage);
-		this.CarCardFrontImage$ = this.orderForm$.map(orderForm => orderForm.CarCardFrontImage);
-		this.PolicyholderNationalCode$ = this.orderForm$.map(orderForm => orderForm.PolicyholderNationalCode);
-		this.PolicyholderBirthDate$ = this.orderForm$.map(orderForm => orderForm.PolicyholderBirthDate);
-		this.PolicyholderFatherName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFatherName);
-		this.PolicyAddressCityId$ = this.orderForm$.map(orderForm => orderForm.PolicyAddressCityId);
-		this.PolicyAddress$ = this.orderForm$.map(orderForm => orderForm.PolicyAddress);
-		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
-		this.PolicyAddressSource$ = this.orderForm$.map(orderForm => orderForm.PolicyAddressSource);
-		this.DeliveryPlaceAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryPlaceAddress);
-		this.DeliveryPlaceCityId$ = this.orderForm$.map(orderForm => orderForm.DeliveryPlaceCityId);
-		this.DeliveryDate$ = this.orderForm$.map(orderForm => orderForm.DeliveryDate);
-		this.DeliveryTime$ = this.orderForm$.map(orderForm => orderForm.DeliveryTime);
-		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
 
 		this.store.select(getAccountInfo).subscribe(user => (this.signedIn = !!user.DisplayName));
 	}

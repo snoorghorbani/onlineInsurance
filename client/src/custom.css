@@ -37,3 +37,11 @@
 mat-checkbox.wrap .mat-checkbox-layout {
 	white-space: pre-wrap;
 }
+
+.simple .mat-horizontal-stepper-header-container {
+	margin-bottom: 0px;
+}
+
+.simple .mat-horizontal-content-container {
+	display: none;
+}

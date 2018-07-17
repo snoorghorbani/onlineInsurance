@@ -1,23 +1,30 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatHorizontalStepper } from "@angular/material";
+import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
+import { Location } from "@angular/common";
 import { Store } from "@ngrx/store";
-import { Router } from "@angular/router";
 
 import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
 
 import { AppState } from "../../order.reducers";
-import { PolicyService } from "../../../policy/services";
 
 @Component({
-	selector: "order-purchase-fire-policy",
 	templateUrl: "./purchase-fire-policy.component.html",
 	styleUrls: [ "./purchase-fire-policy.component.css" ]
 })
 export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
-	constructor(private store: Store<AppState>, public dialog: MatDialog) {}
+	@ViewChild("stepper") stepperRef: MatHorizontalStepper;
+
+	constructor(private store: Store<AppState>, public dialog: MatDialog, private location: Location) {}
 
 	ngOnInit() {
 		this.store.dispatch(new FullscreenAction());
+		if (this.location.isCurrentPathEqualTo("/order/purchase/fire-policy/select-product")) {
+			this.stepperRef.selectedIndex = 0;
+		} else if (this.location.path().startsWith("/order/purchase/fire-policy/insurer-info")) {
+			this.stepperRef.selectedIndex = 1;
+		} else if (this.location.isCurrentPathEqualTo("order/purchase/fire-policy/select-product")) {
+		} else if (this.location.isCurrentPathEqualTo("order/purchase/fire-policy/select-product")) {
+		}
 	}
 
 	ngOnDestroy() {

@@ -9,13 +9,13 @@ import { ToolbarMenuComponent } from "./common/toolbar-menu/toolbar-menu.compone
 const routes: Routes = [
 	{
 		path: "",
-		outlet: LayoutOutlets.footer_A,
-		component: NewsletterComponent
+		component: NewsletterComponent,
+		outlet: LayoutOutlets.footer_A
 	},
 	{
 		path: "",
-		outlet: LayoutOutlets.footer_B,
-		component: FooterComponent
+		component: FooterComponent,
+		outlet: LayoutOutlets.footer_B
 	},
 	{
 		path: "",
