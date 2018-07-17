@@ -109,11 +109,12 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			]),
 			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderBirthDate: new FormControl("", [ Validators.required ]),
 			PolicyholderGender: new FormControl("", [ Validators.required ]),
-			// LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
-			// CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
-			// CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd640eb4f8"),
+			// LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd642eb4f8"),
+			// CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd642eb4f8"),
+			// CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd642eb4f8"),
 			/**
 			 * Reciver Part
 			 */
@@ -147,31 +148,35 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this.insurerInfoForm = [
 			{
 				name: "PolicyholderFirstName",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "PolicyholderLastName",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "PolicyholderFatherName",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "PolicyholderGender",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "PolicyholderNationalCode",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "PolicyholderMobile",
-				fxFlex: 40
+				fxFlex: 42
+			},
+			{
+				name: "PolicyholderPhone",
+				fxFlex: 42
 			},
 			{
 				name: "PolicyholderBirthDate",
-				fxFlex: 40
+				fxFlex: 42
 			}
 		];
 	}
@@ -179,39 +184,35 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this.reciverInfoForm = [
 			{
 				name: "ReceiverFirstName",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "ReceiverLastName",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "DeliveryPlaceCityId",
-				fxFlex: 40
-			},
-			{
-				name: "DeliveryPlaceCityId",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "DeliveryPlaceDistrict",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "ReceiverPhone",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "ReceiverMobile",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "DeliveryPlaceAddress",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "CustomerDescription",
-				fxFlex: 40
+				fxFlex: 42
 			}
 		];
 	}
@@ -219,43 +220,43 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this.buildingInfoForm = [
 			{
 				name: "BuildingAddressCityId",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingAddressDistrict",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingAddressMainStreet",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingAddressSubStreet",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingAddressAlley",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingAddressNo",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingPostalCode",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingUsage",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingFloors",
-				fxFlex: 40
+				fxFlex: 42
 			},
 			{
 				name: "BuildingAge",
-				fxFlex: 40
+				fxFlex: 42
 			}
 		];
 	}
