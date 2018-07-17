@@ -3,7 +3,6 @@
     <button fxFlex="nogrow" mat-raised-button color="primary" (click)="signInRequest()">ورود به حساب کاریری</button>
   </div>
   <div fxFlex="50" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="25px" [class.fade]="!signedIn" *ngIf="orderForm">
-    
     <mat-card>
       <mat-card-title>
             مشخصات بیمه گذار
@@ -31,6 +30,7 @@
             </div>
         </div>
       </form>
+      <app-google-maps (currentLocationOfUser)="currentLocationOfUser($event)"></app-google-maps>
       </mat-card-content>
     </mat-card>
   
