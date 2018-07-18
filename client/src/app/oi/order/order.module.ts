@@ -88,6 +88,12 @@ import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/sele
 import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
 import { GmapsModule } from '../gmaps/gmaps.module';
 import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
+// third party policy
+import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component';
+import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component';
+import { SelectedThirdPartyPolicyConfirmationComponent } from './third-party-policy/selected-third-party-policy-onfirmation/selected-third-party-policy-confirmation.component';
+import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/third-party-policy-products-list/third-party-policy-products-list.component';
+import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
 
 @NgModule({
 	imports: [
@@ -147,6 +153,15 @@ import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
 		AboutThirdPartyPolicyComponent,
 		DynamicOrderFieldDirective,
 		DeliveryTimeComponent,
+
+		// third party policy components
+		PurchaseThirdPartyPolicyComponent,
+		ThirdPartyCarDetailComponent,
+		SelectedThirdPartyPolicyConfirmationComponent,
+		ThirdPartyPolicyProductsListComponent,
+		SelectThirdPartyPolicyProductComponent,
+		// FirePolicyInsurerInfoComponent,
+
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,
