@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-	templateUrl: "./selectd-policy-confirmation.component.html",
-	styleUrls: [ "./selectd-policy-confirmation.component.css" ]
+	templateUrl: './selected-third-party-policy-confirmation.component.html',
+	styleUrls: [ './selected-third-party-policy-confirmation.component.css' ]
 })
-export class SelectdPolicyConfirmationComponent {
+export class SelectedThirdPartyPolicyConfirmationComponent {
 	constructor(
-		public dialogRef: MatDialogRef<SelectdPolicyConfirmationComponent>,
+		public dialogRef: MatDialogRef<SelectedThirdPartyPolicyConfirmationComponent>,
 		@Inject(MAT_DIALOG_DATA) public data
 	) {}
 

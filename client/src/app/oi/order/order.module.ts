@@ -80,6 +80,7 @@ import { FirePolicyProductsListComponent } from "./fire-policy/fire-policy-produ
 import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
 import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component";
 // earthquake policy
+
 import { PurchaseEarthquakePolicyComponent } from "./earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component";
 import { EarthquakeHomeDetailComponent } from "./earthquake-policy/home-detail/home-detail.component";
 import { SelectdEarthquakePolicyConfirmationComponent } from "./earthquake-policy/selectd-earthquake-policy-confirmation/selectd-earthquake-policy-confirmation.component";
@@ -95,6 +96,13 @@ import { SelectedMedicalPolicyConfirmationComponent } from "./medical-policy/sel
 import { MedicalPolicyProductsListComponent } from "./medical-policy/medical-policy-products-list/medical-policy-products-list.component";
 import { SelectMedicalPolicyProductComponent } from "./medical-policy/select-medical-policy-product/select-medical-policy-product.component";
 import { MedicalPolicyInsurerInfoComponent } from "./medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component";
+
+// third party policy
+import { PurchaseThirdPartyPolicyComponent } from "./third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component";
+import { SelectThirdPartyPolicyProductComponent } from "./third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component";
+import { SelectedThirdPartyPolicyConfirmationComponent } from "./third-party-policy/selected-third-party-policy-onfirmation/selected-third-party-policy-confirmation.component";
+import { ThirdPartyPolicyProductsListComponent } from "./third-party-policy/third-party-policy-products-list/third-party-policy-products-list.component";
+import { ThirdPartyCarDetailComponent } from "./third-party-policy/car-detail/car-detail.component";
 
 @NgModule({
 	imports: [
@@ -154,6 +162,15 @@ import { MedicalPolicyInsurerInfoComponent } from "./medical-policy/medical-poli
 		AboutThirdPartyPolicyComponent,
 		DynamicOrderFieldDirective,
 		DeliveryTimeComponent,
+
+		// third party policy components
+		PurchaseThirdPartyPolicyComponent,
+		ThirdPartyCarDetailComponent,
+		SelectedThirdPartyPolicyConfirmationComponent,
+		ThirdPartyPolicyProductsListComponent,
+		SelectThirdPartyPolicyProductComponent,
+		// FirePolicyInsurerInfoComponent,
+
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,

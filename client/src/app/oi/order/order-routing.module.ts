@@ -16,9 +16,8 @@ import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insure
 import { PurchaseEarthquakePolicyComponent } from "./earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component";
 import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component";
 import { EarthquakePolicyInsurerInfoComponent } from "./earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component";
-import { PurchaseMedicalPolicyComponent } from "./medical-policy/purchase-medical-policy/purchase-medical-policy.component";
-import { SelectMedicalPolicyProductComponent } from "./medical-policy/select-medical-policy-product/select-medical-policy-product.component";
-import { MedicalPolicyInsurerInfoComponent } from "./medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component";
+import { PurchaseThirdPartyPolicyComponent } from "./third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component";
+import { SelectThirdPartyPolicyProductComponent } from "./third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component";
 
 const routes: Routes = [
 	{
@@ -42,6 +41,16 @@ const routes: Routes = [
 				path: "purchase",
 				children: [
 					{
+						path: "third-party-policy",
+						component: PurchaseThirdPartyPolicyComponent,
+						children: [
+							{
+								path: "select-product",
+								component: SelectThirdPartyPolicyProductComponent
+							}
+						]
+					},
+					{
 						path: "fire-policy",
 						component: PurchaseFirePolicyComponent,
 						children: [
@@ -60,21 +69,11 @@ const routes: Routes = [
 								component: SelectEarthquakePolicyProductComponent
 							}
 						]
-					},
-					{
-						path: "third-party-policy",
-						component: PurchaseComponent
-					},
-					{
-						path: "medical-policy",
-						component: PurchaseMedicalPolicyComponent,
-						children: [
-							{
-								path: "select-product",
-								component: SelectMedicalPolicyProductComponent
-							}
-						]
 					}
+					// {
+					// 	path: "third-party-policy",
+					// 	component: PurchaseComponent
+					// }
 				]
 			},
 			{

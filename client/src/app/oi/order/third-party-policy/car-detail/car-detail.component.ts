@@ -1,18 +1,18 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
-import { AppState } from "../../order.reducers";
-import { Store } from "@ngrx/store";
-import { GetNewOrderFormStartAction } from "../../services/api";
-import { Subject } from "rxjs";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { FirePolicyOrderFormModel, OrderFormType } from "../../models";
-import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
+import { AppState } from '../../order.reducers';
+import { Store } from '@ngrx/store';
+import { GetNewOrderFormStartAction } from '../../services/api';
+import { Subject } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FirePolicyOrderFormModel, OrderFormType } from '../../models';
+import { NewOrderFormUpdateAction } from '../../new-order/new-order.actions';
 
 @Component({
-	selector: "order-home-detail",
-	templateUrl: "./home-detail.component.html",
-	styleUrls: [ "./home-detail.component.css" ]
+	selector: 'order-third-party-car-detail',
+	templateUrl: './car-detail.component.html',
+	styleUrls: [ './car-detail.component.css' ]
 })
-export class HomeDetailComponent implements OnInit, OnDestroy {
+export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	_orderForm: FirePolicyOrderFormModel;
 	@Input()
@@ -58,12 +58,12 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	_init_properties() {}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			EstateType: new FormControl("", Validators.required),
-			Units: new FormControl("", Validators.required),
-			BuildType: new FormControl("", Validators.required),
-			Area: new FormControl("", Validators.required),
-			ThingsValue: new FormControl("", Validators.required),
-			ConstructionCostPerSquareMeter: new FormControl("", Validators.required),
+			EstateType: new FormControl('', Validators.required),
+			Units: new FormControl('', Validators.required),
+			BuildType: new FormControl('', Validators.required),
+			Area: new FormControl('', Validators.required),
+			ThingsValue: new FormControl('', Validators.required),
+			ConstructionCostPerSquareMeter: new FormControl('', Validators.required),
 			EarthquakeExtraCoverage: new FormControl(false),
 			PipeExplotionExtraCoverage: new FormControl(false),
 			EarthSummitExtraCoverage: new FormControl(false),
@@ -78,7 +78,7 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 		});
 	}
 	_set_formGroup_validation(orderForm: OrderFormType) {
-		Object.keys(this.formGroup.controls).forEach(key => {
+		Object.keys(this.formGroup.controls).forEach((key) => {
 			if (orderForm[key].Status == 4) {
 				this.formGroup.get(key).setValidators([ Validators.required ]);
 				this.formGroup.get(key).updateValueAndValidity();
@@ -89,9 +89,9 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	_patchValue_formGroup_on_orderForm_change(orderForm: OrderFormType) {
 		var values = {};
 		Object.keys(orderForm)
-			.filter(key => key in this.formGroup.controls)
-			.filter(key => orderForm[key].Value)
-			.map(key => (values[key] = orderForm[key].Value));
+			.filter((key) => key in this.formGroup.controls)
+			.filter((key) => orderForm[key].Value)
+			.map((key) => (values[key] = orderForm[key].Value));
 
 		this.formGroup.patchValue(values);
 	}

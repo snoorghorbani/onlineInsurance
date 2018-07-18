@@ -1,29 +1,29 @@
-import { MatDialog, MatHorizontalStepper } from "@angular/material";
-import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
-import { Location } from "@angular/common";
-import { Store } from "@ngrx/store";
+import { MatDialog, MatHorizontalStepper } from '@angular/material';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
 
-import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
+import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from '@soushians/layout';
 
-import { AppState } from "../../order.reducers";
+import { AppState } from '../../order.reducers';
 
 @Component({
-	templateUrl: "./purchase-fire-policy.component.html",
-	styleUrls: [ "./purchase-fire-policy.component.css" ]
+	templateUrl: './purchase-third-party-policy.component.html',
+	styleUrls: [ './purchase-third-party-policy.component.css' ]
 })
-export class PurchaseFirePolicyComponent implements OnInit, OnDestroy {
-	@ViewChild("stepper") stepperRef: MatHorizontalStepper;
+export class PurchaseThirdPartyPolicyComponent implements OnInit, OnDestroy {
+	@ViewChild('stepper') stepperRef: MatHorizontalStepper;
 
 	constructor(private store: Store<AppState>, public dialog: MatDialog, private location: Location) {}
 
 	ngOnInit() {
 		this.store.dispatch(new FullscreenAction());
-		if (this.location.isCurrentPathEqualTo("/order/purchase/fire-policy/select-product")) {
+		if (this.location.isCurrentPathEqualTo('/order/purchase/fire-policy/select-product')) {
 			this.stepperRef.selectedIndex = 0;
-		} else if (this.location.path().startsWith("/order/purchase/fire-policy/insurer-info")) {
+		} else if (this.location.path().startsWith('/order/purchase/fire-policy/insurer-info')) {
 			this.stepperRef.selectedIndex = 1;
-		} else if (this.location.isCurrentPathEqualTo("order/purchase/fire-policy/select-product")) {
-		} else if (this.location.isCurrentPathEqualTo("order/purchase/fire-policy/select-product")) {
+		} else if (this.location.isCurrentPathEqualTo('order/purchase/fire-policy/select-product')) {
+		} else if (this.location.isCurrentPathEqualTo('order/purchase/fire-policy/select-product')) {
 		}
 	}
 
