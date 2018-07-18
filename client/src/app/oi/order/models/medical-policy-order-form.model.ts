@@ -54,6 +54,7 @@ export class MedicalPolicyOrderFormModel {
 	IssuedPolicyStartValidityDate: FieldModel;
 	IssuedPolicyExpirationDate: FieldModel;
 	IssuedPolicyImage: FieldModel;
+
 	MedicalRole: FieldModel;
 	DoctorSpecialty: FieldModel;
 	ParamedicineSpecialty: FieldModel;

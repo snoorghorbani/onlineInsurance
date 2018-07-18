@@ -196,6 +196,7 @@ import { ThirdPartyCarDetailComponent } from "./third-party-policy/car-detail/ca
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
 		SelectdEarthquakePolicyConfirmationComponent,
+		SelectedMedicalPolicyConfirmationComponent,
 		// TODO: move to @soushians/form module
 		FieldInputComponent,
 		FieldSelectComponent,

@@ -12,75 +12,49 @@
       انتخاب نمودید:
   </div>
   <div fxFlex="100">
-      برای ملک مسکونی با متراژ 
+      به عنوان بیمه مسئولیت 
       <b>
-        {{data.orderForm.Area.Value}}
+        {{data.orderForm.MedicalRole.Value}}
       </b>
-      متر مربع
   </div>
+
   <div fxFlex="50">
-    هزینه ساخت بنا:  
+    {{data.orderForm.DoctorSpecialty.Label}} :
     <b>
-      {{data.orderForm.ConstructionCostPerSquareMeter.Value * data.orderForm.Area.Value}} 
+      {{data.orderForm.DoctorSpecialty.Value}}
     </b>
-    تومان 
   </div>
   <div fxFlex="40">
-    ارزش لوازم خانه:  
+    {{data.orderForm.IsResident.Label}} : 
     <b>
-        {{data.orderForm.ThingsValue.Value}}
-    </b>
-    تومان
-  </div>
-  <div fxFlex="100">
-      پوشش های اضافی:
-  </div>
-  <div fxFlex="50">
-      زلزله:  
-    <b>
-      {{data.orderForm.EarthquakeExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+        {{data.orderForm.IsResident.Value}}
     </b>
   </div>
+
   <div fxFlex="50">
-      ترکیدگی لوله:  
+    {{data.orderForm.ParamedicineSpecialty.Label}} :
     <b>
-      {{data.orderForm.PipeExplotionExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+      {{data.orderForm.ParamedicineSpecialty.Value}}
     </b>
   </div>
-  <div fxFlex="50">
-      نشست زمین:  
+  <div fxFlex="40">
+    {{data.orderForm.IsStudent.Label}} : 
     <b>
-      {{data.orderForm.EarthSummitExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+        {{data.orderForm.IsStudent.Value}}
     </b>
   </div>
-  <div fxFlex="50">
-      سقوط هواپیما:  
+  
+  <div fxFlex="40">
+    {{data.orderForm.MedicalNoDamageRecord.Label}} : 
     <b>
-      {{data.orderForm.AirplanFallExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+        {{data.orderForm.MedicalNoDamageRecord.Value}}
     </b>
   </div>
+
   <div fxFlex="50">
-      طوفان:  
+    {{data.orderForm.BloodMoneyIncreaseCoverage.Label}} : 
     <b>
-      {{data.orderForm.StormExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
-  <div fxFlex="50">
-      سیل:  
-    <b>
-      {{data.orderForm.FloodExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
-  <div fxFlex="50">
-      سرقت مربوط به شکست حرز:  
-    <b>
-      {{data.orderForm.HarzExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
-  <div fxFlex="50">
-      ضایعات ناشی از برف و باران:  
-    <b>
-      {{data.orderForm.SnowRainExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+      {{data.orderForm.BloodMoneyIncreaseCoverage.Value? 'دارد' : 'ندارد'}} 
     </b>
   </div>
 </div>
