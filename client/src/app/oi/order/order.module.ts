@@ -70,6 +70,7 @@ import { OrderPanelComponent } from './order-panel/order-panel.component';
 import { AboutThirdPartyPolicyComponent } from './about-third-party-policy/about-third-party-policy.component';
 import { FieldInputComponent } from './field-input/field-input.component';
 import { OrderPanelEffects } from './order-panel/order-panel.effects';
+import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
 
 // fire policy
 import { PurchaseFirePolicyComponent } from './fire-policy/purchase-fire-policy/purchase-fire-policy.component';
@@ -87,6 +88,7 @@ import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthq
 import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component';
 import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
 import { GmapsModule } from '../gmaps/gmaps.module';
+<<<<<<< HEAD
 import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
 // third party policy
 import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component';
@@ -94,6 +96,16 @@ import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/sel
 import { SelectedThirdPartyPolicyConfirmationComponent } from './third-party-policy/selected-third-party-policy-onfirmation/selected-third-party-policy-confirmation.component';
 import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/third-party-policy-products-list/third-party-policy-products-list.component';
 import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
+=======
+// medical policy
+// import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
+// import { HomeDetailComponent } from './medical-policy/home-detail/home-detail.component';
+// import { SelectdPolicyConfirmationComponent } from './medical-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component';
+// import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
+// import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
+// import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
+
+>>>>>>> bbc8c109e5a1d1f5b514c3fee325dbfc5e2578b3
 
 @NgModule({
 	imports: [
@@ -176,6 +188,13 @@ import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/ca
 		EarthquakePolicyProductsListComponent,
 		EarthquakePolicyInsurerInfoComponent,
 		SelectEarthquakePolicyProductComponent
+		// Medical Policy
+		// PurchaseMedicalPolicyComponent,
+		// HomeDetailComponent,
+		// SelectdPolicyConfirmationComponent,
+		// MedicalPolicyProductsListComponent,
+		// SelectMedicalPolicyProductComponent,
+		// MedicalPolicyInsurerInfoComponent
 	],
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
@@ -185,13 +204,13 @@ import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/ca
 		FieldSelectComponent,
 		FieldDatepickerComponent
 	],
-	exports: [ AboutThirdPartyPolicyComponent ]
+	exports: [AboutThirdPartyPolicyComponent]
 })
 export class OrderModule {
 	static forRoot(config?: OrderModuleConfig): ModuleWithProviders {
 		return {
 			ngModule: RootOrderModule,
-			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config } ]
+			providers: [{ provide: MODULE_CONFIG_TOKEN, useValue: config }]
 		};
 	}
 }
@@ -214,6 +233,6 @@ export class OrderModule {
 		]),
 		OrderRoutingModule
 	],
-	exports: [ OrderModule ]
+	exports: [OrderModule]
 })
-export class RootOrderModule {}
+export class RootOrderModule { }
