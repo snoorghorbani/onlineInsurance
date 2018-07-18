@@ -22,11 +22,11 @@ import { NewOrderFormUpdateAction } from '../../new-order/new-order.actions';
 import { SaveOrderStartAction } from '../../services/api/save-order';
 
 @Component({
-	selector: 'earthquake-policy-insurer-info',
-	templateUrl: './earthquake-policy-insurer-info.component.html',
-	styleUrls: [ './earthquake-policy-insurer-info.component.css' ]
+	selector: 'order-fire-policy-insurer-info',
+	templateUrl: './fire-policy-insurer-info.component.html',
+	styleUrls: [ './fire-policy-insurer-info.component.css' ]
 })
-export class EarthquakePolicyInsurerInfoComponent implements OnInit {
+export class FirePolicyInsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	@Output('signInRequest') signInRequest$ = new EventEmitter();
 	orderForm$: Observable<FirePolicyOrderFormModel>;
@@ -36,7 +36,6 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	insurerInfoForm: any;
 	reciverInfoForm: any;
 	buildingInfoForm: any;
-	DeliverDateTime: string;
 	DelieryTimeTableDisplayColumns: string[];
 	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
 	Cities$: Observable<CityModel[]>;
@@ -60,6 +59,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction(4));
 	}
+	DeliverDateTime: string;
 
 	selectDeliveryTime(row: DeliveryTimeModel) {
 		this.DeliverDateTime = row.DayOfWeek + row.TimeFrom.Hours + row.TimeTo.Hours;
@@ -80,6 +80,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 		this.store.dispatch(new SigninRequiredAction());
 	}
 	currentLocationOfUser({ lat, lng }) {
+		debugger;
 		this.formGroup.patchValue({
 			DeliveryPlaceGeoLatitude: lat,
 			DeliveryPlaceGeoLongitude: lng
@@ -103,45 +104,49 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			/**
 			 * Insurer Part
 			 */
-			PolicyholderNationalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderFatherName: new FormControl('', [
-				Validators.required,
-				Validators.pattern(/[\u0600-\u06FF\s]/)
-			]),
-			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
 			PolicyholderFirstName: new FormControl('', [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
 			PolicyholderLastName: new FormControl('', [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
+			PolicyholderFatherName: new FormControl('', [
+				Validators.required,
+				Validators.pattern(/[\u0600-\u06FF\s]/)
+			]),
+			PolicyholderNationalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderGender: new FormControl('', [ Validators.required ]),
 			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
+			PolicyholderGender: new FormControl('', [ Validators.required ]),
+			// LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
+			// CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
+			// CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
 			/**
 			 * Reciver Part
 			 */
-			DeliveryPlaceGeoLongitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceGeoLatitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
-			CustomerDescription: new FormControl('', [ Validators.required ]),
 			ReceiverFirstName: new FormControl('', [ Validators.required ]),
 			ReceiverLastName: new FormControl('', [ Validators.required ]),
-			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl('1', [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl('1', [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
+			CustomerDescription: new FormControl('', [ Validators.required ]),
+
 			/**
 			 * Building Part
 			 */
+			BuildingAddressCityId: new FormControl('', [ Validators.required ]),
+			BuildingAddressDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			BuildingAddressMainStreet: new FormControl('', [ Validators.required ]),
 			BuildingAddressSubStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAddressCityId: new FormControl('', [ Validators.required ]),
 			BuildingAddressAlley: new FormControl('', [ Validators.required ]),
-			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			BuildingAddressNo: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			BuildingUsage: new FormControl('', [ Validators.required ]),
+			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ])
 		});
 	}
