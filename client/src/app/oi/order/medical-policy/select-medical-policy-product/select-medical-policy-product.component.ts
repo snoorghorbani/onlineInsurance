@@ -14,7 +14,7 @@ import { AppState } from "../../order.reducers";
 import { SaveOrderStartAction, GetNewOrderFormStartAction } from "../../services/api";
 import { PolicyCompareModel, PriceModel } from "../../../policy/models";
 import { PolicyService } from "../../../policy/services";
-import { SelectdPolicyConfirmationComponent } from "../selectd-policy-onfirmation/selectd-policy-confirmation.component";
+import { SelectedMedicalPolicyConfirmationComponent } from "../selected-medical-policy-confirmation/selected-medical-policy-confirmation.component";
 
 @Component({
 	templateUrl: "./select-medical-policy-product.component.html",
@@ -35,7 +35,7 @@ export class SelectMedicalPolicyProductComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction(4));
+		this.store.dispatch(new GetNewOrderFormStartAction(8));
 		this.store.dispatch(new FullscreenAction());
 		this._select_order_form_store_and_subscribe();
 	}
@@ -51,7 +51,7 @@ export class SelectMedicalPolicyProductComponent implements OnInit, OnDestroy {
 	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
 		this.orderForm.ProductId.Value = price.ProductId;
 
-		const dialogRef = this.dialog.open(SelectdPolicyConfirmationComponent, {
+		const dialogRef = this.dialog.open(SelectedMedicalPolicyConfirmationComponent, {
 			width: "500px",
 			data: { orderForm: this.orderForm, price, policy }
 		});

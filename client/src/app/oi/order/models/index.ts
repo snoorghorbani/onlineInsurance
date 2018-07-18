@@ -7,3 +7,4 @@ export * from "./initiation-gatewat-result.model";
 export * from "./fire-policy-order-form.model";
 export * from "./earthquake-policy-order-form.model";
 export * from "./order-form.type";
+export * from "./medical-policy-order-form.model";

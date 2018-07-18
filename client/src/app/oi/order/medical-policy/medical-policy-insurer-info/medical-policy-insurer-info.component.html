@@ -49,6 +49,15 @@
       </mat-card-content>
     </mat-card>
   
+    <mat-card>
+      <mat-card-title>
+        زمان ارسال
+      </mat-card-title>
+      <mat-card-content>
+        <order-delivery-time [formGroup]="formGroup"></order-delivery-time>
+      </mat-card-content>
+    </mat-card>
+  
     
     
     <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid">نمایش فاکتور و پرداخت</button>

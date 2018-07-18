@@ -1,7 +1,7 @@
 import { OrderFormModel } from "../models";
 import { FieldOptionModel, FieldModel } from "../models/field.model";
 import { GET_CAR_MODELS_OF_BRAND_ACTION_TYPES, GetCarModelsOfBrandActions } from "../../policy/services/api";
-import { NEW_ORDER_FORM_ACTION_TYPES, NewOrderFormActions } from "./new-order.actions";
+import { NEW_ORDER_FORM_ACTION_TYPES, NewOrderFormActions } from "./third-party-order.actions";
 
 export interface State {
 	data: OrderFormModel;

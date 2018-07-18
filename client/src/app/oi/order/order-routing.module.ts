@@ -16,6 +16,9 @@ import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insure
 import { PurchaseEarthquakePolicyComponent } from "./earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component";
 import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component";
 import { EarthquakePolicyInsurerInfoComponent } from "./earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component";
+import { PurchaseMedicalPolicyComponent } from "./medical-policy/purchase-medical-policy/purchase-medical-policy.component";
+import { SelectMedicalPolicyProductComponent } from "./medical-policy/select-medical-policy-product/select-medical-policy-product.component";
+import { MedicalPolicyInsurerInfoComponent } from "./medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component";
 
 const routes: Routes = [
 	{
@@ -61,6 +64,16 @@ const routes: Routes = [
 					{
 						path: "third-party-policy",
 						component: PurchaseComponent
+					},
+					{
+						path: "medical-policy",
+						component: PurchaseMedicalPolicyComponent,
+						children: [
+							{
+								path: "select-product",
+								component: SelectMedicalPolicyProductComponent
+							}
+						]
 					}
 				]
 			},

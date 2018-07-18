@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { SigninRequiredAction } from "@soushians/authentication";
 import { getAccountInfo } from "@soushians/user";
 
-import { FirePolicyOrderFormModel, DeliveryTimeModel } from "../../models";
+import { MedicalPolicyOrderFormModel, DeliveryTimeModel } from "../../models";
 import { AppState } from "../../order.reducers";
 import { FieldModel } from "../../models/field.model";
 import { FileService } from "../../services/file.service";
@@ -22,17 +22,17 @@ import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
 import { SaveOrderStartAction } from "../../services/api/save-order";
 
 @Component({
-	selector: "order-fire-policy-insurer-info",
-	templateUrl: "./fire-policy-insurer-info.component.html",
-	styleUrls: [ "./fire-policy-insurer-info.component.css" ]
+	selector: "order-medical-policy-insurer-info",
+	templateUrl: "./medical-policy-insurer-info.component.html",
+	styleUrls: [ "./medical-policy-insurer-info.component.css" ]
 })
-export class FirePolicyInsurerInfoComponent implements OnInit {
+export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	@Output("signInRequest") signInRequest$ = new EventEmitter();
-	orderForm$: Observable<FirePolicyOrderFormModel>;
+	orderForm$: Observable<MedicalPolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
-	orderForm: FirePolicyOrderFormModel;
+	orderForm: MedicalPolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
 	buildingInfoForm: any;
@@ -267,7 +267,7 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	_select_order_form() {
 		this.orderForm$ = this.router.params.pipe(
 			// pluck("Id"),
-			switchMap(parmas => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
+			switchMap(parmas => this.orderService.GetOrder<MedicalPolicyOrderFormModel>(parmas))
 		);
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 	}

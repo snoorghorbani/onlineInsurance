@@ -1,5 +1,5 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, ModuleWithProviders } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import {
 	MatFormFieldModule,
 	MatButtonModule,
@@ -25,20 +25,20 @@ import {
 	MatBottomSheetModule,
 	MatDividerModule,
 	MatDialogModule
-} from '@angular/material';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { EffectsModule } from '@ngrx/effects';
-import { FileDropModule } from 'ngx-file-drop';
-import { StoreModule } from '@ngrx/store';
+} from "@angular/material";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { EffectsModule } from "@ngrx/effects";
+import { FileDropModule } from "ngx-file-drop";
+import { StoreModule } from "@ngrx/store";
 
-import { NgsFormModule } from '@soushians/form';
-import { SharedModule } from '@soushians/shared';
-import { RouterModule } from '@angular/router';
+import { NgsFormModule } from "@soushians/form";
+import { SharedModule } from "@soushians/shared";
+import { RouterModule } from "@angular/router";
 
-import { TestComponent } from './test/test.component';
-import { OrderRoutingModule } from './order-routing.module';
-import { FeatureReducers } from './order.reducers';
+import { TestComponent } from "./test/test.component";
+import { OrderRoutingModule } from "./order-routing.module";
+import { FeatureReducers } from "./order.reducers";
 import {
 	GetOrderTypesApiEffects,
 	SaveOrderFormApiEffects,
@@ -47,55 +47,54 @@ import {
 	GetMyCartableApiEffects,
 	ApproveOrderApiEffects,
 	RejectOrderApiEffects
-} from './services/api';
-import { OrderComponent } from './order.component';
-import { NewOrderComponent } from './new-order/new-order.component';
-import { PoliciesCompareItemComponent } from './policies-compare-item/policies-compare-item.component';
-import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
-import { SaveOrderApiEffects } from './services/api/save-order';
-import { PurchaseComponent } from './purchase/purchase.component';
-import { ReviewOrderComponent } from './review-order/review-order.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ViewOrderComponent } from './view-order/view-order.component';
-import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from './order.config';
-import { CartableComponent } from './cartable/cartable.component';
-import { RedirectToBankComponent } from './redirect-to-bank/redirect-to-bank.component';
-import { OiCommonModule } from '../common/common.module';
-import { CarDetailComponent } from './car-detail/car-detail.component';
-import { SelectProductComponent } from './select-product/select-product.component';
-import { FieldSelectComponent } from './field-select/field-select.component';
-import { FieldDatepickerComponent } from './field-datepicker/field-datepicker.component';
-import { RootEffects } from './root/root.effects';
-import { OrderPanelComponent } from './order-panel/order-panel.component';
-import { AboutThirdPartyPolicyComponent } from './about-third-party-policy/about-third-party-policy.component';
-import { FieldInputComponent } from './field-input/field-input.component';
-import { OrderPanelEffects } from './order-panel/order-panel.effects';
-import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
+} from "./services/api";
+import { OrderComponent } from "./order.component";
+import { NewOrderComponent } from "./new-order/new-order.component";
+import { PoliciesCompareItemComponent } from "./policies-compare-item/policies-compare-item.component";
+import { InsurerInfoComponent } from "./insurer-info/insurer-info.component";
+import { SaveOrderApiEffects } from "./services/api/save-order";
+import { PurchaseComponent } from "./purchase/purchase.component";
+import { ReviewOrderComponent } from "./review-order/review-order.component";
+import { MyOrdersComponent } from "./my-orders/my-orders.component";
+import { ViewOrderComponent } from "./view-order/view-order.component";
+import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from "./order.config";
+import { CartableComponent } from "./cartable/cartable.component";
+import { RedirectToBankComponent } from "./redirect-to-bank/redirect-to-bank.component";
+import { OiCommonModule } from "../common/common.module";
+import { CarDetailComponent } from "./car-detail/car-detail.component";
+import { SelectProductComponent } from "./select-product/select-product.component";
+import { FieldSelectComponent } from "./field-select/field-select.component";
+import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.component";
+import { RootEffects } from "./root/root.effects";
+import { OrderPanelComponent } from "./order-panel/order-panel.component";
+import { AboutThirdPartyPolicyComponent } from "./about-third-party-policy/about-third-party-policy.component";
+import { FieldInputComponent } from "./field-input/field-input.component";
+import { OrderPanelEffects } from "./order-panel/order-panel.effects";
+import { DeliveryTimeComponent } from "./delivery-time/delivery-time.component";
 
 // fire policy
-import { PurchaseFirePolicyComponent } from './fire-policy/purchase-fire-policy/purchase-fire-policy.component';
-import { HomeDetailComponent } from './fire-policy/home-detail/home-detail.component';
-import { SelectdPolicyConfirmationComponent } from './fire-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component';
-import { FirePolicyProductsListComponent } from './fire-policy/fire-policy-products-list/fire-policy-products-list.component';
-import { SelectFirePolicyProductComponent } from './fire-policy/select-fire-policy-product/select-fire-policy-product.component';
-import { FirePolicyInsurerInfoComponent } from './fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component';
+import { PurchaseFirePolicyComponent } from "./fire-policy/purchase-fire-policy/purchase-fire-policy.component";
+import { HomeDetailComponent } from "./fire-policy/home-detail/home-detail.component";
+import { SelectdPolicyConfirmationComponent } from "./fire-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component";
+import { FirePolicyProductsListComponent } from "./fire-policy/fire-policy-products-list/fire-policy-products-list.component";
+import { SelectFirePolicyProductComponent } from "./fire-policy/select-fire-policy-product/select-fire-policy-product.component";
+import { FirePolicyInsurerInfoComponent } from "./fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component";
 // earthquake policy
-import { PurchaseEarthquakePolicyComponent } from './earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component';
-import { EarthquakeHomeDetailComponent } from './earthquake-policy/home-detail/home-detail.component';
-import { SelectdEarthquakePolicyConfirmationComponent } from './earthquake-policy/selectd-earthquake-policy-confirmation/selectd-earthquake-policy-confirmation.component';
-import { EarthquakePolicyProductsListComponent } from './earthquake-policy/earthquake-policy-products-list/earthquake-policy-products-list.component';
-import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component';
-import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component';
-import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
-import { GmapsModule } from '../gmaps/gmaps.module';
+import { PurchaseEarthquakePolicyComponent } from "./earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component";
+import { EarthquakeHomeDetailComponent } from "./earthquake-policy/home-detail/home-detail.component";
+import { SelectdEarthquakePolicyConfirmationComponent } from "./earthquake-policy/selectd-earthquake-policy-confirmation/selectd-earthquake-policy-confirmation.component";
+import { EarthquakePolicyProductsListComponent } from "./earthquake-policy/earthquake-policy-products-list/earthquake-policy-products-list.component";
+import { EarthquakePolicyInsurerInfoComponent } from "./earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component";
+import { SelectEarthquakePolicyProductComponent } from "./earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component";
+import { DynamicOrderFieldDirective } from "./dynamic-field/dynamic-grid-item-view.directive";
+import { GmapsModule } from "../gmaps/gmaps.module";
 // medical policy
-// import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
-// import { HomeDetailComponent } from './medical-policy/home-detail/home-detail.component';
-// import { SelectdPolicyConfirmationComponent } from './medical-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component';
-// import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
-// import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
-// import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
-
+import { PurchaseMedicalPolicyComponent } from "./medical-policy/purchase-medical-policy/purchase-medical-policy.component";
+import { MedicalHomeDetailComponent } from "./medical-policy/medical-home-detail/medical-home-detail.component";
+import { SelectedMedicalPolicyConfirmationComponent } from "./medical-policy/selected-medical-policy-confirmation/selected-medical-policy-confirmation.component";
+import { MedicalPolicyProductsListComponent } from "./medical-policy/medical-policy-products-list/medical-policy-products-list.component";
+import { SelectMedicalPolicyProductComponent } from "./medical-policy/select-medical-policy-product/select-medical-policy-product.component";
+import { MedicalPolicyInsurerInfoComponent } from "./medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component";
 
 @NgModule({
 	imports: [
@@ -168,14 +167,14 @@ import { GmapsModule } from '../gmaps/gmaps.module';
 		SelectdEarthquakePolicyConfirmationComponent,
 		EarthquakePolicyProductsListComponent,
 		EarthquakePolicyInsurerInfoComponent,
-		SelectEarthquakePolicyProductComponent
+		SelectEarthquakePolicyProductComponent,
 		// Medical Policy
-		// PurchaseMedicalPolicyComponent,
-		// HomeDetailComponent,
-		// SelectdPolicyConfirmationComponent,
-		// MedicalPolicyProductsListComponent,
-		// SelectMedicalPolicyProductComponent,
-		// MedicalPolicyInsurerInfoComponent
+		PurchaseMedicalPolicyComponent,
+		MedicalHomeDetailComponent,
+		SelectedMedicalPolicyConfirmationComponent,
+		MedicalPolicyProductsListComponent,
+		SelectMedicalPolicyProductComponent,
+		MedicalPolicyInsurerInfoComponent
 	],
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
@@ -185,13 +184,13 @@ import { GmapsModule } from '../gmaps/gmaps.module';
 		FieldSelectComponent,
 		FieldDatepickerComponent
 	],
-	exports: [AboutThirdPartyPolicyComponent]
+	exports: [ AboutThirdPartyPolicyComponent ]
 })
 export class OrderModule {
 	static forRoot(config?: OrderModuleConfig): ModuleWithProviders {
 		return {
 			ngModule: RootOrderModule,
-			providers: [{ provide: MODULE_CONFIG_TOKEN, useValue: config }]
+			providers: [ { provide: MODULE_CONFIG_TOKEN, useValue: config } ]
 		};
 	}
 }
@@ -199,7 +198,7 @@ export class OrderModule {
 @NgModule({
 	imports: [
 		OrderModule,
-		StoreModule.forFeature('order', FeatureReducers),
+		StoreModule.forFeature("order", FeatureReducers),
 		EffectsModule.forFeature([
 			RootEffects,
 			GetOrderTypesApiEffects,
@@ -214,6 +213,6 @@ export class OrderModule {
 		]),
 		OrderRoutingModule
 	],
-	exports: [OrderModule]
+	exports: [ OrderModule ]
 })
-export class RootOrderModule { }
+export class RootOrderModule {}
