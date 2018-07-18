@@ -87,6 +87,7 @@ import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthq
 import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component';
 import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
 import { GmapsModule } from '../gmaps/gmaps.module';
+import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
 
 @NgModule({
 	imports: [
@@ -145,6 +146,7 @@ import { GmapsModule } from '../gmaps/gmaps.module';
 		OrderPanelComponent,
 		AboutThirdPartyPolicyComponent,
 		DynamicOrderFieldDirective,
+		DeliveryTimeComponent,
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,
