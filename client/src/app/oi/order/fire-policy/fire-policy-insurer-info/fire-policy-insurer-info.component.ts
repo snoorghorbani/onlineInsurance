@@ -59,7 +59,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	}
 
 	selectDeliveryTime(row: DeliveryTimeModel) {
-		this.DeliverDateTime = row.DayOfWeek + row.TimeFrom.Hours + row.TimeTo.Hours;
 		this.formGroup.patchValue({
 			DeliveryDate: row.Date,
 			DeliveryTime: row.Id
