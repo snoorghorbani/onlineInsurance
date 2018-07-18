@@ -1,0 +1,26 @@
+<button class="close" mat-mini-fab (click)="fullscreenToggle()">
+  <mat-icon>fullscreen_exit</mat-icon>
+</button>
+<button class="help" mat-mini-fab>
+  <mat-icon>help_outline</mat-icon>
+</button>
+<button class="question" mat-mini-fab>
+  <mat-icon>question_answer</mat-icon>
+</button>
+
+<mat-horizontal-stepper class="simple" linear="true" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>انتخاب بیمه</ng-template>
+  </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>اطلاعات ساختمان</ng-template>
+  </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>مشخصات تحویل گیرنده</ng-template>
+  </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>پرداخت</ng-template>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<router-outlet></router-outlet>

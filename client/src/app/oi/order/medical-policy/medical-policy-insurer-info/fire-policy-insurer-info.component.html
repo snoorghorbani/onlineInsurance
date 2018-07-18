@@ -1,0 +1,56 @@
+<div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center">
+  <div *ngIf="!signedIn" class="signinWrapper" fxLayout="row" (click)="signInRequest()" fxLayoutAlign="center start">
+    <button fxFlex="nogrow" mat-raised-button color="primary" (click)="signInRequest()">ورود به حساب کاریری</button>
+  </div>
+  <div fxFlex="50" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="25px" [class.fade]="!signedIn" *ngIf="orderForm">
+    <mat-card>
+      <mat-card-title>
+            مشخصات بیمه گذار
+      </mat-card-title>
+      <mat-card-content>
+      <form [formGroup]="formGroup">
+        <div fxLayout="row wrap" fxLayoutGap="25px">
+          <div *ngFor="let field of insurerInfoForm" [fxFlex]="field.fxFlex">
+            <ng-container [formGroup]="formGroup" [orderField]="orderForm[field.name]"></ng-container>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-title>
+            اطلاعات تحویل گیرنده
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+          <div fxLayout="row wrap" fxLayoutGap="25px">
+            <div *ngFor="let field of reciverInfoForm" [fxFlex]="field.fxFlex">
+              <ng-container [formGroup]="formGroup" [orderField]="orderForm[field.name]"></ng-container>
+            </div>
+        </div>
+      </form>
+      <app-google-maps (currentLocationOfUser)="currentLocationOfUser($event)"></app-google-maps>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-title>
+            اطلاعات ساختمان
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+          <div fxLayout="row wrap" fxLayoutGap="25px">
+            <div *ngFor="let field of buildingInfoForm" [fxFlex]="field.fxFlex">
+              <ng-container [formGroup]="formGroup" [orderField]="orderForm[field.name]"></ng-container>
+            </div>
+        </div>
+      </form>
+      </mat-card-content>
+    </mat-card>
+  
+    
+    
+    <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid">نمایش فاکتور و پرداخت</button>
+  </div>
+</div>
