@@ -36,8 +36,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	insurerInfoForm: any;
 	reciverInfoForm: any;
 	buildingInfoForm: any;
-	DelieryTimeTableDisplayColumns: string[];
-	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
 	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
@@ -59,13 +57,12 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	ngOnInit() {
 		this.store.dispatch(new GetNewOrderFormStartAction(4));
 	}
-	DeliverDateTime: string;
 
 	selectDeliveryTime(row: DeliveryTimeModel) {
 		this.DeliverDateTime = row.DayOfWeek + row.TimeFrom.Hours + row.TimeTo.Hours;
 		this.formGroup.patchValue({
 			DeliveryDate: row.Date,
-			DeliveryTime: row.TimeFrom.Hours
+			DeliveryTime: row.Id
 		});
 	}
 	save() {
@@ -147,7 +144,12 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			BuildingUsage: new FormControl('', [ Validators.required ]),
 			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ])
+			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			/**
+			 * Delivery Time
+			 */
+			DeliveryDate: new FormControl('', [ Validators.required ]),
+			DeliveryTime: new FormControl('', [ Validators.required ])
 		});
 	}
 	_init_insurerInfoForm() {
@@ -267,8 +269,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		];
 	}
 	_set_properties_value_of_delivery_table() {
-		this.DelieryTimeTableDisplayColumns = [ 'Checkbox', 'Day', 'Date', 'Time' ];
-		this.DelieryTimeTableDataSource$ = this.orderService.GetDeliveryTimeTable();
 		this.Cities$ = this.geoBoundaryService.GetCities();
 	}
 	_select_order_form() {

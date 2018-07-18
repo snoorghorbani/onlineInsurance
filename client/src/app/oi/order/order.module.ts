@@ -70,6 +70,7 @@ import { OrderPanelComponent } from './order-panel/order-panel.component';
 import { AboutThirdPartyPolicyComponent } from './about-third-party-policy/about-third-party-policy.component';
 import { FieldInputComponent } from './field-input/field-input.component';
 import { OrderPanelEffects } from './order-panel/order-panel.effects';
+import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
 
 // fire policy
 import { PurchaseFirePolicyComponent } from './fire-policy/purchase-fire-policy/purchase-fire-policy.component';
@@ -88,12 +89,13 @@ import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/sele
 import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
 import { GmapsModule } from '../gmaps/gmaps.module';
 // medical policy
-import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
-import { HomeDetailComponent } from './medical-policy/home-detail/home-detail.component';
-import { SelectdPolicyConfirmationComponent } from './medical-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component';
-import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
-import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
-import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
+// import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
+// import { HomeDetailComponent } from './medical-policy/home-detail/home-detail.component';
+// import { SelectdPolicyConfirmationComponent } from './medical-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component';
+// import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
+// import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
+// import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
+
 
 @NgModule({
 	imports: [
@@ -152,6 +154,7 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		OrderPanelComponent,
 		AboutThirdPartyPolicyComponent,
 		DynamicOrderFieldDirective,
+		DeliveryTimeComponent,
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,
@@ -166,6 +169,13 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		EarthquakePolicyProductsListComponent,
 		EarthquakePolicyInsurerInfoComponent,
 		SelectEarthquakePolicyProductComponent
+		// Medical Policy
+		// PurchaseMedicalPolicyComponent,
+		// HomeDetailComponent,
+		// SelectdPolicyConfirmationComponent,
+		// MedicalPolicyProductsListComponent,
+		// SelectMedicalPolicyProductComponent,
+		// MedicalPolicyInsurerInfoComponent
 	],
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
