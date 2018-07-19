@@ -1,8 +1,8 @@
-import { OrderFormModel } from "../models";
-import { OrderPanelActions, ORDER_PANEL_ACTION_TYPES } from "./order-panel.actions";
+import { OrderFormType } from '../models';
+import { OrderPanelActions, ORDER_PANEL_ACTION_TYPES } from './order-panel.actions';
 
 export interface State {
-	data: OrderFormModel;
+	data: OrderFormType;
 }
 export const initialState: State = {
 	data: null

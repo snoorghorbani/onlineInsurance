@@ -1,23 +1,8 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators, RequiredValidator } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
-import { OrderFormModel, DeliveryTimeModel } from '../models';
-import { Router } from '@angular/router';
-import { AppState } from '../order.reducers';
-import { Store } from '@ngrx/store';
-import { FieldModel } from '../models/field.model';
-import { FileService } from '../services/file.service';
-import { of } from 'rxjs/internal/observable/of';
-import { GetNewOrderFormStartAction, GetNewOrderFormApiModel } from '../services/api';
+import { DeliveryTimeModel } from '../models';
 import { OrderService } from '../services';
-import { MatExpansionPanel } from '@angular/material';
-import { GeoBoundaryService } from '../../geo-boundary';
-import { CityModel } from '../../geo-boundary/models';
-import { NewOrderFormUpdateAction } from '../new-order/new-order.actions';
-import { from } from 'rxjs';
-import { SaveOrderStartAction } from '../services/api/save-order';
-import { UploadEvent } from 'ngx-file-drop';
-import { filter, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
 	selector: 'order-delivery-time',

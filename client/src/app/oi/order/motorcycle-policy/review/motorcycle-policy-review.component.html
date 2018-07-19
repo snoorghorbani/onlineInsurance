@@ -1,18 +1,12 @@
 <mat-card>
   <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
-    <mat-grid-tile class="th">{{orderForm.CarModel.Label}}</mat-grid-tile>
-    <mat-grid-tile class="th">{{orderForm.CarUsage.Label}}</mat-grid-tile>
-    <mat-grid-tile class="th">{{orderForm.PolicyTerm.Label}}</mat-grid-tile>
-    <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheMali.Label}}</mat-grid-tile>
-    <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheRanande.Label}}</mat-grid-tile>
-    <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheSarneshin.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.MotorType.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.PolicyTerm.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.PolicyPushesheMali.Label}}</mat-grid-tile>
     
-    <mat-grid-tile>{{orderForm.CarModel.DisplayValue}}</mat-grid-tile>
-    <mat-grid-tile>{{orderForm.CarUsage.DisplayValue}}</mat-grid-tile>
-    <mat-grid-tile>{{orderForm.PolicyTerm.DisplayValue}}</mat-grid-tile>
-    <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheMali.DisplayValue}}</mat-grid-tile>
-    <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheRanande.DisplayValue}}</mat-grid-tile>
-    <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheSarneshin.DisplayValue}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.MotorType.DisplayValue}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.PolicyTerm.DisplayValue}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.PolicyPushesheMali.DisplayValue}}</mat-grid-tile>
 
     <mat-grid-tile colspan="2" class="th">{{orderForm.LastPolicyExpirationDate.Label}}</mat-grid-tile>
     <mat-grid-tile colspan="1">{{orderForm.LastPolicyExpirationDate.DisplayValue}}</mat-grid-tile>

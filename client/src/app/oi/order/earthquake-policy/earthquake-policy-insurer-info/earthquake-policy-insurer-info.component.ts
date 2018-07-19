@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SigninRequiredAction } from '@soushians/authentication';
 import { getAccountInfo } from '@soushians/user';
@@ -38,7 +38,8 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
-		private router: ActivatedRoute,
+		private activatedRouter: ActivatedRoute,
+		private router: Router,
 		private geoBoundaryService: GeoBoundaryService
 	) {
 		this._select_order_form();
@@ -66,7 +67,9 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			return;
 		}
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
-		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
+		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
+			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
+		});
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
@@ -112,16 +115,21 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			/**
 			 * Reciver Part
 			 */
-			DeliveryPlaceGeoLongitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceGeoLatitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
 			CustomerDescription: new FormControl('', [ Validators.required ]),
 			ReceiverFirstName: new FormControl('', [ Validators.required ]),
 			ReceiverLastName: new FormControl('', [ Validators.required ]),
 			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			/**
+			 * Delivery Time
+			 */
+			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
+			DeliveryDate: new FormControl('', [ Validators.required ]),
+			DeliveryTime: new FormControl('', [ Validators.required ]),
 			/**
 			 * Building Part
 			 */
@@ -259,7 +267,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 		this.Cities$ = this.geoBoundaryService.GetCities();
 	}
 	_select_order_form() {
-		this.orderForm$ = this.router.params.pipe(
+		this.orderForm$ = this.activatedRouter.params.pipe(
 			// pluck("Id"),
 			switchMap((parmas) => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);

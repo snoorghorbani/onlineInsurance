@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { OrderComponent } from './order.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ViewOrderComponent } from './view-order/view-order.component';
 import { CartableComponent } from './cartable/cartable.component';
 import { OrderPanelComponent } from './order-panel/order-panel.component';
 import { PurchaseFirePolicyComponent } from './fire-policy/purchase-fire-policy/purchase-fire-policy.component';

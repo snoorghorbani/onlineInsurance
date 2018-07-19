@@ -1,7 +1,7 @@
 <div fxLayout="column" *ngIf="ready">
   <mat-card fxFlex="100" fxLayout="row wrap" fxLayoutGap="25px" >
 
-    <div *ngFor="let field of carInfoFields" [fxFlex]="field.fxFlex" fxFlex.lt-sm="100">
+    <div *ngFor="let field of motorInfoFields" [fxFlex]="field.fxFlex" fxFlex.lt-sm="100">
       <ng-container [formGroup]="formGroup" [orderField]="orderForm[field.name]"></ng-container>
     </div>
 

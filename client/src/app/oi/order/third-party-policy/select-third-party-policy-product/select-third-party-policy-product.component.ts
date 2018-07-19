@@ -9,25 +9,27 @@ import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from '
 import { getAccountInfo } from '@soushians/user';
 import { SigninRequiredAction } from '@soushians/authentication';
 
-import { FirePolicyOrderFormModel } from '../../models';
+import { ThirdPartyPolicyOrderFormModel } from '../../models';
 import { AppState } from '../../order.reducers';
 import { SaveOrderStartAction, GetNewOrderFormStartAction } from '../../services/api';
 import { PolicyCompareModel, PriceModel } from '../../../policy/models';
 import { PolicyService } from '../../../policy/services';
 import { SelectedThirdPartyPolicyConfirmationComponent } from '../selected-third-party-policy-onfirmation/selected-third-party-policy-confirmation.component';
+import { OrderFormService } from '../../services';
 
 @Component({
 	templateUrl: './select-third-party-policy-product.component.html',
 	styleUrls: [ './select-third-party-policy-product.component.css' ]
 })
 export class SelectThirdPartyPolicyProductComponent implements OnInit, OnDestroy {
-	orderForm: FirePolicyOrderFormModel;
+	orderForm: ThirdPartyPolicyOrderFormModel;
 	policies$: Observable<PolicyCompareModel[]>;
 	signedIn$: Observable<boolean>;
 
 	constructor(
 		private store: Store<AppState>,
 		private policyService: PolicyService,
+		private orderFormService: OrderFormService,
 		public dialog: MatDialog,
 		private router: Router
 	) {
@@ -62,7 +64,7 @@ export class SelectThirdPartyPolicyProductComponent implements OnInit, OnDestroy
 			if (approved) this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 		});
 	}
-	doneInsurer(orderForm: FirePolicyOrderFormModel) {
+	doneInsurer(orderForm: ThirdPartyPolicyOrderFormModel) {
 		this.router.navigate([ 'order/view', orderForm.Id.Value ]);
 	}
 	fullscreenToggle() {
@@ -79,12 +81,9 @@ export class SelectThirdPartyPolicyProductComponent implements OnInit, OnDestroy
 		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 	_select_order_form_store_and_subscribe() {
-		this.store
-			.select((state) => state.order.newOrder.data as FirePolicyOrderFormModel)
-			.filter((orderForm) => orderForm != null)
-			.subscribe((orderForm) => {
-				this.orderForm = orderForm;
-				this.policies$ = this.policyService.ComparePolicies(this.orderForm);
-			});
+		this.orderFormService.GetNewOrderForm<ThirdPartyPolicyOrderFormModel>(8).subscribe((orderForm) => {
+			this.orderForm = orderForm;
+			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
+		});
 	}
 }

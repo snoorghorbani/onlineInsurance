@@ -49,20 +49,14 @@ import {
 	RejectOrderApiEffects
 } from './services/api';
 import { OrderComponent } from './order.component';
-import { NewOrderComponent } from './new-order/new-order.component';
 import { PoliciesCompareItemComponent } from './policies-compare-item/policies-compare-item.component';
-import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
 import { SaveOrderApiEffects } from './services/api/save-order';
-import { PurchaseComponent } from './purchase/purchase.component';
 import { ReviewOrderComponent } from './review-order/review-order.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ViewOrderComponent } from './view-order/view-order.component';
 import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from './order.config';
 import { CartableComponent } from './cartable/cartable.component';
 import { RedirectToBankComponent } from './redirect-to-bank/redirect-to-bank.component';
 import { OiCommonModule } from '../common/common.module';
-import { CarDetailComponent } from './car-detail/car-detail.component';
-import { SelectProductComponent } from './select-product/select-product.component';
 import { FieldSelectComponent } from './field-select/field-select.component';
 import { FieldDatepickerComponent } from './field-datepicker/field-datepicker.component';
 import { RootEffects } from './root/root.effects';
@@ -73,6 +67,8 @@ import { OrderPanelEffects } from './order-panel/order-panel.effects';
 import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
 import { FieldFileComponent } from './field-file/field-file.component';
 import { TermsComponent } from './terms/terms.component';
+import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
+import { GmapsModule } from '../gmaps/gmaps.module';
 
 // fire policy
 import { PurchaseFirePolicyComponent } from './fire-policy/purchase-fire-policy/purchase-fire-policy.component';
@@ -89,8 +85,7 @@ import { SelectdEarthquakePolicyConfirmationComponent } from './earthquake-polic
 import { EarthquakePolicyProductsListComponent } from './earthquake-policy/earthquake-policy-products-list/earthquake-policy-products-list.component';
 import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component';
 import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component';
-import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
-import { GmapsModule } from '../gmaps/gmaps.module';
+import { EarthquakePolicyOrderReviewComponent } from './earthquake-policy/review/earthquake-policy-review.component';
 // third party policy
 import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component';
 import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component';
@@ -104,7 +99,7 @@ import { PurchaseMotorcyclePolicyComponent } from './motorcycle-policy/purchase-
 import { SelectMotorcyclePolicyProductComponent } from './motorcycle-policy/select-motorcycle-policy-product/select-motorcycle-policy-product.component';
 import { SelectedMotorcyclePolicyConfirmationComponent } from './motorcycle-policy/selected-motorcycle-policy-onfirmation/selected-motorcycle-policy-confirmation.component';
 import { MotorcyclePolicyProductsListComponent } from './motorcycle-policy/motorcycle-policy-products-list/motorcycle-policy-products-list.component';
-import { MotorcycleCarDetailComponent } from './motorcycle-policy/motorcycle-detail/motorcycle-detail.component';
+import { MotorcycleDetailComponent } from './motorcycle-policy/motorcycle-detail/motorcycle-detail.component';
 import { MotorcyclePolicyInsurerInfoComponent } from './motorcycle-policy/motorcycle-policy-insurer-info/motorcycle-policy-insurer-info.component';
 import { MotorcyclePolicyOrderReviewComponent } from './motorcycle-policy/review/motorcycle-policy-review.component';
 // medical policy
@@ -155,15 +150,9 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 	declarations: [
 		TestComponent,
 		OrderComponent,
-		NewOrderComponent,
-		CarDetailComponent,
-		SelectProductComponent,
 		PoliciesCompareItemComponent,
-		InsurerInfoComponent,
-		PurchaseComponent,
 		ReviewOrderComponent,
 		MyOrdersComponent,
-		ViewOrderComponent,
 		TermsComponent,
 		CartableComponent,
 		RedirectToBankComponent,
@@ -186,7 +175,7 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		ThirdPartyPolicyOrderReviewComponent,
 		// motorcycle policy components
 		PurchaseMotorcyclePolicyComponent,
-		MotorcycleCarDetailComponent,
+		MotorcycleDetailComponent,
 		SelectedMotorcyclePolicyConfirmationComponent,
 		MotorcyclePolicyProductsListComponent,
 		SelectMotorcyclePolicyProductComponent,
@@ -207,6 +196,7 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		EarthquakePolicyProductsListComponent,
 		EarthquakePolicyInsurerInfoComponent,
 		SelectEarthquakePolicyProductComponent,
+		EarthquakePolicyOrderReviewComponent,
 		// Medical Policy
 		PurchaseMedicalPolicyComponent,
 		MedicalHomeDetailComponent,

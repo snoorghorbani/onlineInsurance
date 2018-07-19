@@ -7,7 +7,7 @@ import { share, map } from 'rxjs/operators';
 import { FormSchemaModel, FieldConfig } from '@soushians/form';
 
 import { FieldModel } from '../models/field.model';
-import { OrderFormModel } from '../models';
+import { OrderFormType } from '../models';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +15,7 @@ import { OrderFormModel } from '../models';
 export class CartableService {
 	constructor(private http: HttpClient) {}
 
-	getReadonlyField(_orderForm: OrderFormModel): FieldModel[] {
+	getReadonlyField(_orderForm: OrderFormType): FieldModel[] {
 		const orderForm = Object.assign({}, _orderForm);
 		const fields: FieldModel[] = [];
 		Object.keys(orderForm).forEach((key) => {
@@ -30,7 +30,7 @@ export class CartableService {
 		});
 		return fields;
 	}
-	getEditableField(_orderForm: OrderFormModel): FieldModel[] {
+	getEditableField(_orderForm: OrderFormType): FieldModel[] {
 		const orderForm = Object.assign({}, _orderForm);
 		const fields = [];
 		Object.keys(orderForm).forEach((key) => {

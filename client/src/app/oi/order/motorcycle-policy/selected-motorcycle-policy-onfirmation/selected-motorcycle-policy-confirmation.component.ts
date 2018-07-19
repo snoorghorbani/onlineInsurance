@@ -12,8 +12,8 @@ export class SelectedMotorcyclePolicyConfirmationComponent {
 	) {
 		debugger;
 
-		data.orderForm.CarModel.DisplayValue = data.orderForm.CarModel.Options.find(
-			(o) => o.Value == data.orderForm.CarModel.Value
+		data.orderForm.MotorType.DisplayValue = data.orderForm.MotorType.Options.find(
+			(o) => o.Value == data.orderForm.MotorType.Value
 		).DisplayName;
 		data.orderForm.PolicyPushesheMali.DisplayValue = data.orderForm.PolicyPushesheMali.Options.find(
 			(o) => o.Value == data.orderForm.PolicyPushesheMali.Value

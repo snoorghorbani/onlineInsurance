@@ -15,6 +15,7 @@ import { SaveOrderStartAction, GetNewOrderFormStartAction } from '../../services
 import { PolicyCompareModel, PriceModel } from '../../../policy/models';
 import { PolicyService } from '../../../policy/services';
 import { SelectedMotorcyclePolicyConfirmationComponent } from '../selected-motorcycle-policy-onfirmation/selected-motorcycle-policy-confirmation.component';
+import { OrderFormService } from '../../services';
 
 @Component({
 	templateUrl: './select-motorcycle-policy-product.component.html',
@@ -28,6 +29,7 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 	constructor(
 		private store: Store<AppState>,
 		private policyService: PolicyService,
+		private orderFormService: OrderFormService,
 		public dialog: MatDialog,
 		private router: Router
 	) {
@@ -79,12 +81,9 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 	_select_order_form_store_and_subscribe() {
-		this.store
-			.select((state) => state.order.newOrder.data as FirePolicyOrderFormModel)
-			.filter((orderForm) => orderForm != null)
-			.subscribe((orderForm) => {
-				this.orderForm = orderForm;
-				this.policies$ = this.policyService.ComparePolicies(this.orderForm);
-			});
+		this.orderFormService.GetNewOrderForm<FirePolicyOrderFormModel>(8).subscribe((orderForm) => {
+			this.orderForm = orderForm;
+			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
+		});
 	}
 }

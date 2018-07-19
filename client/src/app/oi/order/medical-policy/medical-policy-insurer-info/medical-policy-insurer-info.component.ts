@@ -1,34 +1,30 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { filter, distinctUntilChanged, switchMap, pluck } from "rxjs/operators";
-import { MatExpansionPanel } from "@angular/material";
-import { Observable } from "rxjs/internal/Observable";
-import { UploadEvent } from "ngx-file-drop";
-import { Store } from "@ngrx/store";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
-import { SigninRequiredAction } from "@soushians/authentication";
-import { getAccountInfo } from "@soushians/user";
+import { SigninRequiredAction } from '@soushians/authentication';
+import { getAccountInfo } from '@soushians/user';
 
-import { MedicalPolicyOrderFormModel, DeliveryTimeModel } from "../../models";
-import { AppState } from "../../order.reducers";
-import { FieldModel } from "../../models/field.model";
-import { FileService } from "../../services/file.service";
-import { GetNewOrderFormStartAction } from "../../services/api";
-import { OrderService, OrderFormService } from "../../services";
-import { GeoBoundaryService } from "../../../geo-boundary";
-import { CityModel } from "../../../geo-boundary/models";
-import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
-import { SaveOrderStartAction } from "../../services/api/save-order";
+import { MedicalPolicyOrderFormModel } from '../../models';
+import { AppState } from '../../order.reducers';
+import { FileService } from '../../services/file.service';
+import { GetNewOrderFormStartAction } from '../../services/api';
+import { OrderService } from '../../services';
+import { GeoBoundaryService } from '../../../geo-boundary';
+import { CityModel } from '../../../geo-boundary/models';
+import { SaveOrderStartAction } from '../../services/api/save-order';
 
 @Component({
-	selector: "order-medical-policy-insurer-info",
-	templateUrl: "./medical-policy-insurer-info.component.html",
-	styleUrls: [ "./medical-policy-insurer-info.component.css" ]
+	selector: 'order-medical-policy-insurer-info',
+	templateUrl: './medical-policy-insurer-info.component.html',
+	styleUrls: [ './medical-policy-insurer-info.component.css' ]
 })
 export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
-	@Output("signInRequest") signInRequest$ = new EventEmitter();
+	@Output('signInRequest') signInRequest$ = new EventEmitter();
 	orderForm$: Observable<MedicalPolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
@@ -39,7 +35,6 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
-		private fileService: FileService,
 		private orderService: OrderService,
 		private router: ActivatedRoute,
 		private geoBoundaryService: GeoBoundaryService
@@ -51,7 +46,7 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 		this._init_buildingInfoForm();
 		this._set_properties_value_of_delivery_table();
 
-		this.store.select(getAccountInfo).subscribe(user => (this.signedIn = !!user.DisplayName));
+		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
 	}
 
 	ngOnInit() {
@@ -63,7 +58,7 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
-		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
+		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
 		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 	}
 	signInRequest() {
@@ -80,7 +75,7 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	 * private methods
 	 */
 	_validate_all_form_fields(formGroup: FormGroup) {
-		Object.keys(formGroup.controls).forEach(field => {
+		Object.keys(formGroup.controls).forEach((field) => {
 			const control = formGroup.get(field);
 			if (control instanceof FormControl) {
 				control.markAsTouched({ onlySelf: true });
@@ -94,89 +89,89 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			/**
 			 * Insurer Part
 			 */
-			PolicyholderFirstName: new FormControl("", [
+			PolicyholderFirstName: new FormControl('', [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderLastName: new FormControl("", [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
-			PolicyholderFatherName: new FormControl("", [
+			PolicyholderLastName: new FormControl('', [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
+			PolicyholderFatherName: new FormControl('', [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderBirthDate: new FormControl("", [ Validators.required ]),
-			PolicyholderGender: new FormControl("", [ Validators.required ]),
+			PolicyholderNationalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
+			PolicyholderGender: new FormControl('', [ Validators.required ]),
 			// LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
 			// CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
 			// CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
 			/**
 			 * Reciver Part
 			 */
-			ReceiverFirstName: new FormControl("", [ Validators.required ]),
-			ReceiverLastName: new FormControl("", [ Validators.required ]),
-			ReceiverPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			ReceiverMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceCityId: new FormControl("", [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl("1", [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl("1", [ Validators.required ]),
-			DeliveryPlaceAddress: new FormControl("", [ Validators.required ]),
-			CustomerDescription: new FormControl("", [ Validators.required ]),
+			ReceiverFirstName: new FormControl('', [ Validators.required ]),
+			ReceiverLastName: new FormControl('', [ Validators.required ]),
+			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl('1', [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl('1', [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
+			CustomerDescription: new FormControl('', [ Validators.required ]),
 
 			/**
 			 * Building Part
 			 */
-			BuildingAddressCityId: new FormControl("", [ Validators.required ]),
-			BuildingAddressDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAddressMainStreet: new FormControl("", [ Validators.required ]),
-			BuildingAddressSubStreet: new FormControl("", [ Validators.required ]),
-			BuildingAddressAlley: new FormControl("", [ Validators.required ]),
-			BuildingAddressNo: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingPostalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingUsage: new FormControl("", [ Validators.required ]),
-			BuildingFloors: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAge: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingAddressCityId: new FormControl('', [ Validators.required ]),
+			BuildingAddressDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingAddressMainStreet: new FormControl('', [ Validators.required ]),
+			BuildingAddressSubStreet: new FormControl('', [ Validators.required ]),
+			BuildingAddressAlley: new FormControl('', [ Validators.required ]),
+			BuildingAddressNo: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingUsage: new FormControl('', [ Validators.required ]),
+			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			/**
 			 * Delivery Time
 			 */
-			DeliveryDate: new FormControl("", [ Validators.required ]),
-			DeliveryTime: new FormControl("", [ Validators.required ])
+			DeliveryDate: new FormControl('', [ Validators.required ]),
+			DeliveryTime: new FormControl('', [ Validators.required ])
 		});
 	}
 	_init_insurerInfoForm() {
 		this.insurerInfoForm = [
 			{
-				name: "PolicyholderFirstName",
+				name: 'PolicyholderFirstName',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderLastName",
+				name: 'PolicyholderLastName',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderFatherName",
+				name: 'PolicyholderFatherName',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderGender",
+				name: 'PolicyholderGender',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderNationalCode",
+				name: 'PolicyholderNationalCode',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderMobile",
+				name: 'PolicyholderMobile',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderPhone",
+				name: 'PolicyholderPhone',
 				fxFlex: 46
 			},
 			{
-				name: "PolicyholderBirthDate",
+				name: 'PolicyholderBirthDate',
 				fxFlex: 46
 			}
 		];
@@ -184,35 +179,35 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	_init_reciverInfoForm() {
 		this.reciverInfoForm = [
 			{
-				name: "ReceiverFirstName",
+				name: 'ReceiverFirstName',
 				fxFlex: 46
 			},
 			{
-				name: "ReceiverLastName",
+				name: 'ReceiverLastName',
 				fxFlex: 46
 			},
 			{
-				name: "DeliveryPlaceCityId",
+				name: 'DeliveryPlaceCityId',
 				fxFlex: 46
 			},
 			{
-				name: "DeliveryPlaceDistrict",
+				name: 'DeliveryPlaceDistrict',
 				fxFlex: 46
 			},
 			{
-				name: "ReceiverPhone",
+				name: 'ReceiverPhone',
 				fxFlex: 46
 			},
 			{
-				name: "ReceiverMobile",
+				name: 'ReceiverMobile',
 				fxFlex: 46
 			},
 			{
-				name: "DeliveryPlaceAddress",
+				name: 'DeliveryPlaceAddress',
 				fxFlex: 46
 			},
 			{
-				name: "CustomerDescription",
+				name: 'CustomerDescription',
 				fxFlex: 46
 			}
 		];
@@ -220,43 +215,43 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	_init_buildingInfoForm() {
 		this.buildingInfoForm = [
 			{
-				name: "BuildingAddressCityId",
+				name: 'BuildingAddressCityId',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingAddressDistrict",
+				name: 'BuildingAddressDistrict',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingAddressMainStreet",
+				name: 'BuildingAddressMainStreet',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingAddressSubStreet",
+				name: 'BuildingAddressSubStreet',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingAddressAlley",
+				name: 'BuildingAddressAlley',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingAddressNo",
+				name: 'BuildingAddressNo',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingPostalCode",
+				name: 'BuildingPostalCode',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingUsage",
+				name: 'BuildingUsage',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingFloors",
+				name: 'BuildingFloors',
 				fxFlex: 46
 			},
 			{
-				name: "BuildingAge",
+				name: 'BuildingAge',
 				fxFlex: 46
 			}
 		];
@@ -267,8 +262,8 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	_select_order_form() {
 		this.orderForm$ = this.router.params.pipe(
 			// pluck("Id"),
-			switchMap(parmas => this.orderService.GetOrder<MedicalPolicyOrderFormModel>(parmas))
+			switchMap((parmas) => this.orderService.GetOrder<MedicalPolicyOrderFormModel>(parmas))
 		);
-		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
+		this.orderForm$.subscribe((orderForm) => (this.orderForm = orderForm));
 	}
 }

@@ -1,12 +1,12 @@
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 
-import { RejectOrderApiModel } from "./reject-order.model";
-import { OrderFormModel } from "../../../models";
+import { RejectOrderApiModel } from './reject-order.model';
+import { OrderFormType } from '../../../models';
 
 export const enum REJECT_ORDER_ACTION_TYPES {
-	START = "[REJECT_ORDER][API][RejectOrder] start",
-	SUCCEED = "[REJECT_ORDER][API][RejectOrder] succeed",
-	FAILED = "[REJECT_ORDER][API][RejectOrder] failed"
+	START = '[REJECT_ORDER][API][RejectOrder] start',
+	SUCCEED = '[REJECT_ORDER][API][RejectOrder] succeed',
+	FAILED = '[REJECT_ORDER][API][RejectOrder] failed'
 }
 
 export class RejectOrderStartAction implements Action {
@@ -15,7 +15,7 @@ export class RejectOrderStartAction implements Action {
 }
 export class RejectOrderSucceedAction implements Action {
 	readonly type = REJECT_ORDER_ACTION_TYPES.SUCCEED;
-	constructor(public payload: OrderFormModel) {}
+	constructor(public payload: OrderFormType) {}
 }
 export class RejectOrderFailedAction implements Action {
 	readonly type = REJECT_ORDER_ACTION_TYPES.FAILED;

@@ -31,7 +31,7 @@ export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	orderForm: FirePolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
-	carCardForm: any;
+	motorForm: any;
 	policyForm: any;
 	Cities$: Observable<CityModel[]>;
 	constructor(
@@ -45,7 +45,7 @@ export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 		this._init_formgroup();
 		this._init_insurerInfoForm();
 		this._init_reciverInfoForm();
-		this._init_carCardForm();
+		this._init_motorForm();
 		this._init_policyForm();
 
 		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
@@ -131,10 +131,10 @@ export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			DeliveryDate: new FormControl('', [ Validators.required ]),
 			DeliveryTime: new FormControl('', [ Validators.required ]),
 			/**
-			 * Car Card Part
+			 * Motorcycle Motorcycled Part
 			 */
-			CarCardFrontImage: new FormControl('test', [ Validators.required ]),
-			CarCardBackImage: new FormControl('test', [ Validators.required ]),
+			MotorCardFrontImage: new FormControl('test', [ Validators.required ]),
+			MotorCardBackImage: new FormControl('test', [ Validators.required ]),
 			LastPolicyImage: new FormControl('test', [ Validators.required ]),
 			/**
 			 * Policy Part
@@ -216,19 +216,19 @@ export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			}
 		];
 	}
-	_init_carCardForm() {
-		this.carCardForm = [
+	_init_motorForm() {
+		this.motorForm = [
 			{
-				name: 'CarCardFrontImage',
-				fxFlex: 46
+				name: 'MotorCardFrontImage',
+				fxFlex: 30
 			},
 			{
-				name: 'CarCardBackImage',
-				fxFlex: 46
+				name: 'MotorCardBackImage',
+				fxFlex: 30
 			},
 			{
 				name: 'LastPolicyImage',
-				fxFlex: 46
+				fxFlex: 30
 			}
 		];
 	}

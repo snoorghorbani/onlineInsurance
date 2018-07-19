@@ -9,11 +9,11 @@ import { AppState } from '../../order.reducers';
 import { PolicyService } from '../../../policy/services';
 
 @Component({
-	selector: 'order-motorcycle-car-detail',
+	selector: 'order-motorcycle-detail',
 	templateUrl: './motorcycle-detail.component.html',
 	styleUrls: [ './motorcycle-detail.component.css' ]
 })
-export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
+export class MotorcycleDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	_orderForm: MotorcyclePolicyOrderFormModel;
 	@Input()
@@ -31,11 +31,11 @@ export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
 	unsubscribe = new Subject<void>();
 	formGroup: FormGroup;
 	ready = false;
-	carInfoFields: any;
+	motorInfoFields: any;
 	constructor(private store: Store<AppState>, private policyService: PolicyService) {
 		this._init_properties();
 		this._create_formGroup();
-		this._init_carInfoFields();
+		this._init_motorcycleInfoFields();
 	}
 
 	ngOnInit() {
@@ -60,10 +60,8 @@ export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
 	_init_properties() {}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			CarBrand: new FormControl(''),
-			CarModel: new FormControl(''),
-			CarProductionYear: new FormControl(''),
-			CarUsage: new FormControl(''),
+			MotorType: new FormControl(''),
+			MotorProductionYear: new FormControl(''),
 			NoDamageRecord: new FormControl(''),
 			PolicyTerm: new FormControl(''),
 			LastPolicyExpirationDate: new FormControl(''),
@@ -92,15 +90,15 @@ export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
 		this.formGroup.patchValue(values);
 	}
 	_set_formGroup_relation_logic() {
-		this.formGroup
-			.get('CarBrand')
-			.valueChanges.pipe(takeUntil(this.unsubscribe), filter((carBrand) => carBrand != ''))
-			.subscribe((carBrand) => {
-				this.policyService.GetCarModelsOfBrand({ carBrand }).subscribe((models) => {
-					this.orderForm.CarModel.Options = models as any;
-					this.orderForm.CarModel = { ...this.orderForm.CarModel };
-				});
-			});
+		// this.formGroup
+		// 	.get('MotorType')
+		// 	.valueChanges.pipe(takeUntil(this.unsubscribe), filter((motorcycleBrand) => motorcycleBrand != ''))
+		// 	.subscribe((motorcycleBrand) => {
+		// 		this.policyService.GetMotorTypesOfBrand({ motorcycleBrand }).subscribe((models) => {
+		// 			this.orderForm.MotorType.Options = models as any;
+		// 			this.orderForm.MotorType = { ...this.orderForm.MotorType };
+		// 		});
+		// 	});
 		this.formGroup
 			.get('NoDamageRecord')
 			.valueChanges.pipe(takeUntil(this.unsubscribe))
@@ -112,22 +110,22 @@ export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
 			this.done.emit(this.formGroup.value);
 		});
 	}
-	_init_carInfoFields() {
-		this.carInfoFields = [
+	_init_motorcycleInfoFields() {
+		this.motorInfoFields = [
 			{
-				name: 'CarBrand',
+				name: 'MotorType',
 				fxFlex: 23
 			},
 			{
-				name: 'CarModel',
-				fxFlex: 23
-			},
-			{
-				name: 'CarProductionYear',
+				name: 'MotorProductionYear',
 				fxFlex: 23
 			},
 			{
 				name: 'PolicyTerm',
+				fxFlex: 23
+			},
+			{
+				name: 'LastPolicyExpirationDate',
 				fxFlex: 23
 			},
 			{
@@ -147,15 +145,7 @@ export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
 				fxFlex: 23
 			},
 			{
-				name: 'CarUsage',
-				fxFlex: 23
-			},
-			{
 				name: 'PolicyPushesheMali',
-				fxFlex: 23
-			},
-			{
-				name: 'LastPolicyExpirationDate',
 				fxFlex: 23
 			}
 		];

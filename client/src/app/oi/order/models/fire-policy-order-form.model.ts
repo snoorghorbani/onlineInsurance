@@ -1,6 +1,7 @@
-import { FieldModel } from "./field.model";
+import { FieldModel } from './field.model';
+import { BasePolicyOrderFormModel } from './base-policy-order-form.model';
 
-export class FirePolicyOrderFormModel {
+export class FirePolicyOrderFormModel extends BasePolicyOrderFormModel {
 	AirplanFallExtraCoverage: FieldModel;
 	Area: FieldModel;
 	BuildType: FieldModel;
@@ -31,61 +32,9 @@ export class FirePolicyOrderFormModel {
 	ThingsValue: FieldModel;
 	Units: FieldModel;
 	AcceptAgreementTerms: FieldModel;
-	Agent: FieldModel;
-	AmountPayable: FieldModel;
-	Customer: FieldModel;
-	CustomerDescription: FieldModel;
-	DeliveryDate: FieldModel;
-	DeliveryPlaceAddress: FieldModel;
-	DeliveryPlaceCityId: FieldModel;
-	DeliveryPlaceDistrict: FieldModel;
-	DeliveryPlaceGeoLatitude: FieldModel;
-	DeliveryPlaceGeoLongitude: FieldModel;
-	DeliveryTime: FieldModel;
-	Discount: FieldModel;
-	IssuedPolicyExpirationDate: FieldModel;
-	IssuedPolicyImage: FieldModel;
-	IssuedPolicyNo: FieldModel;
-	IssuedPolicyStartValidityDate: FieldModel;
-	NetPremium: FieldModel;
-	PaymentId: FieldModel;
-	PaymentMethod: FieldModel;
-	PolicyholderBirthDate: FieldModel;
-	PolicyholderFatherName: FieldModel;
-	PolicyholderFirstName: FieldModel;
-	PolicyholderGender: FieldModel;
-	PolicyholderInfoSource: FieldModel;
-	PolicyholderLastName: FieldModel;
-	PolicyholderMobile: FieldModel;
-	PolicyholderNationalCode: FieldModel;
-	PolicyholderPhone: FieldModel;
-	ProductId: FieldModel;
-	ReceiverFirstName: FieldModel;
-	ReceiverLastName: FieldModel;
-	ReceiverMobile: FieldModel;
-	ReceiverPhone: FieldModel;
-	SellerAddress: FieldModel;
-	SellerEconomicNo: FieldModel;
-	SellerName: FieldModel;
-	SellerNationalId: FieldModel;
-	SellerPhone: FieldModel;
-	SellerRegistrationNo: FieldModel;
-	SellerZipCode: FieldModel;
-	ShippingCost: FieldModel;
-	TaxesAndDuties: FieldModel;
-	TotalPremium: FieldModel;
-	TrackingCode: FieldModel;
-	Actor: FieldModel;
-	CanAttachFile: FieldModel;
-	Id: FieldModel;
-	NewNote: FieldModel;
-	SaveDateTime: FieldModel;
-	Type: FieldModel;
-	Version: FieldModel;
-	WorkflowState: FieldModel;
-	ExtensionData: {};
 
 	constructor(initValue = {}) {
-		Object.keys(initValue).forEach(key => (this[key] = initValue[key]));
+		super();
+		Object.keys(initValue).forEach((key) => (this[key] = initValue[key]));
 	}
 }

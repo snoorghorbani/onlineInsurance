@@ -1,6 +1,6 @@
-import { FieldModel } from "./field.model";
+import { FieldModel } from './field.model';
 
-export class OrderFormModel {
+export class BasePolicyOrderFormModel {
 	Id: FieldModel;
 	Version: FieldModel;
 	CanAttachFile: FieldModel;
@@ -54,27 +54,9 @@ export class OrderFormModel {
 	IssuedPolicyStartValidityDate: FieldModel;
 	IssuedPolicyExpirationDate: FieldModel;
 	IssuedPolicyImage: FieldModel;
-	CarBrand: FieldModel;
-	CarModel: FieldModel;
-	CarProductionYear: FieldModel;
-	CarUsage: FieldModel;
-	DamageStatus: FieldModel;
-	NoDamageRecord: FieldModel;
-	LastPolicyDiscountYears: FieldModel;
-	LastPolicyUsedPropertyCoupons: FieldModel;
-	LastPolicyUsedPersonCoupons: FieldModel;
-	LastPolicyExpirationDate: FieldModel;
-	PolicyTerm: FieldModel;
-	PolicyPushesheMali: FieldModel;
-	PolicyPushesheSarneshin: FieldModel;
-	PolicyPushesheRanande: FieldModel;
-	CarCardFrontImage: FieldModel;
-	CarCardBackImage: FieldModel;
-	LastPolicyImage: FieldModel;
-	PolicyAddressSource: FieldModel;
-	PolicyAddressCityId: FieldModel;
-	PolicyAddress: FieldModel;
+	ExtensionData: {};
+
 	constructor(initValue = {}) {
-		Object.keys(initValue).forEach(key => (this[key] = initValue[key]));
+		Object.keys(initValue).forEach((key) => (this[key] = initValue[key]));
 	}
 }

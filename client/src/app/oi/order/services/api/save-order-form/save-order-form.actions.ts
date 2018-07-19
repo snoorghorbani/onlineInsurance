@@ -1,13 +1,12 @@
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 
-import { SaveOrderFormApiModel } from "./save-order-form.model";
-import { OrderModel } from "../../../models/order.model";
-import { OrderFormModel } from "../../../models";
+import { SaveOrderFormApiModel } from './save-order-form.model';
+import { OrderFormType } from '../../../models';
 
 export const enum SAVE_ORDER_FORM_ACTION_TYPES {
-	START = "[SAVE_ORDER_FORM][API][SaveOrderForm] start",
-	SUCCEED = "[SAVE_ORDER_FORM][API][SaveOrderForm] succeed",
-	FAILED = "[SAVE_ORDER_FORM][API][SaveOrderForm] failed"
+	START = '[SAVE_ORDER_FORM][API][SaveOrderForm] start',
+	SUCCEED = '[SAVE_ORDER_FORM][API][SaveOrderForm] succeed',
+	FAILED = '[SAVE_ORDER_FORM][API][SaveOrderForm] failed'
 }
 
 export class SaveOrderFormStartAction implements Action {
@@ -16,7 +15,7 @@ export class SaveOrderFormStartAction implements Action {
 }
 export class SaveOrderFormSucceedAction implements Action {
 	readonly type = SAVE_ORDER_FORM_ACTION_TYPES.SUCCEED;
-	constructor(public payload: OrderFormModel) {}
+	constructor(public payload: OrderFormType) {}
 }
 export class SaveOrderFormFailedAction implements Action {
 	readonly type = SAVE_ORDER_FORM_ACTION_TYPES.FAILED;

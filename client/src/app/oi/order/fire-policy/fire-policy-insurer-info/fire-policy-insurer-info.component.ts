@@ -58,7 +58,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
 
 		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
-			debugger;
 			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
 		});
 	}
