@@ -19,7 +19,6 @@ export class ReviewOrderComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	formGroup: FormGroup;
 	orderForm: OrderFormType;
-	isPayed: boolean;
 	InitiationPaymentResult$: Observable<any>;
 
 	constructor(

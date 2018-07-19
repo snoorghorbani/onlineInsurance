@@ -29,28 +29,7 @@
         <br/>
 
         <h3>مشخصات بیمه نامه</h3>
-        <mat-card>
-          <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
-            <mat-grid-tile class="th">{{orderForm.CarModel.Label}}</mat-grid-tile>
-            <mat-grid-tile class="th">{{orderForm.CarUsage.Label}}</mat-grid-tile>
-            <mat-grid-tile class="th">{{orderForm.PolicyTerm.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheMali.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheRanande.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheSarneshin.Label}}</mat-grid-tile>
-            
-            <mat-grid-tile>{{orderForm.CarModel.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile>{{orderForm.CarUsage.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile>{{orderForm.PolicyTerm.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheMali.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheRanande.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheSarneshin.DisplayValue}}</mat-grid-tile>
-  
-            <mat-grid-tile colspan="2" class="th">{{orderForm.LastPolicyExpirationDate.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{orderForm.LastPolicyExpirationDate.DisplayValue}}</mat-grid-tile>
-            <mat-grid-tile colspan="2" class="th">{{orderForm.LastPolicyDiscountYears.Label}}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{orderForm.LastPolicyDiscountYears.DisplayValue}}</mat-grid-tile>
-          </mat-grid-list>
-        </mat-card>
+        <order-third-party-policy-review *ngIf="orderForm.Type.Value==1" [orderForm]="orderForm"></order-third-party-policy-review>
 
         <br/>
 
@@ -76,44 +55,16 @@
           </mat-grid-list>
         </mat-card>
 
-      <br/>
-      
-      <mat-card>
-        <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
-          <mat-grid-tile class="th">{{orderForm.CarModel.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{orderForm.CarUsage.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{orderForm.PolicyTerm.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{orderForm.Discount.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th"></mat-grid-tile>
-          
-          <mat-grid-tile>{{orderForm.CarModel.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{orderForm.CarUsage.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{orderForm.PolicyTerm.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{orderForm.Discount.Value}}</mat-grid-tile>
-          <mat-grid-tile></mat-grid-tile>
-
-          <mat-grid-tile colspan="3" class="th">{{orderForm.LastPolicyExpirationDate.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="3">{{orderForm.LastPolicyExpirationDate.Value}}</mat-grid-tile>
-          <mat-grid-tile colspan="3" class="th">{{orderForm.LastPolicyDiscountYears.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="3">{{orderForm.LastPolicyDiscountYears.Value}}</mat-grid-tile>
-          <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheMali.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheMali.DisplayValue}}</mat-grid-tile>
-          <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheRanande.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheRanande.DisplayValue}}</mat-grid-tile>
-          <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheSarneshin.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheSarneshin.DisplayValue}}</mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
     </div>
           
     <div fxFlex="30">
-      <h3>شرایط و قوانین</h3>
-      <mat-card>
+      <h3  *ngIf="!orderForm.PaymentId.Value">شرایط و قوانین</h3>
+      <mat-card *ngIf="!orderForm.PaymentId.Value">
         <order-terms></order-terms>
       </mat-card>
 
       <br/>
-      
+
       <h3>جزئیات پرداخت</h3>
       <mat-card id="paymentInfo" [formGroup]="formGroup">
         <mat-card-content>
@@ -129,7 +80,7 @@
             <div fxFlex="50">هزینه ارسال</div>
             <div fxFlex="50"><b>{{orderForm.ShippingCost.DisplayValue}}</b></div>
             <div fxFlex="100">
-            <mat-accordion class="fit" *ngIf="!isPayed">
+            <mat-accordion class="fit" *ngIf="!orderForm.PaymentId.Value">
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   کد تخفیف دارید؟
@@ -143,17 +94,17 @@
             </mat-accordion>
           </div>
         </div>
-        <mat-chip-list *ngIf="isPayed">
+        <mat-chip-list *ngIf="orderForm.PaymentId.Value">
           <mat-chip color="primary" selected="true">پرداخت شده</mat-chip>
         </mat-chip-list>
-        <mat-checkbox class="wrap" *ngIf="!isPayed" formControlName="AcceptAgreementTerms">{{orderForm.AcceptAgreementTerms.Label}}</mat-checkbox>
+        <mat-checkbox class="wrap" *ngIf="!orderForm.PaymentId.Value" formControlName="AcceptAgreementTerms">{{orderForm.AcceptAgreementTerms.Label}}</mat-checkbox>
         </mat-card-content>
-        <mat-card-actions fxLayout="row" *ngIf="!isPayed">
+        <mat-card-actions fxLayout="row" *ngIf="!orderForm.PaymentId.Value">
           <button fxFlex="100" mat-raised-button (click)="pay()" color="primary" [disabled]="formGroup.invalid">
               تایید نهایی و پرداخت
           </button>
         </mat-card-actions>
-        <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="!isPayed">
+        <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="!orderForm.PaymentId.Value">
           <div fxFlex="50">مبلغ قابل پرداخت</div>
           <h3 fxFlex="50">
               {{orderForm.AmountPayable.DisplayValue}}

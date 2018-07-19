@@ -29,10 +29,13 @@ export class OrderService {
 			)
 			.pipe(share(), map((response) => response.Result.Items));
 	}
-	SaveOrder(order: OrderFormModel): Observable<OrderFormModel> {
+	SaveOrder<T>(order: OrderFormType): Observable<T> {
 		debugger;
 		return this.http
-			.post<SaveOrderApiModel.Response>(`${this.configurationService.config.env.server}/order/SaveOrder`, order)
+			.post<SaveOrderApiModel.Response<T>>(
+				`${this.configurationService.config.env.server}/order/SaveOrder`,
+				order
+			)
 			.pipe(map((response) => response.Result), share());
 	}
 	GetMyOrders(): Observable<OrderSummaryModel[]> {

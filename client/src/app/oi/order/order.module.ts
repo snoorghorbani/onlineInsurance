@@ -97,6 +97,7 @@ import { SelectedThirdPartyPolicyConfirmationComponent } from './third-party-pol
 import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/third-party-policy-products-list/third-party-policy-products-list.component';
 import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
 import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
+import { ThirdPartyPolicyOrderReviewComponent } from './third-party-policy/review/third-party-policy-review.component';
 // medical policy
 import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
 import { MedicalHomeDetailComponent } from './medical-policy/medical-home-detail/medical-home-detail.component';
@@ -173,7 +174,7 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		ThirdPartyPolicyProductsListComponent,
 		SelectThirdPartyPolicyProductComponent,
 		ThirdPartyPolicyInsurerInfoComponent,
-
+		ThirdPartyPolicyOrderReviewComponent,
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,

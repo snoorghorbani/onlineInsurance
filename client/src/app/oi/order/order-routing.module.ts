@@ -95,12 +95,12 @@ const routes: Routes = [
 				component: ReviewOrderComponent
 			},
 			{
-				path: 'my-orders',
-				component: MyOrdersComponent
+				path: 'view/:Id',
+				component: ReviewOrderComponent
 			},
 			{
-				path: 'view/:Id',
-				component: ViewOrderComponent
+				path: 'my-orders',
+				component: MyOrdersComponent
 			},
 			{
 				path: 'cartable',

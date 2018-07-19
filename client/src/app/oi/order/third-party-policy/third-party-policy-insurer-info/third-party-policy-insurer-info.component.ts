@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { SigninRequiredAction } from '@soushians/authentication';
 import { getAccountInfo } from '@soushians/user';
 
-import { FirePolicyOrderFormModel, DeliveryTimeModel } from '../../models';
+import { FirePolicyOrderFormModel, DeliveryTimeModel, ThirdPartyPolicyOrderFormModel } from '../../models';
 import { SaveOrderStartAction } from '../../services/api/save-order';
 import { GeoBoundaryService } from '../../../geo-boundary';
 import { CityModel } from '../../../geo-boundary/models';
@@ -37,7 +37,8 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
-		private router: ActivatedRoute,
+		private activeRouter: ActivatedRoute,
+		private router: Router,
 		private geoBoundaryService: GeoBoundaryService
 	) {
 		this._select_order_form();
@@ -64,7 +65,11 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			return;
 		}
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
-		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
+
+		this.orderService.SaveOrder<ThirdPartyPolicyOrderFormModel>(this.orderForm).subscribe((response) => {
+			debugger;
+			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
+		});
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
@@ -244,7 +249,7 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 		];
 	}
 	_select_order_form() {
-		this.orderForm$ = this.router.params.pipe(
+		this.orderForm$ = this.activeRouter.params.pipe(
 			// pluck("Id"),
 			switchMap((parmas) => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
