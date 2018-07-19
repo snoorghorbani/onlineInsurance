@@ -1,0 +1,6 @@
+:host {
+	max-height: 40vh;
+	display: block;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}

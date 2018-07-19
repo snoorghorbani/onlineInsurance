@@ -50,12 +50,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 
 	ngOnInit() {}
 
-	selectDeliveryTime(row: DeliveryTimeModel) {
-		this.formGroup.patchValue({
-			DeliveryDate: row.Date,
-			DeliveryTime: row.Id
-		});
-	}
 	save() {
 		if (this.formGroup.invalid) {
 			this._validate_all_form_fields(this.formGroup);
@@ -68,7 +62,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this.store.dispatch(new SigninRequiredAction());
 	}
 	currentLocationOfUser({ lat, lng }) {
-		debugger;
 		this.formGroup.patchValue({
 			DeliveryPlaceGeoLatitude: lat,
 			DeliveryPlaceGeoLongitude: lng

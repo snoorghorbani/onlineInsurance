@@ -1,115 +1,167 @@
-<div class="review-component">
+<div class="review-component" *ngIf="orderForm">
 
-  <div fxLayout="row" fxLayoutGap="25px">
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
     <div fxFlex="60">
-      <mat-card>
-        <mat-grid-list class="mat-table mat-row" cols="4" rowHeight="40px">
-          <mat-grid-tile class="th">{{(SellerName$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(SellerNationalId$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(SellerRegistrationNo$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(SellerEconomicNo$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile>{{(SellerName$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(SellerNationalId$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(SellerRegistrationNo$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(SellerEconomicNo$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile colspan="4">
-            <b>{{(SellerAddress$ | async)?.Label}}: </b>
-            <span>{{(SellerAddress$ | async)?.Value}}, </span>
-            <b>{{(SellerZipCode$ | async)?.Label}}: </b>
-            <span>{{(SellerZipCode$ | async)?.Value}}, </span>
-            <b>{{(SellerPhone$ | async)?.Label}}: </b>
-            <span>{{(SellerPhone$ | async)?.Value}}</span>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
+        <h3>مشخصات بیمه گذار</h3>
+        <mat-card>
+            <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
+            <mat-grid-tile class="th">نام</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.PolicyholderFatherName.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.PolicyholderNationalCode.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.PolicyholderMobile.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.PolicyholderPhone.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.PolicyholderBirthDate.Label}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyholderFirstName.DisplayValue}} {{orderForm.PolicyholderLastName.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyholderFatherName.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyholderNationalCode.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyholderMobile.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyholderPhone.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyholderBirthDate.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="2" class="th">{{orderForm.PolicyAddress.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="4">{{orderForm.PolicyAddress.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="2" class="th">{{orderForm.DeliveryPlaceAddress.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="4">{{orderForm.DeliveryPlaceAddress.DisplayValue}}</mat-grid-tile>
+            <!-- <mat-grid-tile class="th">شرکت بیمه</mat-grid-tile>
+            <mat-grid-tile colspan="4">{{orderForm.DeliveryPlaceAddress.DisplayValue}}</mat-grid-tile> -->
+          </mat-grid-list>
+        </mat-card>
 
-      <br/>
+        <br/>
 
-      <mat-card>
-        <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
-          <mat-grid-tile class="th">نام</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyholderFatherName$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyholderNationalCode$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyholderMobile$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyholderPhone$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyholderBirthDate$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyholderFirstName$ | async)?.Value}} {{(PolicyholderLastName$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyholderFatherName$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyholderNationalCode$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyholderMobile$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyholderPhone$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyholderBirthDate$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyAddress$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="5">{{(PolicyAddress$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(DeliveryPlaceAddress$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="5">{{(DeliveryPlaceAddress$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile class="th">شرکت بیمه</mat-grid-tile>
-          <mat-grid-tile colspan="5">biemh</mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
+        <h3>مشخصات بیمه نامه</h3>
+        <mat-card>
+          <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
+            <mat-grid-tile class="th">{{orderForm.CarModel.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.CarUsage.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.PolicyTerm.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheMali.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheRanande.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheSarneshin.Label}}</mat-grid-tile>
+            
+            <mat-grid-tile>{{orderForm.CarModel.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.CarUsage.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.PolicyTerm.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheMali.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheRanande.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheSarneshin.DisplayValue}}</mat-grid-tile>
+  
+            <mat-grid-tile colspan="2" class="th">{{orderForm.LastPolicyExpirationDate.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{orderForm.LastPolicyExpirationDate.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="2" class="th">{{orderForm.LastPolicyDiscountYears.Label}}</mat-grid-tile>
+            <mat-grid-tile colspan="1">{{orderForm.LastPolicyDiscountYears.DisplayValue}}</mat-grid-tile>
+          </mat-grid-list>
+        </mat-card>
+
+        <br/>
+
+        <h3>مشخصات کارگزار</h3>
+        <mat-card>
+          <mat-grid-list class="mat-table mat-row" cols="4" rowHeight="40px">
+            <mat-grid-tile class="th">{{orderForm.SellerName.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.SellerNationalId.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.SellerRegistrationNo.Label}}</mat-grid-tile>
+            <mat-grid-tile class="th">{{orderForm.SellerEconomicNo.Label}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.SellerName.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.SellerNationalId.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.SellerRegistrationNo.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile>{{orderForm.SellerEconomicNo.DisplayValue}}</mat-grid-tile>
+            <mat-grid-tile colspan="4">
+              <!-- <b>{{orderForm.SellerAddress.Label}}: </b> -->
+              <span>{{orderForm.SellerAddress.DisplayValue}}, </span>
+              <b> {{orderForm.SellerZipCode.Label}}: </b>
+              <span>{{orderForm.SellerZipCode.DisplayValue}}, </span>
+              <b> {{orderForm.SellerPhone.Label}}: </b>
+              <span> {{orderForm.SellerPhone.DisplayValue}}</span>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card>
 
       <br/>
       
       <mat-card>
         <mat-grid-list class="mat-table mat-row" cols="6" rowHeight="40px">
-          <mat-grid-tile class="th">{{(CarModel$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(CarUsage$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(PolicyTerm$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile class="th">{{(Discount$ | async)?.Label}}</mat-grid-tile>
+          <mat-grid-tile class="th">{{orderForm.CarModel.Label}}</mat-grid-tile>
+          <mat-grid-tile class="th">{{orderForm.CarUsage.Label}}</mat-grid-tile>
+          <mat-grid-tile class="th">{{orderForm.PolicyTerm.Label}}</mat-grid-tile>
+          <mat-grid-tile class="th">{{orderForm.Discount.Label}}</mat-grid-tile>
           <mat-grid-tile class="th"></mat-grid-tile>
           
-          <mat-grid-tile>{{(CarModel$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(CarUsage$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(PolicyTerm$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile>{{(Discount$ | async)?.Value}}</mat-grid-tile>
+          <mat-grid-tile>{{orderForm.CarModel.Value}}</mat-grid-tile>
+          <mat-grid-tile>{{orderForm.CarUsage.Value}}</mat-grid-tile>
+          <mat-grid-tile>{{orderForm.PolicyTerm.Value}}</mat-grid-tile>
+          <mat-grid-tile>{{orderForm.Discount.Value}}</mat-grid-tile>
           <mat-grid-tile></mat-grid-tile>
 
-          <mat-grid-tile colspan="3" class="th">{{(LastPolicyExpirationDate$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="3">{{(LastPolicyExpirationDate$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile colspan="3" class="th">{{(LastPolicyDiscountYears$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="3">{{(LastPolicyDiscountYears$ | async)?.Value}}</mat-grid-tile>
-          <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheMali$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{(PolicyPushesheMali$ | async)?.DisplayValue}}</mat-grid-tile>
-          <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheRanande$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{(PolicyPushesheRanande$ | async)?.DisplayValue}}</mat-grid-tile>
-          <mat-grid-tile colspan="1" class="th">{{(PolicyPushesheSarneshin$ | async)?.Label}}</mat-grid-tile>
-          <mat-grid-tile colspan="1">{{(PolicyPushesheSarneshin$ | async)?.DisplayValue}}</mat-grid-tile>
+          <mat-grid-tile colspan="3" class="th">{{orderForm.LastPolicyExpirationDate.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="3">{{orderForm.LastPolicyExpirationDate.Value}}</mat-grid-tile>
+          <mat-grid-tile colspan="3" class="th">{{orderForm.LastPolicyDiscountYears.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="3">{{orderForm.LastPolicyDiscountYears.Value}}</mat-grid-tile>
+          <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheMali.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheMali.DisplayValue}}</mat-grid-tile>
+          <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheRanande.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheRanande.DisplayValue}}</mat-grid-tile>
+          <mat-grid-tile colspan="1" class="th">{{orderForm.PolicyPushesheSarneshin.Label}}</mat-grid-tile>
+          <mat-grid-tile colspan="1">{{orderForm.PolicyPushesheSarneshin.DisplayValue}}</mat-grid-tile>
         </mat-grid-list>
       </mat-card>
-      
     </div>
           
-    <div fxFlex>
+    <div fxFlex="30">
+      <h3>شرایط و قوانین</h3>
       <mat-card>
-        <div fxLayout="row wrap">
-          <div fxFlex="50">حق بیمه خالص</div>
-          <div fxFlex="50">-</div>
-          <div fxFlex="50">مالیات و عوارض</div>
-          <div fxFlex="50">-</div>
-          <div fxFlex="50">جمع کل حق بیمه</div>
-          <div fxFlex="50">-</div>
-          <div fxFlex="50">تخفیف بیمه بازار</div>
-          <div fxFlex="50">-</div>
-          <div fxFlex="50">هزینه ارسال</div>
-          <div fxFlex="50">-</div>
-          <div fxFlex="100">
-            <mat-accordion class="fit">
+        <order-terms></order-terms>
+      </mat-card>
+
+      <br/>
+      
+      <h3>جزئیات پرداخت</h3>
+      <mat-card id="paymentInfo" [formGroup]="formGroup">
+        <mat-card-content>
+          <div fxLayout="row wrap">
+            <div fxFlex="50">حق بیمه خالص</div>
+            <div fxFlex="50"><b>{{orderForm.NetPremium.DisplayValue}}</b></div>
+            <div fxFlex="50">مالیات و عوارض</div>
+            <div fxFlex="50"><b>{{orderForm.TaxesAndDuties.DisplayValue}}</b></div>
+            <div fxFlex="50">جمع کل حق بیمه</div>
+            <div fxFlex="50"><b>{{orderForm.TotalPremium.DisplayValue}}</b></div>
+            <div fxFlex="50">تخفیف </div>
+            <div fxFlex="50"><b>{{orderForm.Discount.DisplayValue}}</b></div>
+            <div fxFlex="50">هزینه ارسال</div>
+            <div fxFlex="50"><b>{{orderForm.ShippingCost.DisplayValue}}</b></div>
+            <div fxFlex="100">
+            <mat-accordion class="fit" *ngIf="!isPayed">
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                      کد تخفیف دارید؟
+                  کد تخفیف دارید؟
                 </mat-expansion-panel-header>
                 <div fxLayout="row">
-                  <mat-form-field class="fill">
-                    <input matInput class="fit" placeholder="کد تخفیف">
+                  <mat-form-field class="fill fit" appearance="fill">
+                    <input matInput placeholder="کد تخفیف">
                   </mat-form-field>
                 </div>
               </mat-expansion-panel>
             </mat-accordion>
           </div>
-          <div fxFlex="50">مبلغ قابل پرداخت</div>
-          <div fxFlex="50">-</div>
         </div>
+        <mat-chip-list *ngIf="isPayed">
+          <mat-chip color="primary" selected="true">پرداخت شده</mat-chip>
+        </mat-chip-list>
+        <mat-checkbox class="wrap" *ngIf="!isPayed" formControlName="AcceptAgreementTerms">{{orderForm.AcceptAgreementTerms.Label}}</mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" *ngIf="!isPayed">
+          <button fxFlex="100" mat-raised-button (click)="pay()" color="primary" [disabled]="formGroup.invalid">
+              تایید نهایی و پرداخت
+          </button>
+        </mat-card-actions>
+        <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="!isPayed">
+          <div fxFlex="50">مبلغ قابل پرداخت</div>
+          <h3 fxFlex="50">
+              {{orderForm.AmountPayable.DisplayValue}}
+          </h3>
+          <order-redirect-to-bank [data]="InitiationPaymentResult$ | async"></order-redirect-to-bank>
+        </mat-card-footer>
       </mat-card>
+
     </div>
   </div>
 </div>

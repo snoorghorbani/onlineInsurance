@@ -36,6 +36,21 @@
   
     <mat-card>
       <mat-card-title>
+            اطلاعات بیمه نامه
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+          <div fxLayout="row wrap" fxLayoutGap="25px">
+            <div *ngFor="let field of policyForm" [fxFlex]="field.fxFlex">
+              <ng-container [formGroup]="formGroup" [orderField]="orderForm[field.name]"></ng-container>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-title>
             اطلاعات کارت ماشین و بیمه نامه قبلی
       </mat-card-title>
       <mat-card-content>

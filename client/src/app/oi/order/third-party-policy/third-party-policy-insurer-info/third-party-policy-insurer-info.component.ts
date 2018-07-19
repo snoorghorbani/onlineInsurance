@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { SigninRequiredAction } from '@soushians/authentication';
@@ -14,15 +14,17 @@ import { GeoBoundaryService } from '../../../geo-boundary';
 import { CityModel } from '../../../geo-boundary/models';
 import { AppState } from '../../order.reducers';
 import { OrderService } from '../../services';
+import { Subject } from '../../../../../../node_modules/rxjs';
 
 @Component({
 	selector: 'order-third-party-policy-insurer-info',
 	templateUrl: './third-party-policy-insurer-info.component.html',
 	styleUrls: [ './third-party-policy-insurer-info.component.css' ]
 })
-export class ThirdPartyPolicyInsurerInfoComponent implements OnInit {
+export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	@Output('signInRequest') signInRequest$ = new EventEmitter();
+	unsubscribe = new Subject<void>();
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
@@ -31,8 +33,6 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit {
 	reciverInfoForm: any;
 	carCardForm: any;
 	policyForm: any;
-	DelieryTimeTableDisplayColumns: string[];
-	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
 	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
@@ -46,21 +46,18 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit {
 		this._init_reciverInfoForm();
 		this._init_carCardForm();
 		this._init_policyForm();
-		this._set_properties_value_of_delivery_table();
 
 		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
 	}
 
-	ngOnInit() {}
-	DeliverDateTime: string;
-
-	selectDeliveryTime(row: DeliveryTimeModel) {
-		this.DeliverDateTime = row.DayOfWeek + row.TimeFrom.Hours + row.TimeTo.Hours;
-		this.formGroup.patchValue({
-			DeliveryDate: row.Date,
-			DeliveryTime: row.TimeFrom.Hours
-		});
+	ngOnInit() {
+		this._set_formGroup_relation_logic();
 	}
+	ngOnDestroy() {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
 	save() {
 		if (this.formGroup.invalid) {
 			this._validate_all_form_fields(this.formGroup);
@@ -73,7 +70,6 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit {
 		this.store.dispatch(new SigninRequiredAction());
 	}
 	currentLocationOfUser({ lat, lng }) {
-		debugger;
 		this.formGroup.patchValue({
 			DeliveryPlaceGeoLatitude: lat,
 			DeliveryPlaceGeoLongitude: lng
@@ -97,56 +93,50 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit {
 			/**
 			 * Insurer Part
 			 */
-			PolicyholderFirstName: new FormControl('سیبلسیب', [
+			PolicyholderFirstName: new FormControl('', [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderLastName: new FormControl('شسیب', [
+			PolicyholderLastName: new FormControl('', [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
+			PolicyholderFatherName: new FormControl('', [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderFatherName: new FormControl('شسیب', [
-				Validators.required,
-				Validators.pattern(/[\u0600-\u06FF\s]/)
-			]),
-			PolicyholderNationalCode: new FormControl('0078125812', [
-				Validators.required,
-				Validators.pattern(/[0-9]/)
-			]),
-			PolicyholderMobile: new FormControl('09125029344', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderPhone: new FormControl('02144556633', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderBirthDate: new FormControl('1396/12/12', [ Validators.required ]),
-			PolicyholderGender: new FormControl('1', [ Validators.required ]),
+			PolicyholderNationalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
+			PolicyholderGender: new FormControl('', [ Validators.required ]),
 			/**
 			 * Reciver Part
 			 */
-			ReceiverFirstName: new FormControl('سیبیبسل', [ Validators.required ]),
-			ReceiverLastName: new FormControl('سیبلسیبل', [ Validators.required ]),
-			ReceiverPhone: new FormControl('02144554455', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			ReceiverMobile: new FormControl('09125029344', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			CustomerDescription: new FormControl('شسیب', [ Validators.required ]),
+			ReceiverFirstName: new FormControl('', [ Validators.required ]),
+			ReceiverLastName: new FormControl('', [ Validators.required ]),
+			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			CustomerDescription: new FormControl('', [ Validators.required ]),
 			/**
 			 * Delivery Time
 			 */
-			DeliveryPlaceCityId: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl('1', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceAddress: new FormControl('سیبلیبل', [ Validators.required ]),
+			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
 			DeliveryDate: new FormControl('', [ Validators.required ]),
 			DeliveryTime: new FormControl('', [ Validators.required ]),
 			/**
 			 * Car Card Part
 			 */
-			CarCardFrontImage: new FormControl('34', [ Validators.required ]),
-			CarCardBackImage: new FormControl('34', [ Validators.required ]),
-			LastPolicyImage: new FormControl('34', [ Validators.required ]),
+			CarCardFrontImage: new FormControl('test', [ Validators.required ]),
+			CarCardBackImage: new FormControl('test', [ Validators.required ]),
+			LastPolicyImage: new FormControl('test', [ Validators.required ]),
 			/**
 			 * Policy Part
 			 */
-			PolicyAddressSource: new FormControl('34', [ Validators.required ]),
-			PolicyAddressCityId: new FormControl('34', [ Validators.required ]),
-			PolicyAddress: new FormControl('34', [ Validators.required ])
+			PolicyAddressSource: new FormControl('', [ Validators.required ]),
+			PolicyAddressCityId: new FormControl('', [ Validators.required ]),
+			PolicyAddress: new FormControl('', [ Validators.required ])
 		});
 	}
 	_init_insurerInfoForm() {
@@ -253,16 +243,35 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit {
 			}
 		];
 	}
-	_set_properties_value_of_delivery_table() {
-		this.DelieryTimeTableDisplayColumns = [ 'Checkbox', 'Day', 'Date', 'Time' ];
-		this.DelieryTimeTableDataSource$ = this.orderService.GetDeliveryTimeTable();
-		this.Cities$ = this.geoBoundaryService.GetCities();
-	}
 	_select_order_form() {
 		this.orderForm$ = this.router.params.pipe(
 			// pluck("Id"),
 			switchMap((parmas) => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
 		this.orderForm$.subscribe((orderForm) => (this.orderForm = orderForm));
+	}
+	_set_formGroup_relation_logic() {
+		this.formGroup
+			.get('PolicyAddressSource')
+			.valueChanges.pipe(takeUntil(this.unsubscribe))
+			.subscribe((source) => this._check_and_contol_PolicyAddressSource_formControls(source));
+	}
+	_check_and_contol_PolicyAddressSource_formControls(source) {
+		if (source == 1) {
+			this.formGroup.patchValue({
+				PolicyAddressCityId: this.formGroup.get('DeliveryPlaceCityId').value,
+				PolicyAddress: this.formGroup.get('DeliveryPlaceAddress').value
+			});
+			this.formGroup.get('PolicyAddressCityId').disable();
+			this.formGroup.get('PolicyAddress').disable();
+		} else if (source == 2) {
+			this.formGroup.get('PolicyAddressCityId').reset();
+			this.formGroup.get('PolicyAddress').reset();
+			this.formGroup.get('PolicyAddressCityId').disable();
+			this.formGroup.get('PolicyAddress').disable();
+		} else {
+			this.formGroup.get('PolicyAddressCityId').enable();
+			this.formGroup.get('PolicyAddress').enable();
+		}
 	}
 }

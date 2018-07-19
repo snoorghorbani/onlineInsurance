@@ -97,6 +97,7 @@ import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/thir
 import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
 import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
 import { FieldFileComponent } from './field-file/field-file.component';
+import { TermsComponent } from './terms/terms.component';
 
 // medical policy
 // import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
@@ -155,6 +156,7 @@ import { FieldFileComponent } from './field-file/field-file.component';
 		ReviewOrderComponent,
 		MyOrdersComponent,
 		ViewOrderComponent,
+		TermsComponent,
 		CartableComponent,
 		RedirectToBankComponent,
 		FieldSelectComponent,

@@ -117,47 +117,47 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 		this.carInfoFields = [
 			{
 				name: 'CarBrand',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'CarModel',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'CarProductionYear',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'PolicyTerm',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'NoDamageRecord',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'LastPolicyDiscountYears',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'LastPolicyUsedPropertyCoupons',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'LastPolicyUsedPersonCoupons',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'CarUsage',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'PolicyPushesheMali',
-				fxFlex: 30
+				fxFlex: 23
 			},
 			{
 				name: 'LastPolicyExpirationDate',
-				fxFlex: 30
+				fxFlex: 23
 			}
 		];
 	}

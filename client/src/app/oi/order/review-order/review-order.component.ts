@@ -1,82 +1,92 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { OrderFormModel } from "../models";
-import { Observable } from "rxjs/internal/Observable";
-import { FormGroup } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { AppState } from "../order.reducers";
-import { Router } from "@angular/router";
-import { OrderService } from "../services";
-import { FieldModel } from "../models/field.model";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { OrderFormType } from '../models';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { AppState } from '../order.reducers';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OrderFormService, OrderService } from '../services';
+import { FieldModel } from '../models/field.model';
 
 @Component({
-	selector: "order-review-order",
-	templateUrl: "./review-order.component.html",
-	styleUrls: [ "./review-order.component.css" ]
+	selector: 'order-review-order',
+	templateUrl: './review-order.component.html',
+	styleUrls: [ './review-order.component.css' ]
 })
 export class ReviewOrderComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	formGroup: FormGroup;
-	orderForm$: Observable<OrderFormModel>;
-	SellerAddress$: Observable<FieldModel>;
-	SellerEconomicNo$: Observable<FieldModel>;
-	SellerName$: Observable<FieldModel>;
-	SellerNationalId$: Observable<FieldModel>;
-	SellerPhone$: Observable<FieldModel>;
-	SellerRegistrationNo$: Observable<FieldModel>;
-	SellerZipCode$: Observable<FieldModel>;
-	PolicyholderFirstName$: Observable<FieldModel>;
-	PolicyholderLastName$: Observable<FieldModel>;
-	PolicyholderFatherName$: Observable<FieldModel>;
-	PolicyholderNationalCode$: Observable<FieldModel>;
-	PolicyholderPhone$: Observable<FieldModel>;
-	PolicyholderBirthDate$: Observable<FieldModel>;
-	PolicyholderMobile$: Observable<FieldModel>;
-	DeliveryPlaceAddress$: Observable<FieldModel>;
-	PolicyAddress$: Observable<FieldModel>;
-	CarModel$: Observable<FieldModel>;
-	CarUsage$: Observable<FieldModel>;
-	PolicyTerm$: Observable<FieldModel>;
-	Discount$: Observable<FieldModel>;
-	LastPolicyExpirationDate$: Observable<FieldModel>;
-	LastPolicyDiscountYears$: Observable<FieldModel>;
-	PolicyPushesheMali$: Observable<FieldModel>;
-	PolicyPushesheRanande$: Observable<FieldModel>;
-	PolicyPushesheSarneshin$: Observable<FieldModel>;
+	orderForm: OrderFormType;
+	isPayed: boolean;
+	InitiationPaymentResult$: Observable<any>;
 
-	constructor(private store: Store<AppState>, private router: Router, private orderService: OrderService) {
-		this.initFormGroup();
-		this.orderForm$ = this.store
-			.select(state => state.order.newOrder.data as OrderFormModel)
-			.filter(orderForm => orderForm != null);
-		this.SellerAddress$ = this.orderForm$.map(orderForm => orderForm.SellerAddress);
-		this.SellerEconomicNo$ = this.orderForm$.map(orderForm => orderForm.SellerEconomicNo);
-		this.SellerName$ = this.orderForm$.map(orderForm => orderForm.SellerName);
-		this.SellerNationalId$ = this.orderForm$.map(orderForm => orderForm.SellerNationalId);
-		this.SellerPhone$ = this.orderForm$.map(orderForm => orderForm.SellerPhone);
-		this.SellerRegistrationNo$ = this.orderForm$.map(orderForm => orderForm.SellerRegistrationNo);
-		this.SellerZipCode$ = this.orderForm$.map(orderForm => orderForm.SellerZipCode);
-		this.PolicyholderFirstName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFirstName);
-		this.PolicyholderLastName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderLastName);
-		this.PolicyholderFatherName$ = this.orderForm$.map(orderForm => orderForm.PolicyholderFatherName);
-		this.PolicyholderNationalCode$ = this.orderForm$.map(orderForm => orderForm.PolicyholderNationalCode);
-		this.PolicyholderPhone$ = this.orderForm$.map(orderForm => orderForm.PolicyholderPhone);
-		this.PolicyholderBirthDate$ = this.orderForm$.map(orderForm => orderForm.PolicyholderBirthDate);
-		this.PolicyholderMobile$ = this.orderForm$.map(orderForm => orderForm.PolicyholderMobile);
-		this.DeliveryPlaceAddress$ = this.orderForm$.map(orderForm => orderForm.DeliveryPlaceAddress);
-		this.PolicyAddress$ = this.orderForm$.map(orderForm => orderForm.PolicyAddress);
-		this.CarModel$ = this.orderForm$.map(orderForm => orderForm.CarModel);
-		this.CarUsage$ = this.orderForm$.map(orderForm => orderForm.CarUsage);
-		this.PolicyTerm$ = this.orderForm$.map(orderForm => orderForm.PolicyTerm);
-		this.Discount$ = this.orderForm$.map(orderForm => orderForm.Discount);
-		this.LastPolicyExpirationDate$ = this.orderForm$.map(orderForm => orderForm.LastPolicyExpirationDate);
-		this.LastPolicyDiscountYears$ = this.orderForm$.map(
-			orderForm => orderForm.LastPolicyDiscountYears
-		);
-		this.PolicyPushesheMali$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheMali);
-		this.PolicyPushesheRanande$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheRanande);
-		this.PolicyPushesheSarneshin$ = this.orderForm$.map(orderForm => orderForm.PolicyPushesheSarneshin);
+	constructor(
+		private activatedRoute: ActivatedRoute,
+		private orderService: OrderService,
+		private orderFormService: OrderFormService
+	) {
+		this._init_formGroup();
+		this._select_order_form();
 	}
 
 	ngOnInit() {}
-	initFormGroup() {}
+	/**
+	 * view methods
+	 */
+	pay() {
+		if (this.formGroup.invalid) {
+			this._validate_all_form_fields(this.formGroup);
+			return;
+		}
+		const formValue = this.formGroup.value;
+		Object.keys(formValue || {}).forEach((key) => (this.orderForm[key].Value = formValue[key]));
+
+		this.InitiationPaymentResult$ = this.orderService.PlaceOrder(this.orderForm);
+	}
+	/**
+	 * private methods
+	 */
+	_init_formGroup() {
+		this.formGroup = new FormGroup({
+			AcceptAgreementTerms: new FormControl(false, [ Validators.requiredTrue ])
+		});
+	}
+	_select_order_form() {
+		this.activatedRoute.params
+			.pipe(
+				// pluck("Id"),
+				switchMap((parmas) =>
+					this.orderFormService
+						.GetOrder<OrderFormType>(parmas)
+						.pipe(map((orderForm) => this._set_displayValue(orderForm)))
+				)
+			)
+			.subscribe((orderForm) => (this.orderForm = orderForm));
+	}
+	_validate_all_form_fields(formGroup: FormGroup) {
+		Object.keys(formGroup.controls).forEach((field) => {
+			const control = formGroup.get(field);
+			if (control instanceof FormControl) {
+				control.markAsTouched({ onlySelf: true });
+			} else if (control instanceof FormGroup) {
+				this._validate_all_form_fields(control);
+			}
+		});
+	}
+	_set_displayValue(order: OrderFormType): OrderFormType {
+		for (const key in order) {
+			if (order.hasOwnProperty(key)) {
+				const field: FieldModel = order[key];
+				if (field.Options) {
+					const selectedOption = field.Options.find((option) => option.Value == field.Value);
+					if (selectedOption) field.DisplayValue = selectedOption.DisplayValue || selectedOption.DisplayName;
+				} else {
+					order[key].DisplayValue = order[key].DisplayValue || order[key].Value;
+				}
+			}
+		}
+		return order;
+	}
 }

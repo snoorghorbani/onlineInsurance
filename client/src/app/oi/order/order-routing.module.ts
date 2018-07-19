@@ -19,6 +19,7 @@ import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthq
 import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component';
 import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component';
 import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
+import { ReviewOrderComponent } from './review-order/review-order.component';
 
 const routes: Routes = [
 	{
@@ -80,6 +81,10 @@ const routes: Routes = [
 					// 	component: PurchaseComponent
 					// }
 				]
+			},
+			{
+				path: 'review/:Id',
+				component: ReviewOrderComponent
 			},
 			{
 				path: 'my-orders',
