@@ -18,6 +18,9 @@ import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third
 import { ReviewOrderComponent } from './review-order/review-order.component';
 import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
 import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
+import { MotorcyclePolicyInsurerInfoComponent } from './motorcycle-policy/motorcycle-policy-insurer-info/motorcycle-policy-insurer-info.component';
+import { PurchaseMotorcyclePolicyComponent } from './motorcycle-policy/purchase-motorcycle-policy/purchase-motorcycle-policy.component';
+import { SelectMotorcyclePolicyProductComponent } from './motorcycle-policy/select-motorcycle-policy-product/select-motorcycle-policy-product.component';
 
 const routes: Routes = [
 	{
@@ -30,6 +33,10 @@ const routes: Routes = [
 					{
 						path: '1/:Id',
 						component: ThirdPartyPolicyInsurerInfoComponent
+					},
+					{
+						path: '3/:Id',
+						component: MotorcyclePolicyInsurerInfoComponent
 					},
 					{
 						path: '4/:Id',
@@ -51,6 +58,16 @@ const routes: Routes = [
 							{
 								path: 'select-product',
 								component: SelectThirdPartyPolicyProductComponent
+							}
+						]
+					},
+					{
+						path: 'motorcycle-policy',
+						component: PurchaseMotorcyclePolicyComponent,
+						children: [
+							{
+								path: 'select-product',
+								component: SelectMotorcyclePolicyProductComponent
 							}
 						]
 					},

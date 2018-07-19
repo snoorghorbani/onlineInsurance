@@ -81,6 +81,7 @@ import { SelectdPolicyConfirmationComponent } from './fire-policy/selectd-policy
 import { FirePolicyProductsListComponent } from './fire-policy/fire-policy-products-list/fire-policy-products-list.component';
 import { SelectFirePolicyProductComponent } from './fire-policy/select-fire-policy-product/select-fire-policy-product.component';
 import { FirePolicyInsurerInfoComponent } from './fire-policy/fire-policy-insurer-info/fire-policy-insurer-info.component';
+import { FirePolicyOrderReviewComponent } from './fire-policy/review/fire-policy-review.component';
 // earthquake policy
 import { PurchaseEarthquakePolicyComponent } from './earthquake-policy/purchase-earthquake-policy/purchase-earthquake-policy.component';
 import { EarthquakeHomeDetailComponent } from './earthquake-policy/home-detail/home-detail.component';
@@ -98,6 +99,14 @@ import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/thir
 import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
 import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
 import { ThirdPartyPolicyOrderReviewComponent } from './third-party-policy/review/third-party-policy-review.component';
+// motorcycle policy
+import { PurchaseMotorcyclePolicyComponent } from './motorcycle-policy/purchase-motorcycle-policy/purchase-motorcycle-policy.component';
+import { SelectMotorcyclePolicyProductComponent } from './motorcycle-policy/select-motorcycle-policy-product/select-motorcycle-policy-product.component';
+import { SelectedMotorcyclePolicyConfirmationComponent } from './motorcycle-policy/selected-motorcycle-policy-onfirmation/selected-motorcycle-policy-confirmation.component';
+import { MotorcyclePolicyProductsListComponent } from './motorcycle-policy/motorcycle-policy-products-list/motorcycle-policy-products-list.component';
+import { MotorcycleCarDetailComponent } from './motorcycle-policy/motorcycle-detail/motorcycle-detail.component';
+import { MotorcyclePolicyInsurerInfoComponent } from './motorcycle-policy/motorcycle-policy-insurer-info/motorcycle-policy-insurer-info.component';
+import { MotorcyclePolicyOrderReviewComponent } from './motorcycle-policy/review/motorcycle-policy-review.component';
 // medical policy
 import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
 import { MedicalHomeDetailComponent } from './medical-policy/medical-home-detail/medical-home-detail.component';
@@ -175,6 +184,14 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		SelectThirdPartyPolicyProductComponent,
 		ThirdPartyPolicyInsurerInfoComponent,
 		ThirdPartyPolicyOrderReviewComponent,
+		// motorcycle policy components
+		PurchaseMotorcyclePolicyComponent,
+		MotorcycleCarDetailComponent,
+		SelectedMotorcyclePolicyConfirmationComponent,
+		MotorcyclePolicyProductsListComponent,
+		SelectMotorcyclePolicyProductComponent,
+		MotorcyclePolicyInsurerInfoComponent,
+		MotorcyclePolicyOrderReviewComponent,
 		// fire policy components
 		PurchaseFirePolicyComponent,
 		HomeDetailComponent,
@@ -182,6 +199,7 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		FirePolicyProductsListComponent,
 		FirePolicyInsurerInfoComponent,
 		SelectFirePolicyProductComponent,
+		FirePolicyOrderReviewComponent,
 		// earthquake policy components
 		PurchaseEarthquakePolicyComponent,
 		EarthquakeHomeDetailComponent,
@@ -201,6 +219,7 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		SelectdPolicyConfirmationComponent,
 		SelectdEarthquakePolicyConfirmationComponent,
 		SelectedThirdPartyPolicyConfirmationComponent,
+		SelectedMotorcyclePolicyConfirmationComponent,
 		SelectedMedicalPolicyConfirmationComponent,
 		// TODO: move to @soushians/form module
 		FieldInputComponent,

@@ -1,0 +1,24 @@
+:host {
+	width: 100%;
+}
+.close {
+	position: fixed;
+	z-index: 2;
+	bottom: 25px;
+	right: 25px;
+}
+.help {
+	position: fixed;
+	z-index: 2;
+	bottom: 75px;
+	right: 25px;
+}
+.question {
+	position: fixed;
+	z-index: 2;
+	bottom: 125px;
+	right: 25px;
+}
+.card-box {
+	transform: translateX(0);
+}

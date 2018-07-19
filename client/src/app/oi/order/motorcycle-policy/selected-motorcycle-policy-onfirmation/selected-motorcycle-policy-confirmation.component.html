@@ -1,0 +1,63 @@
+<h3 MatDialogTitle>تایید سفارش</h3>
+<div MatDialogContent fxLayout="row wrap" id="box">
+  <div fxFlex="100">
+      شما 
+      <b>
+          {{data.policy.InsuranceCompany}}
+      </b>
+      با قیمت 
+      <b>
+        {{data.price.Price.DisplayValue}}
+      </b> 
+      انتخاب نمودید:
+  </div>
+  <div fxFlex="50">
+      سطح پوشش:
+    <b>
+      {{data.orderForm.PolicyPushesheMali.DisplayValue}} 
+    </b>
+  </div>
+  <div fxFlex="40">
+      مدت بیمه:
+    <b>
+        {{data.orderForm.PolicyTerm.DisplayValue}}
+    </b>
+  </div>
+  <div fxFlex="100">
+      برای اتومبیل 
+      <b>
+          {{data.orderForm.CarModel.DisplayValue}} 
+        </b>
+       با مشخصات:
+  </div>
+  <div fxFlex="50">
+      کاربری:
+    <b>
+      {{data.orderForm.CarUsage.DisplayValue}} 
+    </b>
+  </div>
+  <div fxFlex="50">
+      سال ساخت:
+    <b>
+      {{data.orderForm.CarProductionYear.Value}} 
+    </b>
+  </div>
+  <div fxFlex="50">
+      تاریخ سر رسید بیمه نامه اخیر: 
+    <b>
+      {{data.orderForm.LastPolicyExpirationDate.Value.format()}} 
+    </b>
+  </div>
+  <div fxFlex="50">
+      سابقه ی عدم خسارت:
+    <b>
+      {{data.orderForm.NoDamageRecord.DisplayValue}} 
+    </b>
+  </div>
+
+</div>
+
+<div MatDialogActions>
+  <button mat-button matDialogClose>رد</button>
+  <button mat-raised-button color="primary" (click)="approved()">تایید</button>
+</div>

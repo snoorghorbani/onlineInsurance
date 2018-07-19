@@ -4,20 +4,20 @@ import { takeUntil, filter, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 
-import { ThirdPartyPolicyOrderFormModel, OrderFormType } from '../../models';
+import { MotorcyclePolicyOrderFormModel, OrderFormType } from '../../models';
 import { AppState } from '../../order.reducers';
 import { PolicyService } from '../../../policy/services';
 
 @Component({
-	selector: 'order-third-party-car-detail',
-	templateUrl: './car-detail.component.html',
-	styleUrls: [ './car-detail.component.css' ]
+	selector: 'order-motorcycle-car-detail',
+	templateUrl: './motorcycle-detail.component.html',
+	styleUrls: [ './motorcycle-detail.component.css' ]
 })
-export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
+export class MotorcycleCarDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
-	_orderForm: ThirdPartyPolicyOrderFormModel;
+	_orderForm: MotorcyclePolicyOrderFormModel;
 	@Input()
-	set orderForm(orderForm: ThirdPartyPolicyOrderFormModel) {
+	set orderForm(orderForm: MotorcyclePolicyOrderFormModel) {
 		if (!orderForm) return;
 		this._orderForm = orderForm;
 		this._set_formGroup_validation(orderForm);

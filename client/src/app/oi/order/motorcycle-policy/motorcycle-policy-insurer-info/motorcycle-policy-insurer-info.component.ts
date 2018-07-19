@@ -1,40 +1,43 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import { SigninRequiredAction } from '@soushians/authentication';
 import { getAccountInfo } from '@soushians/user';
 
-import { FirePolicyOrderFormModel } from '../../models';
-import { AppState } from '../../order.reducers';
-import { OrderService } from '../../services';
+import { FirePolicyOrderFormModel, DeliveryTimeModel, MotorcyclePolicyOrderFormModel } from '../../models';
+import { SaveOrderStartAction } from '../../services/api/save-order';
 import { GeoBoundaryService } from '../../../geo-boundary';
 import { CityModel } from '../../../geo-boundary/models';
-import { SaveOrderStartAction } from '../../services/api/save-order';
+import { AppState } from '../../order.reducers';
+import { OrderService } from '../../services';
+import { Subject } from '../../../../../../node_modules/rxjs';
 
 @Component({
-	selector: 'order-fire-policy-insurer-info',
-	templateUrl: './fire-policy-insurer-info.component.html',
-	styleUrls: [ './fire-policy-insurer-info.component.css' ]
+	selector: 'order-motorcycle-policy-insurer-info',
+	templateUrl: './motorcycle-policy-insurer-info.component.html',
+	styleUrls: [ './motorcycle-policy-insurer-info.component.css' ]
 })
-export class FirePolicyInsurerInfoComponent implements OnInit {
+export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	@Output('signInRequest') signInRequest$ = new EventEmitter();
+	unsubscribe = new Subject<void>();
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
 	orderForm: FirePolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
-	buildingInfoForm: any;
+	carCardForm: any;
+	policyForm: any;
 	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
-		private activatedRouter: ActivatedRoute,
+		private activeRouter: ActivatedRoute,
 		private router: Router,
 		private geoBoundaryService: GeoBoundaryService
 	) {
@@ -42,13 +45,19 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this._init_formgroup();
 		this._init_insurerInfoForm();
 		this._init_reciverInfoForm();
-		this._init_buildingInfoForm();
-		this._set_properties_value_of_delivery_table();
+		this._init_carCardForm();
+		this._init_policyForm();
 
 		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this._set_formGroup_relation_logic();
+	}
+	ngOnDestroy() {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
 
 	save() {
 		if (this.formGroup.invalid) {
@@ -57,7 +66,7 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		}
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
 
-		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
+		this.orderService.SaveOrder<MotorcyclePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
 			debugger;
 			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
 		});
@@ -103,9 +112,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
 			PolicyholderGender: new FormControl('', [ Validators.required ]),
-			// LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
-			// CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
-			// CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
 			/**
 			 * Reciver Part
 			 */
@@ -113,31 +119,29 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			ReceiverLastName: new FormControl('', [ Validators.required ]),
 			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl('1', [ Validators.required ]),
-			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
 			CustomerDescription: new FormControl('', [ Validators.required ]),
-
-			/**
-			 * Building Part
-			 */
-			BuildingAddressCityId: new FormControl('', [ Validators.required ]),
-			BuildingAddressDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAddressMainStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressSubStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressAlley: new FormControl('', [ Validators.required ]),
-			BuildingAddressNo: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingUsage: new FormControl('', [ Validators.required ]),
-			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			/**
 			 * Delivery Time
 			 */
+			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
 			DeliveryDate: new FormControl('', [ Validators.required ]),
-			DeliveryTime: new FormControl('', [ Validators.required ])
+			DeliveryTime: new FormControl('', [ Validators.required ]),
+			/**
+			 * Car Card Part
+			 */
+			CarCardFrontImage: new FormControl('test', [ Validators.required ]),
+			CarCardBackImage: new FormControl('test', [ Validators.required ]),
+			LastPolicyImage: new FormControl('test', [ Validators.required ]),
+			/**
+			 * Policy Part
+			 */
+			PolicyAddressSource: new FormControl('', [ Validators.required ]),
+			PolicyAddressCityId: new FormControl('', [ Validators.required ]),
+			PolicyAddress: new FormControl('', [ Validators.required ])
 		});
 	}
 	_init_insurerInfoForm() {
@@ -212,58 +216,67 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			}
 		];
 	}
-	_init_buildingInfoForm() {
-		this.buildingInfoForm = [
+	_init_carCardForm() {
+		this.carCardForm = [
 			{
-				name: 'BuildingAddressCityId',
+				name: 'CarCardFrontImage',
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressDistrict',
+				name: 'CarCardBackImage',
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressMainStreet',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressSubStreet',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressAlley',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressNo',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingPostalCode',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingUsage',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingFloors',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAge',
+				name: 'LastPolicyImage',
 				fxFlex: 46
 			}
 		];
 	}
-	_set_properties_value_of_delivery_table() {
-		this.Cities$ = this.geoBoundaryService.GetCities();
+	_init_policyForm() {
+		this.policyForm = [
+			{
+				name: 'PolicyAddressSource',
+				fxFlex: 46
+			},
+			{
+				name: 'PolicyAddressCityId',
+				fxFlex: 46
+			},
+			{
+				name: 'PolicyAddress',
+				fxFlex: 46
+			}
+		];
 	}
 	_select_order_form() {
-		this.orderForm$ = this.activatedRouter.params.pipe(
+		this.orderForm$ = this.activeRouter.params.pipe(
 			// pluck("Id"),
 			switchMap((parmas) => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
 		this.orderForm$.subscribe((orderForm) => (this.orderForm = orderForm));
+	}
+	_set_formGroup_relation_logic() {
+		this.formGroup
+			.get('PolicyAddressSource')
+			.valueChanges.pipe(takeUntil(this.unsubscribe))
+			.subscribe((source) => this._check_and_contol_PolicyAddressSource_formControls(source));
+	}
+	_check_and_contol_PolicyAddressSource_formControls(source) {
+		if (source == 1) {
+			this.formGroup.patchValue({
+				PolicyAddressCityId: this.formGroup.get('DeliveryPlaceCityId').value,
+				PolicyAddress: this.formGroup.get('DeliveryPlaceAddress').value
+			});
+			this.formGroup.get('PolicyAddressCityId').disable();
+			this.formGroup.get('PolicyAddress').disable();
+		} else if (source == 2) {
+			this.formGroup.get('PolicyAddressCityId').reset();
+			this.formGroup.get('PolicyAddress').reset();
+			this.formGroup.get('PolicyAddressCityId').disable();
+			this.formGroup.get('PolicyAddress').disable();
+		} else {
+			this.formGroup.get('PolicyAddressCityId').enable();
+			this.formGroup.get('PolicyAddress').enable();
+		}
 	}
 }

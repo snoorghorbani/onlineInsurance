@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-grid-list class="mat-table mat-row" cols="8" rowHeight="40px">
+    <mat-grid-tile colspan="2" class="th">{{orderForm.ThingsValue.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.ThingsValue.DisplayValue}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.Area.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.Area.DisplayValue}}</mat-grid-tile>
+
+    <mat-grid-tile colspan="2" class="th">{{orderForm.EarthquakeExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.EarthquakeExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.PipeExplotionExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.PipeExplotionExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.EarthSummitExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.EarthSummitExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.AirplanFallExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.AirplanFallExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.StormExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.StormExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.FloodExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.FloodExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.HarzExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.HarzExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+    <mat-grid-tile colspan="2" class="th">{{orderForm.SnowRainExtraCoverage.Label}}</mat-grid-tile>
+    <mat-grid-tile colspan="2">{{orderForm.SnowRainExtraCoverage.DisplayValue? 'دارد' : 'ندارد'}}</mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

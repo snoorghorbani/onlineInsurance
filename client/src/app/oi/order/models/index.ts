@@ -8,4 +8,5 @@ export * from './fire-policy-order-form.model';
 export * from './earthquake-policy-order-form.model';
 export * from './medical-policy-order-form.model';
 export * from './third-party-policy-order-form.model';
+export * from './motorcycle-policy-order-form.model';
 export * from './order-form.type';
