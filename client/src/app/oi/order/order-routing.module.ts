@@ -1,11 +1,7 @@
 ﻿import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TestComponent } from './test/test.component';
-import { NewOrderComponent } from './new-order/new-order.component';
 import { OrderComponent } from './order.component';
-import { InsurerInfoComponent } from './insurer-info/insurer-info.component';
-import { PurchaseComponent } from './purchase/purchase.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ViewOrderComponent } from './view-order/view-order.component';
 import { CartableComponent } from './cartable/cartable.component';
@@ -20,6 +16,8 @@ import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase
 import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component';
 import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
 import { ReviewOrderComponent } from './review-order/review-order.component';
+import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
+import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
 
 const routes: Routes = [
 	{
@@ -75,12 +73,22 @@ const routes: Routes = [
 								component: SelectEarthquakePolicyProductComponent
 							}
 						]
+					},
+					{
+						path: 'medical-policy',
+						component: PurchaseMedicalPolicyComponent,
+						children: [
+							{
+								path: 'select-product',
+								component: SelectMedicalPolicyProductComponent
+							}
+						]
 					}
-					// {
-					// 	path: "third-party-policy",
-					// 	component: PurchaseComponent
-					// }
 				]
+				// {
+				// 	path: "third-party-policy",
+				// 	component: PurchaseComponent
+				// }
 			},
 			{
 				path: 'review/:Id',

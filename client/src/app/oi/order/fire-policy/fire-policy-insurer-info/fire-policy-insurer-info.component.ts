@@ -8,9 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SigninRequiredAction } from '@soushians/authentication';
 import { getAccountInfo } from '@soushians/user';
 
-import { FirePolicyOrderFormModel, DeliveryTimeModel } from '../../models';
+import { FirePolicyOrderFormModel } from '../../models';
 import { AppState } from '../../order.reducers';
-import { FileService } from '../../services/file.service';
 import { OrderService } from '../../services';
 import { GeoBoundaryService } from '../../../geo-boundary';
 import { CityModel } from '../../../geo-boundary/models';

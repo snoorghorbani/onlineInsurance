@@ -71,6 +71,8 @@ import { AboutThirdPartyPolicyComponent } from './about-third-party-policy/about
 import { FieldInputComponent } from './field-input/field-input.component';
 import { OrderPanelEffects } from './order-panel/order-panel.effects';
 import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
+import { FieldFileComponent } from './field-file/field-file.component';
+import { TermsComponent } from './terms/terms.component';
 
 // fire policy
 import { PurchaseFirePolicyComponent } from './fire-policy/purchase-fire-policy/purchase-fire-policy.component';
@@ -88,7 +90,6 @@ import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthq
 import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/select-earthquake-policy-product/select-earthquake-policy-product.component';
 import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
 import { GmapsModule } from '../gmaps/gmaps.module';
-
 // third party policy
 import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component';
 import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component';
@@ -96,16 +97,13 @@ import { SelectedThirdPartyPolicyConfirmationComponent } from './third-party-pol
 import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/third-party-policy-products-list/third-party-policy-products-list.component';
 import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
 import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
-import { FieldFileComponent } from './field-file/field-file.component';
-import { TermsComponent } from './terms/terms.component';
-
 // medical policy
-// import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
-// import { HomeDetailComponent } from './medical-policy/home-detail/home-detail.component';
-// import { SelectdPolicyConfirmationComponent } from './medical-policy/selectd-policy-onfirmation/selectd-policy-confirmation.component';
-// import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
-// import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
-// import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
+import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
+import { MedicalHomeDetailComponent } from './medical-policy/medical-home-detail/medical-home-detail.component';
+import { SelectedMedicalPolicyConfirmationComponent } from './medical-policy/selected-medical-policy-confirmation/selected-medical-policy-confirmation.component';
+import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
+import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
+import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
 
 @NgModule({
 	imports: [
@@ -189,19 +187,20 @@ import { TermsComponent } from './terms/terms.component';
 		SelectdEarthquakePolicyConfirmationComponent,
 		EarthquakePolicyProductsListComponent,
 		EarthquakePolicyInsurerInfoComponent,
-		SelectEarthquakePolicyProductComponent
+		SelectEarthquakePolicyProductComponent,
 		// Medical Policy
-		// PurchaseMedicalPolicyComponent,
-		// HomeDetailComponent,
-		// SelectdPolicyConfirmationComponent,
-		// MedicalPolicyProductsListComponent,
-		// SelectMedicalPolicyProductComponent,
-		// MedicalPolicyInsurerInfoComponent
+		PurchaseMedicalPolicyComponent,
+		MedicalHomeDetailComponent,
+		SelectedMedicalPolicyConfirmationComponent,
+		MedicalPolicyProductsListComponent,
+		SelectMedicalPolicyProductComponent,
+		MedicalPolicyInsurerInfoComponent
 	],
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
 		SelectdEarthquakePolicyConfirmationComponent,
 		SelectedThirdPartyPolicyConfirmationComponent,
+		SelectedMedicalPolicyConfirmationComponent,
 		// TODO: move to @soushians/form module
 		FieldInputComponent,
 		FieldFileComponent,

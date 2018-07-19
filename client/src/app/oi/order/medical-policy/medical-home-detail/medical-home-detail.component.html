@@ -1,0 +1,78 @@
+<div fxLayout="column" *ngIf="ready">
+  <mat-card fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-around stretch" >
+
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.MedicalRole.Label"
+      controlName="MedicalRole"
+      [description]="orderForm.MedicalRole.Description"
+      [hint]="orderForm.MedicalRole.Description"
+      [tooltip]="orderForm.MedicalRole.Description"
+      [options]="orderForm.MedicalRole.Options"
+      appearance="fill"
+    ></app-field-select>
+      
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.DoctorSpecialty.Label"
+      controlName="DoctorSpecialty"
+      [description]="orderForm.DoctorSpecialty.Description"
+      [hint]="orderForm.DoctorSpecialty.Description"
+      [tooltip]="orderForm.DoctorSpecialty.Description"
+      [options]="orderForm.DoctorSpecialty.Options"
+      appearance="fill"
+    ></app-field-select>
+
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.IsResident.Label"
+      controlName="IsResident"
+      [description]="orderForm.IsResident.Description"
+      [hint]="orderForm.IsResident.Description"
+      [tooltip]="orderForm.IsResident.Description"
+      [options]="orderForm.IsResident.Options"
+      appearance="fill"
+    ></app-field-select>
+      
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.ParamedicineSpecialty.Label"
+      controlName="ParamedicineSpecialty"
+      [description]="orderForm.ParamedicineSpecialty.Description"
+      [hint]="orderForm.ParamedicineSpecialty.Description"
+      [tooltip]="orderForm.ParamedicineSpecialty.Description"
+      [options]="orderForm.ParamedicineSpecialty.Options"
+      appearance="fill"
+    ></app-field-select>
+
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.IsStudent.Label"
+      controlName="IsStudent"
+      [description]="orderForm.IsStudent.Description"
+      [hint]="orderForm.IsStudent.Description"
+      [tooltip]="orderForm.IsStudent.Description"
+      [options]="orderForm.IsStudent.Options"
+      appearance="fill"
+    ></app-field-select>
+
+    <app-field-select fxFlex="30" fxFlex.lt-sm="100"
+      [formGroup]="formGroup"
+      [placeholder]="orderForm.MedicalNoDamageRecord.Label"
+      controlName="MedicalNoDamageRecord"
+      [description]="orderForm.MedicalNoDamageRecord.Description"
+      [hint]="orderForm.MedicalNoDamageRecord.Description"
+      [tooltip]="orderForm.MedicalNoDamageRecord.Description"
+      [options]="orderForm.MedicalNoDamageRecord.Options"
+      appearance="fill"
+    ></app-field-select>
+  </mat-card>
+
+  <mat-card fxFlex="100" id="coverage-buttons" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="25px">
+    <h3 fxFlex="100">پوشش های اضافی</h3>
+    <button mat-raised-button fxFlex="22" fxFlex.lt-sm="100" (click)="toggleCoverage('BloodMoneyIncreaseCoverage')" [color]="formGroup.get('BloodMoneyIncreaseCoverage').value ? 'primary' : 'default'">
+      {{orderForm.BloodMoneyIncreaseCoverage.Label}}
+    </button>
+  </mat-card>
+  
+</div>

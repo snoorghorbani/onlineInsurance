@@ -8,11 +8,11 @@ import { MedicalPolicyOrderFormModel, OrderFormType } from "../../models";
 import { NewOrderFormUpdateAction } from "../../new-order/new-order.actions";
 
 @Component({
-	selector: "order-home-detail",
-	templateUrl: "./home-detail.component.html",
-	styleUrls: [ "./home-detail.component.css" ]
+	selector: "order-medical-home-detail",
+	templateUrl: "./medical-home-detail.component.html",
+	styleUrls: [ "./medical-home-detail.component.css" ]
 })
-export class HomeDetailComponent implements OnInit, OnDestroy {
+export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	_orderForm: MedicalPolicyOrderFormModel;
 	@Input()
@@ -58,23 +58,13 @@ export class HomeDetailComponent implements OnInit, OnDestroy {
 	_init_properties() {}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			EstateType: new FormControl("", Validators.required),
-			Units: new FormControl("", Validators.required),
-			BuildType: new FormControl("", Validators.required),
-			Area: new FormControl("", Validators.required),
-			ThingsValue: new FormControl("", Validators.required),
-			ConstructionCostPerSquareMeter: new FormControl("", Validators.required),
-			EarthquakeExtraCoverage: new FormControl(false),
-			PipeExplotionExtraCoverage: new FormControl(false),
-			EarthSummitExtraCoverage: new FormControl(false),
-			AirplanFallExtraCoverage: new FormControl(false),
-			StormExtraCoverage: new FormControl(false),
-			FloodExtraCoverage: new FormControl(false),
-			HarzExtraCoverage: new FormControl(false),
-			SnowRainExtraCoverage: new FormControl(false),
-			DoctorEngineerDiscount: new FormControl(false),
-			LifeInsuranceDiscount: new FormControl(false),
-			LongTermAccountDiscount: new FormControl(false)
+			MedicalRole: new FormControl("", Validators.required),
+			DoctorSpecialty: new FormControl("", Validators.required),
+			IsResident: new FormControl("", Validators.required),
+			ParamedicineSpecialty: new FormControl("", Validators.required),
+			IsStudent: new FormControl("", Validators.required),
+			MedicalNoDamageRecord: new FormControl("", Validators.required),
+			BloodMoneyIncreaseCoverage: new FormControl(false)
 		});
 	}
 	_set_formGroup_validation(orderForm: OrderFormType) {

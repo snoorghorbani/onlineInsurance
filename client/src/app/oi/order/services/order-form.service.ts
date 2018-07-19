@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import { OrderFormModel } from '../models/order-form.model';
 import { OrderConfigurationService } from './order-configuration.service';
-import { FirePolicyOrderFormModel } from '../models';
+import { FirePolicyOrderFormModel, MedicalPolicyOrderFormModel } from '../models';
 import { share, map } from 'rxjs/operators';
 import { GetOrderApiModel } from './api/get-order';
 
@@ -15,7 +15,7 @@ import { GetOrderApiModel } from './api/get-order';
 export class OrderFormService {
 	constructor(private http: HttpClient, private configurationService: OrderConfigurationService) {}
 
-	GetNewOrderForm(type): Observable<OrderFormModel | FirePolicyOrderFormModel> {
+	GetNewOrderForm(type): Observable<OrderFormModel | FirePolicyOrderFormModel | MedicalPolicyOrderFormModel> {
 		// return of(GetNewOrderForm as OrderFormModel);
 		debugger;
 		return this.http
