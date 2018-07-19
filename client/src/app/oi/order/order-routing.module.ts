@@ -20,6 +20,7 @@ import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medica
 import { MotorcyclePolicyInsurerInfoComponent } from './motorcycle-policy/motorcycle-policy-insurer-info/motorcycle-policy-insurer-info.component';
 import { PurchaseMotorcyclePolicyComponent } from './motorcycle-policy/purchase-motorcycle-policy/purchase-motorcycle-policy.component';
 import { SelectMotorcyclePolicyProductComponent } from './motorcycle-policy/select-motorcycle-policy-product/select-motorcycle-policy-product.component';
+import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
 
 const routes: Routes = [
 	{
@@ -44,6 +45,10 @@ const routes: Routes = [
 					{
 						path: '5/:Id',
 						component: EarthquakePolicyInsurerInfoComponent
+					},
+					{
+						path: '8/:Id',
+						component: MedicalPolicyInsurerInfoComponent
 					}
 				]
 			},

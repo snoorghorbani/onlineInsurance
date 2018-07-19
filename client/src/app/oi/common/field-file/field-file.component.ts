@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UploadEvent } from 'ngx-file-drop';
 
-import { FileService } from '../services/file.service';
+import { FileService } from '../../order/services/file.service';
 
 @Component({
 	selector: 'app-field-file',

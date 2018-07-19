@@ -1,10 +1,10 @@
 import { OnInit, ComponentRef, ComponentFactoryResolver, ViewContainerRef, Directive, Input } from '@angular/core';
 import { FieldModel } from '../models/field.model';
-import { FieldInputComponent } from '../field-input/field-input.component';
-import { FieldSelectComponent } from '../field-select/field-select.component';
-import { FieldDatepickerComponent } from '../field-datepicker/field-datepicker.component';
-import { CartableService } from '../services/cartable.service';
-import { FieldFileComponent } from '../field-file/field-file.component';
+import { FieldInputComponent } from '../../common/field-input/field-input.component';
+import { FieldFileComponent } from '../../common/field-file/field-file.component';
+import { FieldDatepickerComponent } from '../../common/field-datepicker/field-datepicker.component';
+import { FieldSelectComponent } from '../../common/field-select/field-select.component';
+import { CartableService } from '../services';
 
 @Directive({
 	selector: '[orderField]'

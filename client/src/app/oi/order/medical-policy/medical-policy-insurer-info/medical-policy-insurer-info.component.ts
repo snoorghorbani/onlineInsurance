@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SigninRequiredAction } from '@soushians/authentication';
 import { getAccountInfo } from '@soushians/user';
@@ -31,19 +31,18 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	orderForm: MedicalPolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
-	buildingInfoForm: any;
 	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
-		private router: ActivatedRoute,
+		private activatedRouter: ActivatedRoute,
+		private router: Router,
 		private geoBoundaryService: GeoBoundaryService
 	) {
 		this._select_order_form();
 		this._init_formgroup();
 		this._init_insurerInfoForm();
 		this._init_reciverInfoForm();
-		this._init_buildingInfoForm();
 		this._set_properties_value_of_delivery_table();
 
 		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
@@ -59,7 +58,9 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			return;
 		}
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
-		this.store.dispatch(new SaveOrderStartAction(this.orderForm));
+		this.orderService.SaveOrder<MedicalPolicyOrderFormModel>(this.orderForm).subscribe((response) => {
+			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
+		});
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
@@ -103,9 +104,6 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
 			PolicyholderGender: new FormControl('', [ Validators.required ]),
-			// LastPolicyImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
-			// CarCardBackImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
-			// CarCardFrontImage: new FormControl("3dfce20f-47f6-495d-975e-a5dd646eb4f8"),
 			/**
 			 * Reciver Part
 			 */
@@ -120,19 +118,6 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
 			CustomerDescription: new FormControl('', [ Validators.required ]),
 
-			/**
-			 * Building Part
-			 */
-			BuildingAddressCityId: new FormControl('', [ Validators.required ]),
-			BuildingAddressDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAddressMainStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressSubStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressAlley: new FormControl('', [ Validators.required ]),
-			BuildingAddressNo: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingUsage: new FormControl('', [ Validators.required ]),
-			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			/**
 			 * Delivery Time
 			 */
@@ -212,55 +197,12 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			}
 		];
 	}
-	_init_buildingInfoForm() {
-		this.buildingInfoForm = [
-			{
-				name: 'BuildingAddressCityId',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressDistrict',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressMainStreet',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressSubStreet',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressAlley',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAddressNo',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingPostalCode',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingUsage',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingFloors',
-				fxFlex: 46
-			},
-			{
-				name: 'BuildingAge',
-				fxFlex: 46
-			}
-		];
-	}
+
 	_set_properties_value_of_delivery_table() {
 		this.Cities$ = this.geoBoundaryService.GetCities();
 	}
 	_select_order_form() {
-		this.orderForm$ = this.router.params.pipe(
+		this.orderForm$ = this.activatedRouter.params.pipe(
 			// pluck("Id"),
 			switchMap((parmas) => this.orderService.GetOrder<MedicalPolicyOrderFormModel>(parmas))
 		);

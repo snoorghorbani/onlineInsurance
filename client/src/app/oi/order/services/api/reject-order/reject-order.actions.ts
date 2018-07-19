@@ -11,7 +11,7 @@ export const enum REJECT_ORDER_ACTION_TYPES {
 
 export class RejectOrderStartAction implements Action {
 	readonly type = REJECT_ORDER_ACTION_TYPES.START;
-	constructor(public payload: Partial<RejectOrderApiModel.Request>) {}
+	constructor(public payload: any) {}
 }
 export class RejectOrderSucceedAction implements Action {
 	readonly type = REJECT_ORDER_ACTION_TYPES.SUCCEED;

@@ -29,7 +29,6 @@ import {
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EffectsModule } from '@ngrx/effects';
-import { FileDropModule } from 'ngx-file-drop';
 import { StoreModule } from '@ngrx/store';
 
 import { NgsFormModule } from '@soushians/form';
@@ -57,17 +56,13 @@ import { OrderModuleConfig, MODULE_CONFIG_TOKEN } from './order.config';
 import { CartableComponent } from './cartable/cartable.component';
 import { RedirectToBankComponent } from './redirect-to-bank/redirect-to-bank.component';
 import { OiCommonModule } from '../common/common.module';
-import { FieldSelectComponent } from './field-select/field-select.component';
-import { FieldDatepickerComponent } from './field-datepicker/field-datepicker.component';
 import { RootEffects } from './root/root.effects';
 import { OrderPanelComponent } from './order-panel/order-panel.component';
 import { AboutThirdPartyPolicyComponent } from './about-third-party-policy/about-third-party-policy.component';
-import { FieldInputComponent } from './field-input/field-input.component';
 import { OrderPanelEffects } from './order-panel/order-panel.effects';
 import { DeliveryTimeComponent } from './delivery-time/delivery-time.component';
-import { FieldFileComponent } from './field-file/field-file.component';
 import { TermsComponent } from './terms/terms.component';
-import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-grid-item-view.directive';
+import { DynamicOrderFieldDirective } from './dynamic-field/dynamic-field.directive';
 import { GmapsModule } from '../gmaps/gmaps.module';
 
 // fire policy
@@ -109,6 +104,7 @@ import { SelectedMedicalPolicyConfirmationComponent } from './medical-policy/sel
 import { MedicalPolicyProductsListComponent } from './medical-policy/medical-policy-products-list/medical-policy-products-list.component';
 import { SelectMedicalPolicyProductComponent } from './medical-policy/select-medical-policy-product/select-medical-policy-product.component';
 import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component';
+import { MedicalPolicyOrderReviewComponent } from './medical-policy/review/medical-policy-review.component';
 
 @NgModule({
 	imports: [
@@ -142,7 +138,6 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		MatExpansionModule,
 		MatGridListModule,
 		FlexLayoutModule,
-		FileDropModule,
 		NgsFormModule.forRoot(),
 		OiCommonModule,
 		GmapsModule
@@ -156,10 +151,6 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		TermsComponent,
 		CartableComponent,
 		RedirectToBankComponent,
-		FieldSelectComponent,
-		FieldInputComponent,
-		FieldFileComponent,
-		FieldDatepickerComponent,
 		OrderPanelComponent,
 		AboutThirdPartyPolicyComponent,
 		DynamicOrderFieldDirective,
@@ -203,19 +194,15 @@ import { MedicalPolicyInsurerInfoComponent } from './medical-policy/medical-poli
 		SelectedMedicalPolicyConfirmationComponent,
 		MedicalPolicyProductsListComponent,
 		SelectMedicalPolicyProductComponent,
-		MedicalPolicyInsurerInfoComponent
+		MedicalPolicyInsurerInfoComponent,
+		MedicalPolicyOrderReviewComponent
 	],
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
 		SelectdEarthquakePolicyConfirmationComponent,
 		SelectedThirdPartyPolicyConfirmationComponent,
 		SelectedMotorcyclePolicyConfirmationComponent,
-		SelectedMedicalPolicyConfirmationComponent,
-		// TODO: move to @soushians/form module
-		FieldInputComponent,
-		FieldFileComponent,
-		FieldSelectComponent,
-		FieldDatepickerComponent
+		SelectedMedicalPolicyConfirmationComponent
 	],
 	exports: [ AboutThirdPartyPolicyComponent ]
 })
