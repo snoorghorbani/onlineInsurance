@@ -11,78 +11,50 @@
       </b> 
       انتخاب نمودید:
   </div>
-  <div fxFlex="100">
-      برای ملک مسکونی با متراژ 
-      <b>
-        {{data.orderForm.Area.Value}}
-      </b>
-      متر مربع
-  </div>
   <div fxFlex="50">
-    هزینه ساخت بنا:  
+      سطح پوشش:
     <b>
-      {{data.orderForm.ConstructionCostPerSquareMeter.Value * data.orderForm.Area.Value}} 
+      {{data.orderForm.PolicyPushesheMali.DisplayValue}} 
     </b>
-    تومان 
   </div>
   <div fxFlex="40">
-    ارزش لوازم خانه:  
+      مدت بیمه:
     <b>
-        {{data.orderForm.ThingsValue.Value}}
+        {{data.orderForm.PolicyTerm.DisplayValue}}
     </b>
-    تومان
   </div>
   <div fxFlex="100">
-      پوشش های اضافی:
+      برای اتومبیل 
+      <b>
+          {{data.orderForm.CarModel.DisplayValue}} 
+        </b>
+       با مشخصات:
   </div>
   <div fxFlex="50">
-      زلزله:  
+      کاربری:
     <b>
-      {{data.orderForm.EarthquakeExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+      {{data.orderForm.CarUsage.DisplayValue}} 
     </b>
   </div>
   <div fxFlex="50">
-      ترکیدگی لوله:  
+      سال ساخت:
     <b>
-      {{data.orderForm.PipeExplotionExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+      {{data.orderForm.CarProductionYear.Value}} 
     </b>
   </div>
   <div fxFlex="50">
-      نشست زمین:  
+      تاریخ سر رسید بیمه نامه اخیر: 
     <b>
-      {{data.orderForm.EarthSummitExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+      {{data.orderForm.LastPolicyExpirationDate.Value.format()}} 
     </b>
   </div>
   <div fxFlex="50">
-      سقوط هواپیما:  
+      سابقه ی عدم خسارت:
     <b>
-      {{data.orderForm.AirplanFallExtraCoverage.Value? 'دارد' : 'ندارد'}} 
+      {{data.orderForm.NoDamageRecord.DisplayValue}} 
     </b>
   </div>
-  <div fxFlex="50">
-      طوفان:  
-    <b>
-      {{data.orderForm.StormExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
-  <div fxFlex="50">
-      سیل:  
-    <b>
-      {{data.orderForm.FloodExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
-  <div fxFlex="50">
-      سرقت مربوط به شکست حرز:  
-    <b>
-      {{data.orderForm.HarzExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
-  <div fxFlex="50">
-      ضایعات ناشی از برف و باران:  
-    <b>
-      {{data.orderForm.SnowRainExtraCoverage.Value? 'دارد' : 'ندارد'}} 
-    </b>
-  </div>
+
 </div>
 
 <div MatDialogActions>

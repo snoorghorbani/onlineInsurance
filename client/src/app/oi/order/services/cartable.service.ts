@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs";
-import { share, map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import { share, map } from 'rxjs/operators';
 
-import { FormSchemaModel, FieldConfig } from "@soushians/form";
+import { FormSchemaModel, FieldConfig } from '@soushians/form';
 
-import { FieldModel } from "../models/field.model";
-import { OrderFormModel } from "../models";
+import { FieldModel } from '../models/field.model';
+import { OrderFormModel } from '../models';
 
 @Injectable({
-	providedIn: "root"
+	providedIn: 'root'
 })
 export class CartableService {
 	constructor(private http: HttpClient) {}
@@ -18,12 +18,12 @@ export class CartableService {
 	getReadonlyField(_orderForm: OrderFormModel): FieldModel[] {
 		const orderForm = Object.assign({}, _orderForm);
 		const fields: FieldModel[] = [];
-		Object.keys(orderForm).forEach(key => {
+		Object.keys(orderForm).forEach((key) => {
 			if (orderForm[key].Status == 2) fields.push(Object.assign({}, orderForm[key]));
 		});
-		fields.forEach(item => {
+		fields.forEach((item) => {
 			if (item.Options != null) {
-				const selectedOption = item.Options.find(option => option.Value == item.Value);
+				const selectedOption = item.Options.find((option) => option.Value == item.Value);
 				if (selectedOption) item.Value = selectedOption.DisplayValue || selectedOption.DisplayName;
 				if (!selectedOption) debugger;
 			}
@@ -33,7 +33,7 @@ export class CartableService {
 	getEditableField(_orderForm: OrderFormModel): FieldModel[] {
 		const orderForm = Object.assign({}, _orderForm);
 		const fields = [];
-		Object.keys(orderForm).forEach(key => {
+		Object.keys(orderForm).forEach((key) => {
 			if ([ 3, 4 ].includes(orderForm[key].Status)) fields.push(orderForm[key]);
 		});
 		return fields;
@@ -42,9 +42,9 @@ export class CartableService {
 		const fields = _fields.concat();
 		var schema = new FormSchemaModel();
 		schema.init();
-		schema.form.name = "test";
-		schema.form.fields = fields.map(field => {
-			var fieldSchema = new FieldConfig("control");
+		schema.form.name = 'test';
+		schema.form.fields = fields.map((field) => {
+			var fieldSchema = new FieldConfig('control');
 			fieldSchema.name = field.Name;
 			fieldSchema.title = field.Label;
 			fieldSchema.inputType = this.getInputType(field);
@@ -52,7 +52,7 @@ export class CartableService {
 			fieldSchema.width = 3;
 			// fieldSchema.inputType = "text";
 			if (field.Options) {
-				fieldSchema.options = field.Options.map(option => {
+				fieldSchema.options = field.Options.map((option) => {
 					return { key: option.DisplayValue, value: option.Value };
 				});
 			}
@@ -62,11 +62,12 @@ export class CartableService {
 		return schema;
 	}
 	getInputType(field: FieldModel): any {
-		if (field.Name.endsWith("Date")) return "date";
-		if (field.Name.endsWith("Image")) return "file";
-		if (field.Options) return "select";
-		if (field.Value === false || field.Value === true) return "checkbox";
+		if (field.Name.endsWith('Date')) return 'date';
+		if (field.Name.endsWith('Image')) return 'file';
+		if ([ 'CarModel' ].includes(field.Name)) return 'select';
+		if (field.Options) return 'select';
+		if (field.Value === false || field.Value === true) return 'checkbox';
 
-		return "text";
+		return 'text';
 	}
 }

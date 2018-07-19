@@ -1,24 +1,19 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { filter, distinctUntilChanged, switchMap, pluck } from 'rxjs/operators';
-import { MatExpansionPanel } from '@angular/material';
+import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { UploadEvent } from 'ngx-file-drop';
 import { Store } from '@ngrx/store';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { SigninRequiredAction } from '@soushians/authentication';
 import { getAccountInfo } from '@soushians/user';
 
 import { FirePolicyOrderFormModel, DeliveryTimeModel } from '../../models';
 import { AppState } from '../../order.reducers';
-import { FieldModel } from '../../models/field.model';
 import { FileService } from '../../services/file.service';
-import { GetNewOrderFormStartAction } from '../../services/api';
-import { OrderService, OrderFormService } from '../../services';
+import { OrderService } from '../../services';
 import { GeoBoundaryService } from '../../../geo-boundary';
 import { CityModel } from '../../../geo-boundary/models';
-import { NewOrderFormUpdateAction } from '../../new-order/new-order.actions';
 import { SaveOrderStartAction } from '../../services/api/save-order';
 
 @Component({
@@ -39,7 +34,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
-		private fileService: FileService,
 		private orderService: OrderService,
 		private router: ActivatedRoute,
 		private geoBoundaryService: GeoBoundaryService
@@ -54,9 +48,7 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
 	}
 
-	ngOnInit() {
-		this.store.dispatch(new GetNewOrderFormStartAction(4));
-	}
+	ngOnInit() {}
 
 	selectDeliveryTime(row: DeliveryTimeModel) {
 		this.formGroup.patchValue({

@@ -18,6 +18,7 @@ import { SelectEarthquakePolicyProductComponent } from './earthquake-policy/sele
 import { EarthquakePolicyInsurerInfoComponent } from './earthquake-policy/earthquake-policy-insurer-info/earthquake-policy-insurer-info.component';
 import { PurchaseThirdPartyPolicyComponent } from './third-party-policy/purchase-third-party-policy/purchase-third-party-policy.component';
 import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/select-third-party-policy-product/select-third-party-policy-product.component';
+import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
 
 const routes: Routes = [
 	{
@@ -27,6 +28,10 @@ const routes: Routes = [
 			{
 				path: 'insurer-info',
 				children: [
+					{
+						path: '1/:Id',
+						component: ThirdPartyPolicyInsurerInfoComponent
+					},
 					{
 						path: '4/:Id',
 						component: FirePolicyInsurerInfoComponent

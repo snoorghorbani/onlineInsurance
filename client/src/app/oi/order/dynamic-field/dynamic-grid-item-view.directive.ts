@@ -1,16 +1,17 @@
-import { OnInit, ComponentRef, ComponentFactoryResolver, ViewContainerRef, Directive, Input } from "@angular/core";
-import { FieldModel } from "../models/field.model";
-import { FieldInputComponent } from "../field-input/field-input.component";
-import { FieldSelectComponent } from "../field-select/field-select.component";
-import { FieldDatepickerComponent } from "../field-datepicker/field-datepicker.component";
-import { CartableService } from "../services/cartable.service";
+import { OnInit, ComponentRef, ComponentFactoryResolver, ViewContainerRef, Directive, Input } from '@angular/core';
+import { FieldModel } from '../models/field.model';
+import { FieldInputComponent } from '../field-input/field-input.component';
+import { FieldSelectComponent } from '../field-select/field-select.component';
+import { FieldDatepickerComponent } from '../field-datepicker/field-datepicker.component';
+import { CartableService } from '../services/cartable.service';
+import { FieldFileComponent } from '../field-file/field-file.component';
 
 @Directive({
-	selector: "[orderField]"
+	selector: '[orderField]'
 })
 export class DynamicOrderFieldDirective implements OnInit {
 	@Input() formGroup;
-	@Input("orderField")
+	@Input('orderField')
 	set item(item: FieldModel) {
 		if (!item) return;
 		this._resolve_correct_component_base_on_widget_type(item);
@@ -24,16 +25,17 @@ export class DynamicOrderFieldDirective implements OnInit {
 	) {
 		this.mapTypeToComponent = {
 			text: FieldInputComponent,
+			file: FieldFileComponent,
 			select: FieldSelectComponent,
 			date: FieldDatepickerComponent
 		};
 	}
 	ngOnInit() {}
 	_resolve_correct_component_base_on_widget_type(item: FieldModel) {
-		debugger;
+		if (this.component) this.component.destroy();
 		const type = this._select_type(item);
 		if (!this.mapTypeToComponent[type]) {
-			const supportedTypes = Object.keys(this.mapTypeToComponent).join(", ");
+			const supportedTypes = Object.keys(this.mapTypeToComponent).join(', ');
 			throw new Error(
 				`Trying to use an unsupported type (${type}).
 		  		 Supported types: ${supportedTypes}`
@@ -50,9 +52,9 @@ export class DynamicOrderFieldDirective implements OnInit {
 		this.component.instance.description = item.Description;
 		this.component.instance.hint = item.Description;
 		this.component.instance.tooltip = item.Description;
-		this.component.instance.appearance = "fill";
+		this.component.instance.appearance = 'fill';
 
-		if (type == "select") {
+		if (type == 'select') {
 			this.component.instance.options = item.Options;
 		}
 	}

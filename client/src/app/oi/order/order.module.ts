@@ -95,6 +95,8 @@ import { SelectThirdPartyPolicyProductComponent } from './third-party-policy/sel
 import { SelectedThirdPartyPolicyConfirmationComponent } from './third-party-policy/selected-third-party-policy-onfirmation/selected-third-party-policy-confirmation.component';
 import { ThirdPartyPolicyProductsListComponent } from './third-party-policy/third-party-policy-products-list/third-party-policy-products-list.component';
 import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/car-detail.component';
+import { ThirdPartyPolicyInsurerInfoComponent } from './third-party-policy/third-party-policy-insurer-info/third-party-policy-insurer-info.component';
+import { FieldFileComponent } from './field-file/field-file.component';
 
 // medical policy
 // import { PurchaseMedicalPolicyComponent } from './medical-policy/purchase-medical-policy/purchase-medical-policy.component';
@@ -157,6 +159,7 @@ import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/ca
 		RedirectToBankComponent,
 		FieldSelectComponent,
 		FieldInputComponent,
+		FieldFileComponent,
 		FieldDatepickerComponent,
 		OrderPanelComponent,
 		AboutThirdPartyPolicyComponent,
@@ -169,7 +172,7 @@ import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/ca
 		SelectedThirdPartyPolicyConfirmationComponent,
 		ThirdPartyPolicyProductsListComponent,
 		SelectThirdPartyPolicyProductComponent,
-		// FirePolicyInsurerInfoComponent,
+		ThirdPartyPolicyInsurerInfoComponent,
 
 		// fire policy components
 		PurchaseFirePolicyComponent,
@@ -196,8 +199,10 @@ import { ThirdPartyCarDetailComponent } from './third-party-policy/car-detail/ca
 	entryComponents: [
 		SelectdPolicyConfirmationComponent,
 		SelectdEarthquakePolicyConfirmationComponent,
+		SelectedThirdPartyPolicyConfirmationComponent,
 		// TODO: move to @soushians/form module
 		FieldInputComponent,
+		FieldFileComponent,
 		FieldSelectComponent,
 		FieldDatepickerComponent
 	],
