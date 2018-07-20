@@ -1,5 +1,9 @@
 <div fxLayout="row wrap">
-  <div fxFlex="100">
+    <mat-progress-bar *ngIf="!orderForm"
+    color="primary"
+    mode="indeterminate">
+  </mat-progress-bar>
+<div fxFlex="100">
     <order-medical-home-detail [orderForm]="orderForm" (done)="homeIsDone($event)"></order-medical-home-detail>
   </div>
   <div fxFlex="100">

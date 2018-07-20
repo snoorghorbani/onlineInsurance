@@ -84,6 +84,7 @@ import { GwtStepsModule } from './gwt-steps/gwt-steps.module';
 		NgsGridModule.forRoot(NgsGridModuleConfig),
 		NgsFormModule.forRoot(NgsFormModuleConfig),
 		RuleModule.forRoot(NgsRuleModuleConfig),
+		NgsWidgetTypesModule,
 		NgsUserRoutingModule,
 		GwtStepsModule,
 
@@ -93,12 +94,12 @@ import { GwtStepsModule } from './gwt-steps/gwt-steps.module';
 
 		OiModule
 	],
-	declarations: [AppComponent],
+	declarations: [ AppComponent ],
 	providers: [
 		{ provide: LOCALE_ID, useValue: 'fa-IR' },
-		{ provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+		{ provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
 		{ provide: MAT_DATE_FORMATS, useValue: JALALI_MOMENT_FORMATS }
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}

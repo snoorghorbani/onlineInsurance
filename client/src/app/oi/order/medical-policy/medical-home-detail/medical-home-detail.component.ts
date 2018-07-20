@@ -1,14 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
-import { AppState } from '../../order.reducers';
-import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MedicalPolicyOrderFormModel, OrderFormType } from '../../models';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
+import { AppState } from "../../order.reducers";
+import { Store } from "@ngrx/store";
+import { Subject } from "rxjs";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { MedicalPolicyOrderFormModel, OrderFormType } from "../../models";
+import { OrderService } from "../../services";
 
 @Component({
-	selector: 'order-medical-home-detail',
-	templateUrl: './medical-home-detail.component.html',
-	styleUrls: [ './medical-home-detail.component.css' ]
+	selector: "order-medical-home-detail",
+	templateUrl: "./medical-home-detail.component.html",
+	styleUrls: [ "./medical-home-detail.component.css" ]
 })
 export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
@@ -29,7 +30,7 @@ export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 	formGroup: FormGroup;
 	ready = false;
 
-	constructor(private store: Store<AppState>) {
+	constructor(private store: Store<AppState>, private orderService: OrderService) {
 		this._init_properties();
 		this._create_formGroup();
 	}
@@ -56,17 +57,19 @@ export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 	_init_properties() {}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			MedicalRole: new FormControl('', Validators.required),
-			DoctorSpecialty: new FormControl('', Validators.required),
-			IsResident: new FormControl('', Validators.required),
-			ParamedicineSpecialty: new FormControl('', Validators.required),
-			IsStudent: new FormControl('', Validators.required),
-			MedicalNoDamageRecord: new FormControl('', Validators.required),
+			MedicalRole: new FormControl("", Validators.required),
+			DoctorSpecialty: new FormControl("", Validators.required),
+			IsResident: new FormControl("", Validators.required),
+			ParamedicineSpecialty: new FormControl("", Validators.required),
+			IsStudent: new FormControl("", Validators.required),
+			MedicalNoDamageRecord: new FormControl("", Validators.required),
 			BloodMoneyIncreaseCoverage: new FormControl(false)
 		});
+		this.formGroup.patchValue(this.orderService.quickOrder);
+		this.orderService.quickOrder = {};
 	}
 	_set_formGroup_validation(orderForm: OrderFormType) {
-		Object.keys(this.formGroup.controls).forEach((key) => {
+		Object.keys(this.formGroup.controls).forEach(key => {
 			if (orderForm[key].Status == 4) {
 				this.formGroup.get(key).setValidators([ Validators.required ]);
 				this.formGroup.get(key).updateValueAndValidity();
@@ -77,9 +80,9 @@ export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 	_patchValue_formGroup_on_orderForm_change(orderForm: OrderFormType) {
 		var values = {};
 		Object.keys(orderForm)
-			.filter((key) => key in this.formGroup.controls)
-			.filter((key) => orderForm[key].Value)
-			.map((key) => (values[key] = orderForm[key].Value));
+			.filter(key => key in this.formGroup.controls)
+			.filter(key => orderForm[key].Value)
+			.map(key => (values[key] = orderForm[key].Value));
 
 		this.formGroup.patchValue(values);
 	}

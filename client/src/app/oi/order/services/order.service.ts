@@ -1,20 +1,27 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { of, throwError } from 'rxjs';
-import { share, map, switchMap, withLatestFrom, publishLast, refCount, catchError } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import { of, throwError } from "rxjs";
+import { share, map, switchMap, withLatestFrom, publishLast, refCount, catchError } from "rxjs/operators";
 
-import { OrderType } from '../models/order-type.model';
-import { DeliveryTimeModel, OrderSummaryModel, OrderFormType } from '../models';
-import { GetDeliveryTimeTableApiModel, PlaceOrderApiModel, GetMyCartableApiModel, SaveOrderApiModel } from './api';
-import { GetMyOrdersApiModel } from './api/get-my-orders';
-import { GetOrderApiModel } from './api/get-order';
-import { OrderConfigurationService } from './order-configuration.service';
+import { OrderType } from "../models/order-type.model";
+import { DeliveryTimeModel, OrderSummaryModel, OrderFormType } from "../models";
+import { GetDeliveryTimeTableApiModel, PlaceOrderApiModel, GetMyCartableApiModel, SaveOrderApiModel } from "./api";
+import { GetMyOrdersApiModel } from "./api/get-my-orders";
+import { GetOrderApiModel } from "./api/get-order";
+import { OrderConfigurationService } from "./order-configuration.service";
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: "root"
 })
 export class OrderService {
+	private _quickOrder = {};
+	set quickOrder(quickOrder: any) {
+		this._quickOrder = quickOrder;
+	}
+	get quickOrder() {
+		return this._quickOrder;
+	}
 	constructor(private http: HttpClient, private configurationService: OrderConfigurationService) {}
 
 	GetOrderTypes(): Observable<OrderType[]> {
@@ -27,7 +34,7 @@ export class OrderService {
 			.get<GetDeliveryTimeTableApiModel.Response>(
 				`${this.configurationService.config.env.server}/order/GetDeliveryTimeTable`
 			)
-			.pipe(share(), map((response) => response.Result.Items));
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	SaveOrder<T>(order: OrderFormType): Observable<T> {
 		debugger;
@@ -36,23 +43,23 @@ export class OrderService {
 				`${this.configurationService.config.env.server}/order/SaveOrder`,
 				order
 			)
-			.pipe(map((response) => response.Result), share());
+			.pipe(map(response => response.Result), share());
 	}
 	GetMyOrders(): Observable<OrderSummaryModel[]> {
 		return this.http
 			.get<GetMyOrdersApiModel.Response>(`${this.configurationService.config.env.server}/order/GetMyOrders`)
-			.pipe(share(), map((response) => response.Result.Items));
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetMyCartable(): Observable<OrderSummaryModel[]> {
 		return this.http
 			.get<GetMyCartableApiModel.Response>(`${this.configurationService.config.env.server}/order/GetMyCartable`)
-			.pipe(share(), map((response) => response.Result.Items));
+			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetOrder<T = any>({ Id }: Partial<GetOrderApiModel.Request>): Observable<T> {
 		debugger;
 		return this.http
 			.get<GetOrderApiModel.Response<T>>(`${this.configurationService.config.env.server}/order/GetOrder/${Id}`)
-			.pipe(map((response) => response.Result), share());
+			.pipe(map(response => response.Result), share());
 	}
 	PlaceOrder(orderForm: OrderFormType): Observable<any> {
 		return this.http
@@ -60,7 +67,7 @@ export class OrderService {
 				`${this.configurationService.config.env.server}/order/PlaceOrder`,
 				orderForm
 			)
-			.pipe(map((response) => response.Result));
+			.pipe(map(response => response.Result));
 		// this.http.get("${this.configurationService.config.env.server}/user/login?Username=test_agent").subscribe(data => {
 		// 	debugger;
 		// });

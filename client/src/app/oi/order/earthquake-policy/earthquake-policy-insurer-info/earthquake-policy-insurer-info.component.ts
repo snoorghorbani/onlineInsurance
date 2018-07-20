@@ -1,29 +1,29 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable';
-import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { switchMap } from "rxjs/operators";
+import { Observable } from "rxjs/internal/Observable";
+import { Store } from "@ngrx/store";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { SigninRequiredAction } from '@soushians/authentication';
-import { getAccountInfo } from '@soushians/user';
+import { SigninRequiredAction } from "@soushians/authentication";
+import { getAccountInfo } from "@soushians/user";
 
-import { FirePolicyOrderFormModel, DeliveryTimeModel } from '../../models';
-import { AppState } from '../../order.reducers';
-import { FileService } from '../../services/file.service';
-import { OrderService } from '../../services';
-import { GeoBoundaryService } from '../../../geo-boundary';
-import { CityModel } from '../../../geo-boundary/models';
-import { SaveOrderStartAction } from '../../services/api/save-order';
+import { FirePolicyOrderFormModel, DeliveryTimeModel } from "../../models";
+import { AppState } from "../../order.reducers";
+import { FileService } from "../../services/file.service";
+import { OrderService } from "../../services";
+import { GeoBoundaryService } from "../../../geo-boundary";
+import { CityModel } from "../../../geo-boundary/models";
+import { SaveOrderStartAction } from "../../services/api/save-order";
 
 @Component({
-	selector: 'earthquake-policy-insurer-info',
-	templateUrl: './earthquake-policy-insurer-info.component.html',
-	styleUrls: [ './earthquake-policy-insurer-info.component.css' ]
+	selector: "earthquake-policy-insurer-info",
+	templateUrl: "./earthquake-policy-insurer-info.component.html",
+	styleUrls: [ "./earthquake-policy-insurer-info.component.css" ]
 })
 export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	@Output() done = new EventEmitter();
-	@Output('signInRequest') signInRequest$ = new EventEmitter();
+	@Output("signInRequest") signInRequest$ = new EventEmitter();
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
@@ -49,7 +49,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 		this._init_buildingInfoForm();
 		this._set_properties_value_of_delivery_table();
 
-		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
+		this.store.select(getAccountInfo).subscribe(user => (this.signedIn = !!user.DisplayName));
 	}
 
 	ngOnInit() {}
@@ -67,10 +67,10 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			return;
 		}
 		this.submited = true;
-		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
+		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
 
-		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
-			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
+		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe(response => {
+			this.router.navigate([ "/order/review", this.orderForm.Id.Value ]);
 		});
 	}
 	signInRequest() {
@@ -86,7 +86,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	 * private methods
 	 */
 	_validate_all_form_fields(formGroup: FormGroup) {
-		Object.keys(formGroup.controls).forEach((field) => {
+		Object.keys(formGroup.controls).forEach(field => {
 			const control = formGroup.get(field);
 			if (control instanceof FormControl) {
 				control.markAsTouched({ onlySelf: true });
@@ -100,85 +100,88 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			/**
 			 * Insurer Part
 			 */
-			PolicyholderNationalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderFatherName: new FormControl('', [
+			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderFatherName: new FormControl("", [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
-			PolicyholderFirstName: new FormControl('', [
+			PolicyholderBirthDate: new FormControl("", [ Validators.required ]),
+			PolicyholderFirstName: new FormControl("", [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderLastName: new FormControl('', [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
-			PolicyholderMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderGender: new FormControl('', [ Validators.required ]),
-			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderLastName: new FormControl("", [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
+			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderGender: new FormControl("", [ Validators.required ]),
+			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			/**
 			 * Reciver Part
 			 */
-			CustomerDescription: new FormControl('', [ Validators.required ]),
-			ReceiverFirstName: new FormControl('', [ Validators.required ]),
-			ReceiverLastName: new FormControl('', [ Validators.required ]),
-			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			CustomerDescription: new FormControl("", [ Validators.required ]),
+			ReceiverFirstName: new FormControl("", [ Validators.required ]),
+			ReceiverLastName: new FormControl("", [ Validators.required ]),
+			ReceiverMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			ReceiverPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			/**
 			 * Delivery Time
 			 */
-			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
-			DeliveryDate: new FormControl('', [ Validators.required ]),
-			DeliveryTime: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceCityId: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl("", [ Validators.required ]),
+			DeliveryDate: new FormControl("", [ Validators.required ]),
+			DeliveryTime: new FormControl("", [ Validators.required ]),
 			/**
 			 * Building Part
 			 */
-			BuildingAddressMainStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressSubStreet: new FormControl('', [ Validators.required ]),
-			BuildingAddressDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAddressCityId: new FormControl('', [ Validators.required ]),
-			BuildingAddressAlley: new FormControl('', [ Validators.required ]),
-			BuildingPostalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingAddressNo: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingFloors: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			BuildingUsage: new FormControl('', [ Validators.required ]),
-			BuildingAge: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ])
+			BuildingAddressMainStreet: new FormControl("", [ Validators.required ]),
+			BuildingAddressSubStreet: new FormControl("", [ Validators.required ]),
+			BuildingAddressDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingAddressCityId: new FormControl("", [ Validators.required ]),
+			BuildingAddressAlley: new FormControl("", [ Validators.required ]),
+			BuildingPostalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingAddressNo: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingFloors: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			BuildingUsage: new FormControl("", [ Validators.required ]),
+			BuildingAge: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ])
 		});
+
+		this.formGroup.patchValue(this.orderService.quickOrder);
+		this.orderService.quickOrder = {};
 	}
 	_init_insurerInfoForm() {
 		this.insurerInfoForm = [
 			{
-				name: 'PolicyholderFirstName',
+				name: "PolicyholderFirstName",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderLastName',
+				name: "PolicyholderLastName",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderFatherName',
+				name: "PolicyholderFatherName",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderGender',
+				name: "PolicyholderGender",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderNationalCode',
+				name: "PolicyholderNationalCode",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderMobile',
+				name: "PolicyholderMobile",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderPhone',
+				name: "PolicyholderPhone",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderBirthDate',
+				name: "PolicyholderBirthDate",
 				fxFlex: 46
 			}
 		];
@@ -186,35 +189,35 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	_init_reciverInfoForm() {
 		this.reciverInfoForm = [
 			{
-				name: 'ReceiverFirstName',
+				name: "ReceiverFirstName",
 				fxFlex: 46
 			},
 			{
-				name: 'ReceiverLastName',
+				name: "ReceiverLastName",
 				fxFlex: 46
 			},
 			{
-				name: 'DeliveryPlaceCityId',
+				name: "DeliveryPlaceCityId",
 				fxFlex: 46
 			},
 			{
-				name: 'DeliveryPlaceDistrict',
+				name: "DeliveryPlaceDistrict",
 				fxFlex: 46
 			},
 			{
-				name: 'ReceiverPhone',
+				name: "ReceiverPhone",
 				fxFlex: 46
 			},
 			{
-				name: 'ReceiverMobile',
+				name: "ReceiverMobile",
 				fxFlex: 46
 			},
 			{
-				name: 'DeliveryPlaceAddress',
+				name: "DeliveryPlaceAddress",
 				fxFlex: 46
 			},
 			{
-				name: 'CustomerDescription',
+				name: "CustomerDescription",
 				fxFlex: 46
 			}
 		];
@@ -222,56 +225,56 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	_init_buildingInfoForm() {
 		this.buildingInfoForm = [
 			{
-				name: 'BuildingAddressCityId',
+				name: "BuildingAddressCityId",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressDistrict',
+				name: "BuildingAddressDistrict",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressMainStreet',
+				name: "BuildingAddressMainStreet",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressSubStreet',
+				name: "BuildingAddressSubStreet",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressAlley',
+				name: "BuildingAddressAlley",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAddressNo',
+				name: "BuildingAddressNo",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingPostalCode',
+				name: "BuildingPostalCode",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingUsage',
+				name: "BuildingUsage",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingFloors',
+				name: "BuildingFloors",
 				fxFlex: 46
 			},
 			{
-				name: 'BuildingAge',
+				name: "BuildingAge",
 				fxFlex: 46
 			}
 		];
 	}
 	_set_properties_value_of_delivery_table() {
-		this.DelieryTimeTableDisplayColumns = [ 'Checkbox', 'Day', 'Date', 'Time' ];
+		this.DelieryTimeTableDisplayColumns = [ "Checkbox", "Day", "Date", "Time" ];
 		this.DelieryTimeTableDataSource$ = this.orderService.GetDeliveryTimeTable();
 	}
 	_select_order_form() {
 		this.orderForm$ = this.activatedRouter.params.pipe(
 			// pluck("Id"),
-			switchMap((parmas) => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
+			switchMap(parmas => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
-		this.orderForm$.subscribe((orderForm) => (this.orderForm = orderForm));
+		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 	}
 }

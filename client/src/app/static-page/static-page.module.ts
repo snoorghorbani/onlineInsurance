@@ -6,49 +6,65 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-        MatIconModule, MatButtonModule,
-        MatCardModule, MatSnackBarModule,
-        MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule,
-        MatRadioModule, MatInputModule,
-        MatToolbarModule, MatDatepickerModule, MatProgressBarModule
+	MatIconModule,
+	MatButtonModule,
+	MatCardModule,
+	MatSnackBarModule,
+	MatSidenavModule,
+	MatExpansionModule,
+	MatSelectModule,
+	MatFormFieldModule,
+	MatListModule,
+	MatMenuModule,
+	MatRadioModule,
+	MatInputModule,
+	MatToolbarModule,
+	MatDatepickerModule,
+	MatProgressBarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoutingModule } from './static-page.routing-module';
 
+import { NgsWidgetModule } from '@soushians/widget';
+
 import {
-        PageNotFoundComponent,
-        AboutUsComponent,
-        ContactUsComponent,
-        PoliciesComponent,
-        FaqComponent
+	PageNotFoundComponent,
+	AboutUsComponent,
+	ContactUsComponent,
+	PoliciesComponent,
+	FaqComponent
 } from './dumb-components';
 
 @NgModule({
-        imports: [
-                CommonModule,
-                RouterModule,
-                FormsModule,
-                HttpClientModule,
-                FlexLayoutModule,
-                MatIconModule, MatButtonModule,
-                MatCardModule, MatSnackBarModule,
-                MatSidenavModule, MatExpansionModule, MatSelectModule, MatFormFieldModule, MatListModule, MatMenuModule,
-                MatRadioModule, MatInputModule,
-                MatToolbarModule, MatDatepickerModule, MatProgressBarModule,
-                BrowserModule,
-                RouterModule,
-                // BrowserAnimationsModule,
-                RoutingModule
-        ],
-        declarations: [
-                PageNotFoundComponent,
-                AboutUsComponent,
-                ContactUsComponent,
-                PoliciesComponent,
-                FaqComponent
-
-        ],
-        exports: []
+	imports: [
+		CommonModule,
+		RouterModule,
+		FormsModule,
+		HttpClientModule,
+		FlexLayoutModule,
+		MatIconModule,
+		MatButtonModule,
+		MatCardModule,
+		MatSnackBarModule,
+		MatSidenavModule,
+		MatExpansionModule,
+		MatSelectModule,
+		MatFormFieldModule,
+		MatListModule,
+		MatMenuModule,
+		MatRadioModule,
+		MatInputModule,
+		MatToolbarModule,
+		MatDatepickerModule,
+		MatProgressBarModule,
+		BrowserModule,
+		RouterModule,
+		// BrowserAnimationsModule,
+		RoutingModule,
+		NgsWidgetModule
+	],
+	declarations: [ PageNotFoundComponent, AboutUsComponent, ContactUsComponent, PoliciesComponent, FaqComponent ],
+	exports: []
 })
-export class StaticPageModule { }
+export class StaticPageModule {}
