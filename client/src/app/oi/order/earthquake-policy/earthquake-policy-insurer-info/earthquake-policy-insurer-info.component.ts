@@ -34,7 +34,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	DeliverDateTime: string;
 	DelieryTimeTableDisplayColumns: string[];
 	DelieryTimeTableDataSource$: Observable<DeliveryTimeModel[]>;
-	Cities$: Observable<CityModel[]>;
+	submited = false;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
@@ -66,7 +66,9 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
+		this.submited = true;
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
+
 		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
 			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
 		});
@@ -264,7 +266,6 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	_set_properties_value_of_delivery_table() {
 		this.DelieryTimeTableDisplayColumns = [ 'Checkbox', 'Day', 'Date', 'Time' ];
 		this.DelieryTimeTableDataSource$ = this.orderService.GetDeliveryTimeTable();
-		this.Cities$ = this.geoBoundaryService.GetCities();
 	}
 	_select_order_form() {
 		this.orderForm$ = this.activatedRouter.params.pipe(

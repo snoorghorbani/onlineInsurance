@@ -25,6 +25,7 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
 	@Output('signInRequest') signInRequest$ = new EventEmitter();
 	unsubscribe = new Subject<void>();
+	submited = false;
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
@@ -33,7 +34,6 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	reciverInfoForm: any;
 	carCardForm: any;
 	policyForm: any;
-	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
@@ -64,10 +64,10 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
+		this.submited = true;
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
 
 		this.orderService.SaveOrder<ThirdPartyPolicyOrderFormModel>(this.orderForm).subscribe((response) => {
-			debugger;
 			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
 		});
 	}

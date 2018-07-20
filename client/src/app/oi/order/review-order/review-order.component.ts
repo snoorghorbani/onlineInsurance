@@ -19,6 +19,7 @@ export class ReviewOrderComponent implements OnInit {
 	@Output() done = new EventEmitter();
 	formGroup: FormGroup;
 	orderForm: OrderFormType;
+	submited = false;
 	InitiationPaymentResult$: Observable<any>;
 
 	constructor(
@@ -39,6 +40,7 @@ export class ReviewOrderComponent implements OnInit {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
+		this.submited = true;
 		const formValue = this.formGroup.value;
 		Object.keys(formValue || {}).forEach((key) => (this.orderForm[key].Value = formValue[key]));
 

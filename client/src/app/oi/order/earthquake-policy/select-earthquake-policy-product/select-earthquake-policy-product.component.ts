@@ -82,7 +82,6 @@ export class SelectEarthquakePolicyProductComponent implements OnInit, OnDestroy
 	_select_order_form_store_and_subscribe() {
 		this.orderFormService.GetNewOrderForm<EarthquakePolicyOrderFormModel>(5).subscribe((orderForm) => {
 			this.orderForm = orderForm;
-			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 		});
 	}
 }

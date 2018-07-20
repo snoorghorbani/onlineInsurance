@@ -18,16 +18,16 @@
     ],
     "paths": {
       "@soushians/layout": [
-        // "dist/@soushians/layout",
-        "projects/soushians/layout/src/public_api"
+        "dist/@soushians/layout",
+        // "projects/soushians/layout/src/public_api"
       ],
       "@soushians/config": [
-        // "dist/@soushians/config"
-        "projects/soushians/config/src/public_api"
+        "dist/@soushians/config"
+        // "projects/soushians/config/src/public_api"
       ],
       "@soushians/user": [
-        // "dist/@soushians/user"
-        "projects/soushians/user/src/public_api"
+        "dist/@soushians/user"
+        // "projects/soushians/user/src/public_api"
       ],
       "@soushians/shared": [
         "dist/@soushians/shared"
@@ -37,39 +37,39 @@
         "projects/soushians/authentication/src/public_api"
       ],
       "@soushians/form": [
-        // "dist/@soushians/form"
-        "projects/soushians/form/src/public_api"
+        "dist/@soushians/form"
+        // "projects/soushians/form/src/public_api"
       ],
       "@soushians/diagram": [
         "dist/@soushians/diagram"
       ],
       "@soushians/source": [
-        // "dist/@soushians/source"
-        "projects/soushians/source/src/public_api"
+        "dist/@soushians/source"
+        // "projects/soushians/source/src/public_api"
       ],
       "@soushians/socket": [
-        // "dist/@soushians/socket"
-        "projects/soushians/socket/src/public_api"
+        "dist/@soushians/socket"
+        // "projects/soushians/socket/src/public_api"
       ],
       "@soushians/rule": [
-        // "dist/@soushians/rule"
-        "projects/soushians/rule/src/public_api"
+        "dist/@soushians/rule"
+        // "projects/soushians/rule/src/public_api"
       ],
       "@soushians/grid": [
-        // "dist/@soushians/rule"
-        "projects/soushians/grid/src/public_api"
+        "dist/@soushians/grid"
+        // "projects/soushians/grid/src/public_api"
       ],
       "@soushians/widget": [
-        // "dist/@soushians/rule"
-        "projects/soushians/widget/src/public_api"
+        "dist/@soushians/widget"
+        // "projects/soushians/widget/src/public_api"
       ],
       "@soushians/widget-types": [
-        // "dist/@soushians/rule"
-        "projects/soushians/widget-types/src/public_api"
+        "dist/@soushians/widget-types"
+        // "projects/soushians/widget-types/src/public_api"
       ],
       "@soushians/frontend-authentication": [
-        // "dist/@soushians/frontend-authentication"
-        "projects/soushians/frontend-authentication/src/public_api"
+        "dist/@soushians/frontend-authentication"
+        // "projects/soushians/frontend-authentication/src/public_api"
       ],
       "@soushians/test": [
         "dist/soushians/test"

@@ -24,7 +24,8 @@ import {
 	MatListModule,
 	MatBottomSheetModule,
 	MatDividerModule,
-	MatDialogModule
+	MatDialogModule,
+	MatProgressBarModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -133,6 +134,7 @@ import { MedicalPolicyOrderReviewComponent } from './medical-policy/review/medic
 		MatSidenavModule,
 		MatCheckboxModule,
 		MatCardModule,
+		MatProgressBarModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
 		MatExpansionModule,

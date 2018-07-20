@@ -10,12 +10,9 @@ import { getAccountInfo } from '@soushians/user';
 
 import { MedicalPolicyOrderFormModel } from '../../models';
 import { AppState } from '../../order.reducers';
-import { FileService } from '../../services/file.service';
 import { GetNewOrderFormStartAction } from '../../services/api';
 import { OrderService } from '../../services';
 import { GeoBoundaryService } from '../../../geo-boundary';
-import { CityModel } from '../../../geo-boundary/models';
-import { SaveOrderStartAction } from '../../services/api/save-order';
 
 @Component({
 	selector: 'order-medical-policy-insurer-info',
@@ -28,16 +25,15 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 	orderForm$: Observable<MedicalPolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
+	submited = false;
 	orderForm: MedicalPolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
-	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
 		private activatedRouter: ActivatedRoute,
-		private router: Router,
-		private geoBoundaryService: GeoBoundaryService
+		private router: Router
 	) {
 		this._select_order_form();
 		this._init_formgroup();
@@ -57,8 +53,11 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
+		this.submited = true;
+
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
-		this.orderService.SaveOrder<MedicalPolicyOrderFormModel>(this.orderForm).subscribe((response) => {
+
+		this.orderService.SaveOrder<MedicalPolicyOrderFormModel>(this.orderForm).subscribe(() => {
 			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
 		});
 	}
@@ -198,9 +197,7 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 		];
 	}
 
-	_set_properties_value_of_delivery_table() {
-		this.Cities$ = this.geoBoundaryService.GetCities();
-	}
+	_set_properties_value_of_delivery_table() {}
 	_select_order_form() {
 		this.orderForm$ = this.activatedRouter.params.pipe(
 			// pluck("Id"),

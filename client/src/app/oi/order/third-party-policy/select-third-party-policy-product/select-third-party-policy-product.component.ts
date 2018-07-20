@@ -81,9 +81,9 @@ export class SelectThirdPartyPolicyProductComponent implements OnInit, OnDestroy
 		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 	_select_order_form_store_and_subscribe() {
-		this.orderFormService.GetNewOrderForm<ThirdPartyPolicyOrderFormModel>(8).subscribe((orderForm) => {
+		this.orderFormService.GetNewOrderForm<ThirdPartyPolicyOrderFormModel>(1).subscribe((orderForm) => {
 			this.orderForm = orderForm;
-			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
+			// this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 		});
 	}
 }

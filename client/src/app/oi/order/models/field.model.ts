@@ -7,6 +7,7 @@ export interface FieldModel {
 	Options: FieldOptionModel[];
 	SequenceIndex: number;
 	Status: number;
+	category?: string;
 	ExtensionData: any;
 }
 

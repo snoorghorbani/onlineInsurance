@@ -26,11 +26,11 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
+	submited = false;
 	orderForm: FirePolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
 	buildingInfoForm: any;
-	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
@@ -55,6 +55,8 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
+		this.submited = true;
+
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
 
 		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe((response) => {
@@ -255,9 +257,7 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			}
 		];
 	}
-	_set_properties_value_of_delivery_table() {
-		this.Cities$ = this.geoBoundaryService.GetCities();
-	}
+	_set_properties_value_of_delivery_table() {}
 	_select_order_form() {
 		this.orderForm$ = this.activatedRouter.params.pipe(
 			// pluck("Id"),

@@ -81,9 +81,8 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 	_select_order_form_store_and_subscribe() {
-		this.orderFormService.GetNewOrderForm<FirePolicyOrderFormModel>(8).subscribe((orderForm) => {
+		this.orderFormService.GetNewOrderForm<FirePolicyOrderFormModel>(4).subscribe((orderForm) => {
 			this.orderForm = orderForm;
-			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 		});
 	}
 }

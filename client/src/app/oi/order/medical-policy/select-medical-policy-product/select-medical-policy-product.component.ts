@@ -83,7 +83,6 @@ export class SelectMedicalPolicyProductComponent implements OnInit, OnDestroy {
 	_select_order_form_store_and_subscribe() {
 		this.orderFormService.GetNewOrderForm<MedicalPolicyOrderFormModel>(8).subscribe((orderForm) => {
 			this.orderForm = orderForm;
-			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 		});
 	}
 }

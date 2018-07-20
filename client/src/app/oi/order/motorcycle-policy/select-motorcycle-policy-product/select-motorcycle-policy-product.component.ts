@@ -9,7 +9,7 @@ import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from '
 import { getAccountInfo } from '@soushians/user';
 import { SigninRequiredAction } from '@soushians/authentication';
 
-import { FirePolicyOrderFormModel } from '../../models';
+import { MotorcyclePolicyOrderFormModel } from '../../models';
 import { AppState } from '../../order.reducers';
 import { SaveOrderStartAction, GetNewOrderFormStartAction } from '../../services/api';
 import { PolicyCompareModel, PriceModel } from '../../../policy/models';
@@ -22,7 +22,7 @@ import { OrderFormService } from '../../services';
 	styleUrls: [ './select-motorcycle-policy-product.component.css' ]
 })
 export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy {
-	orderForm: FirePolicyOrderFormModel;
+	orderForm: MotorcyclePolicyOrderFormModel;
 	policies$: Observable<PolicyCompareModel[]>;
 	signedIn$: Observable<boolean>;
 
@@ -64,7 +64,7 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 			if (approved) this.store.dispatch(new SaveOrderStartAction(this.orderForm));
 		});
 	}
-	doneInsurer(orderForm: FirePolicyOrderFormModel) {
+	doneInsurer(orderForm: MotorcyclePolicyOrderFormModel) {
 		this.router.navigate([ 'order/view', orderForm.Id.Value ]);
 	}
 	fullscreenToggle() {
@@ -81,9 +81,8 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 	_select_order_form_store_and_subscribe() {
-		this.orderFormService.GetNewOrderForm<FirePolicyOrderFormModel>(8).subscribe((orderForm) => {
+		this.orderFormService.GetNewOrderForm<MotorcyclePolicyOrderFormModel>(3).subscribe((orderForm) => {
 			this.orderForm = orderForm;
-			this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 		});
 	}
 }

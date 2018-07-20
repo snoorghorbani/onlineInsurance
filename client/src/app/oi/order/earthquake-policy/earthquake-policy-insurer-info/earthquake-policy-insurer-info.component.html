@@ -57,7 +57,15 @@
           <order-delivery-time [formGroup]="formGroup"></order-delivery-time>
         </mat-card-content>
       </mat-card>
-      
-      <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid">نمایش فاکتور و پرداخت</button>
+
+      <button mat-raised-button (click)="save()" color="primary" [disabled]="formGroup.invalid || submited">
+        <span>
+          نمایش فاکتور و پرداخت
+        </span>
+        <mat-progress-bar *ngIf="submited"
+          color="primary"
+          mode="indeterminate">
+        </mat-progress-bar>
+      </button>
     </div>
   </div>

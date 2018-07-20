@@ -28,12 +28,12 @@ export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	orderForm$: Observable<FirePolicyOrderFormModel>;
 	signedIn: boolean;
 	formGroup: FormGroup;
+	submited = false;
 	orderForm: FirePolicyOrderFormModel;
 	insurerInfoForm: any;
 	reciverInfoForm: any;
 	motorForm: any;
 	policyForm: any;
-	Cities$: Observable<CityModel[]>;
 	constructor(
 		private store: Store<AppState>,
 		private orderService: OrderService,
@@ -64,6 +64,8 @@ export class MotorcyclePolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			this._validate_all_form_fields(this.formGroup);
 			return;
 		}
+		this.submited = true;
+
 		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
 
 		this.orderService.SaveOrder<MotorcyclePolicyOrderFormModel>(this.orderForm).subscribe((response) => {

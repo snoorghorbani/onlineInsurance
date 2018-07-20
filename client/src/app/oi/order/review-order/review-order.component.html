@@ -102,8 +102,14 @@
         <mat-checkbox class="wrap" *ngIf="!orderForm.PaymentId.Value" formControlName="AcceptAgreementTerms">{{orderForm.AcceptAgreementTerms.Label}}</mat-checkbox>
         </mat-card-content>
         <mat-card-actions fxLayout="row" *ngIf="!orderForm.PaymentId.Value">
-          <button fxFlex="100" mat-raised-button (click)="pay()" color="primary" [disabled]="formGroup.invalid">
+          <button fxFlex="100" mat-raised-button (click)="pay()" color="primary" [disabled]="formGroup.invalid || submited">
+            <span>
               تایید نهایی و پرداخت
+            </span>  
+            <mat-progress-bar *ngIf="submited"
+            color="primary"
+            mode="indeterminate">
+          </mat-progress-bar>
           </button>
         </mat-card-actions>
         <mat-card-footer fxLayout="row" fxLayoutAlign="center center" *ngIf="!orderForm.PaymentId.Value">

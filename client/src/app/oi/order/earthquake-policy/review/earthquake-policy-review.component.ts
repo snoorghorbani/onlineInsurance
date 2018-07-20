@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OrderFormType } from '../../models';
+import { EarthquakePolicyOrderFormModel } from '../../models';
 
 @Component({
 	selector: 'order-earthquake-policy-review',
@@ -7,6 +7,6 @@ import { OrderFormType } from '../../models';
 	styleUrls: [ './earthquake-policy-review.component.css' ]
 })
 export class EarthquakePolicyOrderReviewComponent {
-	@Input() orderForm: OrderFormType;
+	@Input() orderForm: EarthquakePolicyOrderFormModel;
 	constructor() {}
 }
