@@ -23,7 +23,6 @@ export class GwtThenAuthorizeStep implements GwtStep {
 		this.store = this.injector.get(Store);
 	}
 	interperator(params, elementRef) {
-		debugger;
 		elementRef.nativeElement.style.display = "none";
 		return of(true);
 	}

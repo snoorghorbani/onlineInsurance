@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { env } from '../module-configs/env';
+import { env } from "configs";
 
-import { PolicyModule } from './policy';
-import { OrderModule } from './order';
-import { ResultInterceptor } from './result.interceptor';
-import { GeoBoundaryModule } from './geo-boundary';
-import { OiCommonModule } from './common/common.module';
-import { RoutingModule } from './oi-routing.module';
-import { ExceptionInterceptor } from './execption.interceptor';
-import { environment } from '../../environments/environment';
-import { ReportModule } from './report/report.module';
-import { GmapsModule } from './gmaps/gmaps.module';
+import { PolicyModule } from "./policy";
+import { OrderModule } from "./order";
+import { ResultInterceptor } from "./result.interceptor";
+import { GeoBoundaryModule } from "./geo-boundary";
+import { OiCommonModule } from "./common/common.module";
+import { RoutingModule } from "./oi-routing.module";
+import { ExceptionInterceptor } from "./execption.interceptor";
+import { environment } from "../../environments/environment";
+import { ReportModule } from "./report/report.module";
+import { GmapsModule } from "./gmaps/gmaps.module";
 
 @NgModule({
 	imports: [

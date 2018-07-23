@@ -33,7 +33,6 @@ export class IfUserHaveRoleGwtGivenStep implements GwtStep<IfUserHaveRoleGwtGive
 			.pipe(filter(user => !!user.Roles), filter(user => user.Roles.length > 0));
 		return user$.pipe(
 			map(user => {
-				debugger;
 				return !(user as any).Roles.map(item => item.toLowerCase()).includes(params.role.toLowerCase());
 			})
 		);

@@ -1,5 +1,5 @@
 <div>
-  <div fxLayout="row" fxLayoutAlign="center" fxLayoutAlign="space-between center" fxLayoutGap="25px">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="25px">
     <div fxFlex="10">
       <button mat-mini-fab [disabled]="wizardRef.selectedIndex == 0" color="primary" (click)="next()">
         <mat-icon>arrow_forward_ios</mat-icon>
@@ -12,8 +12,15 @@
       </mat-progress-bar>
 
       <mat-tab-group #wizard>
-          <mat-tab *ngFor="let step of steps; let i = index" [label]="i">
-            <ng-container [formGroup]="formGroup" [orderField]="orderForm[step]"></ng-container>
+          <mat-tab *ngFor="let step of steps; let stepIndex = index" [label]="stepIndex" dir="rtl">
+            <div fxLayout="row" fxLayoutGap="25px">
+              <div *ngFor="let field of step; let fieldIndex = index" [fxFlex]="100 / step.length">
+                <ng-container
+                  [formGroup]="formGroup.controls[stepIndex]"
+                  [orderField]="orderForm[steps[stepIndex][fieldIndex]]"
+                ></ng-container>
+              </div>
+            </div>
           </mat-tab>
       </mat-tab-group>
     </div>

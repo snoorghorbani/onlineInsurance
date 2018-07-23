@@ -45,3 +45,7 @@ mat-checkbox.wrap .mat-checkbox-layout {
 .simple .mat-horizontal-content-container {
 	display: none;
 }
+
+.mat-tab-body-wrapper {
+	direction: rtl;
+}

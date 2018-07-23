@@ -23,8 +23,8 @@ import {
 	MatAutocompleteModule
 } from "@angular/material";
 
-import { GwtThenAuthorizeStepComponent } from "./then-authorize";
-import { IfUserHaveRoleGwtGivenStepComponent } from "./if-user-have-role";
+import { GwtThenAuthorizeStepComponent } from "./then-authorize/step-component/gwt-then-authorize-step.component";
+import { IfUserHaveRoleGwtGivenStepComponent } from "./if-user-have-role/step-component/operation-gwt-step.component";
 import { GivenUserIsAuthenticatedStepComponent } from "./given-user-is-authenticated/step-component/given-user-is-authenticated-step.component";
 
 @NgModule({

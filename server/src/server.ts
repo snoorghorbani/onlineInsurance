@@ -26,7 +26,9 @@ dotenv.config({ path: ".env" });
 import "./models/form.model";
 import "./models/bpmn.model";
 import "./models/widget.model";
+import "./models/grid-item.model";
 import "./models/grid.model";
+import "./models/page.model";
 import "./models/user.model";
 import "./models/gwt-scenario.model";
 
@@ -44,7 +46,7 @@ const app: express.Application = express();
  * Connect to MongoDB.
  */
 // mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("error", () => {
 	console.log("MongoDB connection error. Please make sure MongoDB is running.");
@@ -73,7 +75,7 @@ app.use(cors(corsOptions));
 
 const MongoStore = mongo(express_session);
 const sessionStore = new MongoStore({
-	url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+	url: process.env.MONGODB_URI,
 	autoReconnect: true
 });
 app.use(
@@ -130,6 +132,7 @@ import * as gwtScenarioController from "./controllers/gwt-scenario.controller";
 import * as widgetController from "./controllers/widget.controller";
 import * as gridController from "./controllers/grid.controller";
 import * as gwtAnchorController from "./controllers/gwt-anchor.controller";
+import * as pageController from "./controllers/page.controller";
 import { SocketMiddleware } from "./controllers/socket.controller";
 
 /**
@@ -147,6 +150,7 @@ app.use("/api/event", eventController.router);
 app.use("/api/source", sourceController.router);
 app.use("/api/uiwidget", widgetController.router);
 app.use("/api/grid", gridController.router);
+app.use("/api/page", pageController.router);
 app.use("/api/gwt/scenario", gwtScenarioController.router);
 app.use("/api/gwt/anchor", gwtAnchorController.router);
 

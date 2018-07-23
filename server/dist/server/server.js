@@ -26,7 +26,9 @@ dotenv.config({ path: ".env" });
 require("./models/form.model");
 require("./models/bpmn.model");
 require("./models/widget.model");
+require("./models/grid-item.model");
 require("./models/grid.model");
+require("./models/page.model");
 require("./models/user.model");
 require("./models/gwt-scenario.model");
 /**
@@ -37,7 +39,7 @@ const app = express();
  * Connect to MongoDB.
  */
 // mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("error", () => {
     console.log("MongoDB connection error. Please make sure MongoDB is running.");
     process.exit();
@@ -61,7 +63,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 const MongoStore = mongo(express_session);
 const sessionStore = new MongoStore({
-    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    url: process.env.MONGODB_URI,
     autoReconnect: true
 });
 app.use(express_session({
@@ -114,6 +116,7 @@ const gwtScenarioController = require("./controllers/gwt-scenario.controller");
 const widgetController = require("./controllers/widget.controller");
 const gridController = require("./controllers/grid.controller");
 const gwtAnchorController = require("./controllers/gwt-anchor.controller");
+const pageController = require("./controllers/page.controller");
 const socket_controller_1 = require("./controllers/socket.controller");
 /**
  * Primary app routes.
@@ -130,6 +133,7 @@ app.use("/api/event", eventController.router);
 app.use("/api/source", sourceController.router);
 app.use("/api/uiwidget", widgetController.router);
 app.use("/api/grid", gridController.router);
+app.use("/api/page", pageController.router);
 app.use("/api/gwt/scenario", gwtScenarioController.router);
 app.use("/api/gwt/anchor", gwtAnchorController.router);
 app.post("/api/account/profile", userController.postUpdateProfile);

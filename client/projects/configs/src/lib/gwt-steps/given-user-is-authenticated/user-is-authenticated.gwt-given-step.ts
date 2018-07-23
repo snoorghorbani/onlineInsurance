@@ -19,7 +19,6 @@ export class IfUserIsAuthenticatedGwtGivenStep implements GwtStep<UserIsAuthenti
 	store: Store<any>;
 	userFacadeService: UserFacadeService;
 	constructor(public injector: Injector) {
-		debugger;
 		this.id = "if_user_is_authenticated";
 		this.name = "if user is authenticated";
 		this.description = "هنگامی که کاربر احراز هویت کرده است";
@@ -30,7 +29,6 @@ export class IfUserIsAuthenticatedGwtGivenStep implements GwtStep<UserIsAuthenti
 	interperator(params: UserIsAuthenticatedGwtGivenStepParams, elementRef: ElementRef) {
 		return this.userFacadeService.getDisplayName().pipe(
 			map(userDispalyName => {
-				debugger;
 				return !!userDispalyName;
 			})
 		);

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from "@angu
 import { OrderFormType } from "../models";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { switchMap, map } from "rxjs/operators";
+import { switchMap, map, takeUntil, filter } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { MatTabGroup } from "@angular/material";
 
@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { OrderFormService, OrderService } from "../services";
 import { FieldModel } from "../models/field.model";
 import { OrderTypes } from "../models/order-types-enum";
+import { PolicyService } from "../../policy/services";
 
 @Component({
 	selector: "order-quick-product-select",
@@ -53,11 +54,13 @@ export class QuickProductSelectComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private orderService: OrderService,
+		private policyService: PolicyService,
 		private orderFormService: OrderFormService
 	) {
 		this._init_properties();
 		this._init_formGroup();
 		this._react_on_formgroup_change();
+		this._custom_field_logics();
 	}
 
 	ngOnInit() {
@@ -82,15 +85,55 @@ export class QuickProductSelectComponent implements OnInit {
 		this.formGroup = new FormGroup({});
 	}
 	_add_controls_to_formgroup() {
-		this.steps
-			.reduce((all, item) => all.concat(item), [])
-			.forEach(field => this.formGroup.addControl(field, new FormControl("", Validators.required)));
+		this.formGroup = new FormGroup({});
+		this.steps.forEach((stepFields, index) => {
+			let stepFormGroup = new FormGroup({});
+			stepFields.forEach(field => {
+				let ctrl = new FormControl("", Validators.required);
+				stepFormGroup.addControl(field, ctrl);
+				if (field == "CarBrand") {
+					ctrl.valueChanges.pipe(filter(carBrand => carBrand != "")).subscribe(carBrand => {
+						this.policyService.GetCarModelsOfBrand({ carBrand }).subscribe(models => {
+							(this.orderForm as any).CarModel.Options = models as any;
+							(this.orderForm as any).CarModel = { ...(this.orderForm as any).CarModel };
+						});
+					});
+				}
+			});
+			stepFormGroup.valueChanges.subscribe(data => {
+				if (!this.ready) return;
+				setTimeout(() => {
+					if (this.formGroup.valid) {
+						debugger;
+						const res = {};
+						for (const key in this.formGroup.value) {
+							if (this.formGroup.value.hasOwnProperty(key)) {
+								const group = this.formGroup.value[key];
+								for (const field in group) {
+									if (group.hasOwnProperty(field)) {
+										res[field] = group[field];
+									}
+								}
+							}
+						}
+						debugger;
+						this.orderService.quickOrder = res;
+						return this.router.navigate([ this.redirectTo ]);
+					}
+				}, 500);
+				if (stepFormGroup.valid) {
+					this.next();
+				}
+			});
+
+			this.formGroup.addControl(index.toString(), stepFormGroup);
+		});
 	}
 	_fill_steps() {
 		if (!this.orderForm) return [];
 		switch (this.orderForm.Type.Value) {
 			case OrderTypes.thirdParty:
-				this.steps = [ [ "CarBrand" ], [ "CarProductionYear" ], [ "CarUsage" ] ];
+				this.steps = [ [ "CarBrand", "CarModel" ], [ "CarProductionYear" ], [ "CarUsage" ] ];
 				break;
 			case OrderTypes.motorcycle:
 				this.steps = [ [ "MotorType" ], [ "MotorProductionYear" ] ];
@@ -100,20 +143,11 @@ export class QuickProductSelectComponent implements OnInit {
 				break;
 		}
 	}
-	_react_on_formgroup_change() {
-		this.formGroup.valueChanges.subscribe(data => {
-			if (!this.ready) return;
-			if (this.formGroup.valid) {
-				debugger;
-				this.orderService.quickOrder = this.formGroup.value;
-				return this.router.navigate([ this.redirectTo ]);
-			}
-			this.next();
-		});
-	}
+	_react_on_formgroup_change() {}
 	_select_order_form() {
 		this.orderFormService
 			.GetNewOrderForm<OrderFormType>(this.orderType)
 			.subscribe(orderForm => (this.orderForm = orderForm));
 	}
+	_custom_field_logics() {}
 }
