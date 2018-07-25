@@ -79,9 +79,9 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			LastPolicyUsedPersonCoupons: new FormControl()
 		});
 
-		this.formGroup.get("LastPolicyDiscountYears").disable();
-		this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
-		this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
+		// this.formGroup.get("LastPolicyDiscountYears").disable();
+		// this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+		// this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
 	}
 	_patchvalue_from_quick_view() {
 		this.formGroup.patchValue(this.orderService.quickOrder);

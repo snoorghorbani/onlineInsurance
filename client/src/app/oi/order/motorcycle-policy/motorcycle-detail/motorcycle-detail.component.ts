@@ -46,6 +46,7 @@ export class MotorcycleDetailComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this._set_formGroup_relation_logic();
 		this._emit_when_form_group_is_valid();
+		this._patchvalue_from_quick_view();
 	}
 
 	ngOnDestroy() {
@@ -65,16 +66,22 @@ export class MotorcycleDetailComponent implements OnInit, OnDestroy {
 	_init_properties() {}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			MotorType: new FormControl(""),
-			MotorProductionYear: new FormControl(""),
-			NoDamageRecord: new FormControl(""),
-			PolicyTerm: new FormControl(""),
+			MotorType: new FormControl("", Validators.required),
+			MotorProductionYear: new FormControl("", Validators.required),
+			NoDamageRecord: new FormControl(0),
+			PolicyTerm: new FormControl(12),
 			LastPolicyExpirationDate: new FormControl(new Date()),
-			LastPolicyDiscountYears: new FormControl(),
+			LastPolicyDiscountYears: new FormControl(0),
 			LastPolicyUsedPropertyCoupons: new FormControl(),
 			PolicyPushesheMali: new FormControl(),
 			LastPolicyUsedPersonCoupons: new FormControl()
 		});
+
+		this.formGroup.get("LastPolicyDiscountYears").disable();
+		this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+		this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
+	}
+	_patchvalue_from_quick_view() {
 		this.formGroup.patchValue(this.orderService.quickOrder);
 		this.orderService.quickOrder = {};
 	}
