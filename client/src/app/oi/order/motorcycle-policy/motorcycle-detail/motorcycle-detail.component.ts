@@ -69,7 +69,7 @@ export class MotorcycleDetailComponent implements OnInit, OnDestroy {
 			MotorProductionYear: new FormControl(""),
 			NoDamageRecord: new FormControl(""),
 			PolicyTerm: new FormControl(""),
-			LastPolicyExpirationDate: new FormControl(""),
+			LastPolicyExpirationDate: new FormControl(new Date()),
 			LastPolicyDiscountYears: new FormControl(),
 			LastPolicyUsedPropertyCoupons: new FormControl(),
 			PolicyPushesheMali: new FormControl(),

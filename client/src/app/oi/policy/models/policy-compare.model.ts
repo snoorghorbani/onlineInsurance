@@ -1,7 +1,8 @@
 export class PolicyCompareModel {
 	InsuranceCompany: string;
 	InsuranceCompanyStatistics: InsuranceCompanyStatistics;
-	Prices: PriceModel[];
+	Price: PriceModel;
+	ProductId: string;
 
 	constructor() {}
 }

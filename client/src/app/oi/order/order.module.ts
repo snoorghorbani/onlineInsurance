@@ -107,6 +107,7 @@ import { MedicalPolicyProductsListComponent } from "./medical-policy/medical-pol
 import { SelectMedicalPolicyProductComponent } from "./medical-policy/select-medical-policy-product/select-medical-policy-product.component";
 import { MedicalPolicyInsurerInfoComponent } from "./medical-policy/medical-policy-insurer-info/medical-policy-insurer-info.component";
 import { MedicalPolicyOrderReviewComponent } from "./medical-policy/review/medical-policy-review.component";
+import { PurchaseStepperComponent } from "./purchase-stepper/purchase-stepper.component";
 //
 
 @NgModule({
@@ -160,6 +161,7 @@ import { MedicalPolicyOrderReviewComponent } from "./medical-policy/review/medic
 		DynamicOrderFieldDirective,
 		DeliveryTimeComponent,
 		QuickProductSelectComponent,
+		PurchaseStepperComponent,
 		// third party policy components
 		PurchaseThirdPartyPolicyComponent,
 		ThirdPartyCarDetailComponent,

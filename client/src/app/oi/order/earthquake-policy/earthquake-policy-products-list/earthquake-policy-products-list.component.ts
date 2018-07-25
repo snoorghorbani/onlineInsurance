@@ -32,7 +32,7 @@ export class EarthquakePolicyProductsListComponent implements OnInit, OnDestroy 
 	}
 
 	selectPolicy(policy: PolicyCompareModel) {
-		this.select.emit({ price: policy.Prices[0], policy });
+		this.select.emit({ price: policy.Price, policy });
 	}
 
 	getFinalPrice(policy: PolicyCompareModel) {

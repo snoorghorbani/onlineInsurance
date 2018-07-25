@@ -7,7 +7,7 @@
       </b>
       با قیمت 
       <b>
-        {{data.price.Price.DisplayValue}}
+        {{data.price.DisplayValue}}
       </b> 
       انتخاب نمودید:
   </div>
@@ -45,7 +45,7 @@
   <div fxFlex="50">
       تاریخ سر رسید بیمه نامه اخیر: 
     <b>
-      {{data.orderForm.LastPolicyExpirationDate.Value.format()}} 
+      {{data.orderForm.LastPolicyExpirationDate.Value.format ? data.orderForm.LastPolicyExpirationDate.Value.format() :data.orderForm.LastPolicyExpirationDate.Value}} 
     </b>
   </div>
   <div fxFlex="50">

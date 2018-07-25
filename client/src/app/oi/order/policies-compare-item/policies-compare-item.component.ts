@@ -45,7 +45,7 @@ export class PoliciesCompareItemComponent implements OnInit {
 	set policyTerm(value) {
 		if (!this.policy) return;
 		if (!value) return;
-		this.price = this.policy.Prices.find(price => price.Description == value);
+		this.price = this.policy.Price;
 	}
 	@ViewChild("modeDetail") modeDetail: MatExpansionPanel;
 	logos: { [name: string]: string };

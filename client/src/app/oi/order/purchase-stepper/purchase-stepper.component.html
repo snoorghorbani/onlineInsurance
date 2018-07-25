@@ -1,0 +1,23 @@
+<mat-horizontal-stepper class="simple" linear="true" #stepper>
+  <mat-step editable="false" [stepControl]="step0formgroup">
+    <ng-template matStepLabel>
+      <div>انتخاب بیمه</div>
+    </ng-template>
+  </mat-step>
+    <mat-step editable="false" [stepControl]="step1formgroup">
+      <ng-template matStepLabel>{{step2label[this.type]}}</ng-template>
+  </mat-step>
+  <mat-step editable="false" [stepControl]="step2formgroup">
+    <ng-template matStepLabel>مشخصات تحویل گیرنده</ng-template>
+  </mat-step>
+  <mat-step>
+      <ng-template matStepLabel>پرداخت</ng-template>
+  </mat-step>
+</mat-horizontal-stepper>
+<mat-progress-bar *ngIf="progress"
+  color="primary"
+  mode="indeterminate">
+</mat-progress-bar>
+
+  <!-- <div fxLayout="row wrap">
+  </div> -->

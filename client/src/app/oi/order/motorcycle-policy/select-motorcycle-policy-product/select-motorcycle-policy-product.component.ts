@@ -1,25 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs/internal/Observable';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { MatDialog } from "@angular/material";
+import { Observable } from "rxjs/internal/Observable";
+import { Store } from "@ngrx/store";
+import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
 
-import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from '@soushians/layout';
-import { getAccountInfo } from '@soushians/user';
-import { SigninRequiredAction } from '@soushians/authentication';
+import { ExitFullscreenAction, FullscreenAction, ToggleFullscreenAction } from "@soushians/layout";
+import { getAccountInfo } from "@soushians/user";
+import { SigninRequiredAction } from "@soushians/authentication";
 
-import { MotorcyclePolicyOrderFormModel } from '../../models';
-import { AppState } from '../../order.reducers';
-import { SaveOrderStartAction, GetNewOrderFormStartAction } from '../../services/api';
-import { PolicyCompareModel, PriceModel } from '../../../policy/models';
-import { PolicyService } from '../../../policy/services';
-import { SelectedMotorcyclePolicyConfirmationComponent } from '../selected-motorcycle-policy-onfirmation/selected-motorcycle-policy-confirmation.component';
-import { OrderFormService } from '../../services';
+import { MotorcyclePolicyOrderFormModel } from "../../models";
+import { AppState } from "../../order.reducers";
+import { SaveOrderStartAction, GetNewOrderFormStartAction } from "../../services/api";
+import { PolicyCompareModel, PriceModel } from "../../../policy/models";
+import { PolicyService } from "../../../policy/services";
+import { SelectedMotorcyclePolicyConfirmationComponent } from "../selected-motorcycle-policy-onfirmation/selected-motorcycle-policy-confirmation.component";
+import { OrderFormService } from "../../services";
 
 @Component({
-	templateUrl: './select-motorcycle-policy-product.component.html',
-	styleUrls: [ './select-motorcycle-policy-product.component.css' ]
+	templateUrl: "./select-motorcycle-policy-product.component.html",
+	styleUrls: [ "./select-motorcycle-policy-product.component.css" ]
 })
 export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy {
 	orderForm: MotorcyclePolicyOrderFormModel;
@@ -33,9 +33,7 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 		public dialog: MatDialog,
 		private router: Router
 	) {
-		this.signedIn$ = this.store
-			.select(getAccountInfo)
-			.pipe(map((user) => (user.DisplayName == null ? false : true)));
+		this.signedIn$ = this.store.select(getAccountInfo).pipe(map(user => (user.DisplayName == null ? false : true)));
 	}
 
 	ngOnInit() {
@@ -49,14 +47,14 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 	}
 
 	homeIsDone(formValue) {
-		Object.keys(formValue).forEach((k) => (this.orderForm[k].Value = formValue[k]));
+		Object.keys(formValue).forEach(k => (this.orderForm[k].Value = formValue[k]));
 		this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 	}
 	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
-		this.orderForm.ProductId.Value = price.ProductId;
+		this.orderForm.ProductId.Value = policy.ProductId;
 
 		const dialogRef = this.dialog.open(SelectedMotorcyclePolicyConfirmationComponent, {
-			width: '500px',
+			width: "500px",
 			data: { orderForm: this.orderForm, price, policy }
 		});
 
@@ -65,7 +63,7 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 		});
 	}
 	doneInsurer(orderForm: MotorcyclePolicyOrderFormModel) {
-		this.router.navigate([ 'order/view', orderForm.Id.Value ]);
+		this.router.navigate([ "order/view", orderForm.Id.Value ]);
 	}
 	fullscreenToggle() {
 		this.store.dispatch(new ToggleFullscreenAction());
@@ -81,7 +79,7 @@ export class SelectMotorcyclePolicyProductComponent implements OnInit, OnDestroy
 		// this.store.dispatch(new ComparePoliciesStartAction(orderForm));
 	}
 	_select_order_form_store_and_subscribe() {
-		this.orderFormService.GetNewOrderForm<MotorcyclePolicyOrderFormModel>(3).subscribe((orderForm) => {
+		this.orderFormService.GetNewOrderForm<MotorcyclePolicyOrderFormModel>(3).subscribe(orderForm => {
 			this.orderForm = orderForm;
 		});
 	}

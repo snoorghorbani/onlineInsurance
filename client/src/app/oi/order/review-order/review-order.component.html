@@ -1,4 +1,5 @@
 <div class="review-component" *ngIf="orderForm">
+<order-purchase-stepper step="2" [type]="orderForm.Type.Value" [id]="orderForm.Id.Value"></order-purchase-stepper>
 
   <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
     <div fxFlex="60">

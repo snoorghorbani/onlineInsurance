@@ -1,3 +1,5 @@
+<order-purchase-stepper step="1" [progress]="!orderForm" type="4" [id]="(orderForm$ | async)?.Id.Value"></order-purchase-stepper>
+
 <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center">
   <div *ngIf="!signedIn" class="signinWrapper" fxLayout="row" (click)="signInRequest()" fxLayoutAlign="center start">
     <button fxFlex="nogrow" mat-raised-button color="primary" (click)="signInRequest()">ورود به حساب کاریری</button>

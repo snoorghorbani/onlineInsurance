@@ -134,14 +134,14 @@ export class QuickProductSelectComponent implements OnInit {
 						debugger;
 						if (MedicalRole == 1) {
 							this.formGroup.get((index + 1).toString()).get("DoctorSpecialty").enable();
-							this.formGroup.get((index + 2).toString()).get("IsResident").enable();
+							this.formGroup.get((index + 1).toString()).get("IsResident").enable();
 							this.formGroup.get((index + 1).toString()).get("ParamedicineSpecialty").disable();
-							this.formGroup.get((index + 2).toString()).get("IsStudent").disable();
+							this.formGroup.get((index + 1).toString()).get("IsStudent").disable();
 						} else if (MedicalRole == 2) {
 							this.formGroup.get((index + 1).toString()).get("DoctorSpecialty").disable();
-							this.formGroup.get((index + 2).toString()).get("IsResident").disable();
+							this.formGroup.get((index + 1).toString()).get("IsResident").disable();
 							this.formGroup.get((index + 1).toString()).get("ParamedicineSpecialty").enable();
-							this.formGroup.get((index + 2).toString()).get("IsStudent").enable();
+							this.formGroup.get((index + 1).toString()).get("IsStudent").enable();
 						}
 					});
 				}
@@ -214,8 +214,7 @@ export class QuickProductSelectComponent implements OnInit {
 			case OrderTypes.medical:
 				this.steps = [
 					[ "MedicalRole" ],
-					[ "DoctorSpecialty", "ParamedicineSpecialty" ],
-					[ "IsResident", "IsStudent" ],
+					[ "DoctorSpecialty", "ParamedicineSpecialty", "IsResident", "IsStudent" ],
 					[ "MedicalNoDamageRecord" ]
 				];
 				break;

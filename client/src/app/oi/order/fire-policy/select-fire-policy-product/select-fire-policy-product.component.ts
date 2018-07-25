@@ -51,7 +51,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 	}
 	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
-		this.orderForm.ProductId.Value = price.ProductId;
+		this.orderForm.ProductId.Value = policy.ProductId;
 
 		const dialogRef = this.dialog.open(SelectdPolicyConfirmationComponent, {
 			width: "500px",

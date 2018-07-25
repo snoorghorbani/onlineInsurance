@@ -1,14 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from "@angular/core";
+import { Subject } from "rxjs";
+import { Observable } from "rxjs/internal/Observable";
 
-import { FirePolicyOrderFormModel } from '../../models';
-import { PolicyCompareModel } from '../../../policy/models/policy-compare.model';
+import { FirePolicyOrderFormModel } from "../../models";
+import { PolicyCompareModel } from "../../../policy/models/policy-compare.model";
 
 @Component({
-	selector: 'order-third-party-policy-products-list',
-	templateUrl: './third-party-policy-products-list.component.html',
-	styleUrls: [ './third-party-policy-products-list.component.css' ]
+	selector: "order-third-party-policy-products-list",
+	templateUrl: "./third-party-policy-products-list.component.html",
+	styleUrls: [ "./third-party-policy-products-list.component.css" ]
 })
 export class ThirdPartyPolicyProductsListComponent implements OnInit, OnDestroy {
 	@Output() select = new EventEmitter();
@@ -32,7 +32,7 @@ export class ThirdPartyPolicyProductsListComponent implements OnInit, OnDestroy 
 	}
 
 	selectPolicy(policy: PolicyCompareModel) {
-		this.select.emit({ price: policy.Prices[0], policy });
+		this.select.emit({ price: policy.Price, policy });
 	}
 
 	getFinalPrice(policy: PolicyCompareModel) {
@@ -45,29 +45,30 @@ export class ThirdPartyPolicyProductsListComponent implements OnInit, OnDestroy 
 	_set_default_values() {
 		this.ready = false;
 		this.displayedColumns = [
-			'InsuranceCompany',
-			'SatheTavangariyeMali',
-			'TedadeMarakezePardakhteKhesarat',
-			'ModatZamanePasokhgoieBeShekayat',
-			'MizaneShekayateMoshtariyan',
-			'actions'
+			"InsuranceCompany",
+			"SatheTavangariyeMali",
+			"TedadeMarakezePardakhteKhesarat",
+			"ModatZamanePasokhgoieBeShekayat",
+			"MizaneShekayateMoshtariyan",
+			"Price",
+			"actions"
 		];
 		this.logos = {
-			'بیمه آسیا': 'assets\\ins-logos\\asia.png',
-			'بیمه سرمد': 'assets\\ins-logos\\sarmard.png',
-			'بیمه دی': 'assets\\ins-logos\\day.png',
-			'بیمه البرز': 'assets\\ins-logos\\alborz.png',
-			'بیمه دانا': 'assets\\ins-logos\\dana.png',
-			'بیمه ایران': 'assets\\ins-logos\\iran.png',
-			'بیمه کارآفرین': 'assets\\ins-logos\\karafarin.png',
-			'بیمه ما': 'assets\\ins-logos\\ma.png',
-			'بیمه ملت': 'assets\\ins-logos\\melat.png',
-			'بیمه نوین': 'assets\\ins-logos\\novin.png',
-			'بیمه پارسیان': 'assets\\ins-logos\\parsian.png',
-			'بیمه پاسارگاد': 'assets\\ins-logos\\pasargad.png',
-			'بیمه رازی': 'assets\\ins-logos\\razi.png',
-			'بیمه سامان': 'assets\\ins-logos\\saman.png',
-			'بیمه سینا': 'assets\\ins-logos\\sina.png'
+			"بیمه آسیا": "assets\\ins-logos\\asia.png",
+			"بیمه سرمد": "assets\\ins-logos\\sarmard.png",
+			"بیمه دی": "assets\\ins-logos\\day.png",
+			"بیمه البرز": "assets\\ins-logos\\alborz.png",
+			"بیمه دانا": "assets\\ins-logos\\dana.png",
+			"بیمه ایران": "assets\\ins-logos\\iran.png",
+			"بیمه کارآفرین": "assets\\ins-logos\\karafarin.png",
+			"بیمه ما": "assets\\ins-logos\\ma.png",
+			"بیمه ملت": "assets\\ins-logos\\melat.png",
+			"بیمه نوین": "assets\\ins-logos\\novin.png",
+			"بیمه پارسیان": "assets\\ins-logos\\parsian.png",
+			"بیمه پاسارگاد": "assets\\ins-logos\\pasargad.png",
+			"بیمه رازی": "assets\\ins-logos\\razi.png",
+			"بیمه سامان": "assets\\ins-logos\\saman.png",
+			"بیمه سینا": "assets\\ins-logos\\sina.png"
 		};
 	}
 }

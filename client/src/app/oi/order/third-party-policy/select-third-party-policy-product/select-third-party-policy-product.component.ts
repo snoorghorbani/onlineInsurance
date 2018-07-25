@@ -52,7 +52,7 @@ export class SelectThirdPartyPolicyProductComponent implements OnInit, OnDestroy
 	}
 	selectProduct({ price, policy }: { price: PriceModel; policy: PolicyCompareModel }) {
 		debugger;
-		this.orderForm.ProductId.Value = price.ProductId;
+		this.orderForm.ProductId.Value = policy.ProductId;
 
 		const dialogRef = this.dialog.open(SelectedThirdPartyPolicyConfirmationComponent, {
 			width: "500px",

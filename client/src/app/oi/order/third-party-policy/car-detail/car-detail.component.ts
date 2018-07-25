@@ -46,6 +46,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this._set_formGroup_relation_logic();
 		this._emit_when_form_group_is_valid();
+		this._patchvalue_from_quick_view();
 	}
 
 	ngOnDestroy() {
@@ -68,15 +69,21 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			CarBrand: new FormControl("", Validators.required),
 			CarModel: new FormControl("", Validators.required),
 			CarProductionYear: new FormControl(null, Validators.required),
-			CarUsage: new FormControl("", Validators.required),
+			CarUsage: new FormControl(1, Validators.required),
 			NoDamageRecord: new FormControl(0, Validators.required),
-			PolicyTerm: new FormControl(0, Validators.required),
-			LastPolicyExpirationDate: new FormControl(""),
+			PolicyTerm: new FormControl(12, Validators.required),
+			LastPolicyExpirationDate: new FormControl(new Date()),
 			PolicyPushesheMali: new FormControl(7700000),
-			LastPolicyDiscountYears: new FormControl(),
+			LastPolicyDiscountYears: new FormControl(0),
 			LastPolicyUsedPropertyCoupons: new FormControl(),
 			LastPolicyUsedPersonCoupons: new FormControl()
 		});
+
+		this.formGroup.get("LastPolicyDiscountYears").disable();
+		this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+		this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
+	}
+	_patchvalue_from_quick_view() {
 		this.formGroup.patchValue(this.orderService.quickOrder);
 		this.orderService.quickOrder = {};
 	}

@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 import { EarthquakePolicyOrderFormModel, OrderFormType } from "../../models";
+import { OrderService } from "../../services";
 
 @Component({
 	selector: "order-earthquake-home-detail",
@@ -30,7 +31,7 @@ export class EarthquakeHomeDetailComponent implements OnInit, OnDestroy {
 	formGroup: FormGroup;
 	ready = false;
 
-	constructor(private store: Store<AppState>) {
+	constructor(private store: Store<AppState>, private orderService: OrderService) {
 		this._init_properties();
 		this._create_formGroup();
 	}
@@ -67,6 +68,8 @@ export class EarthquakeHomeDetailComponent implements OnInit, OnDestroy {
 			LifeInsuranceDiscount: new FormControl(false),
 			LongTermAccountDiscount: new FormControl(false)
 		});
+		this.formGroup.patchValue(this.orderService.quickOrder);
+		this.orderService.quickOrder = {};
 	}
 	_set_formGroup_validation(orderForm: OrderFormType) {
 		Object.keys(this.formGroup.controls).forEach(key => {

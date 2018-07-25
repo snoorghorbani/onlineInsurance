@@ -18,13 +18,13 @@ export class PurchaseMedicalPolicyComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.store.dispatch(new FullscreenAction());
-		if (this.location.isCurrentPathEqualTo("/order/purchase/medical-policy/select-product")) {
-			this.stepperRef.selectedIndex = 0;
-		} else if (this.location.path().startsWith("/order/purchase/medical-policy/insurer-info")) {
-			this.stepperRef.selectedIndex = 1;
-		} else if (this.location.isCurrentPathEqualTo("order/purchase/medical-policy/select-product")) {
-		} else if (this.location.isCurrentPathEqualTo("order/purchase/medical-policy/select-product")) {
-		}
+		// if (this.location.isCurrentPathEqualTo("/order/purchase/medical-policy/select-product")) {
+		// 	this.stepperRef.selectedIndex = 0;
+		// } else if (this.location.path().startsWith("/order/purchase/medical-policy/insurer-info")) {
+		// 	this.stepperRef.selectedIndex = 1;
+		// } else if (this.location.isCurrentPathEqualTo("order/purchase/medical-policy/select-product")) {
+		// } else if (this.location.isCurrentPathEqualTo("order/purchase/medical-policy/select-product")) {
+		// }
 	}
 
 	ngOnDestroy() {
