@@ -1,8 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Actions, Effect } from "@ngrx/effects";
+import { map } from "rxjs/operators";
 
-import { SAVE_ORDER_FORM_ACTION_TYPES, GET_NEW_ORDER_FORM_ACTION_TYPES } from '../services/api';
+import {
+	SAVE_ORDER_FORM_ACTION_TYPES,
+	GET_NEW_ORDER_FORM_ACTION_TYPES,
+	SAVE_ORDER_ACTION_TYPES
+} from "../services/api";
 
 @Injectable()
 export class RootEffects {
@@ -10,7 +14,7 @@ export class RootEffects {
 
 	// @Effect()
 	// start$ = this.actions$
-	// 	.ofType(SAVE_ORDER_FORM_ACTION_TYPES.SUCCEED, GET_NEW_ORDER_FORM_ACTION_TYPES.SUCCEED)
+	// 	.ofType(SAVE_ORDER_ACTION_TYPES.FAILED)
 	// 	.pipe(map((action) => action.payload), map((orderForm) => new NewOrderFormUpdateAction(orderForm)));
 
 	// @Effect()

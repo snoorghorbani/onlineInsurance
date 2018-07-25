@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { switchMap } from "rxjs/operators";
+import { switchMap, filter } from "rxjs/operators";
 import { Observable } from "rxjs/internal/Observable";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -44,6 +44,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 	) {
 		this._select_order_form();
 		this._init_formgroup();
+		this._set_formGroup_relation_logic();
 		this._init_insurerInfoForm();
 		this._init_reciverInfoForm();
 		this._init_buildingInfoForm();
@@ -71,7 +72,7 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 
 		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe(response => {
 			this.router.navigate([ "/order/review", this.orderForm.Id.Value ]);
-		});
+		}, err => (this.submited = false));
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
@@ -127,8 +128,8 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			 */
 			DeliveryPlaceCityId: new FormControl("", [ Validators.required ]),
 			DeliveryPlaceDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl("", [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceGeoLatitude: new FormControl(1, [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl(1, [ Validators.required ]),
 			DeliveryPlaceAddress: new FormControl("", [ Validators.required ]),
 			DeliveryDate: new FormControl("", [ Validators.required ]),
 			DeliveryTime: new FormControl("", [ Validators.required ]),
@@ -276,5 +277,17 @@ export class EarthquakePolicyInsurerInfoComponent implements OnInit {
 			switchMap(parmas => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
 		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
+	}
+	_set_formGroup_relation_logic() {
+		this.formGroup
+			.get("EstateType")
+			.valueChanges.pipe(filter(EstateType => EstateType != ""))
+			.subscribe(EstateType => {
+				if (EstateType == 1) {
+					this.formGroup.get("Units").disable();
+				} else {
+					this.formGroup.get("Units").enable();
+				}
+			});
 	}
 }

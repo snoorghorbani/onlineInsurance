@@ -28,3 +28,6 @@ mat-grid-tile.th.mat-grid-tile {
 	background-color: #ddd;
 	background-color: #3f51b547;
 }
+.fieldsTab {
+	direction: rtl;
+}

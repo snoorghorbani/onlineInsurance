@@ -1,29 +1,29 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/internal/Observable';
-import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Observable } from "rxjs/internal/Observable";
+import { ActivatedRoute, Router } from "@angular/router";
+import { switchMap, takeUntil } from "rxjs/operators";
+import { Store } from "@ngrx/store";
 
-import { SigninRequiredAction } from '@soushians/authentication';
-import { getAccountInfo } from '@soushians/user';
+import { SigninRequiredAction } from "@soushians/authentication";
+import { getAccountInfo } from "@soushians/user";
 
-import { FirePolicyOrderFormModel, DeliveryTimeModel, ThirdPartyPolicyOrderFormModel } from '../../models';
-import { SaveOrderStartAction } from '../../services/api/save-order';
-import { GeoBoundaryService } from '../../../geo-boundary';
-import { CityModel } from '../../../geo-boundary/models';
-import { AppState } from '../../order.reducers';
-import { OrderService } from '../../services';
-import { Subject } from '../../../../../../node_modules/rxjs';
+import { FirePolicyOrderFormModel, DeliveryTimeModel, ThirdPartyPolicyOrderFormModel } from "../../models";
+import { SaveOrderStartAction } from "../../services/api/save-order";
+import { GeoBoundaryService } from "../../../geo-boundary";
+import { CityModel } from "../../../geo-boundary/models";
+import { AppState } from "../../order.reducers";
+import { OrderService } from "../../services";
+import { Subject } from "../../../../../../node_modules/rxjs";
 
 @Component({
-	selector: 'order-third-party-policy-insurer-info',
-	templateUrl: './third-party-policy-insurer-info.component.html',
-	styleUrls: [ './third-party-policy-insurer-info.component.css' ]
+	selector: "order-third-party-policy-insurer-info",
+	templateUrl: "./third-party-policy-insurer-info.component.html",
+	styleUrls: [ "./third-party-policy-insurer-info.component.css" ]
 })
 export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	@Output() done = new EventEmitter();
-	@Output('signInRequest') signInRequest$ = new EventEmitter();
+	@Output("signInRequest") signInRequest$ = new EventEmitter();
 	unsubscribe = new Subject<void>();
 	submited = false;
 	orderForm$: Observable<FirePolicyOrderFormModel>;
@@ -48,7 +48,7 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 		this._init_carCardForm();
 		this._init_policyForm();
 
-		this.store.select(getAccountInfo).subscribe((user) => (this.signedIn = !!user.DisplayName));
+		this.store.select(getAccountInfo).subscribe(user => (this.signedIn = !!user.DisplayName));
 	}
 
 	ngOnInit() {
@@ -65,11 +65,11 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			return;
 		}
 		this.submited = true;
-		Object.keys(this.formGroup.value).forEach((key) => (this.orderForm[key].Value = this.formGroup.value[key]));
+		Object.keys(this.formGroup.value).forEach(key => (this.orderForm[key].Value = this.formGroup.value[key]));
 
-		this.orderService.SaveOrder<ThirdPartyPolicyOrderFormModel>(this.orderForm).subscribe((response) => {
-			this.router.navigate([ '/order/review', this.orderForm.Id.Value ]);
-		});
+		this.orderService.SaveOrder<ThirdPartyPolicyOrderFormModel>(this.orderForm).subscribe(response => {
+			this.router.navigate([ "/order/review", this.orderForm.Id.Value ]);
+		}, err => (this.submited = false));
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
@@ -84,7 +84,7 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	 * private methods
 	 */
 	_validate_all_form_fields(formGroup: FormGroup) {
-		Object.keys(formGroup.controls).forEach((field) => {
+		Object.keys(formGroup.controls).forEach(field => {
 			const control = formGroup.get(field);
 			if (control instanceof FormControl) {
 				control.markAsTouched({ onlySelf: true });
@@ -98,84 +98,84 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			/**
 			 * Insurer Part
 			 */
-			PolicyholderFirstName: new FormControl('', [
+			PolicyholderFirstName: new FormControl("", [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderLastName: new FormControl('', [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
-			PolicyholderFatherName: new FormControl('', [
+			PolicyholderLastName: new FormControl("", [ Validators.required, Validators.pattern(/[\u0600-\u06FF\s]/) ]),
+			PolicyholderFatherName: new FormControl("", [
 				Validators.required,
 				Validators.pattern(/[\u0600-\u06FF\s]/)
 			]),
-			PolicyholderNationalCode: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			PolicyholderBirthDate: new FormControl('', [ Validators.required ]),
-			PolicyholderGender: new FormControl('', [ Validators.required ]),
+			PolicyholderNationalCode: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			PolicyholderBirthDate: new FormControl("", [ Validators.required ]),
+			PolicyholderGender: new FormControl("", [ Validators.required ]),
 			/**
 			 * Reciver Part
 			 */
-			ReceiverFirstName: new FormControl('', [ Validators.required ]),
-			ReceiverLastName: new FormControl('', [ Validators.required ]),
-			ReceiverPhone: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			ReceiverMobile: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			CustomerDescription: new FormControl('', [ Validators.required ]),
+			ReceiverFirstName: new FormControl("", [ Validators.required ]),
+			ReceiverLastName: new FormControl("", [ Validators.required ]),
+			ReceiverPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			ReceiverMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			CustomerDescription: new FormControl("", [ Validators.required ]),
 			/**
 			 * Delivery Time
 			 */
-			DeliveryPlaceCityId: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceDistrict: new FormControl('', [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl('', [ Validators.required ]),
-			DeliveryPlaceAddress: new FormControl('', [ Validators.required ]),
-			DeliveryDate: new FormControl('', [ Validators.required ]),
-			DeliveryTime: new FormControl('', [ Validators.required ]),
+			DeliveryPlaceCityId: new FormControl("", [ Validators.required ]),
+			DeliveryPlaceDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
+			DeliveryPlaceGeoLatitude: new FormControl(1, [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl(1, [ Validators.required ]),
+			DeliveryPlaceAddress: new FormControl("", [ Validators.required ]),
+			DeliveryDate: new FormControl("", [ Validators.required ]),
+			DeliveryTime: new FormControl("", [ Validators.required ]),
 			/**
 			 * Car Card Part
 			 */
-			CarCardFrontImage: new FormControl('test', [ Validators.required ]),
-			CarCardBackImage: new FormControl('test', [ Validators.required ]),
-			LastPolicyImage: new FormControl('test', [ Validators.required ]),
+			CarCardFrontImage: new FormControl("test", [ Validators.required ]),
+			CarCardBackImage: new FormControl("test", [ Validators.required ]),
+			LastPolicyImage: new FormControl("test", [ Validators.required ]),
 			/**
 			 * Policy Part
 			 */
-			PolicyAddressSource: new FormControl('', [ Validators.required ]),
-			PolicyAddressCityId: new FormControl('', [ Validators.required ]),
-			PolicyAddress: new FormControl('', [ Validators.required ])
+			PolicyAddressSource: new FormControl("", [ Validators.required ]),
+			PolicyAddressCityId: new FormControl("", [ Validators.required ]),
+			PolicyAddress: new FormControl("", [ Validators.required ])
 		});
 	}
 	_init_insurerInfoForm() {
 		this.insurerInfoForm = [
 			{
-				name: 'PolicyholderFirstName',
+				name: "PolicyholderFirstName",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderLastName',
+				name: "PolicyholderLastName",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderFatherName',
+				name: "PolicyholderFatherName",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderGender',
+				name: "PolicyholderGender",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderNationalCode',
+				name: "PolicyholderNationalCode",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderMobile',
+				name: "PolicyholderMobile",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderPhone',
+				name: "PolicyholderPhone",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyholderBirthDate',
+				name: "PolicyholderBirthDate",
 				fxFlex: 46
 			}
 		];
@@ -183,35 +183,35 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	_init_reciverInfoForm() {
 		this.reciverInfoForm = [
 			{
-				name: 'ReceiverFirstName',
+				name: "ReceiverFirstName",
 				fxFlex: 46
 			},
 			{
-				name: 'ReceiverLastName',
+				name: "ReceiverLastName",
 				fxFlex: 46
 			},
 			{
-				name: 'DeliveryPlaceCityId',
+				name: "DeliveryPlaceCityId",
 				fxFlex: 46
 			},
 			{
-				name: 'DeliveryPlaceDistrict',
+				name: "DeliveryPlaceDistrict",
 				fxFlex: 46
 			},
 			{
-				name: 'ReceiverPhone',
+				name: "ReceiverPhone",
 				fxFlex: 46
 			},
 			{
-				name: 'ReceiverMobile',
+				name: "ReceiverMobile",
 				fxFlex: 46
 			},
 			{
-				name: 'DeliveryPlaceAddress',
+				name: "DeliveryPlaceAddress",
 				fxFlex: 46
 			},
 			{
-				name: 'CustomerDescription',
+				name: "CustomerDescription",
 				fxFlex: 46
 			}
 		];
@@ -219,15 +219,15 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	_init_carCardForm() {
 		this.carCardForm = [
 			{
-				name: 'CarCardFrontImage',
+				name: "CarCardFrontImage",
 				fxFlex: 46
 			},
 			{
-				name: 'CarCardBackImage',
+				name: "CarCardBackImage",
 				fxFlex: 46
 			},
 			{
-				name: 'LastPolicyImage',
+				name: "LastPolicyImage",
 				fxFlex: 46
 			}
 		];
@@ -235,15 +235,15 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	_init_policyForm() {
 		this.policyForm = [
 			{
-				name: 'PolicyAddressSource',
+				name: "PolicyAddressSource",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyAddressCityId',
+				name: "PolicyAddressCityId",
 				fxFlex: 46
 			},
 			{
-				name: 'PolicyAddress',
+				name: "PolicyAddress",
 				fxFlex: 46
 			}
 		];
@@ -251,32 +251,32 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 	_select_order_form() {
 		this.orderForm$ = this.activeRouter.params.pipe(
 			// pluck("Id"),
-			switchMap((parmas) => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
+			switchMap(parmas => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
-		this.orderForm$.subscribe((orderForm) => (this.orderForm = orderForm));
+		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
 	}
 	_set_formGroup_relation_logic() {
 		this.formGroup
-			.get('PolicyAddressSource')
+			.get("PolicyAddressSource")
 			.valueChanges.pipe(takeUntil(this.unsubscribe))
-			.subscribe((source) => this._check_and_contol_PolicyAddressSource_formControls(source));
+			.subscribe(source => this._check_and_contol_PolicyAddressSource_formControls(source));
 	}
 	_check_and_contol_PolicyAddressSource_formControls(source) {
 		if (source == 1) {
 			this.formGroup.patchValue({
-				PolicyAddressCityId: this.formGroup.get('DeliveryPlaceCityId').value,
-				PolicyAddress: this.formGroup.get('DeliveryPlaceAddress').value
+				PolicyAddressCityId: this.formGroup.get("DeliveryPlaceCityId").value,
+				PolicyAddress: this.formGroup.get("DeliveryPlaceAddress").value
 			});
-			this.formGroup.get('PolicyAddressCityId').disable();
-			this.formGroup.get('PolicyAddress').disable();
+			this.formGroup.get("PolicyAddressCityId").disable();
+			this.formGroup.get("PolicyAddress").disable();
 		} else if (source == 2) {
-			this.formGroup.get('PolicyAddressCityId').reset();
-			this.formGroup.get('PolicyAddress').reset();
-			this.formGroup.get('PolicyAddressCityId').disable();
-			this.formGroup.get('PolicyAddress').disable();
+			this.formGroup.get("PolicyAddressCityId").reset();
+			this.formGroup.get("PolicyAddress").reset();
+			this.formGroup.get("PolicyAddressCityId").disable();
+			this.formGroup.get("PolicyAddress").disable();
 		} else {
-			this.formGroup.get('PolicyAddressCityId').enable();
-			this.formGroup.get('PolicyAddress').enable();
+			this.formGroup.get("PolicyAddressCityId").enable();
+			this.formGroup.get("PolicyAddress").enable();
 		}
 	}
 }

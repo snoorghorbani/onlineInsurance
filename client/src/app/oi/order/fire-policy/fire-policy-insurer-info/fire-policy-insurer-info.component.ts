@@ -61,7 +61,7 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 
 		this.orderService.SaveOrder<FirePolicyOrderFormModel>(this.orderForm).subscribe(response => {
 			this.router.navigate([ "/order/review", this.orderForm.Id.Value ]);
-		});
+		}, err => (this.submited = false));
 	}
 	signInRequest() {
 		this.store.dispatch(new SigninRequiredAction());
@@ -116,8 +116,8 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			ReceiverMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			DeliveryPlaceCityId: new FormControl("", [ Validators.required ]),
 			DeliveryPlaceDistrict: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			DeliveryPlaceGeoLatitude: new FormControl("1", [ Validators.required ]),
-			DeliveryPlaceGeoLongitude: new FormControl("1", [ Validators.required ]),
+			DeliveryPlaceGeoLatitude: new FormControl(1, [ Validators.required ]),
+			DeliveryPlaceGeoLongitude: new FormControl(1, [ Validators.required ]),
 			DeliveryPlaceAddress: new FormControl("", [ Validators.required ]),
 			CustomerDescription: new FormControl("", [ Validators.required ]),
 
@@ -140,8 +140,6 @@ export class FirePolicyInsurerInfoComponent implements OnInit {
 			DeliveryDate: new FormControl("", [ Validators.required ]),
 			DeliveryTime: new FormControl("", [ Validators.required ])
 		});
-		this.formGroup.patchValue(this.orderService.quickOrder);
-		this.orderService.quickOrder = {};
 	}
 	_init_insurerInfoForm() {
 		this.insurerInfoForm = [

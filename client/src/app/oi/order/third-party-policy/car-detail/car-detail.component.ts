@@ -21,7 +21,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 	set orderForm(orderForm: ThirdPartyPolicyOrderFormModel) {
 		if (!orderForm) return;
 		this._orderForm = orderForm;
-		this._set_formGroup_validation(orderForm);
+		// this._set_formGroup_validation(orderForm);
 		this._patchValue_formGroup_on_orderForm_change(orderForm);
 		this.ready = true;
 	}
@@ -65,16 +65,16 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 	_init_properties() {}
 	_create_formGroup() {
 		this.formGroup = new FormGroup({
-			CarBrand: new FormControl(""),
-			CarModel: new FormControl(""),
-			CarProductionYear: new FormControl(""),
-			CarUsage: new FormControl(""),
-			NoDamageRecord: new FormControl(""),
-			PolicyTerm: new FormControl(""),
+			CarBrand: new FormControl("", Validators.required),
+			CarModel: new FormControl("", Validators.required),
+			CarProductionYear: new FormControl(null, Validators.required),
+			CarUsage: new FormControl("", Validators.required),
+			NoDamageRecord: new FormControl(0, Validators.required),
+			PolicyTerm: new FormControl(0, Validators.required),
 			LastPolicyExpirationDate: new FormControl(""),
+			PolicyPushesheMali: new FormControl(7700000),
 			LastPolicyDiscountYears: new FormControl(),
 			LastPolicyUsedPropertyCoupons: new FormControl(),
-			PolicyPushesheMali: new FormControl(),
 			LastPolicyUsedPersonCoupons: new FormControl()
 		});
 		this.formGroup.patchValue(this.orderService.quickOrder);
@@ -114,6 +114,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			.subscribe(years => this._check_and_contol_incident_formControls(years));
 	}
 	_emit_when_form_group_is_valid() {
+		debugger;
 		this.formGroup.valueChanges.subscribe(() => {
 			if (!this.formGroup.valid) return;
 			this.done.emit(this.formGroup.value);

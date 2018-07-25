@@ -47,5 +47,9 @@ mat-checkbox.wrap .mat-checkbox-layout {
 }
 
 .mat-tab-body-wrapper {
-	direction: rtl;
+	direction: ltr;
 }
+/* 
+.mat-tab-body {
+	direction: rtl;
+} */

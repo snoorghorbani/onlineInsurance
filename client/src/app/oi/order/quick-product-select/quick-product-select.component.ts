@@ -71,6 +71,10 @@ export class QuickProductSelectComponent implements OnInit {
 	 */
 	next() {
 		++this.wizardRef.selectedIndex;
+		debugger;
+		setTimeout(() => {
+			if (this.formGroup.get(this.wizardRef.selectedIndex.toString()).valid) this.next();
+		}, 333);
 	}
 	prev() {
 		--this.wizardRef.selectedIndex;
@@ -99,12 +103,59 @@ export class QuickProductSelectComponent implements OnInit {
 						});
 					});
 				}
+				if (field == "DamageStatus") {
+					ctrl.valueChanges.subscribe(DamageStatus => {
+						debugger;
+						if (DamageStatus == 1) {
+							this.formGroup.get((index + 1).toString()).get("NoDamageRecord").enable();
+							this.formGroup.get((index + 1).toString()).get("LastPolicyDiscountYears").disable();
+							this.formGroup.get((index + 1).toString()).get("LastPolicyUsedPropertyCoupons").disable();
+							this.formGroup.get((index + 1).toString()).get("LastPolicyUsedPersonCoupons").disable();
+						} else if (DamageStatus == 2) {
+							this.formGroup.get((index + 1).toString()).get("NoDamageRecord").disable();
+							this.formGroup.get((index + 1).toString()).get("LastPolicyDiscountYears").enable();
+							this.formGroup.get((index + 1).toString()).get("LastPolicyUsedPropertyCoupons").enable();
+							this.formGroup.get((index + 1).toString()).get("LastPolicyUsedPersonCoupons").enable();
+						}
+					});
+				}
+				if (field == "EstateType") {
+					ctrl.valueChanges.pipe(filter(EstateType => EstateType != "")).subscribe(EstateType => {
+						debugger;
+						if (EstateType == 1) {
+							stepFormGroup.get("Units").disable();
+						} else {
+							stepFormGroup.get("Units").enable();
+						}
+					});
+				}
+				if (field == "MedicalRole") {
+					ctrl.valueChanges.subscribe(MedicalRole => {
+						debugger;
+						if (MedicalRole == 1) {
+							this.formGroup.get((index + 1).toString()).get("DoctorSpecialty").enable();
+							this.formGroup.get((index + 2).toString()).get("IsResident").enable();
+							this.formGroup.get((index + 1).toString()).get("ParamedicineSpecialty").disable();
+							this.formGroup.get((index + 2).toString()).get("IsStudent").disable();
+						} else if (MedicalRole == 2) {
+							this.formGroup.get((index + 1).toString()).get("DoctorSpecialty").disable();
+							this.formGroup.get((index + 2).toString()).get("IsResident").disable();
+							this.formGroup.get((index + 1).toString()).get("ParamedicineSpecialty").enable();
+							this.formGroup.get((index + 2).toString()).get("IsStudent").enable();
+						}
+					});
+				}
 			});
 			stepFormGroup.valueChanges.subscribe(data => {
 				if (!this.ready) return;
+				const StepGroupContainTextInputs = [
+					"Units" in stepFormGroup.controls,
+					"ThingsValue" in stepFormGroup.controls,
+					"Area" in stepFormGroup.controls
+				];
+				if (StepGroupContainTextInputs.some(i => i)) return;
 				setTimeout(() => {
 					if (this.formGroup.valid) {
-						debugger;
 						const res = {};
 						for (const key in this.formGroup.value) {
 							if (this.formGroup.value.hasOwnProperty(key)) {
@@ -116,7 +167,6 @@ export class QuickProductSelectComponent implements OnInit {
 								}
 							}
 						}
-						debugger;
 						this.orderService.quickOrder = res;
 						return this.router.navigate([ this.redirectTo ]);
 					}
@@ -133,13 +183,41 @@ export class QuickProductSelectComponent implements OnInit {
 		if (!this.orderForm) return [];
 		switch (this.orderForm.Type.Value) {
 			case OrderTypes.thirdParty:
-				this.steps = [ [ "CarBrand", "CarModel" ], [ "CarProductionYear" ], [ "CarUsage" ] ];
+				this.steps = [
+					[ "CarBrand", "CarModel" ],
+					[ "CarProductionYear" ],
+					[ "DamageStatus" ],
+					[
+						"NoDamageRecord",
+						"LastPolicyDiscountYears",
+						"LastPolicyUsedPropertyCoupons",
+						"LastPolicyUsedPersonCoupons"
+					],
+					[ "CarUsage" ]
+				];
 				break;
 			case OrderTypes.motorcycle:
-				this.steps = [ [ "MotorType" ], [ "MotorProductionYear" ] ];
+				this.steps = [
+					[ "MotorType" ],
+					[ "MotorProductionYear" ],
+					// [ "DamageStatus", "NoDamageRecord" ],
+					[ "DamageStatus" ],
+					[ "LastPolicyExpirationDate" ]
+				];
 				break;
 			case OrderTypes.fire:
-				this.steps = [ [ "BuildType" ], [ "Units" ], [ "BuildType" ], [ "Area" ], [ "ThingsValue" ] ];
+				this.steps = [ [ "EstateType", "Units" ], [ "Area" ], [ "ThingsValue" ], [ "BuildType" ] ];
+				break;
+			case OrderTypes.earthquake:
+				this.steps = [ [ "EstateType", "Units" ], [ "Area" ], [ "ThingsValue" ], [ "BuildType" ] ];
+				break;
+			case OrderTypes.medical:
+				this.steps = [
+					[ "MedicalRole" ],
+					[ "DoctorSpecialty", "ParamedicineSpecialty" ],
+					[ "IsResident", "IsStudent" ],
+					[ "MedicalNoDamageRecord" ]
+				];
 				break;
 		}
 	}

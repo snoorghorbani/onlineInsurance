@@ -86,7 +86,27 @@ export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 
 		this.formGroup.patchValue(values);
 	}
-	_set_formGroup_relation_logic() {}
+	_set_formGroup_relation_logic() {
+		this.formGroup.get("DoctorSpecialty").disable();
+		this.formGroup.get("ParamedicineSpecialty").disable();
+		this.formGroup.get("IsResident").disable();
+		this.formGroup.get("IsStudent").disable();
+
+		this.formGroup.get("MedicalRole").valueChanges.subscribe(MedicalRole => {
+			debugger;
+			if (MedicalRole == 1) {
+				this.formGroup.get("DoctorSpecialty").enable();
+				this.formGroup.get("IsResident").enable();
+				this.formGroup.get("ParamedicineSpecialty").disable();
+				this.formGroup.get("IsStudent").disable();
+			} else if (MedicalRole == 2) {
+				this.formGroup.get("DoctorSpecialty").disable();
+				this.formGroup.get("IsResident").disable();
+				this.formGroup.get("ParamedicineSpecialty").enable();
+				this.formGroup.get("IsStudent").enable();
+			}
+		});
+	}
 	_emit_when_form_group_is_valid() {
 		this.formGroup.valueChanges.subscribe(() => {
 			if (!this.formGroup.valid) return;
