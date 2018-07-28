@@ -1,29 +1,29 @@
-import { Component, ViewChild, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
-import { Store } from '@ngrx/store';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Component, ViewChild, OnDestroy, OnInit, AfterViewInit } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { MatSnackBar } from "@angular/material";
+import { Store } from "@ngrx/store";
+import { Subject, BehaviorSubject } from "rxjs";
 
-import { FormSchemaModel, FormViewComponent } from '@soushians/form';
+import { FormSchemaModel, FormViewComponent } from "@soushians/form";
 
-import { OrderFormType } from '../models';
-import { ApproveOrderStartAction, RejectOrderStartAction } from '../services/api';
-import { OrderService, CartableService, OrderFormService } from '../services';
-import { FieldModel } from '../models/field.model';
-import { map, switchMap } from 'rxjs/operators';
-import { AppState } from '../order.reducers';
-import { ChangeLayout } from '@soushians/layout';
-import { ActivatedRoute } from '@angular/router';
-import { OrderTypes } from '../models/order-types-enum';
+import { OrderFormType } from "../models";
+import { ApproveOrderStartAction, RejectOrderStartAction } from "../services/api";
+import { OrderService, CartableService, OrderFormService } from "../services";
+import { FieldModel } from "../models/field.model";
+import { map, switchMap } from "rxjs/operators";
+import { AppState } from "../order.reducers";
+import { ChangeLayout } from "@soushians/layout";
+import { ActivatedRoute } from "@angular/router";
+import { OrderTypes } from "../models/order-types-enum";
 
 @Component({
-	selector: 'order-panel',
-	templateUrl: './order-panel.component.html',
-	styleUrls: [ './order-panel.component.css' ]
+	selector: "order-panel",
+	templateUrl: "./order-panel.component.html",
+	styleUrls: [ "./order-panel.component.css" ]
 })
 export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	unsubscribe = new Subject<void>();
-	displayedColumns: string[] = [ 'Summary', 'WorkflowState' ];
+	displayedColumns: string[] = [ "Summary", "WorkflowState" ];
 
 	_orderForm: OrderFormType;
 	set orderForm(orderForm: OrderFormType) {
@@ -42,7 +42,7 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	activeOrderEditableField: FieldModel[];
 	orderEditableFieldSchema: FormSchemaModel;
 	readonlyFields: any;
-	@ViewChild('formRef') formEl: FormViewComponent;
+	@ViewChild("formRef") formEl: FormViewComponent;
 
 	readonlyFielsGroup = [];
 
@@ -56,39 +56,33 @@ export class OrderPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngOnInit() {
 		this._select_order();
 		// this._observe_on_order();
-		this.store.select((s) => s.order.orderPanel.data).subscribe((order) => {
-			debugger;
+		this.store.select(s => s.order.orderPanel.data).subscribe(order => {
 			this.orderForm = order;
 		});
 	}
 	ngAfterViewInit() {
-		this.store.dispatch(new ChangeLayout('with-margin'));
+		this.store.dispatch(new ChangeLayout("with-margin"));
 	}
 	ngOnDestroy() {
 		this.unsubscribe.next();
 		this.unsubscribe.complete();
 	}
 	approveOrder(formValue) {
-		debugger;
-
-		Object.keys(formValue).forEach((key) => (this.orderForm[key].Value = formValue[key]));
+		Object.keys(formValue).forEach(key => (this.orderForm[key].Value = formValue[key]));
 		this.store.dispatch(new ApproveOrderStartAction(this.orderForm));
 	}
 	rejectOrder(formValue) {
-		debugger;
-		Object.keys(formValue).forEach((key) => (this.orderForm[key].Value = formValue[key]));
+		Object.keys(formValue).forEach(key => (this.orderForm[key].Value = formValue[key]));
 		this.store.dispatch(new RejectOrderStartAction(this.orderForm));
 	}
 	_select_order() {
 		this.router.params
-			.pipe(map((params) => params.id), switchMap((Id: string) => this.service.GetOrder({ Id })))
-			.subscribe((order) => {
-				debugger;
+			.pipe(map(params => params.id), switchMap((Id: string) => this.service.GetOrder({ Id })))
+			.subscribe(order => {
 				this.orderForm = order;
 			});
 	}
 	_observe_on_order() {
-		debugger;
 		this.readonlyFields = this.cartableService.getReadonlyField(this.orderForm);
 		this.activeOrderEditableField = this.cartableService.getEditableField(this.orderForm);
 		this.orderEditableFieldSchema = this.cartableService.getEditableFieldSchema(this.activeOrderEditableField);

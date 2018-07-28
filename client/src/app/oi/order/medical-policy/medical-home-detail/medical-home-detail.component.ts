@@ -93,7 +93,6 @@ export class MedicalHomeDetailComponent implements OnInit, OnDestroy {
 		this.formGroup.get("IsStudent").disable();
 
 		this.formGroup.get("MedicalRole").valueChanges.subscribe(MedicalRole => {
-			debugger;
 			if (MedicalRole == 1) {
 				this.formGroup.get("DoctorSpecialty").enable();
 				this.formGroup.get("IsResident").enable();

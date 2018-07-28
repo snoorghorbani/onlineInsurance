@@ -14,7 +14,6 @@ export class OrderPanelEffects {
 	start$ = this.actions$.ofType(APPROVE_ORDER_ACTION_TYPES.SUCCEED).pipe(
 		map(action => action.payload.Id.Value),
 		switchMap(Id => {
-			debugger;
 			return this.orderService.GetOrder({ Id }).pipe(map(orderForm => new NextStateAction(orderForm)));
 		})
 	);

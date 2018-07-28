@@ -21,14 +21,12 @@ router.get("/account/profile", passportConfig.isAuthenticated, (req: Request, re
 	res.json(req.user);
 });
 router.get("/:email", (req: Request, res: Response) => {
-	debugger;
 	User.findOne({ Email: req.params.email }, (err, user) => {
 		res.json(user);
 	});
 });
 
 router.put("/:email", (req: Request, res: Response) => {
-	debugger;
 	User.findOneAndUpdate({ Email: req.params.email }, req.body, (err, User) => {
 		res.json({ Result: { User } });
 	});

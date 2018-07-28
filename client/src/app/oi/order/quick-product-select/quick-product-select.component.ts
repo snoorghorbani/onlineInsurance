@@ -71,7 +71,6 @@ export class QuickProductSelectComponent implements OnInit {
 	 */
 	next() {
 		++this.wizardRef.selectedIndex;
-		debugger;
 		setTimeout(() => {
 			if (this.formGroup.get(this.wizardRef.selectedIndex.toString()).valid) this.next();
 		}, 333);
@@ -105,7 +104,6 @@ export class QuickProductSelectComponent implements OnInit {
 				}
 				if (field == "DamageStatus") {
 					ctrl.valueChanges.subscribe(DamageStatus => {
-						debugger;
 						if (DamageStatus == 1) {
 							this.formGroup.get((index + 1).toString()).get("NoDamageRecord").enable();
 							this.formGroup.get((index + 1).toString()).get("LastPolicyDiscountYears").disable();
@@ -121,7 +119,6 @@ export class QuickProductSelectComponent implements OnInit {
 				}
 				if (field == "EstateType") {
 					ctrl.valueChanges.pipe(filter(EstateType => EstateType != "")).subscribe(EstateType => {
-						debugger;
 						if (EstateType == 1) {
 							stepFormGroup.get("Units").disable();
 						} else {
@@ -131,7 +128,6 @@ export class QuickProductSelectComponent implements OnInit {
 				}
 				if (field == "MedicalRole") {
 					ctrl.valueChanges.subscribe(MedicalRole => {
-						debugger;
 						if (MedicalRole == 1) {
 							this.formGroup.get((index + 1).toString()).get("DoctorSpecialty").enable();
 							this.formGroup.get((index + 1).toString()).get("IsResident").enable();

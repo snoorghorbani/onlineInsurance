@@ -121,7 +121,6 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			.subscribe(years => this._check_and_contol_incident_formControls(years));
 	}
 	_emit_when_form_group_is_valid() {
-		debugger;
 		this.formGroup.valueChanges.subscribe(() => {
 			if (!this.formGroup.valid) return;
 			this.done.emit(this.formGroup.value);
@@ -176,7 +175,6 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 		];
 	}
 	_check_and_contol_incident_formControls(years) {
-		debugger;
 		if (years > 0) {
 			this.formGroup.get("LastPolicyDiscountYears").disable();
 			this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();

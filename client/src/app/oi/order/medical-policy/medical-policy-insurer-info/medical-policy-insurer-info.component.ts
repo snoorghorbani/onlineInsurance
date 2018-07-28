@@ -65,7 +65,6 @@ export class MedicalPolicyInsurerInfoComponent implements OnInit {
 		this.store.dispatch(new SigninRequiredAction());
 	}
 	currentLocationOfUser({ lat, lng }) {
-		debugger;
 		this.formGroup.patchValue({
 			DeliveryPlaceGeoLatitude: lat,
 			DeliveryPlaceGeoLongitude: lng

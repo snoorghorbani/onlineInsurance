@@ -165,7 +165,6 @@ export class MotorcycleDetailComponent implements OnInit, OnDestroy {
 		];
 	}
 	_check_and_contol_incident_formControls(years) {
-		debugger;
 		if (years > 0) {
 			this.formGroup.get("LastPolicyDiscountYears").disable();
 			this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();

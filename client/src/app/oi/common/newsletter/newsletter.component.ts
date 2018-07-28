@@ -14,7 +14,6 @@ export class NewsletterComponent {
 	}
 
 	subscribe() {
-		debugger;
 		this.userService.SubscribeToNewsletter(this.email).subscribe(data => {
 			this.subscribed = true;
 		});

@@ -51,7 +51,6 @@ export class PurchaseStepperComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		debugger;
 		this.activatedRoute.params.subscribe(params => {
 			if ("Id" in params) {
 				this.id = id = params.Id;
@@ -63,10 +62,8 @@ export class PurchaseStepperComponent implements AfterViewInit {
 			});
 		}
 
-		debugger;
 		this.stepperRef.selectedIndex = +this.step;
 		this.stepperRef.selectionChange.subscribe(({ selectedIndex }) => {
-			debugger;
 			// if (selectedIndex == 0) {
 			// 	if (!this.type) return;
 			// 	this.router.navigate([ this.step1Url ]);

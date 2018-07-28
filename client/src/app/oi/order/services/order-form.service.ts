@@ -1,21 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
 
-import { OrderFormType } from '../models';
-import { OrderConfigurationService } from './order-configuration.service';
-import { share, map } from 'rxjs/operators';
-import { GetOrderApiModel } from './api/get-order';
+import { OrderFormType } from "../models";
+import { OrderConfigurationService } from "./order-configuration.service";
+import { share, map } from "rxjs/operators";
+import { GetOrderApiModel } from "./api/get-order";
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: "root"
 })
 export class OrderFormService {
 	constructor(private http: HttpClient, private configurationService: OrderConfigurationService) {}
 
 	GetNewOrderForm<T>(type): Observable<T> {
 		// return of(GetNewOrderForm as OrderFormType);
-		debugger;
 		return this.http
 			.get(`${this.configurationService.config.env.server}/order/GetNewOrderForm/?type=${type}`)
 			.pipe(map((response: any) => response.Result));
@@ -40,6 +39,6 @@ export class OrderFormService {
 	GetOrder<T = OrderFormType>({ Id }: Partial<GetOrderApiModel.Request>): Observable<T> {
 		return this.http
 			.get<GetOrderApiModel.Response<T>>(`${this.configurationService.config.env.server}/order/GetOrder/${Id}`)
-			.pipe(map((response) => response.Result), share());
+			.pipe(map(response => response.Result), share());
 	}
 }

@@ -37,7 +37,6 @@ export class OrderService {
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	SaveOrder<T>(order: OrderFormType): Observable<T> {
-		debugger;
 		return this.http
 			.post<SaveOrderApiModel.Response<T>>(
 				`${this.configurationService.config.env.server}/order/SaveOrder`,
@@ -56,7 +55,6 @@ export class OrderService {
 			.pipe(share(), map(response => response.Result.Items));
 	}
 	GetOrder<T = any>({ Id }: Partial<GetOrderApiModel.Request>): Observable<T> {
-		debugger;
 		return this.http
 			.get<GetOrderApiModel.Response<T>>(`${this.configurationService.config.env.server}/order/GetOrder/${Id}`)
 			.pipe(map(response => response.Result), share());

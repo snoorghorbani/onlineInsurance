@@ -17,7 +17,6 @@ export class FileService {
 		var zz = fileEntry.file((file: File) => {
 			// Here you can access the real file
 			console.log(droppedFile.relativePath, file);
-			debugger;
 			const formData = new FormData();
 			formData.append("File", file, file.name);
 			formData.append(
