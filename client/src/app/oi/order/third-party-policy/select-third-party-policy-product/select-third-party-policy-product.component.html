@@ -1,15 +1,17 @@
 <order-purchase-stepper step="0" [progress]="!orderForm" type="1" [id]="orderForm?.Id.Value"></order-purchase-stepper>
 
 <div fxLayout="row wrap">
-  <mat-progress-bar *ngIf="!orderForm"
-    color="primary"
-    mode="indeterminate">
-  </mat-progress-bar>
-
-  <div fxFlex="100">
+    <div *ngIf="!signedIn" class="signinWrapper" fxLayout="row" (click)="signInRequest()" fxLayoutAlign="center start">
+        <button fxFlex="nogrow" mat-raised-button color="primary" (click)="signInRequest()">ورود به حساب کاریری</button>
+      </div>
+    <mat-progress-bar *ngIf="!orderForm"
+      color="primary"
+      mode="indeterminate">
+    </mat-progress-bar>
+  <div fxFlex="100" [class.fade]="!signedIn">
     <order-third-party-car-detail [orderForm]="orderForm" (done)="homeIsDone($event)"></order-third-party-car-detail>
   </div>
-  <div fxFlex="100">
+  <div fxFlex="100" [class.fade]="!signedIn">
     <order-third-party-policy-products-list [orderForm]="orderForm" [policies]="policies$ | async" (select)="selectProduct($event)"></order-third-party-policy-products-list>
   </div>
 </div>

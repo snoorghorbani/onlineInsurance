@@ -22,3 +22,15 @@
 .card-box {
 	transform: translateX(0);
 }
+.signinWrapper {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(256, 256, 256, 0.5);
+	z-index: 1;
+}
+.fade {
+	filter: blur(3px);
+}

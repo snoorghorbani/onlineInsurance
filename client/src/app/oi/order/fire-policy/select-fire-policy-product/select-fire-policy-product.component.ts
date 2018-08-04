@@ -24,7 +24,7 @@ import { OrderFormService } from "../../services";
 export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 	orderForm: FirePolicyOrderFormModel;
 	policies$: Observable<PolicyCompareModel[]>;
-	signedIn$: Observable<boolean>;
+	signedIn: boolean;
 
 	constructor(
 		private store: Store<AppState>,
@@ -33,7 +33,7 @@ export class SelectFirePolicyProductComponent implements OnInit, OnDestroy {
 		public dialog: MatDialog,
 		private router: Router
 	) {
-		this.signedIn$ = this.store.select(getAccountInfo).pipe(map(user => (user.DisplayName == null ? false : true)));
+		this.store.select(getAccountInfo).subscribe(user => (this.signedIn = !!user.DisplayName));
 	}
 
 	ngOnInit() {
