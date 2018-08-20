@@ -54,7 +54,6 @@ const saveSourceData = (Result, timeOfReuquestSending, source) => {
             const ComputedFormula = utility_1.compileString(threshold.Formula, Result);
             const thresholdResult = eval(ComputedFormula);
             if (thresholdResult) {
-                debugger;
                 model.Events.addToSet({
                     Type: "threshold",
                     Info: {

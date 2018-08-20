@@ -6,7 +6,6 @@ const DiagramModel = require("../models/diagram.model");
 const router = express.Router();
 exports.router = router;
 exports.all = (req, res) => {
-    debugger;
     req.user;
     DiagramModel.Diagram
         .find()
@@ -40,10 +39,16 @@ router.get("/groups", function (req, res) {
         },
         reduce: function (k, vals) {
             return vals.length;
-        },
+        }
+        // finalize: function (k, vals) {
+        //   list.list.push(k);
+        //   return list.list.join(',');
+        // },
+        // scope:{
+        //   list : list
+        // }
     };
     DiagramModel.Diagram.mapReduce(o, function (err, results) {
-        debugger;
         if (err)
             throw err;
         const groups = results.map((item) => item._id);
@@ -51,25 +56,30 @@ router.get("/groups", function (req, res) {
     });
 });
 router.get("/:id", function (req, res) {
-    DiagramModel.Diagram
-        .findById(req.params.id)
-        .populate("Source")
-        .then(data => {
+    DiagramModel.Diagram.findById(req.params.id).populate("Source").then(data => {
         res.json(data);
     });
 });
 router.post("/", function (req, res) {
-    debugger;
     const data = req.body;
     if (!data._id) {
         delete data._id;
         const diagram = new DiagramModel.Diagram(data);
-        diagram.save()
-            .then((diagram) => { debugger; res.send(diagram); })
-            .catch((err) => { debugger; res.send(err); });
+        diagram
+            .save()
+            .then((diagram) => {
+            debugger;
+            res.send(diagram);
+        })
+            .catch((err) => {
+            debugger;
+            res.send(err);
+        });
     }
     else {
-        DiagramModel.Diagram.findByIdAndUpdate(data._id, data, { upsert: true, new: true }).then(diagram => {
+        DiagramModel.Diagram
+            .findByIdAndUpdate(data._id, data, { upsert: true, new: true })
+            .then(diagram => {
             res.send(diagram);
         })
             .catch(err => {

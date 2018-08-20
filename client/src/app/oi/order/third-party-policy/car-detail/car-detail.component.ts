@@ -20,6 +20,30 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 	@Input()
 	set orderForm(orderForm: ThirdPartyPolicyOrderFormModel) {
 		if (!orderForm) return;
+		orderForm.DamageStatus = {
+			category: "",
+			Description: "خسارت",
+			DisplayValue: "خسارت",
+			ExtensionData: "",
+			Label: "سابقه خسارت",
+			Name: "DamageStatus",
+			Options: [
+				{
+					DisplayName: "بدون خسارت",
+					DisplayValue: "بدون خسارت",
+					Value: "1"
+				},
+				{
+					DisplayName: "با خسارت",
+					DisplayValue: "با خسارت",
+					Value: "2"
+				}
+			],
+			SequenceIndex: 1,
+			Status: 1,
+			Value: ""
+		};
+		orderForm.NoDamageRecord.Options = orderForm.NoDamageRecord.Options.filter(i => i.Value !== 0);
 		this._orderForm = orderForm;
 		// this._set_formGroup_validation(orderForm);
 		this._patchValue_formGroup_on_orderForm_change(orderForm);
@@ -45,6 +69,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this._set_formGroup_relation_logic();
+		this.on_damage_status_changed();
 		this._emit_when_form_group_is_valid();
 		this._patchvalue_from_quick_view();
 	}
@@ -76,7 +101,8 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			PolicyPushesheMali: new FormControl(7700000),
 			LastPolicyDiscountYears: new FormControl(0),
 			LastPolicyUsedPropertyCoupons: new FormControl(),
-			LastPolicyUsedPersonCoupons: new FormControl()
+			LastPolicyUsedPersonCoupons: new FormControl(),
+			DamageStatus: new FormControl()
 		});
 
 		// this.formGroup.get("LastPolicyDiscountYears").disable();
@@ -117,7 +143,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			});
 		this.formGroup
 			.get("NoDamageRecord")
-			.valueChanges.pipe(takeUntil(this.unsubscribe))
+			.valueChanges.pipe(takeUntil(this.unsubscribe), filter(value => value != null))
 			.subscribe(years => this._check_and_contol_incident_formControls(years));
 	}
 	_emit_when_form_group_is_valid() {
@@ -142,6 +168,10 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			},
 			{
 				name: "PolicyTerm",
+				fxFlex: 23
+			},
+			{
+				name: "DamageStatus",
 				fxFlex: 23
 			},
 			{
@@ -175,14 +205,31 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 		];
 	}
 	_check_and_contol_incident_formControls(years) {
-		if (years > 0) {
-			this.formGroup.get("LastPolicyDiscountYears").disable();
-			this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
-			this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
-		} else {
-			this.formGroup.get("LastPolicyDiscountYears").enable();
-			this.formGroup.get("LastPolicyUsedPropertyCoupons").enable();
-			this.formGroup.get("LastPolicyUsedPersonCoupons").enable();
-		}
+		// if (!this.formGroup.get("NoDamageRecord").disabled) return;
+		// if (years > 0) {
+		// 	this.formGroup.get("LastPolicyDiscountYears").disable();
+		// 	this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+		// 	this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
+		// } else {
+		// 	this.formGroup.get("LastPolicyDiscountYears").enable();
+		// 	this.formGroup.get("LastPolicyUsedPropertyCoupons").enable();
+		// 	this.formGroup.get("LastPolicyUsedPersonCoupons").enable();
+		// }
+	}
+	on_damage_status_changed() {
+		this.formGroup.get("DamageStatus").valueChanges.subscribe(value => {
+			debugger;
+			if (value == 1) {
+				this.formGroup.get("LastPolicyDiscountYears").disable();
+				this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+				this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
+				this.formGroup.get("NoDamageRecord").enable();
+			} else {
+				this.formGroup.get("LastPolicyDiscountYears").enable();
+				this.formGroup.get("LastPolicyUsedPropertyCoupons").enable();
+				this.formGroup.get("LastPolicyUsedPersonCoupons").enable();
+				this.formGroup.get("NoDamageRecord").disable();
+			}
+		});
 	}
 }

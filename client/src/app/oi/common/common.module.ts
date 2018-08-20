@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import {
 	MatFormFieldModule,
 	MatButtonModule,
@@ -25,28 +25,30 @@ import {
 	MatBottomSheetModule,
 	MatDividerModule,
 	MatDialogModule,
-	MatMenuModule
-} from '@angular/material';
-import { FileDropModule } from 'ngx-file-drop';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { RouterModule } from '@angular/router';
-import { NewsletterComponent } from './newsletter/newsletter.component';
+	MatMenuModule,
+	MatButtonToggleModule
+} from "@angular/material";
+import { FileDropModule } from "ngx-file-drop";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { RouterModule } from "@angular/router";
+import { NewsletterComponent } from "./newsletter/newsletter.component";
 
-import { NgsFormModule } from '@soushians/form';
-import { SharedModule } from '@soushians/shared';
+import { NgsFormModule } from "@soushians/form";
+import { SharedModule } from "@soushians/shared";
 
-import { GmapsModule } from '../gmaps/gmaps.module';
+import { GmapsModule } from "../gmaps/gmaps.module";
 
-import { FooterComponent } from './footer/footer.component';
-import { ReminderComponent } from './reminder/reminder.component';
-import { WeAreComponent } from './we-are/we-are.component';
-import { HowToBuyPolicyComponent } from './how-to-buy-policy/how-to-buy-policy.component';
-import { ToolbarMenuComponent } from './toolbar-menu/toolbar-menu.component';
-import { FieldSelectComponent } from './field-select/field-select.component';
-import { FieldDatepickerComponent } from './field-datepicker/field-datepicker.component';
-import { FieldInputComponent } from './field-input/field-input.component';
-import { FieldFileComponent } from './field-file/field-file.component';
+import { FooterComponent } from "./footer/footer.component";
+import { ReminderComponent } from "./reminder/reminder.component";
+import { WeAreComponent } from "./we-are/we-are.component";
+import { HowToBuyPolicyComponent } from "./how-to-buy-policy/how-to-buy-policy.component";
+import { ToolbarMenuComponent } from "./toolbar-menu/toolbar-menu.component";
+import { FieldSelectComponent } from "./field-select/field-select.component";
+import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.component";
+import { FieldInputComponent } from "./field-input/field-input.component";
+import { FieldFileComponent } from "./field-file/field-file.component";
+import { FieldButtonToggleComponent } from "./field-button-toggle/field-button-toggle.component";
 
 @NgModule({
 	imports: [
@@ -78,6 +80,7 @@ import { FieldFileComponent } from './field-file/field-file.component';
 		MatCardModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
+		MatButtonToggleModule,
 		MatExpansionModule,
 		MatGridListModule,
 		FlexLayoutModule,
@@ -96,6 +99,7 @@ import { FieldFileComponent } from './field-file/field-file.component';
 		ReminderComponent,
 		WeAreComponent,
 		ToolbarMenuComponent,
+		FieldButtonToggleComponent,
 		HowToBuyPolicyComponent
 	],
 	entryComponents: [
@@ -103,7 +107,8 @@ import { FieldFileComponent } from './field-file/field-file.component';
 		FieldInputComponent,
 		FieldFileComponent,
 		FieldSelectComponent,
-		FieldDatepickerComponent
+		FieldDatepickerComponent,
+		FieldButtonToggleComponent
 	],
 	exports: [
 		FooterComponent,

@@ -253,7 +253,12 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			// pluck("Id"),
 			switchMap(parmas => this.orderService.GetOrder<FirePolicyOrderFormModel>(parmas))
 		);
-		this.orderForm$.subscribe(orderForm => (this.orderForm = orderForm));
+		this.orderForm$.subscribe(orderForm => {
+			orderForm.PolicyholderFirstName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
+			orderForm.PolicyholderLastName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
+			orderForm.PolicyholderFatherName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
+			this.orderForm = orderForm;
+		});
 	}
 	_set_formGroup_relation_logic() {
 		this.formGroup
