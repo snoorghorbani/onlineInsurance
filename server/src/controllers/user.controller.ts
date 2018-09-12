@@ -7,7 +7,7 @@ import { Request as OriginalRequest, Response, NextFunction } from "express";
 import { WriteError } from "mongodb";
 // const LocalStrategyInfo = require("passport-local").LocalStrategyInfo;
 const request = require("express-validator");
-import * as passportConfig from "../config/passport";
+import * as passportConfig from "../config/passport.local";
 
 export interface Request extends OriginalRequest {
 	assert: any;
@@ -21,12 +21,14 @@ router.get("/account/profile", passportConfig.isAuthenticated, (req: Request, re
 	res.json(req.user);
 });
 router.get("/:email", (req: Request, res: Response) => {
+	debugger;
 	User.findOne({ Email: req.params.email }, (err, user) => {
 		res.json(user);
 	});
 });
 
 router.put("/:email", (req: Request, res: Response) => {
+	debugger;
 	User.findOneAndUpdate({ Email: req.params.email }, req.body, (err, User) => {
 		res.json({ Result: { User } });
 	});

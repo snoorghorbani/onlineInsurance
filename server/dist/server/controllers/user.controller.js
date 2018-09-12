@@ -7,18 +7,20 @@ const passport = require("passport");
 const user_model_1 = require("../models/user.model");
 // const LocalStrategyInfo = require("passport-local").LocalStrategyInfo;
 const request = require("express-validator");
-const passportConfig = require("../config/passport");
+const passportConfig = require("../config/passport.local");
 const router = express.Router();
 exports.router = router;
 router.get("/account/profile", passportConfig.isAuthenticated, (req, res) => {
     res.json(req.user);
 });
 router.get("/:email", (req, res) => {
+    debugger;
     user_model_1.default.findOne({ Email: req.params.email }, (err, user) => {
         res.json(user);
     });
 });
 router.put("/:email", (req, res) => {
+    debugger;
     user_model_1.default.findOneAndUpdate({ Email: req.params.email }, req.body, (err, User) => {
         res.json({ Result: { User } });
     });

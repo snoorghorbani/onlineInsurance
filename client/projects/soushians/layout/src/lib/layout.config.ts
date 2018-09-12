@@ -18,10 +18,11 @@ export interface LayoutModuleConfigModel {
 	layoutMode?: "with-margin" | "without-margin" | "default";
 	title?: string;
 	signoutAction?: Action;
-	menu_item_authorization_operator?: ([ routes, user ]: [any, any]) => any[];
+	menu_item_authorization_operator?: ([routes, user]: [any, any]) => any[];
+	theme?: string; // "theme_A" | "theme_B";
 }
 
-const menu_item_authorization_operator = function([ routes, user ]) {
+const menu_item_authorization_operator = function ([routes, user]) {
 	if (!user.Roles) return [];
 	if (user.Roles.length == 0) {
 		return [];
@@ -30,10 +31,11 @@ const menu_item_authorization_operator = function([ routes, user ]) {
 	}
 };
 export const MODULE_DEFAULT_CONFIG: LayoutModuleConfigModel = {
+	theme: "theme_B",
 	showMainSidenav: false,
 	showSecondSideNav: true,
-	secondSideNavMode: "over", //| "push" | "side",
-	mainSideNavMode: "over", //| "push" | "side",
+	secondSideNavMode: "over", // | "push" | "side",
+	mainSideNavMode: "over", // | "push" | "side",
 	showLeftNavBar: false,
 	stickyLeftNavBar: false,
 	layoutMode: "with-margin", // | "without-margin" | "default",
@@ -42,19 +44,19 @@ export const MODULE_DEFAULT_CONFIG: LayoutModuleConfigModel = {
 		{
 			route: "/",
 			icon: "multiline_chart",
-			roles: [ "Admin", "User" ],
+			roles: ["Admin", "User"],
 			title: "صفحه اصلی"
 		},
 		{
 			route: "/configs",
 			icon: "settings",
-			roles: [ "Admin" ],
+			roles: ["Admin"],
 			title: "تنظیمات"
 		},
 		{
 			route: "/source",
 			icon: "device_hub",
-			roles: [ "Admin" ],
+			roles: ["Admin"],
 			title: "آدرس سرویس ها"
 		}
 	],

@@ -3,13 +3,14 @@ import * as express from "express";
 import * as async from "async";
 import * as request from "request";
 import { Response, Request, NextFunction } from "express";
-import * as passportConfig from "../config/passport";
+import * as passportConfig from "../config/passport.local";
 
 import * as DiagramModel from "../models/diagram.model";
 
 const router = express.Router();
 declare var emit: any;
 export const all = (req: Request, res: Response) => {
+	debugger;
 	req.user;
 	DiagramModel.Diagram
 		.find()
@@ -40,9 +41,11 @@ router.get("/", passportConfig.isAuthenticated, function(req: Request, res: Resp
 router.get("/groups", function(req: Request, res: Response) {
 	const o = {
 		map: function() {
+			debugger;
 			this.Groups.forEach((group: any) => emit(group, 1));
 		},
 		reduce: function(k: any, vals: any) {
+			debugger;
 			return vals.length;
 		}
 		// finalize: function (k, vals) {
@@ -55,8 +58,9 @@ router.get("/groups", function(req: Request, res: Response) {
 	};
 
 	DiagramModel.Diagram.mapReduce(o, function(err, results) {
+		debugger;
 		if (err) throw err;
-		const groups = results.map((item: any) => item._id);
+		const groups = results.results.map((item: any) => item._id);
 		res.json({ Result: groups });
 	});
 });
@@ -68,6 +72,7 @@ router.get("/:id", function(req: Request, res: Response) {
 });
 
 router.post("/", function(req: Request, res: Response) {
+	debugger;
 	const data = req.body;
 	if (!data._id) {
 		delete data._id;

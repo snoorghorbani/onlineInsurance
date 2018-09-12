@@ -31,7 +31,7 @@ import { map, combineLatest } from "rxjs/operators";
 @Component({
 	selector: "layout-toolbar",
 	templateUrl: "./toolbar-menu.component.html",
-	styleUrls: [ "./toolbar-menu.component.css" ],
+	styleUrls: ["./toolbar-menu.component.scss"],
 	animations: [
 		trigger("logoAnimation", [
 			state(
@@ -265,7 +265,7 @@ export class ToolbarMenuComponent {
 	lastScroll: number;
 	config: toolbarState;
 	config$: Observable<toolbarState>;
-	anchorsMode: boolean = false;
+	anchorsMode = false;
 	constructor(
 		@Inject(DOCUMENT) private document: any,
 		private _location: Location,
@@ -288,12 +288,11 @@ export class ToolbarMenuComponent {
 		this._observe_on_layout_config_and_filter_routes();
 
 		fromEvent(this.document.body, "scroll").subscribe(() => {
-			let scrolledAmount = this.document.body.scrollTop;
-			let scrollToTop =
-				scrolledAmount - this.lastScroll < 0 &&
-				this.document.body.scrollHeight - document.body.offsetHeight - scrolledAmount > 300;
+			const scrolledAmount = this.document.body.scrollTop;
+			const scrollToTop =
+				scrolledAmount - this.lastScroll < 0 && this.document.body.scrollHeight - scrolledAmount < 300;
 			// let scrollToTop = scrolledAmount - this.lastScroll < 0;
-			this.lastScroll = scrolledAmount;
+			this.lastScroll = this.document.body.scrollTop;
 			if (!this.config.visibility) return;
 			if (scrolledAmount == 0) {
 				if (this.config.mode == "comfortable") return;

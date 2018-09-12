@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const passportConfig = require("../config/passport");
+const passportConfig = require("../config/passport.local");
 const DiagramModel = require("../models/diagram.model");
 const router = express.Router();
 exports.router = router;
 exports.all = (req, res) => {
+    debugger;
     req.user;
     DiagramModel.Diagram
         .find()
@@ -35,9 +36,11 @@ router.get("/", passportConfig.isAuthenticated, function (req, res) {
 router.get("/groups", function (req, res) {
     const o = {
         map: function () {
+            debugger;
             this.Groups.forEach((group) => emit(group, 1));
         },
         reduce: function (k, vals) {
+            debugger;
             return vals.length;
         }
         // finalize: function (k, vals) {
@@ -49,9 +52,10 @@ router.get("/groups", function (req, res) {
         // }
     };
     DiagramModel.Diagram.mapReduce(o, function (err, results) {
+        debugger;
         if (err)
             throw err;
-        const groups = results.map((item) => item._id);
+        const groups = results.results.map((item) => item._id);
         res.json({ Result: groups });
     });
 });
@@ -61,6 +65,7 @@ router.get("/:id", function (req, res) {
     });
 });
 router.post("/", function (req, res) {
+    debugger;
     const data = req.body;
     if (!data._id) {
         delete data._id;

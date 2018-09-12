@@ -1,10 +1,10 @@
 import { Component, Injector, Inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { AppState } from "../grid.reducer";
-import { GridModel } from "../models";
 import { MAT_BOTTOM_SHEET_DATA } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
 
+import { AppState } from "../grid.reducer";
+import { GridModel } from "../models";
 import { UpsertGridStartAction } from "../services/api/upsert-grid/upsert-grid.actions";
 
 @Component({
@@ -44,12 +44,12 @@ export class GridConfigComponent {
 			//
 			scrollToNewItems: new FormControl(true),
 			// margins
-			margin: new FormControl("10"),
+			margin: new FormControl(10),
 			outerMargin: new FormControl(true),
-			outerMarginTop: new FormControl("10"),
-			outerMarginRight: new FormControl("10"),
-			outerMarginBottom: new FormControl("10"),
-			outerMarginLeft: new FormControl("10"),
+			outerMarginTop: new FormControl(10),
+			outerMarginRight: new FormControl(10),
+			outerMarginBottom: new FormControl(10),
+			outerMarginLeft: new FormControl(10),
 			// grid size
 			minCols: new FormControl(3),
 			maxCols: new FormControl(3),

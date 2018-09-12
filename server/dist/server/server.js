@@ -31,6 +31,7 @@ require("./models/grid.model");
 require("./models/page.model");
 require("./models/user.model");
 require("./models/gwt-scenario.model");
+// import * as passportConfig from "./config/passport.activedirectory";
 /**
  * Create Express server.
  */

@@ -8,7 +8,7 @@ let io;
 const sockets = new Set();
 exports.usernames = {};
 const dynamicSocketMessages = {
-    disconnect: socket => {
+    disconnect: (socket) => {
         sockets.delete(socket);
     }
 };
@@ -40,7 +40,7 @@ exports.SocketMiddleware = {
             if (socket.request.user && socket.request.user.logged_in) {
             }
             sockets.add(socket);
-            Object.keys(dynamicSocketMessages).forEach(message => {
+            Object.keys(dynamicSocketMessages).forEach((message) => {
                 socket.on(message, (data) => dynamicSocketMessages[message](socket, io, data));
             });
         });
@@ -53,8 +53,9 @@ exports.SocketMiddleware = {
             io.emit("DISPATCH_ACTION" /* DISPATCH_ACTION */, { type: ngrxActionType, payload: ngrxActionPayload });
         },
         dispatchActionToClientByUsername: (ngrxActionType, ngrxActionPayload, participant) => {
+            debugger;
             io
-                .clients(exports.usernames[participant].values)
+                .clients(exports.usernames[participant].values())
                 .emit("DISPATCH_ACTION" /* DISPATCH_ACTION */, { type: ngrxActionType, payload: ngrxActionPayload });
         },
         dispatchActionToClientBySocketId: (socketId, ngrxActionType, ngrxActionPayload) => {

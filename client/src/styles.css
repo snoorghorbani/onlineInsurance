@@ -211,6 +211,18 @@ select:-webkit-autofill {
 	position: relative;
 }
 
+.mat-calendar-controls:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40%;
+	bottom: 0;
+	background: white;
+	z-index: 5;
+	background-color: transparent;
+}
+
 .mat-calendar-arrow {
 	display: none !important;
 }
@@ -334,26 +346,6 @@ mat-sidenav-content mat-sidenav-content {
 	padding: 25px;
 } */
 
-#layout-sidnav > mat-sidenav-content {
-	transition: all 800ms;
-	overflow: visible;
-}
-
-.fullscreen #layout-sidnav > mat-sidenav-content {
-	padding: 0;
-}
-.comfortable #layout-sidnav > mat-sidenav-content {
-	padding-top: 33vh;
-}
-.compact #layout-sidnav > mat-sidenav-content {
-	padding-top: 128px;
-}
-.summary #layout-sidnav > mat-sidenav-content {
-	padding-top: 64px;
-}
-.hide #layout-sidnav > mat-sidenav-content {
-	padding-top: 1px;
-}
 .mat-form-field-wrapper {
 	transition: top 500ms;
 	top: 0px;
@@ -395,38 +387,3 @@ mat-form-field.edit .mat-form-field-wrapper {
 mat-form-field.fit {
 	width: 100%;
 }
-
-/**
-* table
-*/
-th.mat-header-cell {
-	text-align: right !important;
-}
-td.mat-cell:first-child,
-td.mat-footer-cell:first-child,
-th.mat-header-cell:first-child {
-	padding-left: 0 !important;
-	padding-right: 24px !important;
-}
-/**
-* end
-*/
-
-/**
-* material tab component
-*/
-
-mat-tab-group {
-	direction: ltr;
-}
-.mat-tab-label-container {
-	direction: rtl;
-}
-
-/* .mat-tab-body-wrapper {
-	direction: rtl;
-} */
-
-/**
-* end
-*/

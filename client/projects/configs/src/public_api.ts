@@ -14,6 +14,4 @@ export * from "./lib/lib-configs/ngs-rule.module-config";
 export * from "./lib/lib-configs/ngs-socket.module-config";
 export * from "./lib/lib-configs/ngs-user.module-config";
 export * from "./lib/lib-configs/ngs-widget.module-config";
-// export * from "./lib/lib-configs/ngs-page.module-config";
-
-export * from "./lib/gwt-steps/gwt-steps.module";
+export * from "./lib/lib-configs/ngs-page.module-config";

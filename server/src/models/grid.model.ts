@@ -1,26 +1,51 @@
-import * as bcrypt from "bcrypt-nodejs";
-import * as crypto from "crypto";
 import * as mongoose from "mongoose";
-import { ObjectId } from "mongodb";
 
-const widgetSchema = new mongoose.Schema(
+const gridSchema = new mongoose.Schema(
 	{
 		type: { type: String },
 		name: { type: String },
 		oid: { type: String },
-		config: { type: Object, default: {} },
-		items: { type: Object, default: [] }
+		owner: { type: String },
+		config: {
+			type: Object,
+			default: {
+				gridType: "fixed",
+				compactType: "none",
+				displayGrid: "onDrag&Resize",
+				enableEmptyCellDrag: true,
+				enableEmptyCellClick: false,
+				enableEmptyCellContextMenu: false,
+				scrollToNewItems: true,
+				margin: 10,
+				outerMargin: true,
+				outerMarginTop: 10,
+				outerMarginRight: 10,
+				outerMarginBottom: 10,
+				outerMarginLeft: 10,
+				minCols: 3,
+				maxCols: 3,
+				draggable: {
+					enabled: false,
+					delayStart: 333
+				},
+				resizable: {
+					enabled: false
+				}
+			}
+		},
+		items: [ { type: mongoose.Schema.Types.ObjectId, ref: "GridItem" } ]
 	},
-	{ timestamps: true }
+	{ timestamps: true, minimize: false }
 );
 
 /**
- * pre save widget middleware.
+ * pre save grid middleware.
  */
-widgetSchema.pre("save", function save(next) {
-	const widget = this;
-	// if (!widget.isModified("password")) { return next(); }
+gridSchema.pre("save", function save(next) {
+	const grid = this;
 	next();
 });
 
-mongoose.model("Grid", widgetSchema);
+gridSchema.post("init", function(grid: any) {});
+
+mongoose.model("Grid", gridSchema);

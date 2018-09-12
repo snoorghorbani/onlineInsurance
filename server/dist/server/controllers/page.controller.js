@@ -10,11 +10,11 @@ const router = express.Router();
 exports.router = router;
 router.get("/", function (req, res) {
     Model.find({ owner: req.query.userId })
-        .then((Result) => res.json({ Result }))
-        .catch((err) => res.sendStatus(500).json(err));
+        .then(Result => res.json({ Result }))
+        .catch(err => res.sendStatus(500).json(err));
 });
 router.get("/:name", function (req, res) {
-    Model.findOne({ name: req.params.name, owner: req.query.userId }).then((Result) => res.json({ Result }));
+    Model.findOne({ name: req.params.name, owner: req.query.userId }).then(Result => res.json({ Result }));
 });
 router.post("/", function (req, res) {
     if (!req.body._id)
@@ -31,18 +31,18 @@ router.post("/", function (req, res) {
     }
     // TODO: set user
     Model.findOneAndUpdate({ _id: req.body._id, owner: req.query.userId }, req.body, { upsert: true, new: true })
-        .then((Result) => {
+        .then(Result => {
         // TODO:
         socket_controller_1.SocketMiddleware.server.dispatchActionToClientByUsername("[PAGE][DB] UPSERT", [Result], req.query.userId);
         res.send({ Result });
     })
-        .catch((err) => {
+        .catch(err => {
         res.sendStatus(500).json(err);
     });
 });
 router.delete("/:_id", function (req, res) {
     Model.findByIdAndRemove(req.params._id)
-        .then((Result) => res.json({ Result }))
-        .catch((err) => res.sendStatus(500).json(err));
+        .then(Result => res.json({ Result }))
+        .catch(err => res.sendStatus(500).json(err));
 });
 //# sourceMappingURL=page.controller.js.map
