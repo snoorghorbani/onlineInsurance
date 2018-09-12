@@ -7,7 +7,7 @@
         <mat-icon class="tooltip md-18" *ngIf="tooltip" [matTooltip]="tooltip">help</mat-icon>
         </mat-form-field> -->
         <mat-button-toggle-group name="fontStyle" fxFlex="100" aria-label="Font Style"  [formControlName]="controlName">
-          <mat-button-toggle *ngFor="let item of options" [value]="item.Value">{{item.DisplayName}}</mat-button-toggle>
+          <mat-button-toggle *ngFor="let item of options" [value]="item.Value">{{item.DisplayValue}}</mat-button-toggle>
         </mat-button-toggle-group>
         <!-- <div class="value-box"> 
           <span class="name">

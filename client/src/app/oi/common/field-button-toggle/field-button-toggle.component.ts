@@ -45,6 +45,7 @@ export class FieldButtonToggleComponent implements OnInit {
 	ngOnInit() {
 		this.DisplayValue$ = this.formGroup.get(this.controlName).valueChanges.pipe(
 			map(value => {
+				debugger;
 				if (!this.options) return "";
 				let option = this.options.find(o => o.Value == value);
 				if (option) return option.DisplayValue || option.DisplayName;
