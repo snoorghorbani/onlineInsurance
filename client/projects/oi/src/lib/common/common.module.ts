@@ -49,6 +49,7 @@ import { FieldDatepickerComponent } from "./field-datepicker/field-datepicker.co
 import { FieldInputComponent } from "./field-input/field-input.component";
 import { FieldFileComponent } from "./field-file/field-file.component";
 import { FieldButtonToggleComponent } from "./field-button-toggle/field-button-toggle.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 @NgModule({
 	imports: [
@@ -100,7 +101,8 @@ import { FieldButtonToggleComponent } from "./field-button-toggle/field-button-t
 		WeAreComponent,
 		ToolbarMenuComponent,
 		FieldButtonToggleComponent,
-		HowToBuyPolicyComponent
+		HowToBuyPolicyComponent,
+		ProfileComponent
 	],
 	entryComponents: [
 		// TODO: move to @soushians/form module
@@ -120,7 +122,8 @@ import { FieldButtonToggleComponent } from "./field-button-toggle/field-button-t
 		FieldInputComponent,
 		FieldFileComponent,
 		FieldSelectComponent,
-		FieldDatepickerComponent
+		FieldDatepickerComponent,
+		ProfileComponent
 	]
 })
 export class OiCommonModule {}

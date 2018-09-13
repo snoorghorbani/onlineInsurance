@@ -21,6 +21,9 @@
 .theme_B #firstToolbar {
 	color: #fff !important;
 }
+.theme_B #firstToolbar #app-name {
+	color: #333 !important;
+}
 
 #layout-sidnav > mat-sidenav-content {
 	transition: all 800ms;

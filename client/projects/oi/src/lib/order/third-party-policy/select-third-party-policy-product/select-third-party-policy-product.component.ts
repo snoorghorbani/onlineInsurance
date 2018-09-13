@@ -47,6 +47,7 @@ export class SelectThirdPartyPolicyProductComponent implements OnInit, OnDestroy
 	}
 
 	homeIsDone(formValue) {
+		debugger;
 		Object.keys(formValue).forEach(k => (this.orderForm[k].Value = formValue[k]));
 		this.policies$ = this.policyService.ComparePolicies(this.orderForm);
 	}

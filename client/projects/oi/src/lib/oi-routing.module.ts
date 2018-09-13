@@ -5,6 +5,7 @@ import { LayoutOutlets } from "@soushians/layout";
 
 import { FooterComponent, NewsletterComponent } from "./common";
 import { ToolbarMenuComponent } from "./common/toolbar-menu/toolbar-menu.component";
+import { ProfileComponent } from "./common/profile/profile.component";
 
 const routes: Routes = [
 	{
@@ -21,6 +22,11 @@ const routes: Routes = [
 		path: "",
 		component: ToolbarMenuComponent,
 		outlet: LayoutOutlets.ngs_layout_toolbar_menu
+	},
+	{
+		path: "user/panel/profile",
+		component: ProfileComponent
+		// outlet: LayoutOutlets.ngs_layout_toolbar_menu
 	}
 ];
 

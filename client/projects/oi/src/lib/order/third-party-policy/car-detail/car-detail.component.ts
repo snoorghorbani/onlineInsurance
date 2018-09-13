@@ -43,6 +43,8 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			Status: 1,
 			Value: ""
 		};
+		orderForm.LastPolicyDiscountYears.Options.unshift(orderForm.LastPolicyDiscountYears.Options.pop());
+		debugger;
 		orderForm.NoDamageRecord.Options = orderForm.NoDamageRecord.Options.filter(i => i.Value !== 0);
 		this._orderForm = orderForm;
 		// this._set_formGroup_validation(orderForm);
@@ -71,6 +73,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 		this._set_formGroup_relation_logic();
 		this.on_damage_status_changed();
 		this._emit_when_form_group_is_valid();
+		this._set_default_damage_filds_enable();
 		this._patchvalue_from_quick_view();
 	}
 
@@ -102,7 +105,7 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 			LastPolicyDiscountYears: new FormControl(0),
 			LastPolicyUsedPropertyCoupons: new FormControl(),
 			LastPolicyUsedPersonCoupons: new FormControl(),
-			DamageStatus: new FormControl()
+			DamageStatus: new FormControl("1")
 		});
 
 		// this.formGroup.get("LastPolicyDiscountYears").disable();
@@ -231,5 +234,11 @@ export class ThirdPartyCarDetailComponent implements OnInit, OnDestroy {
 				this.formGroup.get("NoDamageRecord").disable();
 			}
 		});
+	}
+	_set_default_damage_filds_enable() {
+		this.formGroup.get("LastPolicyDiscountYears").disable();
+		this.formGroup.get("LastPolicyUsedPropertyCoupons").disable();
+		this.formGroup.get("LastPolicyUsedPersonCoupons").disable();
+		this.formGroup.get("NoDamageRecord").enable();
 	}
 }

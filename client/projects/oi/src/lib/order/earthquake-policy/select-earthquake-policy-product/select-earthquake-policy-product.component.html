@@ -9,7 +9,7 @@
       mode="indeterminate">
     </mat-progress-bar>
   <div fxFlex="100"  [class.fade]="!signedIn">
-    <order-earthquake-home-detail [orderForm]="orderForm" (done)="homeIsDone($event)"></order-earthquake-home-detail>
+    <order-earthquake-home-detail *ngIf="orderForm" [orderForm]="orderForm" (done)="homeIsDone($event)"></order-earthquake-home-detail>
   </div>
   <div fxFlex="100"  [class.fade]="!signedIn">
     <order-earthquake-policy-products-list [orderForm]="orderForm" [policies]="policies$ | async" (select)="selectProduct($event)"></order-earthquake-policy-products-list>

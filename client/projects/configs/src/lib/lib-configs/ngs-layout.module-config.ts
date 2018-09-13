@@ -1,6 +1,6 @@
 import { LayoutModuleConfigModel } from "@soushians/layout";
+import { DoSignoutAction } from "@soushians/authentication";
 
 export class NgsLayoutModuleConfig implements LayoutModuleConfigModel {
-	static showMainSidenav = false;
+	static signoutAction: DoSignoutAction;
 }
-// export class ngsLayoutModuleConfig implements LayoutModuleConfigModel {}
