@@ -3392,9 +3392,9 @@
 			}
 		},
 		"@soushians/authentication": {
-			"version": "6.2.1",
-			"resolved": "https://registry.npmjs.org/@soushians/authentication/-/authentication-6.2.1.tgz",
-			"integrity": "sha512-Fbtkn5iJInzQBr5OafuNaN3b/IeC2rrzJIQrxRx8HeqjJcQzbxzgPGllCxkVHJBWk4kSu2njSMaNesIz+DyAag==",
+			"version": "6.2.3",
+			"resolved": "https://registry.npmjs.org/@soushians/authentication/-/authentication-6.2.3.tgz",
+			"integrity": "sha512-+fhWRrd3ZKTFi2AilPgXJP22FQWxfGbpyr39Ah8/9YIZSlQmH4xpZ5SlHzmlR8Cwf9BM2mEwrpkf7QJCg9K0Ug==",
 			"requires": {
 				"tslib": "1.9.1"
 			}
@@ -3452,7 +3452,7 @@
 			"resolved": "https://registry.npmjs.org/@soushians/layout/-/layout-6.2.75.tgz",
 			"integrity": "sha512-VSgBNhRcR8iQcxynG4UNLxJIWbx8HrSHc9IEYuMr6dSumyUohFmH1dzrLI3gWRWUD0d+eMvkpsfLNmulaI27ug==",
 			"requires": {
-				"@soushians/authentication": "6.2.1",
+				"@soushians/authentication": "6.2.3",
 				"@soushians/config": "6.2.0",
 				"@soushians/shared": "6.2.0",
 				"@soushians/user": "6.2.1",

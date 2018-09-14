@@ -50,7 +50,7 @@
     "@ngrx/store-devtools": "^6.0.0-beta.1",
     "@schematics/angular": "^0.6.0",
     "@schematics/schematics": "^0.6.0",
-    "@soushians/authentication": "^6.2.1",
+    "@soushians/authentication": "^6.2.3",
     "@soushians/config": "^6.2.0",
     "@soushians/diagram": "^6.2.0",
     "@soushians/form": "^6.2.0",

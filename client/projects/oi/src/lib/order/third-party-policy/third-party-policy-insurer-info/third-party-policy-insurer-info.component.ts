@@ -119,7 +119,7 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			ReceiverLastName: new FormControl("", [ Validators.required ]),
 			ReceiverPhone: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
 			ReceiverMobile: new FormControl("", [ Validators.required, Validators.pattern(/[0-9]/) ]),
-			CustomerDescription: new FormControl("", [ Validators.required ]),
+			CustomerDescription: new FormControl("", []),
 			/**
 			 * Delivery Time
 			 */
@@ -257,6 +257,12 @@ export class ThirdPartyPolicyInsurerInfoComponent implements OnInit, OnDestroy {
 			orderForm.PolicyholderFirstName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
 			orderForm.PolicyholderLastName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
 			orderForm.PolicyholderFatherName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
+			orderForm.PolicyholderFatherName.Description = " لطفا اطلاعات را به زبان فارسی وارد نمایید";
+			orderForm.PolicyholderMobile.Description = " شماره باید با 09 شروع شود";
+			orderForm.ReceiverMobile.Description = " شماره باید با 09 شروع شود";
+			orderForm.PolicyholderPhone.Description = " شماره به همراه پیش شماره شروع شود";
+			orderForm.ReceiverPhone.Description = " شماره به همراه پیش شماره شروع شود";
+			orderForm.SellerPhone.Description = " شماره به همراه پیش شماره شروع شود";
 			this.orderForm = orderForm;
 		});
 	}

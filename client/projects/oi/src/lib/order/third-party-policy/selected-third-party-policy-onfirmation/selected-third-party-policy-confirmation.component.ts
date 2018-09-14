@@ -1,15 +1,29 @@
 import { Component, OnInit, OnDestroy, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { JalaliMomentDateAdapter } from "../../../persian-data-adapter";
 
 @Component({
 	templateUrl: "./selected-third-party-policy-confirmation.component.html",
 	styleUrls: [ "./selected-third-party-policy-confirmation.component.css" ]
 })
 export class SelectedThirdPartyPolicyConfirmationComponent {
+	jalaliMomentDateAdapter: JalaliMomentDateAdapter;
+	date;
 	constructor(
 		public dialogRef: MatDialogRef<SelectedThirdPartyPolicyConfirmationComponent>,
 		@Inject(MAT_DIALOG_DATA) public data
 	) {
+		debugger;
+		this.jalaliMomentDateAdapter = new JalaliMomentDateAdapter();
+
+		if (data.orderForm.LastPolicyExpirationDate.Value.format) {
+			this.date = data.orderForm.LastPolicyExpirationDate.Value.format();
+		} else {
+			this.date = this.jalaliMomentDateAdapter
+				.parse(data.orderForm.LastPolicyExpirationDate.Value, undefined)
+				.format("YY/MM/DD");
+		}
+
 		data.orderForm.CarModel.DisplayValue = data.orderForm.CarModel.Options.find(
 			o => o.Value == data.orderForm.CarModel.Value
 		).DisplayName;
